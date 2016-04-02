@@ -1,0 +1,10 @@
+# OS X
+Applications/
+Library/
+Movies/
+Music/
+Pictures/
+
+# Temp folders
+tmp/
+temp/

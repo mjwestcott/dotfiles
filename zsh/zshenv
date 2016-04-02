@@ -1,0 +1,48 @@
+#
+# Defines environment variables.
+#
+
+# Ensure that a non-login, non-interactive shell has a defined environment.
+if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
+setopt HIST_IGNORE_SPACE
+export HISTSIZE=100000
+export SAVEHIST=100000
+export HISTFILE=~/.zhistory
+[ -z "$TMPDIR" ] && TMPDIR=/tmp
+
+# PATH
+export PATH=$HOME/bin:$PATH
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/opt/bin
+
+# go setup
+export GOPATH=$HOME/repos/go
+export PATH=$PATH:$GOPATH/bin
+if [[ $(uname) != *Darwin* ]]; then
+    # because it's built from source
+    export GOROOT=$HOME/go1.4
+    export PATH=$PATH:$GOROOT/bin
+fi
+
+# virtualenv setup (note: sh script is sourced by the prezto python module)
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/repos/python
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# fzf options
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3'
+export FZF_TMUX=0
+
+# ag options
+export AGIGNORE="$HOME/dotfiles/ag/agignore"
+
+# grep options
+export GREP_COLOR='30;43'                             # BSD
+export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
+
+# Haskell/Cabal setup
+export PATH="$HOME/Library/Haskell/bin:$PATH"

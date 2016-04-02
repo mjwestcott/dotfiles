@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+# Install bash dotfiles environment on Ubuntu 14.04 Trusty.
+
+if [ $(uname -s) != 'Linux' ]; then
+    echo "Error: not on Linux"
+    exit 1
+elif [ ! -e ~/dotfiles ]; then
+    echo "Error: ~/dotfiles does not exist"
+    exit 1
+elif [ -s ~/dotfiles/bak ]; then # Don't clobber an old backup
+    echo "Error: ~/dotfiles/bak already exists"
+    exit 1
+fi
+
+sudo apt-get update
+sudo apt-get install -y \
+    build-essential automake cmake pkg-config \
+    ruby python python-pip \
+    ruby-dev python2.7-dev python3.4-dev ncurses-dev libevent-dev \
+    git httpie curl tree wget silversearcher-ag man-db bash-completion
+
+sudo pip install --upgrade pip
+sudo pip install virtualenvwrapper && mkdir -p ~/repos/python
+
+# python 3.5.1
+cd ~ && wget https://www.python.org/ftp/python/3.5.1/Python-3.5.1.tar.xz
+tar -xf Python-3.5.1.tar.xz && cd Python-3.5.1
+./configure --prefix=/usr/local/opt/python3 && make && sudo make install
+
+# go1.4
+git clone https://go.googlesource.com/go ~/go1.4
+cd ~/go1.4 && git checkout go1.4 && cd ~/go1.4/src && sudo ./all.bash
+mkdir -p ~/repos/go
+
+# vim
+git clone https://github.com/vim/vim.git ~/vim
+cd ~/vim/src && make distclean
+./configure --with-features=huge \
+            --enable-rubyinterp \
+            --enable-pythoninterp \
+            --with-python-config-dir=/usr/lib/python2.7/config
+make && sudo make install
+
+# tmux
+git clone https://github.com/tmux/tmux.git ~/tmux
+cd ~/tmux && sh autogen.sh && ./configure && make
+sudo cp ~/tmux/tmux /usr/local/bin
+
+# Tmux Package Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+sudo ~/.tmux/plugins/tpm/bin/install_plugins
+
+# z and v
+git clone https://github.com/rupa/z.git ~/z
+git clone https://github.com/rupa/v.git ~/v
+sudo cp ~/v/v /usr/local/bin/_v
+
+# git-prompt
+if [ ! -e ~/.git-prompt.sh ]; then
+    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+fi
+
+# dotfiles
+cd ~/dotfiles && mkdir -pv bak
+for path in bash/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
+    file=$(basename $path)
+    [ -e ~/.$file ] && mv -v ~/.$file bak/.$file
+    ln -sfv ~/dotfiles/$path ~/.$file
+done
+
+# vim
+cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
+for file in *; do
+    [ ! -e ~/.vim/colors/$file ] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
+done

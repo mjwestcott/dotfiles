@@ -1,0 +1,344 @@
+# source 'fzf'
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# source 'z'
+[ -f ~/z/z.sh ] && source ~/z/z.sh
+
+# git-prompt
+[ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
+
+# bash completion
+if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    source "$(brew --prefix)/etc/bash_completion";
+elif [ -f /etc/bash_completion  ]; then
+    source /etc/bash_completion;
+fi
+
+#------------------------------------------------------------------------------
+# Environment variables.
+
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
+
+export HISTSIZE=100000
+export SAVEHIST=100000
+export HISTFILE=~/.bash_history
+export HISTCONTROL=ignoreboth
+[ -z "$TMPDIR" ] && TMPDIR=/tmp
+
+# Append every command
+shopt -s histappend
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# PATH
+export PATH=$HOME/bin:$PATH
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/opt/bin
+
+# virtualenvwrapper setup
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/repos/python
+source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENV_USE_DISTRIBUTE=1
+
+# fzf options
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3'
+export FZF_TMUX=0
+
+# ag options
+export AGIGNORE="$HOME/dotfiles/ag/agignore"
+
+# grep options
+export GREP_COLOR='30;43'                             # BSD
+export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
+
+# go setup
+export GOPATH=$HOME/repos/go
+export PATH=$PATH:$GOPATH/bin
+if [[ $(uname) != *Darwin* ]]; then
+    # because it's built from source
+    export GOROOT=$HOME/go1.4
+    export PATH=$PATH:$GOROOT/bin
+fi
+
+# only on OS X
+if [[ $(uname) == *Darwin* ]]; then
+    # Haskell/Cabal
+    export PATH=$PATH:$HOME/Library/Haskell/bin
+    # For RabbitMQ
+    export PATH=$PATH:/usr/local/sbin
+fi
+
+# PS1
+function virtualenv_info {
+    [[ -n "$VIRTUAL_ENV" ]] && echo "(${VIRTUAL_ENV##*/}) "
+}
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_STATESEPARATOR=""
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+export PS1='\e[0m\u@\h $(virtualenv_info)\e[34m\w\e[32m$(__git_ps1 " %s") \e[0m$ '
+
+function miniprompt {
+    PS1="\e[38;5;168m> \e[0m"
+}
+
+#------------------------------------------------------------------------------
+# Aliases
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+alias grep='grep --color=auto'
+alias tmux='tmux -2'
+alias r='ranger'
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+else # OS X `ls`
+	colorflag="-G"
+fi
+
+alias ls='ls ${colorflag}'
+alias l='ls -1A ${colorflag}'         # Lists in one column, hidden files.
+alias ll='ls -lh ${colorflag}'        # Lists human readable sizes.
+alias lr='ll -R ${colorflag}'         # Lists human readable sizes, recursively.
+alias la='ll -A ${colorflag}'         # Lists human readable sizes, hidden files.
+alias lm='la ${colorflag} | "$PAGER"' # Lists human readable sizes, hidden files through pager.
+alias lx='ll -XB ${colorflag}'        # Lists sorted by extension (GNU only).
+alias lk='ll -Sr ${colorflag}'        # Lists sorted by size, largest last.
+alias lt='ll -tr ${colorflag}'        # Lists sorted by date, most recent last.
+alias lc='lt -c ${colorflag}'         # Lists sorted by date, most recent last, shows change time.
+alias lu='lt -u ${colorflag}'         # Lists sorted by date, most recent last, shows access time.
+alias sl='ls ${colorflag}'            # I often screw this up.
+
+# Python
+alias py="python"
+alias ip="ipython"
+alias nb="jupyter notebook"
+alias de="deactivate"
+alias wk="workon"
+
+alias j='_z'  # https://github.com/rupa/z.git
+alias v='_v'  # https://github.com/rupa/v.git
+
+# Fuzzy finding aliases using 'fzf'.
+alias J='fzf_jump'
+alias V='fzf_vim'
+alias A='fzf_ag'
+alias H='fzf_hidden'
+alias G='fzf_regex'
+alias L='fzf_locate'
+alias C='fzf_commit'
+
+function fzf_jump {
+    local file="$(ag -p $AGIGNORE $HOME -g "" | fzf -q "${*}")"
+    [ -n "$file" ] && cd "$(dirname "$file")"
+}
+
+function fzf_vim {
+    local file="$(ag -p $AGIGNORE $HOME -g "" | fzf -q "${*}")"
+    [ -n "$file" ] && vim "$file"
+}
+
+# Similar to fzf_vim, but show only hidden files (respecting agignore).
+function fzf_hidden {
+    local file="$(ag --hidden -f -p $AGIGNORE $HOME -g "/\..+" --ignore "/.git" | fzf -q "${*}")"
+    [ -n "$file" ] && vim "$file"
+}
+
+function fzf_ag {
+    local tmp="$TMPDIR/fzf_ag"
+    ag "." | fzf -m -q "${*}" --delimiter=':' --nth=3.. > "$tmp"
+    [ -s "$tmp" ] && vim -q "$tmp"
+}
+
+# Similar to fzf_ag, but pass the args through to ag as a regex.
+function fzf_regex {
+    local tmp="$TMPDIR/fzf_ag"
+    ag "${*}" --color | fzf -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. > "$tmp"
+    [ -s "$tmp" ] && vim -q "$tmp"
+}
+
+# Search the whole file system using locate.
+function fzf_locate {
+    local result="$(locate / | fzf -q "${*}")"
+    if [ -d "$result" ]; then
+        cd "$result"
+    elif [ -f "$result" ]; then
+        vim "$result"
+    fi
+}
+
+# Search git log in fzf; open in tig.
+function fzf_commit {
+    local sha="$(git log --pretty=format:"%h %an %ad %s" --date=short |
+                 fzf -q "${*}" |
+                 awk -F' ' '{ print $1 }')"
+    [ -n "$sha" ] && tig show "$sha"
+}
+
+alias g="git"
+# Enable tab completion for `g` by marking it as an alias for `git`
+if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+        complete -o default -o nospace -F _git g;
+fi;
+
+_git_log_medium_format='%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
+_git_log_oneline_format='%C(green)%h%C(reset) %s%C(red)%d%C(reset)%n'
+_git_log_brief_format='%C(green)%h%C(reset) %s%n%C(blue)(%ar by %an)%C(red)%d%C(reset)%n'
+
+# Branch (b)
+alias gb='git branch'
+alias gbc='git checkout -b'
+alias gbl='git branch -v'
+alias gbL='git branch -av'
+alias gbx='git branch -d'
+alias gbX='git branch -D'
+alias gbm='git branch -m'
+alias gbM='git branch -M'
+alias gbs='git show-branch'
+alias gbS='git show-branch -a'
+
+# Commit (c)
+alias gc='git commit --verbose'
+alias gca='git commit --verbose --all'
+alias gcm='git commit --message'
+alias gco='git checkout'
+alias gcO='git checkout --patch'
+alias gcf='git commit --amend --reuse-message HEAD'
+alias gcF='git commit --verbose --amend'
+alias gcp='git cherry-pick --ff'
+alias gcP='git cherry-pick --no-commit'
+alias gcr='git revert'
+alias gcR='git reset "HEAD^"'
+alias gcs='git show'
+alias gcl='git-commit-lost'
+
+# Conflict (C)
+alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+alias gCa='git add $(gCl)'
+alias gCe='git mergetool $(gCl)'
+alias gCo='git checkout --ours --'
+alias gCO='gCo $(gCl)'
+alias gCt='git checkout --theirs --'
+alias gCT='gCt $(gCl)'
+
+# Data (d)
+alias gd='git ls-files'
+alias gdc='git ls-files --cached'
+alias gdx='git ls-files --deleted'
+alias gdm='git ls-files --modified'
+alias gdu='git ls-files --other --exclude-standard'
+alias gdk='git ls-files --killed'
+alias gdi='git status --porcelain --short --ignored | sed -n "s/^!! //p"'
+
+# Fetch (f)
+alias gf='git fetch'
+alias gfc='git clone'
+alias gfm='git pull'
+alias gfr='git pull --rebase'
+
+# Grep (g)
+alias gg='git grep'
+alias ggi='git grep --ignore-case'
+alias ggl='git grep --files-with-matches'
+alias ggL='git grep --files-without-matches'
+alias ggv='git grep --invert-match'
+alias ggw='git grep --word-regexp'
+
+# Index (i)
+alias gia='git add'
+alias giA='git add --patch'
+alias giu='git add --update'
+alias gid='git diff --no-ext-diff --cached'
+alias giD='git diff --no-ext-diff --cached --word-diff'
+alias gir='git reset'
+alias giR='git reset --patch'
+alias gix='git rm -r --cached'
+alias giX='git rm -rf --cached'
+
+# Log (l)
+alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
+alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
+alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
+alias glo='git log --topo-order --pretty=format:"${_git_log_oneline_format}"'
+alias glg='git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}"'
+alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
+alias glc='git shortlog --summary --numbered'
+
+# Merge (m)
+alias gm='git merge'
+alias gmC='git merge --no-commit'
+alias gmF='git merge --no-ff'
+alias gma='git merge --abort'
+alias gmt='git mergetool'
+
+# Push (p)
+alias gp='git push'
+alias gpf='git push --force'
+alias gpa='git push --all'
+alias gpA='git push --all && git push --tags'
+alias gpt='git push --tags'
+alias gpc='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
+alias gpp='git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"'
+
+# Rebase (r)
+alias gr='git rebase'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gri='git rebase --interactive'
+alias grs='git rebase --skip'
+
+# Remote (R)
+alias gR='git remote'
+alias gRl='git remote --verbose'
+alias gRa='git remote add'
+alias gRx='git remote rm'
+alias gRm='git remote rename'
+alias gRu='git remote update'
+alias gRp='git remote prune'
+alias gRs='git remote show'
+alias gRb='git-hub-browse'
+
+# Stash (s)
+alias gs='git stash'
+alias gsa='git stash apply'
+alias gsx='git stash drop'
+alias gsX='git-stash-clear-interactive'
+alias gsl='git stash list'
+alias gsL='git-stash-dropped'
+alias gsd='git stash show --patch --stat'
+alias gsp='git stash pop'
+alias gsr='git-stash-recover'
+alias gss='git stash save --include-untracked'
+alias gsS='git stash save --patch --no-keep-index'
+alias gsw='git stash save --include-untracked --keep-index'
+
+# Submodule (S)
+alias gS='git submodule'
+alias gSa='git submodule add'
+alias gSf='git submodule foreach'
+alias gSi='git submodule init'
+alias gSI='git submodule update --init --recursive'
+alias gSl='git submodule status'
+alias gSm='git-submodule-move'
+alias gSs='git submodule sync'
+alias gSu='git submodule foreach git pull origin master'
+alias gSx='git-submodule-remove'
+
+# Working Copy (w)
+alias gws='git status --short'
+alias gwS='git status'
+alias gwd='git diff --no-ext-diff'
+alias gwD='git diff --no-ext-diff --word-diff'
+alias gwr='git reset --soft'
+alias gwR='git reset --hard'
+alias gwc='git clean -n'
+alias gwC='git clean -f'
+alias gwx='git rm -r'
+alias gwX='git rm -rf'

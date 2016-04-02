@@ -1,0 +1,31 @@
+[core]
+	excludesfile = ~/.gitignore_global
+[user]
+	name = Matt Westcott
+	email = m.westcott@gmail.com
+[alias]
+	unadd = reset --mixed
+	uncommit = reset --soft
+	unstage = reset
+[apply]
+	# Detect whitespace errors when applying a patch.
+	whitespace = warn
+[color]
+	ui = auto
+[diff]
+        tool = vimdiff
+	# Detect copies as well as renames.
+	renames = copies
+[difftool]
+        prompt = false
+[help]
+	# Automatically correct and execute mistyped commands.
+	autocorrect = 1
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages.
+	log = true
+[push]
+        # See `git help config` (search for push.default).
+        default = simple
+[credential]
+	helper = cache --timeout=3600
