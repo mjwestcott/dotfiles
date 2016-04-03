@@ -236,9 +236,9 @@ hi link lispSymbol Normal
 " Diff
 
 call s:h("DiffAdd",    { "bg": s:Dark_Green })
-call s:h("DiffDelete", { "bg": s:Red })
+call s:h("DiffDelete", { "bg": s:Dark_Red })
 call s:h("DiffChange", { "bg": s:Dark_Grey })
-call s:h("DiffText",   { "bg": s:Dark_Red })
+call s:h("DiffText",   { "bg": s:Pastel_Red })
 
 "------------------------------------------------------------------------------
 " vim-gitgutter
