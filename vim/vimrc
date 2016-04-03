@@ -80,7 +80,7 @@ set shiftwidth=4
 set laststatus=2
 set softtabstop=4
 set conceallevel=2
-set diffopt=vertical
+set diffopt=vertical,filler
 set clipboard=unnamed
 set backspace=indent,eol,start
 set noerrorbells
