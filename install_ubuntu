@@ -2,13 +2,13 @@
 #
 # Install bash dotfiles environment on Ubuntu 14.04 Trusty.
 
-if [ $(uname -s) != 'Linux' ]; then
+if [[ $(uname -s) != 'Linux' ]]; then
     echo "Error: not on Linux"
     exit 1
-elif [ ! -e ~/dotfiles ]; then
+elif [[ ! -e ~/dotfiles ]]; then
     echo "Error: ~/dotfiles does not exist"
     exit 1
-elif [ -s ~/dotfiles/bak ]; then # Don't clobber an old backup
+elif [[ -s ~/dotfiles/bak ]]; then # Don't clobber an old backup
     echo "Error: ~/dotfiles/bak already exists"
     exit 1
 fi
@@ -57,7 +57,7 @@ git clone https://github.com/rupa/v.git ~/v
 sudo cp ~/v/v /usr/local/bin/_v
 
 # git-prompt
-if [ ! -e ~/.git-prompt.sh ]; then
+if [[ ! -e ~/.git-prompt.sh ]]; then
     curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 fi
 
@@ -65,12 +65,12 @@ fi
 cd ~/dotfiles && mkdir -pv bak
 for path in bash/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
     file=$(basename $path)
-    [ -e ~/.$file ] && mv -v ~/.$file bak/.$file
+    [[ -e ~/.$file ]] && mv -v ~/.$file bak/.$file
     ln -sfv ~/dotfiles/$path ~/.$file
 done
 
 # vim
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in ./*; do
-    [ ! -e ~/.vim/colors/$file ] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
+    [[ ! -e ~/.vim/colors/$file ]] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
 done
