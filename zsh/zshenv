@@ -11,7 +11,7 @@ setopt HIST_IGNORE_SPACE
 export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTFILE=~/.zhistory
-[ -z "$TMPDIR" ] && TMPDIR=/tmp
+[[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
 # PATH
 export PATH=$HOME/bin:$PATH
