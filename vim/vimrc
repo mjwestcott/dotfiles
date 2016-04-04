@@ -130,6 +130,8 @@ autocmd FileType lisp
 autocmd FileType python
     \ setlocal textwidth=79
 
+autocmd FileType sh
+    \ setlocal textwidth=80
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
