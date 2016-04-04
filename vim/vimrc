@@ -195,18 +195,18 @@ noremap <silent> <leader>v :e $MYVIMRC<CR>
 noremap <silent> <leader>.v :so $MYVIMRC<CR>
 
 " Toggle functions.
-nnoremap <silent> <leader>n :call ToggleNumber()<CR>
+nnoremap <silent> <leader>Z :call ToggleNumber()<CR>
 function! ToggleNumber()
     set number!
     set relativenumber!
 endfunction
 
-nnoremap <silent> <leader>z :call ToggleSyntax()<CR>
+nnoremap <silent> <leader>X :call ToggleSyntax()<CR>
 function! ToggleSyntax()
     if exists("g:syntax_on") | syntax off | else | syntax enable | endif
 endfunction
 
-nnoremap <silent> <leader>cc :call ToggleColorColumn()<CR>
+nnoremap <silent> <leader>C :call ToggleColorColumn()<CR>
 function! g:ToggleColorColumn()
   if &colorcolumn != ''
     setlocal colorcolumn&
