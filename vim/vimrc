@@ -194,7 +194,7 @@ function! ToggleSyntax()
     if exists("g:syntax_on") | syntax off | else | syntax enable | endif
 endfunction
 
-nnoremap <silent> <leader>C :call ToggleColorColumn()<CR>
+nnoremap <silent> <leader>cc :call ToggleColorColumn()<CR>
 function! g:ToggleColorColumn()
   if &colorcolumn != ''
     setlocal colorcolumn&
@@ -207,19 +207,20 @@ endfunction
 " fzf all the things
 
 nnoremap <leader><leader> :Ag<space><C-R><C-W><CR>
+nnoremap <leader>/ :BLines<CR>
 nnoremap <leader>G :Ag<space>
 nnoremap <leader>V :FZF ~<CR>
+nnoremap <leader>C :Commits<CR>
+nnoremap <leader>L :Locate<space>
 
 nnoremap <leader>t :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>m :History<CR>
 nnoremap <leader>p :GitFiles<CR>
 
-nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fbc :BCommits<CR>
-nnoremap <leader>fbl :BLines<CR>
 nnoremap <leader>fbt :BTags<CR>
 nnoremap <leader>fw :Windows<CR>
 nnoremap <leader>fhc :History:<CR>
@@ -228,7 +229,6 @@ nnoremap <leader>fs :Snippets<CR>
 nnoremap <leader>f: :Commands<CR>
 nnoremap <leader>fm :Marks<CR>
 nnoremap <leader>fM :Maps<CR>
-nnoremap <leader>fL :Locate<space>
 nnoremap <leader>fH :Helptags<CR>
 nnoremap <leader>fC :Colors<CR>
 
