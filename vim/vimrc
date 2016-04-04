@@ -55,42 +55,51 @@ colorscheme minimal
 filetype plugin indent on
 syntax on
 
+" Undo
 set undofile
 set undolevels=1000
 set undodir=/tmp
 set backupdir=/tmp
 set dir=/tmp
 
+" Visual
 set ruler
-set hidden
-set mouse=a
-set gdefault
 set showmode
-set smarttab
-set tabstop=8
-set expandtab
 set lazyredraw
-set autoindent
-set copyindent
 set cursorline
-set splitbelow
-set splitright
-set shiftround
-set shiftwidth=4
-set laststatus=2
-set softtabstop=4
-set conceallevel=2
-set diffopt=vertical,filler
-set clipboard=unnamed
-set foldlevelstart=99
-set backspace=indent,eol,start
-set noerrorbells
-set visualbell
 set scrolloff=3
+set laststatus=2
+set conceallevel=2
+set foldlevelstart=99
+set diffopt=vertical,filler
 
+" Search
 set incsearch
 set ignorecase
 set smartcase
+
+" Split
+set splitbelow
+set splitright
+
+" Indent
+set smarttab
+set tabstop=8
+set expandtab
+set autoindent
+set copyindent
+set shiftround
+set shiftwidth=4
+set softtabstop=4
+
+" Misc
+set hidden
+set mouse=a
+set gdefault
+set visualbell
+set noerrorbells
+set clipboard=unnamed
+set backspace=indent,eol,start
 
 if has("gui_running")
     set transp=2
