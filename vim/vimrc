@@ -218,31 +218,28 @@ endfunction
 "------------------------------------------------------------------------------
 " fzf all the things
 
-nnoremap <leader><leader> :Ag<space><C-R><C-W><CR>
 nnoremap <leader>/ :BLines<CR>
-nnoremap <leader>G :Ag<space>
-nnoremap <leader>V :FZF ~<CR>
-nnoremap <leader>C :Commits<CR>
-nnoremap <leader>L :Locate<space>
-
 nnoremap <leader>t :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>m :History<CR>
 nnoremap <leader>p :GitFiles<CR>
 
-nnoremap <leader>fl :Lines<CR>
-nnoremap <leader>ft :Tags<CR>
-nnoremap <leader>fbc :BCommits<CR>
-nnoremap <leader>fbt :BTags<CR>
-nnoremap <leader>fw :Windows<CR>
-nnoremap <leader>fhc :History:<CR>
-nnoremap <leader>fhs :History/<CR>
-nnoremap <leader>fs :Snippets<CR>
-nnoremap <leader>f: :Commands<CR>
-nnoremap <leader>fm :Marks<CR>
-nnoremap <leader>fM :Maps<CR>
-nnoremap <leader>fH :Helptags<CR>
-nnoremap <leader>fC :Colors<CR>
+nnoremap ,, :Ag<space><C-R><C-W><CR>
+nnoremap ,g :Ag<space>
+nnoremap ,v :FZF ~<CR>
+nnoremap ,l :Locate<space>
+nnoremap ,c :Commits<CR>
+nnoremap ,b :BCommits<CR>
+nnoremap ,/ :Lines<CR>
+nnoremap ,: :Commands<CR>
+nnoremap ,w :Windows<CR>
+nnoremap ,s :Snippets<CR>
+nnoremap ,m :Maps<CR>
+nnoremap ,M :Marks<CR>
+nnoremap ,H :Helptags<CR>
+nnoremap ,C :Colors<CR>
+nnoremap ,h: :History:<CR>
+nnoremap ,h/ :History/<CR>
 
 "------------------------------------------------------------------------------
 " NERDTree
