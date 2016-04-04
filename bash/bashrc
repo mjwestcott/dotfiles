@@ -1,16 +1,16 @@
 # source 'fzf'
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # source 'z'
-[ -f ~/z/z.sh ] && source ~/z/z.sh
+[[ -f ~/z/z.sh ]] && source ~/z/z.sh
 
 # git-prompt
-[ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
+[[ -f ~/.git-prompt.sh ]] && source ~/.git-prompt.sh
 
 # bash completion
-if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+if which brew > /dev/null && [[ -f "$(brew --prefix)/etc/bash_completion" ]]; then
     source "$(brew --prefix)/etc/bash_completion";
-elif [ -f /etc/bash_completion  ]; then
+elif [[ -f /etc/bash_completion  ]]; then
     source /etc/bash_completion;
 fi
 
@@ -25,7 +25,7 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTFILE=~/.bash_history
 export HISTCONTROL=ignoreboth
-[ -z "$TMPDIR" ] && TMPDIR=/tmp
+[[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
 # Append every command
 shopt -s histappend
@@ -137,54 +137,54 @@ alias C='fzf_commit'
 
 function fzf_jump {
     local file="$(ag -p $AGIGNORE $HOME -g "" | fzf -q "${*}")"
-    [ -n "$file" ] && cd "$(dirname "$file")"
+    [[ -n "$file" ]] && cd "$(dirname "$file")"
 }
 
 function fzf_vim {
     local file="$(ag -p $AGIGNORE $HOME -g "" | fzf -q "${*}")"
-    [ -n "$file" ] && vim "$file"
+    [[ -n "$file" ]] && vim "$file"
 }
 
 # Similar to fzf_vim, but show only hidden files (respecting agignore).
 function fzf_hidden {
     local file="$(ag --hidden -f -p $AGIGNORE $HOME -g "/\..+" --ignore "/.git" | fzf -q "${*}")"
-    [ -n "$file" ] && vim "$file"
+    [[ -n "$file" ]] && vim "$file"
 }
 
 function fzf_ag {
     local tmp="$TMPDIR/fzf_ag"
     ag "." | fzf -m -q "${*}" --delimiter=':' --nth=3.. > "$tmp"
-    [ -s "$tmp" ] && vim -q "$tmp"
+    [[ -s "$tmp" ]] && vim -q "$tmp"
 }
 
 # Similar to fzf_ag, but pass the args through to ag as a regex.
 function fzf_regex {
     local tmp="$TMPDIR/fzf_ag"
     ag "${*}" --color | fzf -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. > "$tmp"
-    [ -s "$tmp" ] && vim -q "$tmp"
+    [[ -s "$tmp" ]] && vim -q "$tmp"
 }
 
 # Search the whole file system using locate.
 function fzf_locate {
     local result="$(locate / | fzf -q "${*}")"
-    if [ -d "$result" ]; then
+    if [[ -d "$result" ]]; then
         cd "$result"
-    elif [ -f "$result" ]; then
+    elif [[ -f "$result" ]]; then
         vim "$result"
     fi
 }
 
-# Search git log in fzf; open in tig.
+# Search git log in fzf.
 function fzf_commit {
-    local sha="$(git log --pretty=format:"%h %an %ad %s" --date=short |
-                 fzf -q "${*}" |
-                 awk -F' ' '{ print $1 }')"
-    [ -n "$sha" ] && tig show "$sha"
+    local sha="$(git log --pretty=format:"%h %an %ad %s" --date=short \
+                   | fzf -q "${*}" \
+                   | awk -F' ' '{ print $1 }')"
+    [[ -n "$sha" ]] && git show "$sha"
 }
 
 alias g="git"
 # Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+if type _git &> /dev/null && [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
         complete -o default -o nospace -F _git g;
 fi;
 
