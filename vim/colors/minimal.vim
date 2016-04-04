@@ -243,17 +243,17 @@ call s:h("DiffText",   { "bg": s:Pastel_Red })
 "------------------------------------------------------------------------------
 " vim-gitgutter
 
-call s:h("GitGutterAdd",          { "fg": s:Dark_Green, "bg": s:Black2 })
-call s:h("GitGutterDelete",       { "fg": s:Red,        "bg": s:Black2 })
-call s:h("GitGutterChange",       { "fg": s:Dark_Red,   "bg": s:Black2 })
-call s:h("GitGutterChangeDelete", { "fg": s:Dark_Red,   "bg": s:Black2 })
+call s:h("GitGutterAdd",          { "fg": s:Flourescent_Green, "bg": s:Black3 })
+call s:h("GitGutterDelete",       { "fg": s:Pastel_Red,        "bg": s:Black3 })
+call s:h("GitGutterChange",       { "fg": s:Orange,            "bg": s:Black3 })
+call s:h("GitGutterChangeDelete", { "fg": s:Orange,            "bg": s:Black3 })
 
 "------------------------------------------------------------------------------
 " TagBar
 
-call s:h("TagbarVisibilityPublic",    { "fg": s:Dark_Green })
-call s:h("TagbarVisibilityPrivate",   { "fg": s:Dark_Red })
-call s:h("TagbarVisibilityProtected", { "fg": s:Terracotta })
+call s:h("TagbarVisibilityPublic",    { "fg": s:Flourescent_Green })
+call s:h("TagbarVisibilityPrivate",   { "fg": s:Pastel_Red })
+call s:h("TagbarVisibilityProtected", { "fg": s:Orange })
 
 "------------------------------------------------------------------------------
 " gitCommit
