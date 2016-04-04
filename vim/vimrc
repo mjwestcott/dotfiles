@@ -180,8 +180,8 @@ nnoremap <leader>r :%s/\<<C-r><C-w>\>//c<left><left>
 nnoremap <leader>R :%s//c<left><left>
 
 " Editing and loading vimrc.
-noremap <silent> <leader>ev :e $MYVIMRC<CR>
-noremap <silent> <leader>sv :so $MYVIMRC<CR>
+noremap <silent> <leader>v :e $MYVIMRC<CR>
+noremap <silent> <leader>.v :so $MYVIMRC<CR>
 
 " Toggle functions.
 nnoremap <silent> <leader>n :call ToggleNumber()<CR>
@@ -280,11 +280,8 @@ nmap ga <Plug>(EasyAlign)
 "------------------------------------------------------------------------------
 " vim-fugitive
 
-nnoremap <leader>gl :Glog<CR>
-nnoremap <leader>ga :Gwrite<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gws :Gstatus<CR>
-nnoremap <leader>gwd :Gdiff<CR>
+nmap <leader>s :Gstatus<CR>gg<C-n>
+nnoremap <leader>d :Gdiff<CR>
 
 "------------------------------------------------------------------------------
 " vim-go
@@ -359,5 +356,4 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
                            \ "passive_filetypes": ['html'] }
 
-nnoremap <leader>sc :SyntasticCheck<CR>
-nnoremap <leader>sx :SyntasticReset<CR>
+nnoremap <leader>S :SyntasticReset<CR>
