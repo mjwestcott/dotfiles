@@ -82,6 +82,7 @@ set softtabstop=4
 set conceallevel=2
 set diffopt=vertical,filler
 set clipboard=unnamed
+set foldlevelstart=99
 set backspace=indent,eol,start
 set noerrorbells
 set visualbell
