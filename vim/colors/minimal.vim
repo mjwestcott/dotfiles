@@ -133,7 +133,7 @@ call s:h("Title",        { "fg": s:Pale_Grey })
 call s:h("ModeMsg",      { "fg": s:Pink })
 
 call s:h("Error",        { "fg": s:Pale_Grey,  "bg": s:Red })
-call s:h("ColorColumn",  { "fg": s:Pale_Grey,  "bg": s:Red })
+call s:h("ColorColumn",  { "fg": s:Red,        "bg": s:Black3 })
 
 call s:h("Pmenu",        { "fg": s:Light_Blue, "bg": s:Black2 })
 call s:h("PmenuSel",     { "fg": s:Pale_Blue,  "bg": s:Black3 })
