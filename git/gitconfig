@@ -3,10 +3,6 @@
 [user]
 	name = Matt Westcott
 	email = m.westcott@gmail.com
-[alias]
-	unadd = reset --mixed
-	uncommit = reset --soft
-	unstage = reset
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = warn
