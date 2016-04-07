@@ -51,10 +51,9 @@ sudo cp ~/tmux/tmux /usr/local/bin
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 sudo ~/.tmux/plugins/tpm/bin/install_plugins
 
-# z and v
-git clone https://github.com/rupa/z.git ~/z
-git clone https://github.com/rupa/v.git ~/v
-sudo cp ~/v/v /usr/local/bin/_v
+# fasd
+git clone https://github.com/clvv/fasd.git ~/fasd
+mkdir -p ~/bin && cp ~/fasd/fasd ~/bin
 
 # git-prompt
 if [[ ! -e ~/.git-prompt.sh ]]; then
