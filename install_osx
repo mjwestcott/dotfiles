@@ -35,7 +35,7 @@ sudo pip install --upgrade pip
 sudo pip install virtualenvwrapper && mkdir -pv ~/repos/python
 
 # Prezto
-git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto
+git clone --recursive git@github.com:mjwestcott/prezto.git ~/.zprezto
 
 # Tmux Package Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
