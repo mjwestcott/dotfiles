@@ -19,6 +19,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'guns/vim-sexp'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'hdima/python-syntax'
+Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
@@ -296,6 +297,12 @@ nmap ga <Plug>(EasyAlign)
 
 nmap <leader>s :Gstatus<CR>gg<C-n>
 nnoremap <leader>d :Gdiff<CR>
+
+"------------------------------------------------------------------------------
+" gv.vim
+
+nmap <leader>g :GV<CR>o
+nmap <leader>G :GV!<CR>o
 
 "------------------------------------------------------------------------------
 " vim-go
