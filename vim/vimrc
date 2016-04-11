@@ -175,6 +175,12 @@ noremap <C-j> 10gj
 noremap <C-k> 10gk
 noremap <C-n> <C-^>
 
+" Window switching.
+noremap <leader>h <C-w>h
+noremap <leader>l <C-w>l
+noremap <leader>k <C-w>k
+noremap <leader>j <C-w>j
+
 " These create newlines like o and O but stay in normal mode.
 nnoremap <silent> zj o<Esc>k
 nnoremap <silent> zk O<Esc>j
