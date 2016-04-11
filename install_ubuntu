@@ -18,7 +18,7 @@ sudo apt-get install -y \
     build-essential automake cmake pkg-config \
     ruby python python-pip \
     ruby-dev python2.7-dev python3.4-dev ncurses-dev libevent-dev \
-    git httpie curl tree wget silversearcher-ag man-db bash-completion
+    git httpie curl tree wget silversearcher-ag man-db manpages-dev bash-completion
 
 sudo pip install --upgrade pip
 sudo pip install virtualenvwrapper && mkdir -p ~/repos/python
