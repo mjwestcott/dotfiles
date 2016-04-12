@@ -70,10 +70,10 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_STATESEPARATOR=""
-export PS1='$(session_info)$(virtualenv_info)\e[34m\w\e[38;5;245m$(__git_ps1 " %s") \e[0m$ '
+export PS1='$(session_info)$(virtualenv_info)\[\e[34m\]\w\[\e[38;5;245m\]$(__git_ps1 " %s") \[\e[0m\]$ '
 
 function miniprompt {
-    PS1="\e[38;5;168m> \e[0m"
+    PS1='\[\e[38;5;168m\]> \[\e[0m\]'
 }
 
 #------------------------------------------------------------------------------
