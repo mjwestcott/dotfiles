@@ -123,7 +123,7 @@ call s:h("StatusLineNC", { "fg": s:Grey,       "bg": s:Black2 })
 call s:h("LineNr",       { "fg": s:Grey,       "bg": s:Black3 })
 call s:h("SignColumn",   { "fg": s:Pale_Grey,  "bg": s:Black2 })
 
-call s:h("Visual",       {                     "bg": s:Dark_Grey_Blue })
+call s:h("Visual",       {                     "bg": s:Black })
 
 call s:h("Search",       { "fg": s:Black,      "bg": s:Pale_Yellow })
 
