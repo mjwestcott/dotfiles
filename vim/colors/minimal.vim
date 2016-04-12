@@ -116,8 +116,8 @@ call s:h("Underlined",   { "fg": s:White, "gui": "underline", "cterm": "underlin
 "------------------------------------------------------------------------------
 " Other groups
 
-call s:h("CursorLine",   {                     "bg": s:Black2 })
-call s:h("CursorColumn", {                     "bg": s:Black2 })
+call s:h("CursorLine",   {                     "bg": s:Black3 })
+call s:h("CursorColumn", {                     "bg": s:Black3 })
 call s:h("VertSplit",    { "fg": s:Black2,     "bg": s:Black2 })
 call s:h("StatusLine",   { "fg": s:Pale_Grey,  "bg": s:Black2 })
 call s:h("StatusLineNC", { "fg": s:Grey,       "bg": s:Black2 })
