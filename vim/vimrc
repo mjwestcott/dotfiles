@@ -273,7 +273,7 @@ let g:rustfmt_autosave = 1
 "------------------------------------------------------------------------------
 " Clang-format
 
-noremap <C-I> :pyf ~/dotfiles/vim/misc/clang-format.py<CR>
+noremap <leader>cf :pyf ~/dotfiles/vim/misc/clang-format.py<CR>
 
 "------------------------------------------------------------------------------
 " markdown syntax
