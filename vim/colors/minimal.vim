@@ -141,6 +141,10 @@ call s:h("PmenuSel",     { "fg": s:Pale_Blue,  "bg": s:Black3 })
 call s:h("FoldColumn",   { "fg": s:Pink,       "bg": s:Black3 })
 call s:h("Folded",       { "fg": s:Pink,       "bg": s:Black3 })
 
+call s:h('TabLineFill',  {                     "bg": s:Black2 })
+call s:h('TabLineSel',   { "fg": s:Light_Blue, "bg": s:Black2 })
+call s:h('TabLine',      { "fg": s:Grey,       "bg": s:Black2 })
+
 "------------------------------------------------------------------------------
 " Indent-Guides
 
