@@ -1,0 +1,9 @@
+# 4-space indent style
+# Rename to .clang-format and place in project root.
+
+BasedOnStyle: LLVM
+IndentWidth: 4
+UseTab: Never
+BreakBeforeBraces: Attach
+AllowShortIfStatementsOnASingleLine: true
+IndentCaseLabels: false
