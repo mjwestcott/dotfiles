@@ -121,8 +121,8 @@ endif
 " FileType-Specific Settings
 
 autocmd FileType c
-    \ setlocal shiftwidth=8 |
-    \ setlocal noexpandtab
+    \ setlocal shiftwidth=4 |
+    \ setlocal expandtab
 
 autocmd FileType cpp
     \ setlocal shiftwidth=2 |
