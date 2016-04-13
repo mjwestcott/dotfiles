@@ -138,7 +138,9 @@ autocmd FileType lisp
     \ setlocal shiftwidth=2
 
 autocmd FileType python
-    \ setlocal textwidth=79
+    \ setlocal textwidth=79 |
+    \ setlocal shiftwidth=4 |
+    \ setlocal expandtab
 
 autocmd FileType sh
     \ setlocal textwidth=80
