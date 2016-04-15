@@ -23,6 +23,7 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'michaeljsmith/vim-indent-object'
@@ -36,9 +37,13 @@ Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
 Plug 'sjl/vitality.vim'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
+Plug 'tpope/vim-projectionist', {'for': 'clojure'}
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-salve', {'for': 'clojure'}
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -134,8 +139,9 @@ autocmd FileType go
 autocmd FileType html
     \ setlocal shiftwidth=2
 
-autocmd FileType lisp
-    \ setlocal shiftwidth=2
+autocmd FileType lisp,clojure,scheme
+    \ setlocal shiftwidth=2 |
+    \ RainbowParentheses
 
 autocmd FileType python
     \ setlocal textwidth=79 |
@@ -251,6 +257,13 @@ nnoremap ,H :Helptags<CR>
 nnoremap ,C :Colors<CR>
 nnoremap ,h: :History:<CR>
 nnoremap ,h/ :History/<CR>
+
+"------------------------------------------------------------------------------
+" rainbow-parentheses
+
+nnoremap <leader>P :RainbowParentheses!!<CR>
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72]
 
 "------------------------------------------------------------------------------
 " NERDTree
