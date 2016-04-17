@@ -263,7 +263,12 @@ nnoremap ,h/ :History/<CR>
 
 nnoremap <leader>P :RainbowParentheses!!<CR>
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72]
+let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72, '#f6f6f6']
+
+"------------------------------------------------------------------------------
+" vim-fireplace
+
+autocmd FileType clojure nnoremap <leader><leader> :Eval<CR>
 
 "------------------------------------------------------------------------------
 " NERDTree
@@ -368,7 +373,7 @@ let g:ycm_extra_conf_globlist = ['~/repos/*', '!~/*']
 " UltiSnips
 
 let g:snips_author = 'Matt Westcott'
-let g:UltiSnipsExpandTrigger = ";;"
+let g:UltiSnipsExpandTrigger = "``"
 let g:UltiSnipsEditSplit = "vertical"
 let g:UltiSnipsListSnippets = "<C-x>"
 let g:ultisnips_python_style = "google"
