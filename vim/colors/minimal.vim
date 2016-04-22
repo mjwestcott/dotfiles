@@ -276,3 +276,12 @@ hi link HelpExample     Statement
 hi link vimCommand      Statement
 hi link vimOption       Function
 hi link vimCommentTitle Function
+
+"------------------------------------------------------------------------------
+" RainbowParentheses
+
+call s:h("rainbowParens1", { "fg": s:Orange })
+call s:h("rainbowParens2", { "fg": s:Flourescent_Green })
+call s:h("rainbowParens3", { "fg": s:Light_Blue })
+call s:h("rainbowParens4", { "fg": s:Pink })
+call s:h("rainbowParens5", { "fg": s:Pale_Yellow })
