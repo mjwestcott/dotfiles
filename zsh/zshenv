@@ -44,5 +44,5 @@ export AGIGNORE="$HOME/dotfiles/ag/agignore"
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
 
-# Haskell/Cabal setup
-export PATH="$HOME/Library/Haskell/bin:$PATH"
+# Haskell/Stack setup
+export PATH="$PATH:$HOME/.local/bin"
