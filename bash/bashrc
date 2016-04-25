@@ -49,8 +49,9 @@ fi
 
 # only on OS X
 if [[ $(uname) == *Darwin* ]]; then
-    # Haskell/Cabal
-    export PATH=$PATH:$HOME/Library/Haskell/bin
+    # Haskell/Stack setup
+    export PATH="$PATH:$HOME/.local/bin"
+
     # For RabbitMQ
     export PATH=$PATH:/usr/local/sbin
 fi
