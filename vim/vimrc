@@ -1,5 +1,5 @@
 "------------------------------------------------------------------------------
-" vimrc intended for Python, Go, C, Clojure
+" vimrc intended for Python, Go, C, Clojure, Haskell
 " by Matt Westcott (mattwestcott.co.uk)
 
 set nocompatible
@@ -14,11 +14,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'eagletmt/ghcmod-vim'
 Plug 'fatih/vim-go'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'guns/vim-sexp'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'hdima/python-syntax'
+Plug 'itchyny/vim-haskell-indent'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
@@ -28,11 +30,13 @@ Plug 'junegunn/seoul256.vim'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'othree/html5.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/syntastic'
+Plug 'Shougo/vimproc', {'do': 'make'}
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
 Plug 'sjl/vitality.vim'
