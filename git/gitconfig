@@ -3,6 +3,15 @@
 [user]
 	name = Matt Westcott
 	email = m.westcott@gmail.com
+[alias]
+        discard = checkout --
+        unstage = reset --
+        uncommit = reset --soft HEAD~
+        # Plurals...
+        branches = branch -a
+        stashes = stash list
+        remotes = remote -v
+        tags = tag
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = warn
