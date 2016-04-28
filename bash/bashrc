@@ -54,6 +54,9 @@ if [[ $(uname) == *Darwin* ]]; then
 
     # For RabbitMQ
     export PATH=$PATH:/usr/local/sbin
+
+    # Homebrew
+    export HOMEBREW_NO_ANALYTICS=1
 fi
 
 # PS1
