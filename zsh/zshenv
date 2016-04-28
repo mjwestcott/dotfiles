@@ -46,3 +46,6 @@ export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
 
 # Haskell/Stack setup
 export PATH="$PATH:$HOME/.local/bin"
+
+# Homebrew
+export HOMEBREW_NO_ANALYTICS=1
