@@ -54,6 +54,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/python-indent'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer'}
+Plug 'Valloric/vim-operator-highlight'
 call plug#end()
 
 "------------------------------------------------------------------------------
@@ -261,6 +262,11 @@ nnoremap ,H :Helptags<CR>
 nnoremap ,C :Colors<CR>
 nnoremap ,h: :History:<CR>
 nnoremap ,h/ :History/<CR>
+
+"------------------------------------------------------------------------------
+" vim-operator-highlight
+
+let g:ophigh_highlight_link_group = "Operator"
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
