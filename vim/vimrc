@@ -15,6 +15,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'eagletmt/ghcmod-vim'
+Plug 'edkolev/erlang-motions.vim'
 Plug 'fatih/vim-go'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'guns/vim-sexp'
@@ -162,6 +163,7 @@ autocmd BufNewFile,BufRead *bash* set filetype=sh
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
 autocmd FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:}"
 autocmd BufNewFile,BufRead \*.{md,mdwn,mkd,mkdn,mark\*} set filetype=markdown
+autocmd BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
 
 "------------------------------------------------------------------------------
 " Mappings (see also Plugin section)
