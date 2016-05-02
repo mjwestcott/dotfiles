@@ -269,6 +269,10 @@ nnoremap ,h/ :History/<CR>
 " vim-operator-highlight
 
 let g:ophigh_highlight_link_group = "Operator"
+let g:ophigh_filetypes_to_ignore = { "haskell": 1,
+                                   \ "erlang": 1,
+                                   \ "clojure": 1,
+                                   \ "vim": 1 }
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
