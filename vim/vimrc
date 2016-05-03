@@ -146,8 +146,7 @@ autocmd FileType html
     \ setlocal shiftwidth=2
 
 autocmd FileType lisp,clojure,scheme
-    \ setlocal shiftwidth=2 |
-    \ RainbowParentheses
+    \ setlocal shiftwidth=2
 
 autocmd FileType python
     \ setlocal textwidth=79 |
