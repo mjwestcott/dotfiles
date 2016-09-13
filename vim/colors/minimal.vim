@@ -45,7 +45,7 @@ let s:Terracotta        = { "gui": "#c05303", "cterm": "130" }
 let s:Brown             = { "gui": "#7d7569", "cterm": "137" }
 let s:Orange            = { "gui": "#ff9b0b", "cterm": "214" }
 let s:Pale_Yellow       = { "gui": "#ffce4b", "cterm": "222" }
-let s:Pastel_Red        = { "gui": "#ff5b3a", "cterm": "203" }
+let s:Pastel_Red        = { "gui": "#ff5b3a", "cterm": "209" } " Or 203
 let s:Red               = { "gui": "#cc2b12", "cterm": "160" }
 let s:Dark_Red          = { "gui": "#800c0c", "cterm": "88"  }
 let s:Pink              = { "gui": "#fdadba", "cterm": "217" }
@@ -73,11 +73,11 @@ call s:h("Function",      { "fg": s:Pale_Grey })
 hi! link SpecialKey       Function
 hi! link Directory        Function
 
-call s:h("Constant",      { "fg": s:Light_Blue })
+call s:h("Constant",      { "fg": s:Pale_Green })
 hi! link String           Constant
 hi! link Character        Constant
 
-call s:h("Comment",       { "fg": s:Pale_Green })
+call s:h("Comment",       { "fg": s:Pastel_Red })
 
 call s:h("Special",       { "fg": s:Pink })
 hi! link Todo             Special
@@ -132,7 +132,7 @@ call s:h("Visual",       {                     "bg": s:Black })
 call s:h("Search",       { "fg": s:Black,      "bg": s:Pale_Yellow })
 
 call s:h("NonText",      { "fg": s:Pale_Grey })
-call s:h("Title",        { "fg": s:Pale_Grey })
+call s:h("Title",        { "fg": s:Pale_Yellow })
 
 call s:h("ModeMsg",      { "fg": s:Pink })
 
