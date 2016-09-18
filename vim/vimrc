@@ -216,6 +216,7 @@ nnoremap <leader>R :%s//c<left><left>
 " Editing and loading vimrc.
 noremap <silent> <leader>v :e $MYVIMRC<CR>
 noremap <silent> <leader>.v :so $MYVIMRC<CR>
+nnoremap <leader>U :PlugUpdate<CR>
 
 " Toggle functions.
 nnoremap <silent> <leader>Z :call ToggleNumber()<CR>
