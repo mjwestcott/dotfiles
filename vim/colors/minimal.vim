@@ -73,13 +73,13 @@ call s:h("Function",      { "fg": s:Pale_Grey })
 hi! link SpecialKey       Function
 hi! link Directory        Function
 
-call s:h("Constant",      { "fg": s:Pale_Green })
+call s:h("Constant",      { "fg": s:Pink })
 hi! link String           Constant
 hi! link Character        Constant
 
-call s:h("Comment",       { "fg": s:Pastel_Red })
+call s:h("Comment",       { "fg": s:Pale_Green })
 
-call s:h("Special",       { "fg": s:Pink })
+call s:h("Special",       { "fg": s:Pale_Yellow })
 hi! link Todo             Special
 hi! link Debug            Special
 hi! link SpecialChar      Special
@@ -201,8 +201,7 @@ hi link clojureRepeat   Normal
 "------------------------------------------------------------------------------
 " Haskell
 
-hi link haskellIdentifier Special
-hi link haskellType       Function
+hi link haskellIdentifier Constant
 
 "------------------------------------------------------------------------------
 " HTML/CSS
