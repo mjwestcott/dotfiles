@@ -97,10 +97,6 @@ function fzf_commit {
     [[ -n "$sha" ]] && git show "$sha"
 }
 
-# For the 'pure' prompt theme to use Ctrl-l to clear-screen
-bindkey '^[p' push-input
-bindkey -s "^L" "^[pclear\n"
-
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
