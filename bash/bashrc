@@ -379,3 +379,6 @@ if which brew > /dev/null && [[ -f "$(brew --prefix)/etc/bash_completion" ]]; th
 elif [[ -f /etc/bash_completion  ]]; then
     source /etc/bash_completion;
 fi
+
+# Source extra config
+[[ -f ~/dotfiles/private ]] && source ~/dotfiles/private
