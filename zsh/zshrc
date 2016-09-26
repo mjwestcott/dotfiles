@@ -106,3 +106,6 @@ bindkey -s "^L" "^[pclear\n"
 
 # Initialize fasd
 [[ -f ~/.fasd ]] && eval "$(fasd --init auto)"
+
+# Initalize rbenv
+eval "$(rbenv init -)"
