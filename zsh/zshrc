@@ -105,3 +105,6 @@ function fzf_commit {
 
 # Initalize rbenv
 eval "$(rbenv init -)"
+
+# Source extra config
+[[ -f ~/dotfiles/private ]] && source ~/dotfiles/private
