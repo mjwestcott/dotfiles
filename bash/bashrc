@@ -367,6 +367,9 @@ alias gwX='git rm -rf'
 # source 'fasd'
 eval "$(fasd --init auto)"
 
+# source 'rbenv'
+eval "$(rbenv init -)"
+
 # git-prompt
 [[ -f ~/.git-prompt.sh ]] && source ~/.git-prompt.sh
 
