@@ -16,7 +16,8 @@ fi
 sudo apt-get update
 sudo apt-get install -y \
     build-essential automake cmake pkg-config \
-    ruby python python-pip \
+    python python-pip \
+    ruby rbenv ruby-build \
     ruby-dev python2.7-dev python3.4-dev ncurses-dev libevent-dev \
     git httpie curl tree wget silversearcher-ag man-db manpages-dev bash-completion
 
@@ -32,6 +33,10 @@ tar -xf Python-3.5.1.tar.xz && cd Python-3.5.1
 git clone https://go.googlesource.com/go ~/go1.4
 cd ~/go1.4 && git checkout go1.4 && cd ~/go1.4/src && sudo ./all.bash
 mkdir -p ~/repos/go
+
+# ruby 2.3.1
+rbenv install 2.3.1
+rbenv global 2.3.1
 
 # vim
 git clone https://github.com/vim/vim.git ~/vim
