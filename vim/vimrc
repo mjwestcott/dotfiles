@@ -222,7 +222,6 @@ nnoremap <leader>U :PlugUpdate<CR>
 nnoremap <silent> <leader>Z :call ToggleNumber()<CR>
 function! ToggleNumber()
     set number!
-    set relativenumber!
 endfunction
 
 nnoremap <silent> <leader>X :call ToggleSyntax()<CR>
