@@ -108,3 +108,6 @@ eval "$(rbenv init -)"
 
 # Source extra config
 [[ -f ~/dotfiles/private ]] && source ~/dotfiles/private
+
+# OPAM configuration
+command -v opam > /dev/null 2>&1 && eval `opam config env`
