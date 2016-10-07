@@ -370,6 +370,9 @@ eval "$(fasd --init auto)"
 # source 'rbenv'
 eval "$(rbenv init -)"
 
+# OPAM configuration
+command -v opam > /dev/null 2>&1 && eval `opam config env`
+
 # git-prompt
 [[ -f ~/.git-prompt.sh ]] && source ~/.git-prompt.sh
 
