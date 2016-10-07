@@ -154,6 +154,10 @@ autocmd FileType python
     \ setlocal shiftwidth=4 |
     \ setlocal expandtab
 
+autocmd FileType ocaml
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab
+
 autocmd FileType sh
     \ setlocal textwidth=80
 
@@ -270,9 +274,10 @@ nnoremap ,h/ :History/<CR>
 
 let g:ophigh_highlight_link_group = "Operator"
 let g:ophigh_filetypes_to_ignore = { "haskell": 1,
+                                   \ "ocaml": 1,
                                    \ "erlang": 1,
                                    \ "clojure": 1,
-                                   \ "vim": 1 }
+                                   \ "lisp": 1 }
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
@@ -417,3 +422,14 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "passive_filetypes": ['html'] }
 
 nnoremap <leader>S :SyntasticReset<CR>
+
+"------------------------------------------------------------------------------
+" merlin (assumes an installation via OPAM)
+
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+"------------------------------------------------------------------------------
+" ocp-indent (assumes an installation via OPAM)
+
+set rtp^="/Users/mattwestcott/.opam/system/share/ocp-indent/vim"
