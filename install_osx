@@ -31,6 +31,7 @@ brew install emacs --with-cocoa --devel
 brew install go leiningen ocaml opam python python3 rbenv ruby-build
 
 # OCaml config
+opam init
 opam install merlin ocp-indent tuareg utop
 eval `opam config env`
 
