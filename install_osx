@@ -28,12 +28,13 @@ brew install macvim --HEAD
 brew install emacs --with-cocoa --devel
 
 # Languages
-brew install go leiningen ocaml opam python python3 rbenv ruby-build
+brew install go leiningen opam python python3 rbenv ruby-build
 
 # OCaml config
 opam init
-opam install merlin ocp-indent tuareg utop
+opam switch 4.03.0
 eval `opam config env`
+opam install merlin ocp-indent tuareg utop
 
 # Python config
 sudo pip install --upgrade pip
