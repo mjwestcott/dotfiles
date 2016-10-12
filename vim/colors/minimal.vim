@@ -73,13 +73,13 @@ call s:h("Function",      { "fg": s:Pale_Grey })
 hi! link SpecialKey       Function
 hi! link Directory        Function
 
-call s:h("Constant",      { "fg": s:Pink })
+call s:h("Constant",      { "fg": s:Pale_Yellow })
 hi! link String           Constant
 hi! link Character        Constant
 
 call s:h("Comment",       { "fg": s:Pale_Green })
 
-call s:h("Special",       { "fg": s:Pale_Yellow })
+call s:h("Special",       { "fg": s:Pink })
 hi! link Todo             Special
 hi! link Debug            Special
 hi! link SpecialChar      Special
@@ -269,6 +269,9 @@ call s:h("diffAdded",   { "fg": s:Flourescent_Green })
 call s:h("diffRemoved", { "fg": s:Pastel_Red })
 call s:h("diffChanged", { "fg": s:Orange })
 hi link diffLine Constant
+
+call s:h("gitcommitSummary", { "fg": s:Pale_Grey })
+call s:h("gitcommitOverflow", { "fg": s:Pink })
 
 "------------------------------------------------------------------------------
 " Vim
