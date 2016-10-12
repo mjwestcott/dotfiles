@@ -307,6 +307,11 @@ nnoremap <leader>T :TagbarToggle<CR>
 let g:python_host_prog = '/usr/local/bin/python'
 
 "------------------------------------------------------------------------------
+" python-syntax
+
+let g:python_highlight_builtins = 0
+
+"------------------------------------------------------------------------------
 " rust.vim
 
 let g:rustfmt_autosave = 1
