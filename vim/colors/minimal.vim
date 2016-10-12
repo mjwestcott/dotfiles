@@ -93,9 +93,12 @@ call s:h("Operator",      { "fg": s:Light_Blue })
 call s:h("Statement",     { "fg": s:Pale_Grey })
 hi! link Conditional      Statement
 hi! link Exception        Statement
-hi! link Keyword          Statement
 hi! link Label            Statement
 hi! link Repeat           Statement
+hi! link Define           Statement
+
+" TODO: Temporary fix to make OCaml look reasonable
+call s:h("Keyword",       { "fg": s:Light_Blue })
 
 call s:h("Identifier",   { "fg": s:Pale_Grey })
 
@@ -105,7 +108,6 @@ hi! link Structure        Type
 hi! link Typedef          Type
 
 call s:h("PreProc",      { "fg": s:Pale_Grey })
-hi! link Define           Preproc
 hi! link Include          Preproc
 hi! link Macro            Preproc
 hi! link PreCondit        PreProc
@@ -199,9 +201,15 @@ hi link clojureCond     Normal
 hi link clojureRepeat   Normal
 
 "------------------------------------------------------------------------------
-" Haskell
+" Ruby
 
-hi link haskellIdentifier Constant
+hi link rubyStringDelimiter String
+hi link rubyInterpolation Special
+
+"------------------------------------------------------------------------------
+" OCaml
+
+hi link ocamlConstructor Identifier
 
 "------------------------------------------------------------------------------
 " HTML/CSS
