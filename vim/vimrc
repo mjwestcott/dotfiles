@@ -54,7 +54,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/python-indent'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer'}
 Plug 'Valloric/vim-operator-highlight'
 call plug#end()
 
