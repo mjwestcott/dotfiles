@@ -44,6 +44,7 @@ let s:Cyan              = { "gui": "#5ebfba", "cterm": "73"  }
 let s:Terracotta        = { "gui": "#c05303", "cterm": "130" }
 let s:Brown             = { "gui": "#7d7569", "cterm": "137" }
 let s:Orange            = { "gui": "#ff9b0b", "cterm": "214" }
+let s:Gold              = { "gui": "#dfbc72", "cterm": "179" }
 let s:Pale_Yellow       = { "gui": "#ffdf87", "cterm": "222" }
 let s:Bright_Yellow     = { "gui": "#ffce4b", "cterm": "221" }
 let s:Pastel_Red        = { "gui": "#ff5b3a", "cterm": "209" } " Or 203
@@ -74,7 +75,7 @@ call s:h("Function",      { "fg": s:Pale_Grey })
 hi! link SpecialKey       Function
 hi! link Directory        Function
 
-call s:h("Constant",      { "fg": s:Pale_Yellow })
+call s:h("Constant",      { "fg": s:Light_Blue })
 hi! link String           Constant
 hi! link Character        Constant
 
@@ -87,19 +88,17 @@ hi! link SpecialChar      Special
 hi! link SpecialComment   Special
 hi! link Tag              Special
 
-call s:h("Delimiter",     { "fg": s:Light_Blue })
+call s:h("Delimiter",     { "fg": s:Gold })
 
-call s:h("Operator",      { "fg": s:Light_Blue })
+call s:h("Operator",      { "fg": s:Gold })
 
-call s:h("Statement",     { "fg": s:Pale_Grey })
+call s:h("Statement",     { "fg": s:Gold })
 hi! link Conditional      Statement
+hi! link Keyword          Statement
 hi! link Exception        Statement
 hi! link Label            Statement
 hi! link Repeat           Statement
 hi! link Define           Statement
-
-" TODO: Temporary fix to make OCaml look reasonable
-call s:h("Keyword",       { "fg": s:Light_Blue })
 
 call s:h("Identifier",   { "fg": s:Pale_Grey })
 
@@ -193,9 +192,9 @@ hi link goType      Type
 
 hi link clojureParen    Delimiter
 hi link clojureKeyword  Statement
-hi link clojureDefine   Statement
 hi link clojureConstant Number
 hi link clojureBoolean  Boolean
+hi link clojureDefine   Normal
 hi link clojureFunc     Normal
 hi link clojureSpecial  Normal
 hi link clojureCond     Normal
