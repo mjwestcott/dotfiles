@@ -81,7 +81,7 @@ set lazyredraw
 set cursorline
 set scrolloff=3
 set laststatus=2
-set conceallevel=2
+set conceallevel=0
 set foldlevelstart=99
 set diffopt=vertical,filler
 
@@ -160,6 +160,10 @@ autocmd FileType ocaml
 
 autocmd FileType sh
     \ setlocal textwidth=80
+
+autocmd FileType markdown
+    \ setlocal textwidth=80 |
+    \ syntax match Comment /\%^---\_.\{-}\.\.\.$/ " YAML front-matter
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
@@ -324,6 +328,7 @@ noremap <leader>cf :pyf ~/dotfiles/vim/misc/clang-format.py<CR>
 "------------------------------------------------------------------------------
 " markdown syntax
 
+let g:markdown_syntax_conceal = 0
 let g:markdown_fenced_languages = ['python', 'go', 'c', 'clojure', 'haskell',
                                   \ 'bash=sh', 'html', 'css', 'javascript']
 

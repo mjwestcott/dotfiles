@@ -212,6 +212,12 @@ hi link rubyInterpolation Special
 hi link ocamlConstructor Identifier
 
 "------------------------------------------------------------------------------
+" Markdown
+
+hi link markdownCode      Statement
+hi link markdownCodeBlock Statement
+
+"------------------------------------------------------------------------------
 " HTML/CSS
 
 hi link htmlTag                Comment
