@@ -75,6 +75,9 @@ set undodir=/tmp
 set backupdir=/tmp
 set dir=/tmp
 
+" History
+set history=1000
+
 " Visual
 set ruler
 set showmode
