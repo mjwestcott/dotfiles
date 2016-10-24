@@ -74,7 +74,7 @@ def slugify(s):
 def new_note(query):
     if not query:
         raise ValueError("fuzzynotes error: no description given")
-    slug = re.sub('\W+', '-', query.strip().lower())
+    slug = slugify(query)
     call(["vim", "~/notes/{}.md".format(slug),
           "-c", ":call NoteTemplate('{}')".format(query)])
 
