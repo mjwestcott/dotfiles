@@ -453,3 +453,28 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 " ocp-indent (assumes an installation via OPAM)
 
 set rtp^="/Users/mattwestcott/.opam/system/share/ocp-indent/vim"
+
+"------------------------------------------------------------------------------
+" fuzzynotes
+
+let g:notes_dir = $NOTESDIR
+
+function! g:NoteTemplate(desc)
+    call append(0, "---")
+    call append(1, "tags: []")
+    call append(2, "description: " . a:desc)
+    call append(3, "...")
+endfunction
+
+function! g:NoteOpen(data)
+    " Data is expected as '{filename}:{description} | {tags}'
+    exec "edit " . g:notes_dir . "/" . split(a:data, ':')[0]
+endfunction
+
+command! Notes call fzf#run({
+  \ 'source':  'fuzzynotes --show',
+  \ 'options': '--exact --ansi -d ":" --with-nth 2..',
+  \ 'down':    '~40%',
+  \ 'sink':    function('g:NoteOpen')})
+
+nnoremap <leader>n :Notes<CR>

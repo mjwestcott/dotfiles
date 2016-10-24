@@ -34,6 +34,9 @@ export FZF_TMUX=0
 # ag options
 export AGIGNORE="$HOME/dotfiles/ag/agignore"
 
+# fuzzynotes
+export NOTESDIR="$HOME/notes"
+
 # grep options
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
@@ -112,6 +115,10 @@ alias lt='ll -tr ${colorflag}'        # Lists sorted by date, most recent last.
 alias lc='lt -c ${colorflag}'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u ${colorflag}'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls ${colorflag}'            # I often screw this up.
+
+# Notes (relies on script in $HOME/bin)
+alias n='fuzzynotes'
+alias nsync='fuzzynotes --rename && fuzzynotes --sync'
 
 # Python
 alias py="python"

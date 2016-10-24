@@ -1,0 +1,171 @@
+#!/usr/bin/env python
+#
+# fuzzynotes
+#
+# A command line interface for managing a notes folder
+# using fzf, vim, git, markdown, and yaml front-matter.
+#
+# When in fzf:
+#     enter -> open in vim
+#     ctrl-r -> remove file
+#     ctrl-p -> print file
+#
+# If the fzf selection is empty, the query string is used to create a new note
+# (in the style of Notational Velocity).
+
+import sys, os, re, yaml
+from subprocess import Popen, PIPE, call, check_call, check_output
+
+NOTESDIR = os.getenv("NOTESDIR")
+if NOTESDIR == '':
+    raise ValueError("fuzzynotes error: NOTESDIR not set")
+
+class colours:
+    DEFAULT    = '\033[39m'
+    GREEN      = '\033[32m'
+    BLUE       = '\033[34m'
+    GOLD       = '\033[38;5;179m'
+
+SEP = colours.GOLD + " ~ "
+
+def all_notes():
+    """Yield all notes in a format amenable to filtering using fzf.
+    The format is
+        "{filename}:{description}{SEP}{tags}"
+    Each tag is prefixed with an @ symbol to aid with filtering.
+    """
+    for filename in os.listdir(NOTESDIR):
+        if filename.endswith('md'):
+            with open(os.path.join(NOTESDIR, filename)) as f:
+                metadata = next(yaml.load_all(f))
+                A = fmt(colours.DEFAULT, filename)
+                B = fmt(colours.DEFAULT, metadata.get('description', ''))
+                C = fmt(colours.GREEN, metadata.get('tags', ''))
+                yield A + ':' + B + SEP + C
+
+def fmt(colour, item):
+    if item == [] or item == '':
+        return ''
+    if isinstance(item, list):
+        # The item is a list of tags.
+        item = ", ".join('@'+t for t in item)
+    return colour+item
+
+def sync():
+    """Commit and push all changes to the notes folder git remote with
+    an auto generated message.
+    """
+    if not os.path.isdir(os.path.join(NOTESDIR, ".git")):
+        raise ValueError("fuzzynotes: no git repo at $NOTESDIR")
+
+    os.chdir(NOTESDIR)
+    print(colours.GOLD + "=== Start Notes Sync ===" + colours.DEFAULT)
+    NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
+    check_call(["git", "add", "."])
+    check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
+    check_call(["git", "push"])
+    print(colours.GOLD + "=== End Notes Sync ===" + colours.DEFAULT)
+    os.chdir(os.getenv("OLDPWD"))
+
+def slugify(s):
+    """A very simple function to turn a string into a slug."""
+    return re.sub('\W+', '-', s.strip().lower())
+
+def new_note(query):
+    if not query:
+        raise ValueError("fuzzynotes error: no description given")
+    slug = re.sub('\W+', '-', query.strip().lower())
+    call(["vim", "~/notes/{}.md".format(slug),
+          "-c", ":call NoteTemplate('{}')".format(query)])
+
+def rename():
+    """Ensure the filenames of all notes match the yaml description field.
+
+    In case of difference, rename the file with a slugified version of the
+    field.
+    """
+    for filename in os.listdir(NOTESDIR):
+        if filename.endswith('md'):
+            with open(os.path.join(NOTESDIR, filename)) as f:
+                metadata = next(yaml.load_all(f))
+                slug = slugify(metadata['description'])+'.md'
+                if filename != slug:
+                    os.rename(os.path.join(NOTESDIR, filename),
+                              os.path.join(NOTESDIR, slug))
+                    print("fuzzynotes rename: {} -> {}".format(filename, slug))
+
+def main(query=''):
+    """Run fzf with the given query on the notes folder data.
+
+    enter -> open in vim
+    ctrl-r -> remove file
+    ctrl-p -> print file
+
+    If the fzf selection is empty, the query string is used to create a new
+    note.
+    """
+    notes = '\n'.join(sorted(list(all_notes()), key=len))
+    opts = [
+        "fzf -q '{}'".format(query),
+        "--exact --ansi --print-query",
+        "-d ':' --with-nth=2..",
+        "--expect=enter,ctrl-r,ctrl-p",
+        "--preview=\"cat $NOTESDIR/{1}\""
+    ]
+
+    # Choose preview size and location based on tmux pane width
+    out = Popen("tmux display-message -p '#{pane_width}'",
+                shell=True, stdout=PIPE, stderr=PIPE).stdout.read()
+    if out != '' and int(out) < 160:
+        opts.append("--preview-window=up:50% ")
+
+    cmd = " ".join(opts)
+    p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE)
+    out, err = p.communicate(notes.encode())
+
+    # out will be empty if fzf is exits early (e.g. pressing ESC)
+    if out:
+        lines = out.decode().split('\n')
+        query, key, data = lines[0], lines[1], lines[2]
+
+        if not data and key == "enter":
+            # Our fzf selection was empty
+            new_note(query)
+
+        else:
+            # Our fzf selection was not empty
+            file, rest = data.split(':')
+            if key == "ctrl-r":
+                check_call(["rm", "-i", os.path.join(NOTESDIR, file)])
+            elif key == "ctrl-p":
+                check_call(["cat", os.path.join(NOTESDIR, file)])
+            else:
+                call(["vim", os.path.join(NOTESDIR, file)])
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Manage a notes folder')
+    parser.add_argument('--show', action='store_true')
+    parser.add_argument('--rename', action='store_true')
+    parser.add_argument('--sync', action='store_true')
+    parser.add_argument('--new', action='store_true')
+    parser.add_argument('query', nargs='*', default='')
+    args = parser.parse_args()
+    if args.query:
+        args.query = ' '.join(args.query)
+
+    # Note: the args are mutually exclusive
+    if args.show:
+        for line in sorted(list(all_notes()), key=len):
+            print(line)
+    elif args.rename:
+        rename()
+    elif args.sync:
+        sync()
+    elif args.new:
+        new_note(args.query)
+    elif args.query:
+        main(args.query)
+    else:
+        main()

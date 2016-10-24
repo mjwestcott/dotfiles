@@ -49,3 +49,6 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
+
+# fuzzynotes
+export NOTESDIR="$HOME/notes"

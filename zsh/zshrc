@@ -14,6 +14,10 @@ alias .....="cd ../../../.."
 alias r=ranger
 alias grep='grep --color=auto'
 
+# Notes (relies on script in $HOME/bin)
+alias n='fuzzynotes'
+alias nsync='fuzzynotes --rename && fuzzynotes --sync'
+
 # Python
 alias py='python'
 alias ip='ipython'
