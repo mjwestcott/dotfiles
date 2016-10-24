@@ -17,7 +17,7 @@ import sys, os, re, yaml
 from subprocess import Popen, PIPE, call, check_call, check_output
 
 NOTESDIR = os.getenv("NOTESDIR")
-if NOTESDIR == '':
+if not NOTESDIR:
     raise ValueError("fuzzynotes error: NOTESDIR not set")
 
 class colours:
