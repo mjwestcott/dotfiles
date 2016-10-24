@@ -166,7 +166,6 @@ autocmd FileType sh
     \ setlocal textwidth=80
 
 autocmd FileType markdown
-    \ setlocal textwidth=80 |
     \ syntax match Comment /\%^---\_.\{-}\.\.\.$/ " YAML front-matter
 
 autocmd BufWritePre * :%s/\s\+$//e
