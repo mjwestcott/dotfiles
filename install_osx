@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Install bash and zsh dotfiles environment on OS X.
 
@@ -66,6 +66,6 @@ done
 
 # vim
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
-for file in ./*; do
+for file in *; do
     [[ ! -e ~/.vim/colors/$file ]] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
 done
