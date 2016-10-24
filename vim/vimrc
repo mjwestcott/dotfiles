@@ -170,7 +170,6 @@ autocmd FileType markdown
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
-autocmd BufNewFile,BufRead *bash* set filetype=sh
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
 autocmd FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:}"
 autocmd BufNewFile,BufRead \*.{md,mdwn,mkd,mkdn,mark\*} set filetype=markdown
@@ -284,7 +283,11 @@ let g:ophigh_filetypes_to_ignore = { "haskell": 1,
                                    \ "ocaml": 1,
                                    \ "erlang": 1,
                                    \ "clojure": 1,
-                                   \ "lisp": 1 }
+                                   \ "lisp": 1,
+                                   \ "zsh": 1,
+                                   \ "bash": 1,
+                                   \ "sh": 1,
+                                   \ "text": 1 }
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
@@ -333,7 +336,7 @@ noremap <leader>cf :pyf ~/dotfiles/vim/misc/clang-format.py<CR>
 
 let g:markdown_syntax_conceal = 0
 let g:markdown_fenced_languages = ['python', 'go', 'c', 'clojure', 'haskell',
-                                  \ 'bash=sh', 'html', 'css', 'javascript']
+                                  \ 'bash=sh', 'zsh', 'html', 'css', 'javascript']
 
 "------------------------------------------------------------------------------
 " ListToggle
