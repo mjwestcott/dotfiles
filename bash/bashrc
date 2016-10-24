@@ -136,7 +136,7 @@ function fasd_vim {
     if [[ -n "${*}" ]]; then
         LANG=C fasd -f -e vim -b viminfo "${*}"
     else
-        vim
+        vim -c ":History"
     fi
 }
 
