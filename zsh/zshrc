@@ -49,6 +49,7 @@ alias H='fzf_hidden'
 alias G='fzf_regex'
 alias L='fzf_locate'
 alias C='fzf_commit'
+alias B='fzf_branches'
 
 function fzf_jump {
     local file="$(ag -p $AGIGNORE $HOME -g "" | fzf -q "${*}")"
@@ -95,6 +96,21 @@ function fzf_commit {
                    | fzf -q "${*}" \
                    | awk -F' ' '{ print $1 }')"
     [[ -n "$sha" ]] && git show "$sha"
+}
+
+# Checkout git branch/tag, from
+# https://github.com/junegunn/dotfiles/blob/master/bashrc
+function fzf_branches {
+    local tags branches target
+    tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+    branches=$(
+        git branch --all | grep -v HEAD             |
+        sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+        sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+    target=$(
+        (echo "$tags"; echo "$branches") |
+        fzf-tmux -l40 -- --no-hscroll --ansi +m -d "\t" -n 2 -1 -q "$*") || return
+    git checkout $(echo "$target" | awk '{print $2}')
 }
 
 # Source 'fzf'.
