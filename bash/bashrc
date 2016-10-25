@@ -117,8 +117,8 @@ alias lu='lt -u ${colorflag}'         # Lists sorted by date, most recent last, 
 alias sl='ls ${colorflag}'            # I often screw this up.
 
 # Notes (relies on script in $HOME/bin)
-alias n='fuzzynotes'
-alias nsync='fuzzynotes --rename && fuzzynotes --sync'
+alias n='fuzzynotes run'
+alias nsync='fuzzynotes rename && fuzzynotes sync'
 
 # Python
 alias py="python"

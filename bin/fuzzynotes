@@ -51,22 +51,6 @@ def fmt(colour, item):
         item = ", ".join('@'+t for t in item)
     return colour+item
 
-def sync():
-    """Commit and push all changes to the notes folder git remote with
-    an auto generated message.
-    """
-    if not os.path.isdir(os.path.join(NOTESDIR, ".git")):
-        raise ValueError("fuzzynotes: no git repo at $NOTESDIR")
-
-    os.chdir(NOTESDIR)
-    print(colours.GOLD + "=== Start Notes Sync ===" + colours.DEFAULT)
-    NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
-    check_call(["git", "add", "."])
-    check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
-    check_call(["git", "push"])
-    print(colours.GOLD + "=== End Notes Sync ===" + colours.DEFAULT)
-    os.chdir(os.getenv("OLDPWD"))
-
 def slugify(s):
     """A very simple function to turn a string into a slug."""
     return re.sub('\W+', '-', s.strip().lower())
@@ -78,7 +62,17 @@ def new_note(query):
     call(["vim", "~/notes/{}.md".format(slug),
           "-c", ":call NoteTemplate('{}')".format(query)])
 
-def rename():
+# We define four subcommands for the 'fuzzynotes' CLI:
+#     show, rename, sync, run
+# They are intended to be used via shell aliases, e.g.
+#     alias n='fuzzynotes run'
+#     alias nsync='fuzzynotes rename && fuzzynotes sync'
+
+def show(args):
+    for line in sorted(list(all_notes()), key=len):
+        print(line)
+
+def rename(args):
     """Ensure the filenames of all notes match the yaml description field.
 
     In case of difference, rename the file with a slugified version of the
@@ -94,7 +88,24 @@ def rename():
                               os.path.join(NOTESDIR, slug))
                     print("fuzzynotes rename: {} -> {}".format(filename, slug))
 
-def main(query=''):
+def sync(args):
+    """Commit and push all changes to the notes folder git remote with
+    an auto generated message.
+    """
+    if not os.path.isdir(os.path.join(NOTESDIR, ".git")):
+        raise ValueError("fuzzynotes: no git repo at $NOTESDIR")
+
+    os.chdir(NOTESDIR)
+    print(colours.GOLD + "=== Start Notes Sync ===" + colours.DEFAULT)
+    NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
+    check_call(["git", "add", "."])
+    check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
+    check_call(["git", "push"])
+    print(colours.GOLD + "=== End Notes Sync ===" + colours.DEFAULT)
+    os.chdir(os.getenv("OLDPWD"))
+
+
+def run(args):
     """Run fzf with the given query on the notes folder data.
 
     enter -> open in vim
@@ -104,6 +115,10 @@ def main(query=''):
     If the fzf selection is empty, the query string is used to create a new
     note.
     """
+    query = ''
+    if args.query:
+        query = ' '.join(args.query)
+
     notes = '\n'.join(sorted(list(all_notes()), key=len))
     opts = [
         "fzf -q '{}'".format(query),
@@ -144,28 +159,16 @@ def main(query=''):
 
 if __name__ == "__main__":
     import argparse
-
     parser = argparse.ArgumentParser(description='Manage a notes folder')
-    parser.add_argument('--show', action='store_true')
-    parser.add_argument('--rename', action='store_true')
-    parser.add_argument('--sync', action='store_true')
-    parser.add_argument('--new', action='store_true')
-    parser.add_argument('query', nargs='*', default='')
-    args = parser.parse_args()
-    if args.query:
-        args.query = ' '.join(args.query)
+    subparsers = parser.add_subparsers()
 
-    # Note: the args are mutually exclusive
-    if args.show:
-        for line in sorted(list(all_notes()), key=len):
-            print(line)
-    elif args.rename:
-        rename()
-    elif args.sync:
-        sync()
-    elif args.new:
-        new_note(args.query)
-    elif args.query:
-        main(args.query)
-    else:
-        main()
+    run_parser = subparsers.add_parser('run')
+    run_parser.add_argument('query', nargs='*')
+    run_parser.set_defaults(func=run)
+
+    subparsers.add_parser('show').set_defaults(func=show)
+    subparsers.add_parser('rename').set_defaults(func=rename)
+    subparsers.add_parser('sync').set_defaults(func=sync)
+
+    args = parser.parse_args()
+    args.func(args)

@@ -472,7 +472,7 @@ function! g:NoteOpen(data)
 endfunction
 
 command! Notes call fzf#run({
-  \ 'source':  'fuzzynotes --show',
+  \ 'source':  'fuzzynotes show',
   \ 'options': '--exact --ansi -d ":" --with-nth 2..',
   \ 'down':    '~40%',
   \ 'sink':    function('g:NoteOpen')})
