@@ -104,7 +104,6 @@ def sync(args):
     print(colours.GOLD + "=== End Notes Sync ===" + colours.DEFAULT)
     os.chdir(os.getenv("OLDPWD"))
 
-
 def run(args):
     """Run fzf with the given query on the notes folder data.
 
