@@ -14,7 +14,8 @@
 # (in the style of Notational Velocity).
 
 import sys, os, re, yaml
-from subprocess import Popen, PIPE, call, check_call, check_output
+from subprocess import (Popen, PIPE, CalledProcessError,
+                        call, check_call, check_output)
 
 NOTESDIR = os.getenv("NOTESDIR")
 if not NOTESDIR:
@@ -89,18 +90,35 @@ def rename(args):
                     print("fuzzynotes rename: {} -> {}".format(filename, slug))
 
 def sync(args):
-    """Commit and push all changes to the notes folder git remote with
-    an auto generated message.
+    """Synchronise notes git repo with remote.
+
+    1) Commit all changes with auto generated message
+    2) Fetch changes from upstream
+    3) Rebase (raise error on failure)
+    4) Push changes to upstream
     """
     if not os.path.isdir(os.path.join(NOTESDIR, ".git")):
         raise ValueError("fuzzynotes: no git repo at $NOTESDIR")
 
     os.chdir(NOTESDIR)
     print(colours.GOLD + "=== Start Notes Sync ===" + colours.DEFAULT)
-    NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
-    check_call(["git", "add", "--all"])
-    check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
+
+    # Commit all changes with auto-generated messsage
+    if check_output(["git", "status", "--porcelain"]):
+        NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
+        check_call(["git", "add", "--all"])
+        check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
+
+    # Attempt to fetch and rebase
+    check_call(["git", "fetch"])
+    try:
+        check_call(["git", "rebase", "origin/master"])
+    except CalledProcessError:
+        sys.exit("fuzzynotes error: rebase failed")
+
+    # Push all changes
     check_call(["git", "push"])
+
     print(colours.GOLD + "=== End Notes Sync ===" + colours.DEFAULT)
     os.chdir(os.getenv("OLDPWD"))
 
