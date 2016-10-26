@@ -98,7 +98,7 @@ def sync(args):
     os.chdir(NOTESDIR)
     print(colours.GOLD + "=== Start Notes Sync ===" + colours.DEFAULT)
     NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
-    check_call(["git", "add", "."])
+    check_call(["git", "add", "--all"])
     check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
     check_call(["git", "push"])
     print(colours.GOLD + "=== End Notes Sync ===" + colours.DEFAULT)
