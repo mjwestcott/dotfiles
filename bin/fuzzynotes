@@ -19,7 +19,7 @@ from subprocess import (Popen, PIPE, CalledProcessError,
 
 NOTESDIR = os.getenv("NOTESDIR")
 if not NOTESDIR:
-    raise ValueError("fuzzynotes error: NOTESDIR not set")
+    sys.exit("fuzzynotes error: NOTESDIR not set")
 
 class colours:
     DEFAULT    = '\033[39m'
@@ -58,7 +58,7 @@ def slugify(s):
 
 def new_note(query):
     if not query:
-        raise ValueError("fuzzynotes error: no description given")
+        sys.exit("fuzzynotes error: no description given")
     slug = slugify(query)
     call(["vim", os.path.join(NOTESDIR, slug)+".md",
           "-c", ":call NoteTemplate('{}')".format(query)])
