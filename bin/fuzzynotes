@@ -3,7 +3,7 @@
 # fuzzynotes
 #
 # A command line interface for managing a notes folder
-# using fzf, vim, git, markdown, and yaml front-matter.
+# using fzf, vim, git, markdown, and YAML front-matter.
 #
 # When in fzf:
 #     enter -> open in vim
@@ -22,10 +22,10 @@ if not NOTESDIR:
     sys.exit("fuzzynotes error: NOTESDIR not set")
 
 class colours:
-    DEFAULT    = '\033[39m'
-    GREEN      = '\033[32m'
-    BLUE       = '\033[34m'
-    GOLD       = '\033[38;5;179m'
+    DEFAULT = '\033[39m'
+    GREEN   = '\033[32m'
+    BLUE    = '\033[34m'
+    GOLD    = '\033[38;5;179m'
 
 SEP = colours.GOLD + " ~ "
 
