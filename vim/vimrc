@@ -287,7 +287,8 @@ let g:ophigh_filetypes_to_ignore = { "haskell": 1,
                                    \ "zsh": 1,
                                    \ "bash": 1,
                                    \ "sh": 1,
-                                   \ "text": 1 }
+                                   \ "text": 1,
+                                   \ "gitcommit": 1}
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
