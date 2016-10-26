@@ -22,15 +22,18 @@ NOTESDIR = os.getenv("NOTESDIR")
 if not NOTESDIR:
     sys.exit("fuzzynotes error: NOTESDIR not set")
 
-Note = namedtuple("Note", ["filename", "description", "tags"])
+Note = namedtuple("Note", ["modified", "filename", "description", "tags"])
 
 def all_notes():
     """Yield all Notes."""
     for filename in os.listdir(NOTESDIR):
         if filename.endswith('md'):
             with open(os.path.join(NOTESDIR, filename)) as f:
+                cmd = "git log -1 --format='%at' -- '{}'"
+                modified = check_output(cmd.format(filename), shell=True).strip()
                 metadata = next(yaml.load_all(f))
-                yield Note(filename,
+                yield Note(modified,
+                           filename,
                            metadata.get('description', ''),
                            metadata.get('tags', []))
 
@@ -41,10 +44,10 @@ class colours:
     GOLD    = '\033[38;5;179m'
 
 # The format string will be used to produce string such as:
-#     "example.md|My First Description ~ @tag1, @tag2"
-FMT = "{filename}|{c1}{description}{c2}{separator}{c3}{tags}{c4}"
+#     "1477483226|example.md|My First Description ~ @tag1, @tag2"
+FMT = "{modified}|{filename}|{c1}{description}{c2}{separator}{c3}{tags}{c4}"
 
-def format(note, sep=" ~ "):
+def format(note, sep= " :: "):
     """Transform a Note object into a pretty string format amenable to
     filtering using fzf.
     """
@@ -53,6 +56,7 @@ def format(note, sep=" ~ "):
                       c2=colours.GOLD,
                       c3=colours.GREEN,
                       c4=colours.DEFAULT,
+                      modified=note.modified,
                       filename=note.filename,
                       description=note.description,
                       separator=sep,
@@ -85,7 +89,8 @@ def new_note(query):
 
 def show(args):
     print(format_many(sorted(list(all_notes()),
-                             key=lambda x: len(x.description))))
+                             key=lambda x: x.modified,
+                             reverse=True)))
 
 def rename(args):
     """Ensure the filenames of all notes match the yaml description field.
@@ -150,14 +155,15 @@ def run(args):
     if args.query:
         query = ' '.join(args.query)
 
-    notes = format_many(sorted(list(all_notes()),
-                               key=lambda x: len(x.description)))
+    notes = format_many(sorted(all_notes(),
+                               key=lambda x: x.modified,
+                               reverse=True))
     opts = [
         "fzf -q '{}'".format(query),
         "--exact --ansi --print-query",
-        "-d '\|' --with-nth=2..",
+        "-d '\|' --with-nth=3..",
         "--expect=enter,ctrl-r,ctrl-p",
-        "--preview=\"cat $NOTESDIR/{1}\""
+        "--preview=\"cat $NOTESDIR/{2}\""
     ]
 
     # Choose preview size and location based on tmux pane width
@@ -181,7 +187,7 @@ def run(args):
 
         else:
             # Our fzf selection was not empty
-            filename, _ = data.split("|")
+            _, filename, _ = data.split("|")
             if key == "ctrl-r":
                 check_call(["rm", "-i", os.path.join(NOTESDIR, filename)])
             elif key == "ctrl-p":
