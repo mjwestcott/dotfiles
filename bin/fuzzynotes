@@ -41,8 +41,8 @@ class colours:
     GOLD    = '\033[38;5;179m'
 
 # The format string will be used to produce string such as:
-#     "example.md:My First Description ~ @tag1, @tag2"
-FMT = "{filename}:{c1}{description}{c2}{separator}{c3}{tags}{c4}"
+#     "example.md|My First Description ~ @tag1, @tag2"
+FMT = "{filename}|{c1}{description}{c2}{separator}{c3}{tags}{c4}"
 
 def format(note, sep=" ~ "):
     """Transform a Note object into a pretty string format amenable to
@@ -155,7 +155,7 @@ def run(args):
     opts = [
         "fzf -q '{}'".format(query),
         "--exact --ansi --print-query",
-        "-d ':' --with-nth=2..",
+        "-d '\|' --with-nth=2..",
         "--expect=enter,ctrl-r,ctrl-p",
         "--preview=\"cat $NOTESDIR/{1}\""
     ]
@@ -181,7 +181,7 @@ def run(args):
 
         else:
             # Our fzf selection was not empty
-            filename, _ = data.split(":")
+            filename, _ = data.split("|")
             if key == "ctrl-r":
                 check_call(["rm", "-i", os.path.join(NOTESDIR, filename)])
             elif key == "ctrl-p":
