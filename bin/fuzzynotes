@@ -84,7 +84,8 @@ def new_note(query):
 #     alias nsync='fuzzynotes rename && fuzzynotes sync'
 
 def show(args):
-    print(format_many(all_notes()))
+    print(format_many(sorted(list(all_notes()),
+                             key=lambda x: len(x.description))))
 
 def rename(args):
     """Ensure the filenames of all notes match the yaml description field.
@@ -149,7 +150,8 @@ def run(args):
     if args.query:
         query = ' '.join(args.query)
 
-    notes = format_many(sorted(list(all_notes()), key=lambda x: len(x.description)))
+    notes = format_many(sorted(list(all_notes()),
+                               key=lambda x: len(x.description)))
     opts = [
         "fzf -q '{}'".format(query),
         "--exact --ansi --print-query",
