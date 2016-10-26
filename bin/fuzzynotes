@@ -14,6 +14,7 @@
 # (in the style of Notational Velocity).
 
 import sys, os, re, yaml
+from collections import namedtuple
 from subprocess import (Popen, PIPE, CalledProcessError,
                         call, check_call, check_output)
 
@@ -21,39 +22,52 @@ NOTESDIR = os.getenv("NOTESDIR")
 if not NOTESDIR:
     sys.exit("fuzzynotes error: NOTESDIR not set")
 
+Note = namedtuple("Note", ["filename", "description", "tags"])
+
+def all_notes():
+    """Yield all Notes."""
+    for filename in os.listdir(NOTESDIR):
+        if filename.endswith('md'):
+            with open(os.path.join(NOTESDIR, filename)) as f:
+                metadata = next(yaml.load_all(f))
+                yield Note(filename,
+                           metadata.get('description', ''),
+                           metadata.get('tags', []))
+
 class colours:
     DEFAULT = '\033[39m'
     GREEN   = '\033[32m'
     BLUE    = '\033[34m'
     GOLD    = '\033[38;5;179m'
 
-SEP = colours.GOLD + " ~ "
+# The format string will be used to produce string such as:
+#     "example.md:My First Description ~ @tag1, @tag2"
+FMT = "{filename}:{c1}{description}{c2}{separator}{c3}{tags}{c4}"
 
-def all_notes():
-    """Yield all notes in a format amenable to filtering using fzf.
-    The format is
-        "{filename}:{description}{SEP}{tags}"
-    Each tag is prefixed with an @ symbol to aid with filtering.
+def format(note, sep=" ~ "):
+    """Transform a Note object into a pretty string format amenable to
+    filtering using fzf.
     """
-    for filename in os.listdir(NOTESDIR):
-        if filename.endswith('md'):
-            with open(os.path.join(NOTESDIR, filename)) as f:
-                metadata = next(yaml.load_all(f))
-                A = fmt(colours.DEFAULT, filename)
-                B = fmt(colours.DEFAULT, metadata.get('description', ''))
-                C = fmt(colours.GREEN, metadata.get('tags', ''))
-                yield A + ':' + B + SEP + C
+    # Each tag is prefixed with an @ symbol to aid with filtering.
+    return FMT.format(c1=colours.DEFAULT,
+                      c2=colours.GOLD,
+                      c3=colours.GREEN,
+                      c4=colours.DEFAULT
+                      filename=note.filename,
+                      description=note.description,
+                      separator=sep,
+                      tags=", ".join('@'+t for t in note.tags))
 
-def fmt(colour, item):
-    if item == [] or item == '':
-        return ''
-    if isinstance(item, list):
-        # The item is a list of tags.
-        item = ", ".join('@'+t for t in item)
-    return colour+item
+def format_many(notes):
+    """Transform a list of Note objects to a newline separated string of
+    formatted notes.
+    """
+    return '\n'.join(format(note) for note in notes)
 
 def slugify(s):
-    """A very simple function to turn a string into a slug."""
+    """A very simple function to turn a string into a slug. Used to turn
+    descriptions into filenames.
+    """
     return re.sub('\W+', '-', s.strip().lower())
 
 def new_note(query):
@@ -70,8 +84,7 @@ def new_note(query):
 #     alias nsync='fuzzynotes rename && fuzzynotes sync'
 
 def show(args):
-    for line in sorted(list(all_notes()), key=len):
-        print(line)
+    print(format_many(all_notes()))
 
 def rename(args):
     """Ensure the filenames of all notes match the yaml description field.
@@ -136,7 +149,7 @@ def run(args):
     if args.query:
         query = ' '.join(args.query)
 
-    notes = '\n'.join(sorted(list(all_notes()), key=len))
+    notes = format_many(sorted(list(all_notes()), key=lambda x: len(x.description)))
     opts = [
         "fzf -q '{}'".format(query),
         "--exact --ansi --print-query",
@@ -166,13 +179,13 @@ def run(args):
 
         else:
             # Our fzf selection was not empty
-            file, rest = data.split(':')
+            filename, _ = data.split(":")
             if key == "ctrl-r":
-                check_call(["rm", "-i", os.path.join(NOTESDIR, file)])
+                check_call(["rm", "-i", os.path.join(NOTESDIR, filename)])
             elif key == "ctrl-p":
-                check_call(["cat", os.path.join(NOTESDIR, file)])
+                check_call(["cat", os.path.join(NOTESDIR, filename)])
             else:
-                call(["vim", os.path.join(NOTESDIR, file)])
+                call(["vim", os.path.join(NOTESDIR, filename)])
 
 if __name__ == "__main__":
     import argparse
