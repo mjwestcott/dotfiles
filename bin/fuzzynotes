@@ -22,6 +22,9 @@ NOTESDIR = os.getenv("NOTESDIR")
 if not NOTESDIR:
     sys.exit("fuzzynotes error: NOTESDIR not set")
 
+if not os.path.isdir(os.path.join(NOTESDIR, ".git")):
+    sys.exit("fuzzynotes error: no git repo at NOTESDIR")
+
 Note = namedtuple("Note", ["modified", "filename", "description", "tags"])
 
 def all_notes():
@@ -44,7 +47,7 @@ class colours:
     GOLD    = '\033[38;5;179m'
 
 # The format string will be used to produce string such as:
-#     "1477483226|example.md|My First Description ~ @tag1, @tag2"
+#     "1477483226|example.md|My First Description :: @tag1, @tag2"
 FMT = "{modified}|{filename}|{c1}{description}{c2}{separator}{c3}{tags}{c4}"
 
 def format(note, sep= " :: "):
@@ -81,8 +84,8 @@ def new_note(query):
     call(["vim", os.path.join(NOTESDIR, slug)+".md",
           "-c", ":call NoteTemplate('{}')".format(query)])
 
-# We define four subcommands for the 'fuzzynotes' CLI:
-#     show, rename, sync, run
+# We define the following subcommands for the 'fuzzynotes' CLI:
+#     show, rename, commit, sync, run
 # They are intended to be used via shell aliases, e.g.
 #     alias n='fuzzynotes run'
 #     alias nsync='fuzzynotes rename && fuzzynotes sync'
@@ -108,6 +111,16 @@ def rename(args):
                               os.path.join(NOTESDIR, slug))
                     print("fuzzynotes rename: {} -> {}".format(filename, slug))
 
+def commit(args):
+    """Commit all changes in $NOTESDIR with auto generated message."""
+    assert os.getcwd() == NOTESDIR
+
+    # Commit all changes with auto-generated messsage
+    if check_output(["git", "status", "--porcelain"]):
+        NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
+        check_call(["git", "add", "--verbose", "--all"])
+        check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
+
 def sync(args):
     """Synchronise notes git repo with remote.
 
@@ -116,17 +129,10 @@ def sync(args):
     3) Rebase (raise error on failure)
     4) Push changes to upstream
     """
-    if not os.path.isdir(os.path.join(NOTESDIR, ".git")):
-        raise ValueError("fuzzynotes: no git repo at $NOTESDIR")
-
-    os.chdir(NOTESDIR)
-    print(colours.GOLD + "=== Start Notes Sync ===" + colours.DEFAULT)
+    assert os.getcwd() == NOTESDIR
 
     # Commit all changes with auto-generated messsage
-    if check_output(["git", "status", "--porcelain"]):
-        NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
-        check_call(["git", "add", "--all"])
-        check_call(["git", "commit", "-m", "auto: latest updates at {}".format(NOW)])
+    commit(args)
 
     # Attempt to fetch and rebase
     check_call(["git", "fetch"])
@@ -137,9 +143,6 @@ def sync(args):
 
     # Push all changes
     check_call(["git", "push"])
-
-    print(colours.GOLD + "=== End Notes Sync ===" + colours.DEFAULT)
-    os.chdir(os.getenv("OLDPWD"))
 
 def run(args):
     """Run fzf with the given query on the notes folder data.
@@ -197,6 +200,10 @@ def run(args):
 
 if __name__ == "__main__":
     import argparse
+
+    WORKING_DIR = os.getenv("PWD")
+    os.chdir(NOTESDIR)
+
     parser = argparse.ArgumentParser(description='Manage a notes folder')
     subparsers = parser.add_subparsers()
 
@@ -207,6 +214,9 @@ if __name__ == "__main__":
     subparsers.add_parser('show').set_defaults(func=show)
     subparsers.add_parser('rename').set_defaults(func=rename)
     subparsers.add_parser('sync').set_defaults(func=sync)
+    subparsers.add_parser('commit').set_defaults(func=commit)
 
     args = parser.parse_args()
     args.func(args)
+
+    os.chdir(WORKING_DIR)
