@@ -72,7 +72,3 @@ cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
     [[ ! -e ~/.vim/colors/$file ]] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
 done
-
-# fuzzynotes
-git clone https://gitlab.com/mjwestcott/notes.git ~/notes
-cd ~/dotfiles/bin && mkdir ~/bin && ln -sfv ~/dotfiles/bin/fuzzynotes ~/bin/fuzzynotes
