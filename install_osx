@@ -30,6 +30,9 @@ brew install emacs --with-cocoa --devel
 # Languages
 brew install go leiningen opam python python3 rbenv ruby-build
 
+# Other tools
+brew install modd devd
+
 # OCaml config
 opam init
 opam switch 4.03.0
