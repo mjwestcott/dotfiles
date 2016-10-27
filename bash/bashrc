@@ -116,9 +116,19 @@ alias lc='lt -c ${colorflag}'         # Lists sorted by date, most recent last, 
 alias lu='lt -u ${colorflag}'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls ${colorflag}'            # I often screw this up.
 
-# Notes (relies on script in $HOME/bin)
+# Notes (relies on fuzzynotes script in $HOME/bin)
 alias n='fuzzynotes run'
 alias nsync='fuzzynotes rename && fuzzynotes sync'
+function autosync {
+    local dir=$PWD
+    if [[ -n $(pgrep 'modd') ]]; then
+        echo 'autosync fail: modd already running?'
+        return 1
+    else
+        [[ -n $NOTESDIR ]] && cd $NOTESDIR && modd >> .synclog &
+        cd $dir
+    fi
+}
 
 # Python
 alias py="python"
