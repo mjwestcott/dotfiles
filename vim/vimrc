@@ -180,6 +180,9 @@ autocmd BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
 
 let mapleader=" "
 
+" UK keyboards...
+inoremap § <ESC>
+
 " Keep search matches in the middle of the window.
 nnoremap * *zzzv
 nnoremap # #zzzv
