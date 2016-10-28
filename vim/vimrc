@@ -467,13 +467,13 @@ function! g:NoteTemplate(desc)
 endfunction
 
 function! g:NoteOpen(data)
-    " Data is expected as '{modified}|{filename}|{description} ~ {tags}'
-    exec "edit " . g:notes_dir . "/" . split(a:data, '|')[1]
+    " Data is expected as '{filename}:{description} | {modified} | {tags}'
+    exec "edit " . g:notes_dir . "/" . split(a:data, ':')[0]
 endfunction
 
 command! Notes call fzf#run({
   \ 'source':  'fuzzynotes show',
-  \ 'options': '--exact --ansi -d "\|" --with-nth 3..',
+  \ 'options': '--exact --ansi -d ":" --with-nth 2..',
   \ 'down':    '~40%',
   \ 'sink':    function('g:NoteOpen')})
 
