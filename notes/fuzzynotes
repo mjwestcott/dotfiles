@@ -14,7 +14,6 @@
 # (in the style of Notational Velocity).
 
 import sys, os, re, yaml, datetime
-from collections import namedtuple
 from subprocess import (Popen, PIPE, CalledProcessError,
                         call, check_call, check_output)
 
@@ -46,61 +45,87 @@ def relative(dt):
     else:
         return '{} days ago'.format(diff.days)
 
-Note = namedtuple("Note", ["filename", "modified", "description", "tags"])
-
-def all_notes():
-    """Yield all Notes."""
+def generate_data():
+    """Yield all notes data gathered from the filesystem and git."""
+    # Note data is represented as dicts rather than namedtuples for the sake of
+    # YAML serialisation.
     for filename in os.listdir(NOTESDIR):
         if filename.endswith('md'):
             with open(os.path.join(NOTESDIR, filename)) as f:
                 cmd = "git log -1 --format='%at' -- '{}'"
                 out = check_output(cmd.format(filename), shell=True).strip()
-                modified = datetime.datetime.fromtimestamp(int(out))
+                modified = int(out) # A UNIX timestamp
                 metadata = next(yaml.load_all(f))
-                yield Note(filename,
-                           modified,
-                           metadata.get('description', ''),
-                           metadata.get('tags', []))
+                yield {"filename": filename,
+                       "modified": modified,
+                       "description": metadata.get('description', ''),
+                       "tags": metadata.get('tags', [])}
+
+def write_to_cache(hash, data):
+    """Write the git SHA1 hash of the latest commit and the notes data into a
+    YAML cache file."""
+    assert os.getcwd() == NOTESDIR
+    with open(".cache", "w") as f:
+        f.write(yaml.safe_dump({"hash": hash,
+                                "data": data}))
+
+def read_from_cache():
+    """Return a tuple of the SHA1 hash, and the YAML data."""
+    assert os.getcwd() == NOTESDIR
+    with open(".cache", "r") as f:
+        x = yaml.safe_load(f)
+    return x['hash'], x['data']
+
+def get_notes():
+    """Attempt to get notes data from cache, otherwise generate it and write to
+    the cache, before returning the data."""
+    assert os.getcwd() == NOTESDIR
+    cache_hash, data = read_from_cache()
+    curr_hash = check_output(["git", "rev-parse", "HEAD"]).strip()
+    status = check_output(["git", "status", "--porcelain"])
+    if cache_hash == curr_hash and status == '':
+        # Cache is valid
+        return data
+    else:
+        # Cache is invalid
+        data = list(generate_data())
+        write_to_cache(curr_hash, data)
+        return data
 
 class colours:
+    # GOLD    = '\033[38;5;179m'
     DEFAULT = '\033[39m'
     GREEN   = '\033[32m'
     BLUE    = '\033[34m'
-    GOLD    = '\033[38;5;179m'
 
-SEP  = colours.GOLD + " "
+SEP  = " "
 FNAME = colours.DEFAULT + "{filename}"
 MOD  = colours.BLUE + "{modified}"
 DESC = colours.DEFAULT + "{description}"
 TAGS = colours.GREEN + "{tags}"
-
-# e.g. "example.md:My First Description | 2 days ago | @tag1, @tag2"
 FMT = FNAME + ":" + DESC + SEP + MOD + SEP + TAGS + colours.DEFAULT
 
-def format(notes):
-    """Transform a list of Note objects into a newline separated string format amenable to
-    filtering using fzf.
+def format_for_fzf(data):
+    """Transform the notes data into a form amenable for filtering in fzf.
 
-    Each tag is prefixed with an @ symbol to aid with filtering.
+    The data is a list of python dicts.
     """
-    filenames = [note.filename for note in notes]
-    mods = [relative(note.modified) for note in notes]
-    descriptions = [note.description for note in notes]
-    tags = [", ".join('@'+t for t in note.tags) for note in notes]
+    # Sort by last modified time and turn into readable relative time
+    data.sort(key=lambda d: d['modified'], reverse=True)
+    for d in data:
+        dt = datetime.datetime.fromtimestamp(d['modified'])
+        d['modified'] = relative(dt)
 
-    # Left justify mods and descriptions based on max length.
-    modlen = max(len(x) for x in mods)
-    desclen = max(len(x) for x in descriptions)
-    mods = [mod.ljust(modlen) for mod in mods]
-    descriptions = [description.ljust(desclen) for description in descriptions]
+    # Left justify modified and description fields based on max length.
+    # @ symbols are added to tags to aid with filtering in fzf.
+    modlen = max(len(d['modified']) for d in data)
+    desclen = max(len(d['description']) for d in data)
+    for d in data:
+        d['description'] = d['description'].ljust(desclen)
+        d['modified'] = d['modified'].ljust(modlen)
+        d['tags'] = ", ".join('@'+t for t in d['tags'])
 
-    # Recombine fields.
-    notes = [Note(*fields) for fields in zip(filenames, mods, descriptions, tags)]
-    return '\n'.join(FMT.format(filename=note.filename,
-                                modified=note.modified,
-                                description=note.description,
-                                tags=note.tags)
-                     for note in notes)
+    return '\n'.join(FMT.format(**d) for d in data)
 
 def slugify(s):
     """A very simple function to turn a string into a slug. Used to turn
@@ -123,9 +148,7 @@ def new_note(query):
 #     alias autosync='fuzzynotes autosync &'
 
 def show(args):
-    print(format(sorted(list(all_notes()),
-                        key=lambda x: x.modified,
-                        reverse=True)))
+    print(format_for_fzf(get_notes()))
 
 def rename(args):
     """Ensure the filenames of all notes match the yaml description field.
@@ -211,9 +234,8 @@ def run(args):
     if args.query:
         query = ' '.join(args.query)
 
-    notes = format(sorted(all_notes(),
-                          key=lambda x: x.modified,
-                          reverse=True))
+    notes = format_for_fzf(get_notes())
+
     opts = [
         "fzf -q '{}'".format(query),
         "--exact --ansi --print-query",
