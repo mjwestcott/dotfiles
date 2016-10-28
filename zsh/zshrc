@@ -17,16 +17,7 @@ alias grep='grep --color=auto'
 # Notes (relies on fuzzynotes script in $HOME/bin)
 alias n='fuzzynotes run'
 alias nsync='fuzzynotes rename && fuzzynotes sync'
-function autosync {
-    local dir=$PWD
-    if [[ -n $(pgrep 'modd') ]]; then
-        echo 'autosync fail: modd already running?'
-        return 1
-    else
-        [[ -n $NOTESDIR ]] && cd $NOTESDIR && modd >> .synclog &
-        cd $dir
-    fi
-}
+alias autosync='fuzzynotes autosync &'
 
 # Python
 alias py='python'

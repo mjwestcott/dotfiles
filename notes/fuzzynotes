@@ -144,6 +144,27 @@ def sync(args):
     # Push all changes
     check_call(["git", "push"])
 
+def autosync(args):
+    """Launch modd in NOTESDIR to automatically sync on file changes.
+
+    Intended to be run as a background job in the shell, i.e.
+        fuzzynotes autosync &
+    """
+    assert os.getcwd() == NOTESDIR
+
+    # TODO: We might be running modd for another purpose, so using pgrep to
+    # check whether it is already running autosync is a bit of a hack.
+    try:
+        check_call(["pgrep", "modd"])
+    except CalledProcessError:
+        # pgrep will return code 1 in case of no match, which indicates
+        # that modd is not currently running.
+        with open(".synclog", "a") as logfile:
+            call(["modd"], stdout=logfile)
+    else:
+        # pgrep returned code 0, indicating a match.
+        sys.exit("autosync fail: modd already running?")
+
 def run(args):
     """Run fzf with the given query on the notes folder data.
 
@@ -213,8 +234,9 @@ if __name__ == "__main__":
 
     subparsers.add_parser('show').set_defaults(func=show)
     subparsers.add_parser('rename').set_defaults(func=rename)
-    subparsers.add_parser('sync').set_defaults(func=sync)
     subparsers.add_parser('commit').set_defaults(func=commit)
+    subparsers.add_parser('sync').set_defaults(func=sync)
+    subparsers.add_parser('autosync').set_defaults(func=autosync)
 
     args = parser.parse_args()
     args.func(args)
