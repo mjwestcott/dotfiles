@@ -116,10 +116,11 @@ def new_note(query):
           "-c", ":call NoteTemplate('{}')".format(query)])
 
 # We define the following subcommands for the 'fuzzynotes' CLI:
-#     show, rename, commit, sync, run
+#     show, rename, commit, sync, autosync, run
 # They are intended to be used via shell aliases, e.g.
 #     alias n='fuzzynotes run'
 #     alias nsync='fuzzynotes rename && fuzzynotes sync'
+#     alias autosync='fuzzynotes autosync &'
 
 def show(args):
     print(format(sorted(list(all_notes()),
