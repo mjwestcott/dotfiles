@@ -27,7 +27,7 @@ if not os.path.isdir(os.path.join(NOTESDIR, ".git")):
 
 def relative(dt):
     """Format the given datetime object to human readable relative time."""
-    diff = datetime.datetime.utcnow() - dt
+    diff = datetime.datetime.now() - dt
     s = int(diff.total_seconds())
     if s <= 1:
         return 'just now'
