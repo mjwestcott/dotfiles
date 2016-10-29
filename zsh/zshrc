@@ -35,7 +35,7 @@ function fasd_jump {
 
 function fasd_vim {
     if [[ -n "${*}" ]]; then
-        LANG=C fasd -f -e vim -b viminfo "${*}"
+        LANG=C fasd -f -t -e vim -b viminfo "${*}"
     else
         vim -c ":History"
     fi
