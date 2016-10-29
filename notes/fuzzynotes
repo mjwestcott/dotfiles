@@ -169,8 +169,6 @@ def rename(args):
 def commit(args):
     """Commit all changes in $NOTESDIR with auto generated message."""
     assert os.getcwd() == NOTESDIR
-
-    # Commit all changes with auto-generated messsage
     if check_output(["git", "status", "--porcelain"]):
         NOW = check_output(["date", "+%Y-%m-%d %H:%M:%S %Z"])
         check_call(["git", "add", "--verbose", "--all"])
@@ -185,7 +183,6 @@ def sync(args):
     4) Push changes to upstream
     """
     assert os.getcwd() == NOTESDIR
-
     # Commit all changes with auto-generated messsage
     commit(args)
 
@@ -206,7 +203,6 @@ def autosync(args):
         fuzzynotes autosync &
     """
     assert os.getcwd() == NOTESDIR
-
     # TODO: We might be running modd for another purpose, so using pgrep to
     # check whether it is already running autosync is a bit of a hack.
     try:
