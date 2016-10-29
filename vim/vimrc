@@ -459,6 +459,10 @@ set rtp^="/Users/mattwestcott/.opam/system/share/ocp-indent/vim"
 
 let g:notes_dir = $NOTESDIR
 
+function! g:Slugify(str)
+    return join(split(tolower(a:str), '\W\+'), '-')
+endfunction
+
 function! g:NoteTemplate(desc)
     call append(0, "---")
     call append(1, "tags: []")
@@ -466,15 +470,34 @@ function! g:NoteTemplate(desc)
     call append(3, "...")
 endfunction
 
-function! g:NoteOpen(data)
-    " Data is expected as '{filename}:{description} | {modified} | {tags}'
-    exec "edit " . g:notes_dir . "/" . split(a:data, ':')[0]
+function! g:NoteSink(output)
+    if len(a:output) == 2
+        let query = a:output[0]
+        let key = a:output[1]
+        if key == "enter"
+            let filename = g:Slugify(query) . ".md"
+            exec "edit" join([g:notes_dir, filename], "/")
+            call g:NoteTemplate(query)
+        endif
+    elseif len(a:output) == 3
+        let key = a:output[1]
+        let data = a:output[2]
+        " Data is expected as '{filename}:{description} | {modified} | {tags}'
+        let filename = split(data, ":")[0]
+        if key == "ctrl-r"
+            exec "!rm -i" join([g:notes_dir, filename], "/")
+        else
+            exec "edit" join([g:notes_dir, filename], "/")
+        endif
+    endif
 endfunction
 
 command! Notes call fzf#run({
   \ 'source':  'fuzzynotes show',
-  \ 'options': '--exact --ansi -d ":" --with-nth 2..',
+  \ 'sink*':    function('g:NoteSink'),
   \ 'down':    '~40%',
-  \ 'sink':    function('g:NoteOpen')})
+  \ 'options': '--exact --ansi -d ":" --with-nth 2.. --prompt="Notes> " ' .
+  \            '--expect=enter,ctrl-r --print-query'
+  \})
 
 nnoremap <leader>n :Notes<CR>
