@@ -7,4 +7,7 @@
 git clone https://gitlab.com/mjwestcott/notes.git $NOTESDIR
 cd ~/dotfiles/notes && mkdir -p ~/bin
 ln -sfv ~/dotfiles/notes/fuzzynotes ~/bin/fuzzynotes
-ln -sfv ~/dotfiles/notes/modd.conf $NOTESDIR/modd.conf
+
+mkdir -p $NOTESDIR/.fuzzynotes && cd $NOTESDIR/.fuzzynotes
+touch synclog && touch cache
+ln -sfv ~/dotfiles/notes/modd.conf $NOTESDIR/.fuzzynotes/modd.conf

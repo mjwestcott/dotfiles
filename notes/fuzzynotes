@@ -65,14 +65,14 @@ def write_to_cache(hash, data):
     """Write the git SHA1 hash of the latest commit and the notes data into a
     YAML cache file."""
     assert os.getcwd() == NOTESDIR
-    with open(".cache", "w") as f:
+    with open(".fuzzynotes/cache", "w") as f:
         f.write(yaml.safe_dump({"hash": hash,
                                 "data": data}))
 
 def read_from_cache():
     """Return a tuple of the SHA1 hash, and the YAML data."""
     assert os.getcwd() == NOTESDIR
-    with open(".cache", "r") as f:
+    with open(".fuzzynotes/cache", "r") as f:
         x = yaml.safe_load(f)
     return x['hash'], x['data']
 
@@ -210,8 +210,8 @@ def autosync(args):
     except CalledProcessError:
         # pgrep will return code 1 in case of no match, which indicates
         # that modd is not currently running.
-        with open(".synclog", "a") as logfile:
-            call(["modd"], stdout=logfile)
+        with open(".fuzzynotes/synclog", "a") as logfile:
+            call(["modd", "-f" ".fuzzynotes/modd.conf"], stdout=logfile)
     else:
         # pgrep returned code 0, indicating a match.
         sys.exit("autosync fail: modd already running?")
