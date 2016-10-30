@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
-# Assumes dotfiles and modd already exist, ~/bin is on PATH
+# Assumes dotfiles already exists and ~/bin is on PATH.
+# modd is required for the autosync feature.
 
 [[ -n $NOTESDIR ]] || echo 'install fuzzynotes: NOTESDIR not set' && exit 1
 
@@ -9,5 +10,6 @@ cd ~/dotfiles/notes && mkdir -p ~/bin
 ln -sfv ~/dotfiles/notes/fuzzynotes ~/bin/fuzzynotes
 
 mkdir -p $NOTESDIR/.fuzzynotes && cd $NOTESDIR/.fuzzynotes
-touch synclog && touch cache
+touch synclog
+echo "hash: ~\ndata: ~" > cache
 ln -sfv ~/dotfiles/notes/modd.conf $NOTESDIR/.fuzzynotes/modd.conf
