@@ -245,7 +245,7 @@ def run(args):
     p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE)
     out, err = p.communicate(notes.encode())
 
-    # out will be empty if fzf is exits early (e.g. pressing ESC)
+    # out will be empty if fzf exits early (e.g. pressing ESC)
     if out:
         lines = out.decode().split('\n')
         query, key, data = lines[0], lines[1], lines[2]
@@ -264,6 +264,9 @@ def run(args):
             else:
                 call(["vim", os.path.join(NOTESDIR, filename)])
 
+        if args.loop:
+            run(args)
+
 if __name__ == "__main__":
     import argparse
 
@@ -274,6 +277,7 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers()
 
     run_parser = subparsers.add_parser('run')
+    run_parser.add_argument('--loop', action="store_true")
     run_parser.add_argument('query', nargs='*')
     run_parser.set_defaults(func=run)
 
