@@ -15,7 +15,8 @@ alias r=ranger
 alias grep='grep --color=auto'
 
 # Notes (relies on fuzzynotes script in $HOME/bin)
-alias n='fuzzynotes run'
+alias n='fuzzynotes run --loop'
+alias notes='fuzzynotes run'
 alias nsync='fuzzynotes rename && fuzzynotes sync'
 alias autosync='fuzzynotes autosync &'
 
