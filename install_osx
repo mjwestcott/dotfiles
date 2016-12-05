@@ -24,7 +24,7 @@ brew install \
     redis sqlite tmux tree wget youtube-dl zsh
 
 # Editors
-brew install macvim --HEAD
+brew install macvim --HEAD --with-override-system-vim
 brew install emacs --with-cocoa --devel
 
 # Languages
