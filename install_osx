@@ -50,10 +50,6 @@ rbenv global 2.3.1
 # Prezto
 git clone --recursive git@github.com:mjwestcott/prezto.git ~/.zprezto
 
-# Tmux Package Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-sudo ~/.tmux/plugins/tpm/bin/install_plugins
-
 # git-prompt
 if [[ ! -e ~/.git-prompt.sh ]]; then
     curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
@@ -72,3 +68,8 @@ cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
     [[ ! -e ~/.vim/colors/$file ]] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
 done
+
+# Tmux Package Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+sudo ~/.tmux/plugins/tpm/bin/install_plugins
+
