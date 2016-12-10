@@ -97,6 +97,8 @@ alias .....="cd ../../../.."
 alias grep='grep --color=auto'
 alias tmux='tmux -2'
 alias r='ranger'
+alias t2='tree -L 2'
+alias t3='tree -L 3'
 alias vi='vim'
 
 # Detect which `ls` flavor is in use
