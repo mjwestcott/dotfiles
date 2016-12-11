@@ -100,6 +100,7 @@ alias r='ranger'
 alias t2='tree -L 2'
 alias t3='tree -L 3'
 alias vi='vim'
+alias ide='vim +NERDTreeToggle +TagbarToggle'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
