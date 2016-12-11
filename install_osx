@@ -19,9 +19,10 @@ brew upgrade
 
 # Basic tools
 brew install \
-    ag bash coreutils ctags fasd git gnuplot graphviz \
-    httpie jq mysql postgresql ranger reattach-to-user-namespace \
-    redis sqlite tmux tree wget youtube-dl zsh
+    ag awscli bash cmake coreutils ctags fasd git gnuplot graphviz \
+    httpie jq memchached mysql postgresql rabbitmq ranger \
+    reattach-to-user-namespace redis sqlite tmux tree wget \
+    youtube-dl zsh
 
 # Editors
 brew install macvim --HEAD --with-override-system-vim
@@ -72,4 +73,3 @@ done
 # Tmux Package Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 sudo ~/.tmux/plugins/tpm/bin/install_plugins
-
