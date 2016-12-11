@@ -364,8 +364,8 @@ nnoremap <leader>d :Gdiff<CR>
 "------------------------------------------------------------------------------
 " gv.vim
 
-nmap <leader>g :GV<CR>o
-nmap <leader>G :GV!<CR>o
+nmap <leader>G :GV<CR>o
+nmap <leader>V :GV!<CR>o
 
 "------------------------------------------------------------------------------
 " vim-go
@@ -373,7 +373,7 @@ nmap <leader>G :GV!<CR>o
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 0
 
-" Since 'g' is taken by git commands...
+" Since 'g' is taken by GoTo commands...
 nmap <leader>or <Plug>(go-run)
 nmap <leader>ob <Plug>(go-build)
 nmap <leader>ot <Plug>(go-test)
@@ -409,6 +409,10 @@ let g:ycm_min_num_identifier_candidate_chars = 4
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_extra_conf_globlist = ['~/repos/*', '!~/*']
+
+nnoremap <leader>gt :YcmCompleter GoTo<CR>
+nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
 
 "------------------------------------------------------------------------------
 " UltiSnips
