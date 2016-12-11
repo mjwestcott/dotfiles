@@ -15,6 +15,7 @@ alias r=ranger
 alias t2='tree -L 2'
 alias t3='tree -L 3'
 alias grep='grep --color=auto'
+alias ide='vim +NERDTreeToggle +TagbarToggle'
 
 # Notes (relies on fuzzynotes script in $HOME/bin)
 alias n='fuzzynotes run --loop'
