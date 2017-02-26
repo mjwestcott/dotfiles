@@ -416,3 +416,6 @@ fi
 
 # Source extra config
 [[ -f ~/dotfiles/private ]] && source ~/dotfiles/private
+
+# awscli completion (assumes awscli installed by homebrew)
+complete -C '/usr/local/bin/aws_completer' aws
