@@ -158,8 +158,8 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
-call s:h("IndentGuidesEven", { "bg": s:Light_Grey })
-call s:h("IndentGuidesOdd",  { "bg": s:Light_Grey })
+call s:h("IndentGuidesEven", { "bg": s:Black3 })
+call s:h("IndentGuidesOdd",  { "bg": s:Black2 })
 
 "------------------------------------------------------------------------------
 " C
