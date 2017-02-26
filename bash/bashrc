@@ -183,14 +183,14 @@ function fzf_hidden {
 
 function fzf_ag {
     local tmp="$TMPDIR/fzf_ag"
-    ag "." | fzf -m -q "${*}" --delimiter=':' --nth=3.. > "$tmp"
+    ag "." | fzf -e -m -q "${*}" > "$tmp"
     [[ -s "$tmp" ]] && vim -q "$tmp"
 }
 
-# Similar to fzf_ag, but pass the args through to ag as a regex.
+# Similar to fzf_ag, but pass the args through to ag as a regex and filter only the source text.
 function fzf_regex {
     local tmp="$TMPDIR/fzf_ag"
-    ag "${*}" --color | fzf -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. > "$tmp"
+    ag "${*}" --color | fzf -e -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. > "$tmp"
     [[ -s "$tmp" ]] && vim -q "$tmp"
 }
 
