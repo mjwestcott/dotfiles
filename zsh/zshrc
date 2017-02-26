@@ -136,3 +136,6 @@ eval "$(rbenv init -)"
 
 # OPAM configuration
 command -v opam > /dev/null 2>&1 && eval `opam config env`
+
+# awscli completion (assumes awscli installed by homebrew)
+source /usr/local/share/zsh/site-functions/_aws
