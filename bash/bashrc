@@ -392,13 +392,16 @@ alias gwX='git rm -rf'
 #------------------------------------------------------------------------------
 # Other scripts.
 
-# source 'fzf'
+# Source 'fzf'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
-# source 'fasd'
+# Source autoenv
+source $(brew --prefix autoenv)/activate.sh
+
+# Source 'fasd'
 eval "$(fasd --init auto)"
 
-# source 'rbenv'
+# Source 'rbenv'
 eval "$(rbenv init -)"
 
 # OPAM configuration
