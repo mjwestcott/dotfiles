@@ -18,11 +18,32 @@ brew update
 brew upgrade
 
 # Basic tools
-brew install \
-    ag awscli bash cmake coreutils ctags fasd git gnuplot graphviz \
-    httpie jq memchached mysql postgresql rabbitmq ranger \
-    reattach-to-user-namespace redis sqlite tmux tree wget \
-    youtube-dl zsh
+brew install ag
+brew install autoenv
+brew install awscli
+brew install bash
+brew install cmake
+brew install coreutils
+brew install ctags
+brew install fasd
+brew install git
+brew install gnuplot
+brew install graphviz
+brew install httpie
+brew install jq
+brew install memcached
+brew install mysql
+brew install postgresql
+brew install rabbitmq
+brew install ranger
+brew install reattach-to-user-namespace
+brew install redis
+brew install sqlite
+brew install tmux
+brew install tree
+brew install wget
+brew install youtube-dl
+brew install zsh
 
 # Editors
 brew install macvim --HEAD --with-override-system-vim
