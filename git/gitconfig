@@ -1,41 +1,51 @@
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
+
 [user]
-	name = Matt Westcott
-	email = m.westcott@gmail.com
+    name = Matt Westcott
+    email = m.westcott@gmail.com
+
 [alias]
-        discard = checkout --
-        unstage = reset --
-        uncommit = reset --soft HEAD~
-        # Plurals...
-        branches = branch -a
-        stashes = stash list
-        remotes = remote -v
-        tags = tag
+    discard = checkout --
+    unstage = reset --
+    uncommit = reset --soft HEAD~
+    # Plurals...
+    branches = branch -a
+    stashes = stash list
+    remotes = remote -v
+    tags = tag
+
 [apply]
-	# Detect whitespace errors when applying a patch.
-	whitespace = warn
+    # Detect whitespace errors when applying a patch.
+    whitespace = warn
+
 [color]
-	ui = auto
+    ui = auto
+
 [diff]
-        tool = vimdiff
-        renames = copies  # Detect copies as well as renames.
-        compactionHeuristic = true
-        indentHeuristic = on
+    tool = vimdiff
+    renames = copies  # Detect copies as well as renames.
+    compactionHeuristic = true
+    indentHeuristic = on
+
 [difftool]
-        prompt = false
+    prompt = false
+
 [help]
-	# Automatically correct and execute mistyped commands.
-	autocorrect = 1
+    # Automatically correct and execute mistyped commands.
+    autocorrect = 1
+
 [merge]
-	# Include summaries of merged commits in newly created merge commit messages.
-	log = true
+    # Include summaries of merged commits in newly created merge commit messages.
+    log = true
+
 [push]
-        # See `git help config` (search for push.default).
-        default = simple
+    # See `git help config` (search for push.default).
+    default = simple
+
 [credential]
-	helper = cache --timeout=3600
+    helper = cache --timeout=3600
 
 # URL shorthands
 [url "https://github.com/"]
-        insteadOf = "gh:"
+    insteadOf = "gh:"
