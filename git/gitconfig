@@ -19,8 +19,9 @@
 	ui = auto
 [diff]
         tool = vimdiff
-	# Detect copies as well as renames.
-	renames = copies
+        renames = copies  # Detect copies as well as renames.
+        compactionHeuristic = true
+        indentHeuristic = on
 [difftool]
         prompt = false
 [help]
