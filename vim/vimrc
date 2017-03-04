@@ -366,6 +366,7 @@ nmap ga <Plug>(EasyAlign)
 
 nmap <leader>s :Gstatus<CR>gg<C-n>
 nnoremap <leader>d :Gdiff<CR>
+nnoremap <leader>B :Gblame<CR>
 
 "------------------------------------------------------------------------------
 " gv.vim
