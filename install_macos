@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
-# Install bash and zsh dotfiles environment on OS X.
+# Install bash and zsh dotfiles environment on macOS.
 
 if [[ $(uname -s) != 'Darwin' ]]; then
-    echo "Error: not on OS X"
+    echo "Error: not on macOS"
     exit 1
 elif [[ ! -e ~/dotfiles ]]; then
     echo "Error: ~/dotfiles does not exist"

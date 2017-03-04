@@ -53,7 +53,7 @@ if [[ $(uname) != *Darwin* ]]; then
     export PATH=$PATH:$GOROOT/bin
 fi
 
-# only on OS X
+# only on macOS
 if [[ $(uname) == *Darwin* ]]; then
     # Haskell/Stack setup
     export PATH="$PATH:$HOME/.local/bin"
@@ -105,7 +105,7 @@ alias ide='vim +NERDTreeToggle +TagbarToggle'
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
     colorflag="--color"
-else # OS X `ls`
+else # macOS `ls`
     colorflag="-G"
 fi
 
