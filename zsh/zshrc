@@ -61,18 +61,18 @@ alias C='fzf_commit'
 alias B='fzf_branches'
 
 function fzf_jump {
-    local file="$(ag -p $AGIGNORE $HOME -g "" | fzf -q "${*}")"
+    local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
     [[ -n "$file" ]] && cd "$(dirname "$file")"
 }
 
 function fzf_vim {
-    local file="$(ag -p $AGIGNORE $HOME -g "" | fzf -q "${*}")"
+    local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
     [[ -n "$file" ]] && vim "$file"
 }
 
 # Similar to fzf_vim, but show only hidden files (respecting agignore).
 function fzf_hidden {
-    local file="$(ag --hidden -f -p $AGIGNORE $HOME -g "/\..+" --ignore "/.git" | fzf -q "${*}")"
+    local file="$(ag --hidden -f -p $AGIGNORE -g "/\..+" --ignore "/.git" | fzf -q "${*}")"
     [[ -n "$file" ]] && vim "$file"
 }
 
