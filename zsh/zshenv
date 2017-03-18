@@ -40,6 +40,9 @@ export FZF_TMUX=0
 # ag options
 export AGIGNORE="$HOME/dotfiles/ag/agignore"
 
+# pure options
+export PURE_CMD_MAX_EXEC_TIME=0
+
 # grep options
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
