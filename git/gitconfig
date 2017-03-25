@@ -4,6 +4,10 @@
 [user]
     name = Matt Westcott
     email = m.westcott@gmail.com
+    signingkey = A8FCAE14CFA47FDD
+
+[commit]
+    gpgsign = true
 
 [alias]
     discard = checkout --
