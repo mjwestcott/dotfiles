@@ -452,7 +452,7 @@ let g:syntastic_mode_map = { "mode": "active",
                            \ "active_filetypes": [],
                            \ "passive_filetypes": ['html'] }
 
-nnoremap <leader>S :SyntasticReset<CR>
+nnoremap <leader>S :SyntasticCheck<CR>
 
 "------------------------------------------------------------------------------
 " merlin (assumes an installation via OPAM)
