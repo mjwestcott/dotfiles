@@ -37,7 +37,7 @@ Plug 'othree/html5.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
 Plug 'Shougo/vimproc', {'do': 'make'}
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
