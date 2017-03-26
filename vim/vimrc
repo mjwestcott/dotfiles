@@ -55,9 +55,9 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/python-indent'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer'}
 Plug 'Valloric/vim-operator-highlight'
+Plug 'Vimjas/vim-python-pep8-indent'
 call plug#end()
 
 "------------------------------------------------------------------------------
