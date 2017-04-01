@@ -395,9 +395,6 @@ alias gwX='git rm -rf'
 # Source 'fzf'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
-# Source autoenv
-source $(brew --prefix autoenv)/activate.sh
-
 # Source 'fasd'
 eval "$(fasd --init auto)"
 

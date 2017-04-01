@@ -19,7 +19,6 @@ brew upgrade
 
 # Basic tools
 brew install ag
-brew install autoenv
 brew install awscli
 brew install bash
 brew install cmake

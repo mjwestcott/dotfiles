@@ -125,9 +125,6 @@ function fzf_branches {
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
-# Source autoenv
-source $(brew --prefix autoenv)/activate.sh
-
 # Initialize fasd
 [[ -f ~/.fasd ]] && eval "$(fasd --init auto)"
 
