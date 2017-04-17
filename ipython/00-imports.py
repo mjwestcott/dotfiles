@@ -22,6 +22,14 @@ except ImportError:
 
 try:
     import pandas as pd
+    pd.set_option('expand_frame_repr', False)
+    pd.set_option('display.max_colwidth', -1)
+    pd.set_option('display.max_columns', None)
+except ImportError:
+    pass
+
+try:
+    import seaborn as sns
 except ImportError:
     pass
 
