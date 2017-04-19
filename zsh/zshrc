@@ -59,6 +59,7 @@ alias G='fzf_regex'
 alias L='fzf_locate'
 alias C='fzf_commit'
 alias B='fzf_branches'
+alias T='fzf_tmux'
 
 function fzf_jump {
     local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
@@ -120,6 +121,12 @@ function fzf_branches {
         (echo "$tags"; echo "$branches") |
         fzf-tmux -l40 -- --no-hscroll --ansi +m -d "\t" -n 2 -1 -q "$*") || return
     git checkout $(echo "$target" | awk '{print $2}')
+}
+
+function fzf_tmux {
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0) && tmux switch-client -t "$session"
 }
 
 # Source 'fzf'.
