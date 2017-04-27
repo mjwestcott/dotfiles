@@ -244,6 +244,8 @@ endfunction
 "------------------------------------------------------------------------------
 " fzf all the things
 
+let g:fzf_layout = {'down': '~50%'}
+
 nnoremap <leader>/ :BLines<CR>
 nnoremap <leader>t :Files<CR>
 nnoremap <leader>b :Buffers<CR>
