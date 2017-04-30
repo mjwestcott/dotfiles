@@ -63,6 +63,7 @@ opam install merlin ocp-indent tuareg utop
 # Python config
 sudo pip install --upgrade pip
 sudo pip install virtualenvwrapper && mkdir -pv ~/repos/python
+sudo pip install 'ipython[all]'
 
 # Ruby config
 rbenv install 2.3.1
@@ -83,6 +84,17 @@ for path in bash/* zsh/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
     [[ -e ~/.$file ]] && mv -v ~/.$file bak/.$file
     ln -sfv ~/dotfiles/$path ~/.$file
 done
+
+# ipython
+mkdir -pv  ~/.ipython/profile_default/startup
+if [[ -e ~/.ipython/profile_default/ipython_config.py ]]; then
+    mv -v ~/.ipython/profile_default/ipython_config.py bak/ipython_config
+fi
+if [[ -e ~/.ipython/profile_default/startup/00-imports.py ]]; then
+    mv -v ~/.ipython/profile_default/startup/00-imports.py bak/00-imports.py
+fi
+ln -sfv ~/dotfiles/ipython/ipython_config.py ~/.ipython/profile_default/ipython_config.py
+ln -sfv ~/dotfiles/ipython/startup/00-imports.py ~/.ipython/profile_default/startup/00-imports.py
 
 # pgcli
 mkdir -pv ~/.config/pgcli
