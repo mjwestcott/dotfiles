@@ -15,6 +15,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
+Plug 'davidoc/taskpaper.vim'
 Plug 'fatih/vim-go'
 Plug 'guns/vim-sexp'
 Plug 'junegunn/gv.vim'
@@ -159,6 +160,9 @@ autocmd FileType sh
 autocmd FileType markdown
     \ syntax match Comment /\%^---\_.\{-}\.\.\.$/ " YAML front-matter
 
+autocmd FileType taskpaper
+    \ setlocal shiftwidth=8
+
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
@@ -286,6 +290,7 @@ let g:ophigh_filetypes_to_ignore = { "haskell": 1,
                                    \ "zsh": 1,
                                    \ "bash": 1,
                                    \ "sh": 1,
+                                   \ "taskpaper": 1,
                                    \ "text": 1,
                                    \ "gitcommit": 1}
 

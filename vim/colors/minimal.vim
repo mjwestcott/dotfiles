@@ -161,6 +161,18 @@ let g:indent_guides_start_level = 2
 call s:h("IndentGuidesEven", { "bg": s:Black3 })
 call s:h("IndentGuidesOdd",  { "bg": s:Black2 })
 
+
+"------------------------------------------------------------------------------
+" Taskpaper
+
+hi link taskpaperContext        Constant
+hi link taskpaperComment        Comment
+hi link taskpaperProject        Statement
+hi link taskpaperListItem       Special
+hi link taskpaperAutoStyle_FAIL Error
+call s:h("taskpaperDone",      { "fg": s:Grey })
+call s:h("taskpaperCancelled", { "fg": s:Grey })
+
 "------------------------------------------------------------------------------
 " C
 
