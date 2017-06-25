@@ -1,5 +1,6 @@
 "------------------------------------------------------------------------------
 " A minimal colorscheme indended to highlight only comments and strings.
+" Color palette based on https://github.com/junegunn/seoul256.vim
 "
 " Author:  Matt Westcott <m.westcott@gmail.com> (mattwestcott.co.uk)
 "------------------------------------------------------------------------------
@@ -10,7 +11,7 @@ if exists("syntax_on")
     syntax reset
 endif
 
-let g:colors_name = "minimal"
+let g:colors_name = "brown"
 
 function! s:h(group, style)
   execute "highlight" a:group
@@ -29,44 +30,36 @@ endfunction
 let s:Black             = { "gui": "#333333", "cterm": "236" }
 let s:Black2            = { "gui": "#3a3a3a", "cterm": "237" }
 let s:Black3            = { "gui": "#444444", "cterm": "238" }
-let s:Dark_Grey         = { "gui": "#484848", "cterm": "59"  }
+let s:Dark_Grey         = { "gui": "#4e4e4e", "cterm": "239" }
 let s:Grey              = { "gui": "#767676", "cterm": "102" }
 let s:Grey2             = { "gui": "#949494", "cterm": "246" }
 let s:Light_Grey        = { "gui": "#bdbdbd", "cterm": "145" }
-let s:Pale_Grey         = { "gui": "#dadada", "cterm": "253" }
+let s:Pale_Grey         = { "gui": "#d0d0d0", "cterm": "252" }
 let s:Almost_White      = { "gui": "#eaeaea", "cterm": "255" }
 let s:White             = { "gui": "#f6f6f6", "cterm": "231" }
-let s:Pale_Blue         = { "gui": "#aad8f1", "cterm": "153" }
-let s:Light_Blue        = { "gui": "#94b1ca", "cterm": "110" }
-let s:Dark_Grey_Blue    = { "gui": "#507892", "cterm": "66"  }
-let s:Blue_Black        = { "gui": "#484f53", "cterm": "239" }
-let s:Cyan              = { "gui": "#5ebfba", "cterm": "73"  }
-let s:Terracotta        = { "gui": "#c05303", "cterm": "130" }
-let s:Brown             = { "gui": "#7d7569", "cterm": "137" }
-let s:Orange            = { "gui": "#ff9b0b", "cterm": "214" }
-let s:Gold              = { "gui": "#dfbc72", "cterm": "179" }
-let s:Pale_Yellow       = { "gui": "#ffdf87", "cterm": "222" }
-let s:Bright_Yellow     = { "gui": "#ffce4b", "cterm": "221" }
-let s:Pastel_Red        = { "gui": "#ff5b3a", "cterm": "209" } " Or 203
+let s:Pale_Blue         = { "gui": "#bce0ff", "cterm": "153" }
+let s:Light_Blue        = { "gui": "#98bede", "cterm": "110" }
+let s:Dark_Grey_Blue    = { "gui": "#719899", "cterm": "66"  }
+let s:Blue_Black        = { "gui": "#616161", "cterm": "239" }
+let s:Cyan              = { "gui": "#98bcbd", "cterm": "109" }
+let s:Terracotta        = { "gui": "#be7572", "cterm": "131" }
+let s:Brown             = { "gui": "#be9873", "cterm": "137" }
+let s:Orange            = { "gui": "#dfbc72", "cterm": "179" }
+let s:Pale_Yellow       = { "gui": "#ffde99", "cterm": "222" }
+let s:Pastel_Red        = { "gui": "#e09b99", "cterm": "174" }
 let s:Red               = { "gui": "#cc2b12", "cterm": "160" }
 let s:Dark_Red          = { "gui": "#800c0c", "cterm": "88"  }
-let s:Pink              = { "gui": "#fdadba", "cterm": "217" }
-let s:Pale_Green        = { "gui": "#72af7e", "cterm": "72"  }
-let s:Dark_Green        = { "gui": "#1c6326", "cterm": "22"  }
-let s:Flourescent_Green = { "gui": "#aad801", "cterm": "148" }
+let s:Pink              = { "gui": "#e09b99", "cterm": "174" }
+let s:Pale_Green        = { "gui": "#98bc99", "cterm": "108" }
+let s:Dark_Green        = { "gui": "#719872", "cterm": "65"  }
+let s:Flourescent_Green = { "gui": "#bdbb72", "cterm": "143" }
 
 "------------------------------------------------------------------------------
 " Main highlights
 
 call s:h("Cursor",        { "gui": "reverse" })
 
-if has("gui_running")
-    call s:h("Normal",        { "fg": s:Pale_Grey, "bg": s:Blue_Black })
-else
-    " The Blue_Black color doesn't have a great match in 256 colors.
-    " So set ctermbg=NONE, i.e. delegate to the terminal's background color.
-    call s:h("Normal",        { "fg": s:Pale_Grey })
-endif
+call s:h("Normal",        { "fg": s:Pale_Grey, "bg": s:Dark_Grey })
 hi! link Boolean          Normal
 hi! link Number           Normal
 hi! link Float            Normal
@@ -88,35 +81,36 @@ hi! link SpecialChar      Special
 hi! link SpecialComment   Special
 hi! link Tag              Special
 
-call s:h("Delimiter",     { "fg": s:Gold })
+call s:h("Delimiter",     { "fg": s:Orange })
 
-call s:h("Operator",      { "fg": s:Gold })
+call s:h("Operator",      { "fg": s:Orange })
 
-call s:h("Statement",     { "fg": s:Gold })
+call s:h("Statement",     { "fg": s:Orange })
 hi! link Conditional      Statement
-hi! link Keyword          Statement
 hi! link Exception        Statement
 hi! link Label            Statement
 hi! link Repeat           Statement
 hi! link Define           Statement
 
-call s:h("Identifier",   { "fg": s:Pale_Grey })
+call s:h("Keyword",       { "fg": s:Orange })
 
-call s:h("Type",         { "fg": s:Pale_Grey })
+call s:h("Identifier",    { "fg": s:Pale_Grey })
+
+call s:h("Type",          { "fg": s:Pale_Grey })
 hi! link StorageClass     Type
 hi! link Structure        Type
 hi! link Typedef          Type
 
-call s:h("PreProc",      { "fg": s:Pale_Grey })
+call s:h("PreProc",       { "fg": s:Pale_Grey })
 hi! link Include          Preproc
 hi! link Macro            Preproc
 hi! link PreCondit        PreProc
 
-call s:h("MatchParen",   { "fg": s:Pale_Yellow, "bg": s:Grey })
+call s:h("MatchParen",    { "fg": s:Pale_Yellow, "bg": s:Grey })
 
-call s:h("CursorLineNr", { "fg": s:Pale_Grey })
+call s:h("CursorLineNr",  { "fg": s:Pale_Grey })
 
-call s:h("Underlined",   { "fg": s:White, "gui": "underline", "cterm": "underline"})
+call s:h("Underlined",    { "fg": s:White, "gui": "underline", "cterm": "underline"})
 
 "------------------------------------------------------------------------------
 " Other groups
@@ -158,8 +152,8 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
-call s:h("IndentGuidesEven", { "bg": s:Black3 })
-call s:h("IndentGuidesOdd",  { "bg": s:Black2 })
+call s:h("IndentGuidesEven", { "bg": s:Light_Grey })
+call s:h("IndentGuidesOdd",  { "bg": s:Light_Grey })
 
 "------------------------------------------------------------------------------
 " Taskpaper

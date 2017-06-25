@@ -55,7 +55,7 @@ call plug#end()
 " General Settings
 
 set background=dark
-colorscheme minimal
+colorscheme brown
 
 filetype plugin indent on
 syntax on
