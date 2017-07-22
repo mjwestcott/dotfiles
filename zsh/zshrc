@@ -7,6 +7,59 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+setopt HIST_IGNORE_SPACE
+export HISTSIZE=100000
+export SAVEHIST=100000
+export HISTFILE=~/.zhistory
+[[ -z "$TMPDIR" ]] && TMPDIR=/tmp
+
+# PATH
+export PATH=$HOME/bin:$PATH
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/opt/bin
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+
+# go setup
+export GOPATH=$HOME/repos/go
+export PATH=$PATH:$GOPATH/bin
+if [[ $(uname) != *Darwin* ]]; then
+    # because it's built from source
+    export GOROOT=$HOME/go1.4
+    export PATH=$PATH:$GOROOT/bin
+fi
+
+# virtualenv setup (note: sh script is sourced by the prezto python module)
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/repos/python
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# fzf options
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3'
+export FZF_TMUX=0
+
+# ag options
+export AGIGNORE="$HOME/dotfiles/ag/agignore"
+
+# pure options
+export PURE_CMD_MAX_EXEC_TIME=0
+
+# grep options
+export GREP_COLOR='30;43'                             # BSD
+export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
+
+# Haskell/Stack setup
+export PATH="$PATH:$HOME/.local/bin"
+
+# Homebrew
+export HOMEBREW_NO_ANALYTICS=1
+
+# fuzzynotes
+export NOTESDIR="$HOME/notes"
+
+# Heroku postgres
+export DATABASE_URL=postgres:///$(whoami)
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
