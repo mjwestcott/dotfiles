@@ -133,6 +133,8 @@ call s:h("Title",        { "fg": s:Pale_Yellow })
 call s:h("ModeMsg",      { "fg": s:Pink })
 
 call s:h("Error",        { "fg": s:Pale_Grey,  "bg": s:Red })
+hi! link SpellBad        Error
+
 call s:h("ColorColumn",  { "fg": s:Red,        "bg": s:Black3 })
 
 call s:h("Pmenu",        { "fg": s:Light_Blue, "bg": s:Black2 })
