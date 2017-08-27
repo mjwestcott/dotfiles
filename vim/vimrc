@@ -146,7 +146,7 @@ autocmd FileType lisp,clojure,scheme
     \ setlocal shiftwidth=2
 
 autocmd FileType python
-    \ setlocal textwidth=79 |
+    \ setlocal textwidth=120 |
     \ setlocal shiftwidth=4 |
     \ setlocal expandtab
 
