@@ -285,8 +285,8 @@ nnoremap ,, :History<CR>
 nnoremap ,t :Files<CR>
 nnoremap ,b :Buffers<CR>
 nnoremap ,p :GitFiles<CR>
-nnoremap ,g :Ag<space>
-nnoremap ,a :Ag<space><C-R><C-W><CR>
+nnoremap ,a :Ag<space>
+nnoremap ,g :Ag<space><C-R><C-W><CR>
 nnoremap ,v :FZF ~<CR>
 nnoremap ,l :Locate<space>
 nnoremap ,c :Commits<CR>
@@ -425,12 +425,13 @@ nmap ga <Plug>(EasyAlign)
 
 nmap <leader>s :Gstatus<CR>gg<C-n>
 nnoremap <leader>d :Gdiff<CR>
+nnoremap <leader>b :Gblame<CR>
 
 "------------------------------------------------------------------------------
 " gv.vim
 
-nmap <leader>G :GV<CR>o
-nmap <leader>V :GV!<CR>o
+nmap <leader>G :GV<CR>
+nmap <leader>V :GV!<CR>
 
 "------------------------------------------------------------------------------
 " vim-go
