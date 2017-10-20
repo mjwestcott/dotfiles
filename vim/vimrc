@@ -15,6 +15,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'davidoc/taskpaper.vim'
 Plug 'fatih/vim-go'
 Plug 'guns/vim-sexp'
@@ -307,6 +308,12 @@ nnoremap <leader>ap :ALEPrevious<CR>
 let g:ale_fixers = {
 \    'python': ['isort', 'yapf'],
 \}
+
+"------------------------------------------------------------------------------
+" vim-rooter
+
+let g:rooter_silent_chdir = 1
+let g:rooter_resolve_links = 1
 
 "------------------------------------------------------------------------------
 " indentLine
