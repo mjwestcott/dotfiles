@@ -295,7 +295,16 @@ nnoremap ,h/ :History/<CR>
 " ALE
 
 let g:ale_sign_column_always = 0
-nnoremap <leader>A :ALEDetail<CR>
+let g:ale_fix_on_save = 1
+let g:ale_python_mypy_options = '--ignore-missing-imports'
+let g:ale_python_flake8_options = '--select=F,C9 --max-complexity=10'
+
+nnoremap <leader>ai :ALEInfo<CR>
+nnoremap <leader>af :ALEFix<CR>
+
+let g:ale_fixers = {
+\    'python': ['isort', 'yapf'],
+\}
 
 "------------------------------------------------------------------------------
 " indentLine
