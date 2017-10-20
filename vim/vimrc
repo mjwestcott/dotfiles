@@ -29,7 +29,6 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
@@ -49,6 +48,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer'}
 Plug 'Valloric/vim-operator-highlight'
+Plug 'w0rp/ale'
 call plug#end()
 
 "------------------------------------------------------------------------------
@@ -274,6 +274,12 @@ nnoremap ,h: :History:<CR>
 nnoremap ,h/ :History/<CR>
 
 "------------------------------------------------------------------------------
+" ALE
+
+let g:ale_sign_column_always = 0
+nnoremap <leader>A :ALEDetail<CR>
+
+"------------------------------------------------------------------------------
 " indentLine
 
 let g:indentLine_color_term = 243
@@ -430,24 +436,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<Left>"
 let g:UltiSnipsJumpForwardTrigger = "<Right>"
 let g:UltiSnipsSnippetsDir = "~/dotfiles/vim/ultisnips"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/vim/ultisnips']
-
-"------------------------------------------------------------------------------
-" syntastic
-
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_signs = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--select=F,C9 --max-complexity=10'
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { "mode": "active",
-                           \ "active_filetypes": [],
-                           \ "passive_filetypes": ['html'] }
-
-nnoremap <leader>S :SyntasticCheck<CR>
 
 "------------------------------------------------------------------------------
 " merlin (assumes an installation via OPAM)
