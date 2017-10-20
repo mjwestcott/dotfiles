@@ -16,6 +16,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'ap/vim-buftabline'
 Plug 'davidoc/taskpaper.vim'
 Plug 'fatih/vim-go'
 Plug 'guns/vim-sexp'
@@ -78,6 +79,7 @@ set lazyredraw
 set cursorline
 set scrolloff=3
 set laststatus=2
+set showtabline=0
 set conceallevel=0
 set foldlevelstart=99
 set diffopt=vertical,filler
@@ -264,6 +266,15 @@ function! ToggleStatus()
     endif
 endfunction
 
+nnoremap <silent><leader>B :call ToggleTabLine()<CR>
+function! ToggleTabLine()
+    if &showtabline == 0
+        set showtabline=2
+    else
+        set showtabline=0
+    endif
+endfunction
+
 "------------------------------------------------------------------------------
 " fzf all the things
 
@@ -308,6 +319,23 @@ nnoremap <leader>ap :ALEPrevious<CR>
 let g:ale_fixers = {
 \    'python': ['isort', 'yapf'],
 \}
+
+"------------------------------------------------------------------------------
+" buftabline
+
+let g:buftabline_numbers = 2
+let g:buftabline_show = 0
+
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 "------------------------------------------------------------------------------
 " vim-rooter
@@ -403,7 +431,6 @@ nmap ga <Plug>(EasyAlign)
 
 nmap <leader>s :Gstatus<CR>gg<C-n>
 nnoremap <leader>d :Gdiff<CR>
-nnoremap <leader>B :Gblame<CR>
 
 "------------------------------------------------------------------------------
 " gv.vim
