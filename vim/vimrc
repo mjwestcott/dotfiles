@@ -86,7 +86,6 @@ set diffopt=vertical,filler
 
 " Statusline
 set statusline=
-set statusline+=%#LineNr#
 set statusline+=%f
 set statusline+=\ %m
 set statusline+=%=
