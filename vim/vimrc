@@ -254,6 +254,15 @@ function! g:ToggleColorColumn()
   endif
 endfunction
 
+nnoremap <silent><leader>S :call ToggleStatus()<CR>
+function! ToggleStatus()
+    if &laststatus == 1
+        set laststatus=2
+    else
+        set laststatus=1
+    endif
+endfunction
+
 "------------------------------------------------------------------------------
 " fzf all the things
 
