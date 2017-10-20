@@ -301,6 +301,8 @@ let g:ale_python_flake8_options = '--select=F,C9 --max-complexity=10'
 
 nnoremap <leader>ai :ALEInfo<CR>
 nnoremap <leader>af :ALEFix<CR>
+nnoremap <leader>an :ALENext<CR>
+nnoremap <leader>ap :ALEPrevious<CR>
 
 let g:ale_fixers = {
 \    'python': ['isort', 'yapf'],
