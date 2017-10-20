@@ -278,6 +278,7 @@ endfunction
 " fzf all the things
 
 let g:fzf_layout = {'down': '100%'}
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)(%an) %C(green)%cr"'
 
 nnoremap <leader><leader> :Ag<CR>
 nnoremap ,, :History<CR>
