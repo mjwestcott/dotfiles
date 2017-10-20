@@ -279,26 +279,26 @@ endfunction
 
 let g:fzf_layout = {'down': '100%'}
 
-nnoremap <leader>/ :BLines<CR>
-nnoremap <leader>t :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>m :History<CR>
-nnoremap <leader>p :GitFiles<CR>
+nnoremap <leader><leader> :Ag<CR>
+nnoremap ,, :History<CR>
 
-nnoremap ,, :Ag<space><C-R><C-W><CR>
+nnoremap ,t :Files<CR>
+nnoremap ,b :Buffers<CR>
+nnoremap ,p :GitFiles<CR>
 nnoremap ,g :Ag<space>
+nnoremap ,a :Ag<space><C-R><C-W><CR>
 nnoremap ,v :FZF ~<CR>
 nnoremap ,l :Locate<space>
 nnoremap ,c :Commits<CR>
-nnoremap ,b :BCommits<CR>
+nnoremap ,C :BCommits<CR>
 nnoremap ,/ :Lines<CR>
 nnoremap ,: :Commands<CR>
 nnoremap ,w :Windows<CR>
 nnoremap ,s :Snippets<CR>
-nnoremap ,m :Maps<CR>
-nnoremap ,M :Marks<CR>
+nnoremap ,M :Maps<CR>
+nnoremap ,m :Marks<CR>
 nnoremap ,H :Helptags<CR>
-nnoremap ,C :Colors<CR>
+nnoremap ,S :Colors<CR>
 nnoremap ,h: :History:<CR>
 nnoremap ,h/ :History/<CR>
 
@@ -369,11 +369,6 @@ let g:ophigh_filetypes_to_ignore = { "haskell": 1,
 nnoremap <leader>P :RainbowParentheses!!<CR>
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72, '#f6f6f6']
-
-"------------------------------------------------------------------------------
-" vim-fireplace
-
-autocmd FileType clojure nnoremap <leader><leader> :Eval<CR>
 
 "------------------------------------------------------------------------------
 " NERDTree
