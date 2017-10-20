@@ -155,16 +155,19 @@ function fasd_vim {
     fi
 }
 
+# Mirroring vim mappings.
+alias ,v='fasd_vim'
+alias ,m='fasd_vim'
+
 # Fuzzy finding aliases using 'fzf'.
-alias J='fzf_jump'
-alias V='fzf_vim'
-alias A='fzf_ag'
-alias H='fzf_hidden'
-alias G='fzf_regex'
-alias L='fzf_locate'
-alias C='fzf_commit'
-alias B='fzf_branches'
-alias T='fzf_tmux'
+alias ,j='fzf_jump'
+alias ,t='fzf_vim'
+alias ,a='fzf_ag'
+alias ,h='fzf_hidden'
+alias ,g='fzf_regex'
+alias ,l='fzf_locate'
+alias ,c='fzf_commit'
+alias ,b='fzf_branches'
 
 function fzf_jump {
     local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
