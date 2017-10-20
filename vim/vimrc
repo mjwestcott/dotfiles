@@ -81,6 +81,15 @@ set conceallevel=0
 set foldlevelstart=99
 set diffopt=vertical,filler
 
+" Statusline
+set statusline=
+set statusline+=%#LineNr#
+set statusline+=%f
+set statusline+=\ %m
+set statusline+=%=
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+
 " Search
 set incsearch
 set ignorecase
