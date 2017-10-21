@@ -118,6 +118,7 @@ set gdefault
 set visualbell
 set nojoinspaces
 set noerrorbells
+set updatetime=500
 set clipboard=unnamed
 set backspace=indent,eol,start
 
