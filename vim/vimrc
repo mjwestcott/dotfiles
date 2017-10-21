@@ -28,7 +28,6 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'Yggdroot/indentLine'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'sheerun/vim-polyglot'
@@ -51,6 +50,7 @@ Plug 'Valloric/ListToggle'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer'}
 Plug 'Valloric/vim-operator-highlight'
 Plug 'w0rp/ale'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 "------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ if has("gui_running")
     set guioptions-=M
     set guioptions-=e
     set guicursor=a:blinkon0
-    set guifont=Menlo:h12
+    set guifont=Inconsolata:h16
 endif
 
 "------------------------------------------------------------------------------
