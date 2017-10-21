@@ -308,10 +308,12 @@ nnoremap ,h/ :History/<CR>
 " ALE
 
 let g:ale_sign_column_always = 0
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 let g:ale_python_flake8_options = '--select=F,C9 --max-complexity=10'
 
+nnoremap <leader>al :ALELint<CR>
 nnoremap <leader>ai :ALEInfo<CR>
 nnoremap <leader>af :ALEFix<CR>
 nnoremap <leader>an :ALENext<CR>
