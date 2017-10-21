@@ -133,7 +133,6 @@ call s:h("Title",        { "fg": s:Pale_Yellow })
 call s:h("ModeMsg",      { "fg": s:Pink })
 
 call s:h("Error",        { "fg": s:Pale_Grey,  "bg": s:Red })
-hi! link SpellBad        Error
 
 call s:h("ColorColumn",  { "fg": s:Red,        "bg": s:Black3 })
 
@@ -146,6 +145,18 @@ call s:h("Folded",       { "fg": s:Pink,       "bg": s:Black3 })
 call s:h('TabLineFill',  {                     "bg": s:Black2 })
 call s:h('TabLineSel',   { "fg": s:Light_Blue, "bg": s:Black2 })
 call s:h('TabLine',      { "fg": s:Grey,       "bg": s:Black2 })
+
+call s:h("SpellBad",     { "fg": s:Black2,     "bg": s:Pastel_Red   })
+call s:h("SpellCap",     { "fg": s:Black2,     "bg": s:Pale_Blue    })
+call s:h("SpellRare",    { "fg": s:Black2,     "bg": s:Orange       })
+call s:h("SpellLocal",   { "fg": s:Black2,     "bg": s:Pale_Yellow  })
+
+"------------------------------------------------------------------------------
+" ALE
+
+call s:h("ALEInfoSign",    { "fg": s:Pale_Green, "bg": s:Black3 })
+call s:h("ALEErrorSign",   { "fg": s:Pastel_Red, "bg": s:Black3 })
+call s:h("ALEWarningSign", { "fg": s:Orange,     "bg": s:Black3 })
 
 "------------------------------------------------------------------------------
 " Indent-Guides
