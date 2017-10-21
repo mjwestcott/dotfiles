@@ -135,6 +135,9 @@ alias nb="jupyter notebook"
 alias de="deactivate"
 alias wk="workon"
 
+# https://github.com/junegunn/gv.vim
+alias gv='vim -c ":GV"'
+
 # fasd
 alias j='fasd_jump'
 alias v='fasd_vim'
