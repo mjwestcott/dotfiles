@@ -180,11 +180,13 @@ autocmd FileType taskpaper
     \ setlocal shiftwidth=8
 
 autocmd BufWritePre * :%s/\s\+$//e
-autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
 autocmd FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:}"
-autocmd BufNewFile,BufRead \*.{md,mdwn,mkd,mkdn,mark\*} set filetype=markdown
+
+autocmd BufNewFile,BufRead *bash* let g:is_bash=1
+autocmd BufNewFile,BufRead \*.{md,mdwn,mkd,mkdn,mark\*} setf markdown
 autocmd BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
+autocmd BufNewFile,BufRead jbuild setf lisp
 
 "------------------------------------------------------------------------------
 " Mappings (see also Plugin section)
