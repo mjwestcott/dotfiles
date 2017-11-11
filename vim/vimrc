@@ -504,6 +504,11 @@ let g:UltiSnipsSnippetsDir = "~/dotfiles/vim/ultisnips"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/vim/ultisnips']
 
 "------------------------------------------------------------------------------
+" vim-fireplace
+
+autocmd FileType clojure nnoremap <leader>e :Eval<CR>
+
+"------------------------------------------------------------------------------
 " merlin (assumes an installation via OPAM)
 
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
