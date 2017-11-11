@@ -359,17 +359,20 @@ let g:indentLine_color_term = 243
 " vim-operator-highlight
 
 let g:ophigh_highlight_link_group = "Operator"
-let g:ophigh_filetypes_to_ignore = { "haskell": 1,
-                                   \ "ocaml": 1,
-                                   \ "erlang": 1,
-                                   \ "clojure": 1,
-                                   \ "lisp": 1,
-                                   \ "zsh": 1,
-                                   \ "bash": 1,
-                                   \ "sh": 1,
-                                   \ "taskpaper": 1,
-                                   \ "text": 1,
-                                   \ "gitcommit": 1 }
+let g:ophigh_filetypes_to_ignore = {
+\    "bash": 1,
+\    "clojure": 1,
+\    "dockerfile": 1,
+\    "erlang": 1,
+\    "gitcommit": 1,
+\    "haskell": 1,
+\    "lisp": 1,
+\    "ocaml": 1,
+\    "sh": 1,
+\    "taskpaper": 1,
+\    "text": 1,
+\    "zsh": 1
+\}
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
