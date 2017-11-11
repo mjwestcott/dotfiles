@@ -223,6 +223,7 @@ hi link clojureRepeat   Normal
 
 hi link rubyStringDelimiter String
 hi link rubyInterpolation Special
+hi link rubySharpBang Special
 
 "------------------------------------------------------------------------------
 " OCaml
