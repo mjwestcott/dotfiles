@@ -1,5 +1,5 @@
 "------------------------------------------------------------------------------
-" vimrc intended for Python, Go, C, Clojure, Haskell
+" vimrc intended for Python, Ruby, Go, Clojure, OCaml
 " by Matt Westcott (mattwestcott.co.uk)
 
 set nocompatible
@@ -163,6 +163,10 @@ autocmd FileType python
     \ setlocal expandtab
 
 autocmd FileType ocaml
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab
+
+autocmd FileType ruby
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
 
