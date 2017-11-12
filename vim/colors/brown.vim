@@ -229,7 +229,7 @@ hi link rubyInterpolation   Special
 hi link rubySharpBang       Special
 
 call s:h("rubySymbol", { "fg": s:Cyan })
-hi link rubySymbolDelimiter rubySymbol
+hi link rubySymbolDelimiter Normal
 
 "------------------------------------------------------------------------------
 " OCaml
