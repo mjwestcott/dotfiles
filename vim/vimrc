@@ -347,6 +347,7 @@ let g:ophigh_filetypes_to_ignore = {
 \    "bash": 1,
 \    "clojure": 1,
 \    "dockerfile": 1,
+\    "ruby": 1,
 \    "erlang": 1,
 \    "gitcommit": 1,
 \    "haskell": 1,

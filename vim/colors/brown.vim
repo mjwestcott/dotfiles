@@ -191,10 +191,10 @@ hi link cStorageClass Statement
 hi link pythonOperator   Statement
 hi link pythonDecorator  Statement
 hi link pythonDottedName Statement
+hi link pythonImport     Statement
 hi link pythonDot        Normal
 hi link pythonBuiltinObj Number
 hi link pythonBoolean    Boolean
-hi link pythonImport     Statement
 
 "------------------------------------------------------------------------------
 " Go
@@ -221,9 +221,15 @@ hi link clojureRepeat   Normal
 "------------------------------------------------------------------------------
 " Ruby
 
+hi link rubyPseudoVariable  Statement
+hi link rubyInclude         Statement
+hi link rubyMacro           Statement
 hi link rubyStringDelimiter String
-hi link rubyInterpolation Special
-hi link rubySharpBang Special
+hi link rubyInterpolation   Special
+hi link rubySharpBang       Special
+
+call s:h("rubySymbol", { "fg": s:Cyan })
+hi link rubySymbolDelimiter rubySymbol
 
 "------------------------------------------------------------------------------
 " OCaml
