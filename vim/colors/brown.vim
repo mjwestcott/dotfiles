@@ -221,12 +221,15 @@ hi link clojureRepeat   Normal
 "------------------------------------------------------------------------------
 " Ruby
 
-hi link rubyPseudoVariable  Statement
-hi link rubyInclude         Statement
-hi link rubyMacro           Statement
-hi link rubyStringDelimiter String
-hi link rubyInterpolation   Special
-hi link rubySharpBang       Special
+hi link rubyPseudoVariable       Statement
+hi link rubyInclude              Statement
+hi link rubyMacro                Statement
+hi link rubyStringDelimiter      String
+hi link rubyInterpolation        Special
+hi link rubySharpBang            Special
+hi link rubyPredefinedIdentifier Title
+hi link rubyPredefinedVariable   Title
+hi link rubyPredefinedConstant   Title
 
 call s:h("rubySymbol", { "fg": s:Cyan })
 hi link rubySymbolDelimiter Normal
