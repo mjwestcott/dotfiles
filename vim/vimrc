@@ -343,7 +343,8 @@ let g:rooter_resolve_links = 1
 "------------------------------------------------------------------------------
 " indentLine
 
-let g:indentLine_color_term = 243
+let g:indentLine_color_term = 102
+let g:indentLine_color_gui = "#767676"
 
 "------------------------------------------------------------------------------
 " vim-operator-highlight
@@ -370,7 +371,7 @@ let g:ophigh_filetypes_to_ignore = {
 
 nnoremap <leader>P :RainbowParentheses!!<CR>
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72, '#f6f6f6']
+let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72, '#F6F6F6']
 
 "------------------------------------------------------------------------------
 " NERDTree
