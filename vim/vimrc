@@ -137,6 +137,11 @@ if has("gui_running")
     set guifont=Inconsolata:h16
 endif
 
+if has("nvim")
+    let g:python_host_prog = $WORKON_HOME . "/neovim-py2/bin/python"
+    let g:python3_host_prog = $WORKON_HOME . "/neovim-py3/bin/python"
+endif
+
 "------------------------------------------------------------------------------
 " FileType-Specific Settings
 
@@ -376,11 +381,6 @@ nnoremap <leader>N :NERDTreeToggle<CR>
 " TagBar
 
 nnoremap <leader>T :TagbarToggle<CR>
-
-"------------------------------------------------------------------------------
-" NeoVim
-
-let g:python_host_prog = '/usr/local/bin/python'
 
 "------------------------------------------------------------------------------
 " python-syntax
