@@ -1,0 +1,26 @@
+#
+# Executes commands at the start of an interactive session.
+#
+
+# Source profile.
+[[ -e ~/dotfiles/shell/profile ]] && emulate sh -c 'source ~/dotfiles/shell/profile'
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+setopt HIST_IGNORE_SPACE
+export HISTSIZE=100000
+export SAVEHIST=100000
+export HISTFILE=~/.zhistory
+[[ -z "$TMPDIR" ]] && TMPDIR=/tmp
+
+# Source 'fzf'.
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+
+# AWS CLI completion (assumes awscli installed by Homebrew).
+source /usr/local/share/zsh/site-functions/_aws
+
+# Since it's provided by our prompt.
+export VIRTUAL_ENV_DISABLE_PROMPT=1

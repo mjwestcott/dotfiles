@@ -1,3 +1,5 @@
+[[ -e ~/dotfiles/shell/profile ]] && source ~/dotfiles/shell/profile
+
 #------------------------------------------------------------------------------
 # Environment variables.
 
@@ -11,58 +13,22 @@ export HISTFILE=~/.bash_history
 export HISTCONTROL=ignoreboth
 [[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
-# Append every command
 shopt -s histappend
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-# PATH
-export PATH=$HOME/bin:$PATH
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/usr/local/opt/bin
-
-# virtualenvwrapper setup
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/repos/python
 source /usr/local/bin/virtualenvwrapper.sh
 export VIRTUALENV_USE_DISTRIBUTE=1
 
-# fzf options
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3'
-export FZF_TMUX=0
+export GREP_COLOR='30;43'                            # BSD
+export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'  # GNU
 
-# ag options
-export AGIGNORE="$HOME/dotfiles/ag/agignore"
-
-# fuzzynotes
-export NOTESDIR="$HOME/notes"
-
-# Heroku postgres
-export DATABASE_URL=postgres:///$(whoami)
-
-# grep options
-export GREP_COLOR='30;43'                             # BSD
-export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
-
-# go setup
 export GOPATH=$HOME/repos/go
 export PATH=$PATH:$GOPATH/bin
-if [[ $(uname) != *Darwin* ]]; then
-    # because it's built from source
-    export GOROOT=$HOME/go1.4
-    export PATH=$PATH:$GOROOT/bin
-fi
 
-# only on macOS
 if [[ $(uname) == *Darwin* ]]; then
-    # Haskell/Stack setup
-    export PATH="$PATH:$HOME/.local/bin"
-
-    # For RabbitMQ
-    export PATH=$PATH:/usr/local/sbin
-
-    # Homebrew
-    export HOMEBREW_NO_ANALYTICS=1
+    export PATH="$PATH:$HOME/.local/bin"  # Haskell/Stack
+    export PATH=$PATH:/usr/local/sbin     # RabbitMQ
+    export HOMEBREW_NO_ANALYTICS=1        # Homebrew
 fi
 
 # PS1
@@ -89,23 +55,11 @@ function miniprompt {
 #------------------------------------------------------------------------------
 # Aliases
 
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
-alias grep='grep --color=auto'
-alias tmux='tmux -2'
-alias r='ranger'
-alias t2='tree -L 2'
-alias t3='tree -L 3'
-alias vi='vim'
-alias ide='vim +NERDTreeToggle +TagbarToggle'
-
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
+if ls --color > /dev/null 2>&1; then
+    # GNU `ls`
     colorflag="--color"
-else # macOS `ls`
+else
+    # macOS `ls`
     colorflag="-G"
 fi
 
@@ -122,128 +76,10 @@ alias lc='lt -c ${colorflag}'         # Lists sorted by date, most recent last, 
 alias lu='lt -u ${colorflag}'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls ${colorflag}'            # I often screw this up.
 
-# Notes (relies on fuzzynotes script in $HOME/bin)
-alias n='fuzzynotes run --loop'
-alias notes='fuzzynotes run'
-alias nsync='fuzzynotes rename && fuzzynotes sync'
-alias autosync='fuzzynotes autosync &'
-
-# Python
-alias py="python"
-alias ip="ipython"
-alias nb="jupyter notebook"
-alias de="deactivate"
-alias wk="workon"
-
-# https://github.com/junegunn/gv.vim
-alias gv='vim -c ":GV"'
-
-# fasd
-alias j='fasd_jump'
-alias v='fasd_vim'
-
-function fasd_jump {
-    if [[ -n "${*}" ]]; then
-        fasd_cd -d "${*}"
-    else
-        cd $OLDPWD
-    fi
-}
-
-function fasd_vim {
-    if [[ -n "${*}" ]]; then
-        LANG=C fasd -f -t -e vim -b viminfo "${*}"
-    else
-        vim -c ":History"
-    fi
-}
-
-# Mirroring vim mappings.
-alias ,v='fasd_vim'
-alias ,m='fasd_vim'
-
-# Fuzzy finding aliases using 'fzf'.
-alias ,j='fzf_jump'
-alias ,t='fzf_vim'
-alias ,a='fzf_ag'
-alias ,h='fzf_hidden'
-alias ,g='fzf_regex'
-alias ,l='fzf_locate'
-alias ,c='fzf_commit'
-alias ,b='fzf_branches'
-
-function fzf_jump {
-    local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
-    [[ -n "$file" ]] && cd "$(dirname "$file")"
-}
-
-function fzf_vim {
-    local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
-    [[ -n "$file" ]] && vim "$file"
-}
-
-# Similar to fzf_vim, but show only hidden files (respecting agignore).
-function fzf_hidden {
-    local file="$(ag --hidden -f -p $AGIGNORE -g "/\..+" --ignore "/.git" | fzf -q "${*}")"
-    [[ -n "$file" ]] && vim "$file"
-}
-
-function fzf_ag {
-    local tmp="$TMPDIR/fzf_ag"
-    ag "." | fzf -e -m -q "${*}" > "$tmp"
-    [[ -s "$tmp" ]] && vim -q "$tmp"
-}
-
-# Similar to fzf_ag, but pass the args through to ag as a regex and filter only the source text.
-function fzf_regex {
-    local tmp="$TMPDIR/fzf_ag"
-    ag "${*}" --color | fzf -e -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. > "$tmp"
-    [[ -s "$tmp" ]] && vim -q "$tmp"
-}
-
-# Search the whole file system using locate.
-function fzf_locate {
-    local result="$(locate / | fzf -q "${*}")"
-    if [[ -d "$result" ]]; then
-        cd "$result"
-    elif [[ -f "$result" ]]; then
-        vim "$result"
-    fi
-}
-
-# Search git log in fzf.
-function fzf_commit {
-    local sha="$(git log --pretty=format:"%h %an %ad %s" --date=short \
-                   | fzf -q "${*}" \
-                   | awk -F' ' '{ print $1 }')"
-    [[ -n "$sha" ]] && git show "$sha"
-}
-
-# Checkout git branch/tag, from
-# https://github.com/junegunn/dotfiles/blob/master/bashrc
-function fzf_branches {
-    local tags branches target
-    tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
-    branches=$(
-        git branch --all | grep -v HEAD             |
-        sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
-        sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
-    target=$(
-        (echo "$tags"; echo "$branches") |
-        fzf-tmux -l40 -- --no-hscroll --ansi +m -d "\t" -n 2 -1 -q "$*") || return
-    git checkout $(echo "$target" | awk '{print $2}')
-}
-
-function fzf_tmux {
-  local session
-  session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0) && tmux switch-client -t "$session"
-}
-
 alias g="git"
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
-        complete -o default -o nospace -F _git g;
+    complete -o default -o nospace -F _git g;
 fi;
 
 _git_log_medium_format='%C(bold)Commit:%C(reset) %C(yellow)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(green)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
@@ -412,15 +248,6 @@ alias gwX='git rm -rf'
 # Source 'fzf'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
-# Source 'fasd'
-eval "$(fasd --init auto)"
-
-# Source 'rbenv'
-eval "$(rbenv init -)"
-
-# OPAM configuration
-command -v opam > /dev/null 2>&1 && eval `opam config env`
-
 # git-prompt
 [[ -f ~/.git-prompt.sh ]] && source ~/.git-prompt.sh
 
@@ -430,9 +257,6 @@ if which brew > /dev/null && [[ -f "$(brew --prefix)/etc/bash_completion" ]]; th
 elif [[ -f /etc/bash_completion  ]]; then
     source /etc/bash_completion;
 fi
-
-# Source extra config
-[[ -f ~/dotfiles/private ]] && source ~/dotfiles/private
 
 # awscli completion (assumes awscli installed by homebrew)
 complete -C '/usr/local/bin/aws_completer' aws

@@ -8,8 +8,8 @@ if [[ $(uname -s) != 'Darwin' ]]; then
 elif [[ ! -e ~/dotfiles ]]; then
     echo "Error: ~/dotfiles does not exist"
     exit 1
-elif [[ -s ~/dotfiles/bak ]]; then # Don't clobber an old backup
-    echo "Error: ~/dotfiles/bak already exists"
+elif [[ -s ~/dotfiles/backup ]]; then # Don't clobber an old backup
+    echo "Error: ~/dotfiles/backup already exists"
     exit 1
 fi
 
@@ -78,27 +78,27 @@ if [[ ! -e ~/.git-prompt.sh ]]; then
 fi
 
 # dotfiles
-cd ~/dotfiles && mkdir -pv bak
-for path in bash/* zsh/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
+cd ~/dotfiles && mkdir -pv backup
+for path in shell/bash/* shell/zsh/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
     file=$(basename $path)
-    [[ -e ~/.$file ]] && mv -v ~/.$file bak/.$file
+    [[ -e ~/.$file ]] && mv -v ~/.$file backup/.$file
     ln -sfv ~/dotfiles/$path ~/.$file
 done
 
 # ipython
 mkdir -pv  ~/.ipython/profile_default/startup
 if [[ -e ~/.ipython/profile_default/ipython_config.py ]]; then
-    mv -v ~/.ipython/profile_default/ipython_config.py bak/ipython_config
+    mv -v ~/.ipython/profile_default/ipython_config.py backup/ipython_config
 fi
 if [[ -e ~/.ipython/profile_default/startup/00-imports.py ]]; then
-    mv -v ~/.ipython/profile_default/startup/00-imports.py bak/00-imports.py
+    mv -v ~/.ipython/profile_default/startup/00-imports.py backup/00-imports.py
 fi
 ln -sfv ~/dotfiles/ipython/ipython_config.py ~/.ipython/profile_default/ipython_config.py
 ln -sfv ~/dotfiles/ipython/startup/00-imports.py ~/.ipython/profile_default/startup/00-imports.py
 
 # pgcli
 mkdir -pv ~/.config/pgcli
-[[ -e ~/.config/pgcli/config ]] && mv -v ~/.config/pgcli/config bak/pgcli_config
+[[ -e ~/.config/pgcli/config ]] && mv -v ~/.config/pgcli/config backup/pgcli_config
 ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
 
 # vim
