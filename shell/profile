@@ -42,6 +42,9 @@ alias t2='tree -L 2'
 alias t3='tree -L 3'
 alias vi='vim'
 alias ide='vim +NERDTreeToggle +TagbarToggle'
+alias json="python -m json.tool"
+alias up='ping 8.8.8.8'
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # Notes (relies on fuzzynotes script in $HOME/bin)
 alias n='fuzzynotes run --loop'
@@ -55,6 +58,7 @@ alias ip='ipython'
 alias nb='jupyter notebook'
 alias de='deactivate'
 alias wk='workon'
+alias pyc='find . -name "*.pyc" -delete'
 
 # https://github.com/junegunn/gv.vim
 alias gv='vim -c ":GV"'
@@ -156,6 +160,10 @@ function fzf_tmux {
   local session
   session=$(tmux list-sessions -F "#{session_name}" | \
     fzf --query="$1" --select-1 --exit-0) && tmux switch-client -t "$session"
+}
+
+function bk {
+    cp -a "$1" "${1}_$(date -u +%FT%TZ)"
 }
 
 # Source extra config
