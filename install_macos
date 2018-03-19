@@ -79,7 +79,7 @@ fi
 
 # dotfiles
 cd ~/dotfiles && mkdir -pv backup
-for path in shell/bash/* shell/zsh/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
+for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
     file=$(basename $path)
     [[ -e ~/.$file ]] && mv -v ~/.$file backup/.$file
     ln -sfv ~/dotfiles/$path ~/.$file
