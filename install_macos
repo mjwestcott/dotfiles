@@ -16,27 +16,36 @@ fi
 [[ -z "$(which brew)" ]] && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 brew upgrade
-
-# Basic tools
+brew tap caskroom/cask
 brew install ag
 brew install awscli
 brew install bash
 brew install cmake
 brew install coreutils
 brew install ctags
+brew install devd
 brew install fasd
 brew install git
 brew install gnuplot
+brew install go
 brew install graphviz
+brew install heroku/brew/heroku
 brew install httpie
 brew install jq
+brew install macvim --HEAD --with-override-system-vim
 brew install memcached
+brew install modd
 brew install mysql
+brew install opam
 brew install postgresql
+brew install python
+brew install python@2
 brew install rabbitmq
 brew install ranger
 brew install reattach-to-user-namespace
 brew install redis
+brew install rbenv
+brew install shellcheck
 brew install sqlite
 brew install tmux
 brew install tree
@@ -44,15 +53,11 @@ brew install wget
 brew install youtube-dl
 brew install zsh
 
-# Editors
-brew install macvim --HEAD --with-override-system-vim
-brew install emacs --with-cocoa --devel
-
-# Languages
-brew install go leiningen opam python python3 rbenv ruby-build
-
-# Other tools
-brew install modd devd
+# Docker
+brew cask install docker
+brew install docker-completion
+brew install docker-compose-completion
+brew install docker-machine-completion
 
 # OCaml config
 opam init
