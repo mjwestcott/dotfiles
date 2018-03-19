@@ -43,8 +43,12 @@ alias t3='tree -L 3'
 alias vi='vim'
 alias ide='vim +NERDTreeToggle +TagbarToggle'
 alias json="python -m json.tool"
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# Networking
 alias up='ping 8.8.8.8'
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
 
 # Notes (relies on fuzzynotes script in $HOME/bin)
 alias n='fuzzynotes run --loop'
@@ -54,7 +58,7 @@ alias autosync='fuzzynotes autosync &'
 
 # Python
 alias py='python'
-alias ip='ipython'
+alias ipy='ipython'
 alias nb='jupyter notebook'
 alias de='deactivate'
 alias wk='workon'
