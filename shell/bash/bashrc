@@ -252,9 +252,9 @@ alias gwX='git rm -rf'
 [[ -f ~/.git-prompt.sh ]] && source ~/.git-prompt.sh
 
 # bash completion
-if which brew > /dev/null && [[ -f "$(brew --prefix)/etc/bash_completion" ]]; then
-    source "$(brew --prefix)/etc/bash_completion";
-elif [[ -f /etc/bash_completion  ]]; then
+if [[ -f /usr/local/share/bash-completion/bash_completion ]]; then
+    source /usr/local/share/bash-completion/bash_completion
+elif [[ -f /etc/bash_completion ]]; then
     source /etc/bash_completion;
 fi
 

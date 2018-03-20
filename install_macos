@@ -20,6 +20,7 @@ brew tap caskroom/cask
 brew install ag
 brew install awscli
 brew install bash
+brew install bash-completion@2
 brew install cmake
 brew install coreutils
 brew install ctags
