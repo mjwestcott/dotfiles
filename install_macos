@@ -60,6 +60,8 @@ brew install docker-completion
 brew install docker-compose-completion
 brew install docker-machine-completion
 
+# SF Mono
+cp /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/* ~/Library/Fonts
 # OCaml config
 opam init
 opam switch 4.03.0
