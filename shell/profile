@@ -45,6 +45,8 @@ alias vi='vim'
 alias ide='vim +NERDTreeToggle +TagbarToggle'
 alias json="python -m json.tool"
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+alias gh='hub browse'
+alias pr='hub pull-request'
 
 # Networking
 alias up='ping 8.8.8.8'

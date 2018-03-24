@@ -38,6 +38,7 @@ brew install go
 brew install graphviz
 brew install heroku/brew/heroku
 brew install httpie
+brew install hub
 brew install jq
 brew install macvim --HEAD --with-override-system-vim
 brew install memcached
