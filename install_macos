@@ -49,9 +49,9 @@ brew install python
 brew install python@2
 brew install rabbitmq
 brew install ranger
+brew install rbenv
 brew install reattach-to-user-namespace
 brew install redis
-brew install rbenv
 brew install shellcheck
 brew install sqlite
 brew install tmux
@@ -120,6 +120,11 @@ for file in *; do
 done
 
 mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.yml ~/.config/alacritty/alacritty.yml
+
+cd ~/dotfiles/bin && mkdir -pv ~/bin
+for file in *; do
+    [[ ! -e ~/bin/$file ]] && ln -sfv "$HOME/dotfiles/bin/$file" "$HOME/bin/$file"
+done
 
 # Tmux Package Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
