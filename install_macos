@@ -31,6 +31,7 @@ brew install cmake
 brew install coreutils
 brew install ctags
 brew install devd
+brew install diff-so-fancy
 brew install fasd
 brew install git
 brew install gnuplot

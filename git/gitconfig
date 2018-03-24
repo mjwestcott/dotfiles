@@ -27,6 +27,24 @@
 [color]
         ui = auto
 
+[color "diff"]
+        meta = yellow
+        frag = magenta bold
+        commit = yellow bold
+        old = red
+        new = green
+        whitespace = red reverse
+
+[color "diff-highlight"]
+        oldHighlight = red 52
+        newNormal = green
+        newHighlight = green 22
+        oldNormal = red
+
+[diff-so-fancy]
+        markEmptyLines = true
+        stripLeadingSymbols = true
+
 [diff]
         tool = vimdiff
         renames = copies  # Detect copies as well as renames.
