@@ -96,6 +96,7 @@ set statusline+=\ %l:%c
 set incsearch
 set ignorecase
 set smartcase
+set nohlsearch
 
 " Split
 set splitbelow
