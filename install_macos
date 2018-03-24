@@ -62,6 +62,20 @@ brew install docker-machine-completion
 
 # SF Mono
 cp /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/* ~/Library/Fonts
+
+# Rust config
+curl https://sh.rustup.rs -sSf | sh \
+    && source "$HOME/.cargo/env" \
+    && rustup override set stable \
+    && rustup update stable
+
+# Alacritty
+git clone https://github.com/jwilm/alacritty.git ~/alacritty \
+    && pushd ~/alacritty \
+    && make app \
+    && cp -r target/release/osx/Alacritty.app /Applications/ \
+    && popd || exit 1
+
 # OCaml config
 opam init
 opam switch 4.06.0
