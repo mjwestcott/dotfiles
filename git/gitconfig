@@ -13,6 +13,7 @@
     discard = checkout --
     unstage = reset --
     uncommit = reset --soft HEAD~
+
     # Plurals...
     branches = branch -a
     stashes = stash list
@@ -20,7 +21,6 @@
     tags = tag
 
 [apply]
-    # Detect whitespace errors when applying a patch.
     whitespace = warn
 
 [color]
@@ -44,12 +44,24 @@
     log = true
 
 [push]
-    # See `git help config` (search for push.default).
     default = simple
 
 [credential]
     helper = cache --timeout=3600
 
-# URL shorthands
-[url "https://github.com/"]
+[url "git@github.com:"]
+    insteadOf = "https://github.com/"
+    insteadOf = "git://github.com/"
+    insteadOf = "github:"
     insteadOf = "gh:"
+
+[url "git@gist.github.com:"]
+    insteadOf = "https://gist.github.com/"
+    insteadOf = "git://gist.github.com/"
+    insteadOf = "gist:"
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
