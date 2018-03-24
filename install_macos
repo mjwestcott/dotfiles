@@ -73,7 +73,7 @@ curl https://sh.rustup.rs -sSf | sh \
 git clone https://github.com/jwilm/alacritty.git ~/alacritty \
     && pushd ~/alacritty \
     && make app \
-    && cp -r target/release/osx/Alacritty.app /Applications/ \
+    && cp -rv target/release/osx/Alacritty.app /Applications/ \
     && popd || exit 1
 
 # OCaml config
@@ -112,6 +112,8 @@ cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
     [[ ! -e ~/.vim/colors/$file ]] && ln -sfv "$HOME/dotfiles/vim/colors/$file" "$HOME/.vim/colors/$file"
 done
+
+mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.yml ~/.config/alacritty/alacritty.yml
 
 # Tmux Package Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
