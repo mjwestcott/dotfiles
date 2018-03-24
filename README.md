@@ -9,3 +9,4 @@ Inspiration and code from these fine individuals:
 * https://github.com/kennethreitz/dotfiles
 * https://github.com/jessfraz/dotfiles
 * https://github.com/fatih/dotfiles
+* https://github.com/paulirish/dotfiles

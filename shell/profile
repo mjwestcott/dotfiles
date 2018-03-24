@@ -167,6 +167,12 @@ function fzf_tmux {
     fzf --query="$1" --select-1 --exit-0) && tmux switch-client -t "$session"
 }
 
+# Create a new directory and enter it.
+function md() {
+	mkdir -p "$@" && cd "$@"
+}
+
+# Create timestamped backup of a file.
 function bk {
     cp -a "$1" "${1}_$(date -u +%FT%TZ)"
 }
@@ -190,6 +196,12 @@ function extract {
     else
         echo "'$1' is not a valid file"
     fi
+}
+
+function colours {
+    for code in `seq 255 0`; do
+        echo -e "\e[38;5;${code}m"'\\e[38;5;'"$code"m"\e[0m"
+    done
 }
 
 # Source extra config
