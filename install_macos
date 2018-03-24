@@ -64,8 +64,8 @@ brew install docker-machine-completion
 cp /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/* ~/Library/Fonts
 # OCaml config
 opam init
-opam switch 4.03.0
-eval `opam config env`
+opam switch 4.06.0
+eval "$(opam config env)"
 opam install merlin ocp-indent tuareg utop
 
 # Python config
@@ -74,47 +74,31 @@ sudo pip install virtualenvwrapper && mkdir -pv ~/repos/python
 sudo pip install 'ipython[all]'
 
 # Ruby config
-rbenv install 2.3.1
-rbenv global 2.3.1
+rbenv install 2.5.0 && rbenv global 2.5.0
 
 # Prezto
-git clone --recursive git@github.com:mjwestcott/prezto.git ~/.zprezto
+if [[ ! -e ~/.zprezto ]]; then
+    git clone --recursive git@github.com:mjwestcott/prezto.git ~/.zprezto
+fi
 
 # git-prompt
 if [[ ! -e ~/.git-prompt.sh ]]; then
     curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 fi
 
-# dotfiles
+# Dotfiles
 cd ~/dotfiles && mkdir -pv backup
 for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
-    file=$(basename $path)
-    [[ -e ~/.$file ]] && mv -v ~/.$file backup/.$file
-    ln -sfv ~/dotfiles/$path ~/.$file
+    file=$(basename "$path")
+    [[ -e "$HOME/.$file" ]] && mv -v "$HOME/.$file" "backup/$file"
+    ln -sfv "$HOME/dotfiles/$path" "$HOME/.$file"
 done
 
-# ipython
-mkdir -pv  ~/.ipython/profile_default/startup
-if [[ -e ~/.ipython/profile_default/ipython_config.py ]]; then
-    mv -v ~/.ipython/profile_default/ipython_config.py backup/ipython_config
-fi
-if [[ -e ~/.ipython/profile_default/startup/00-imports.py ]]; then
-    mv -v ~/.ipython/profile_default/startup/00-imports.py backup/00-imports.py
-fi
-ln -sfv ~/dotfiles/ipython/ipython_config.py ~/.ipython/profile_default/ipython_config.py
-ln -sfv ~/dotfiles/ipython/startup/00-imports.py ~/.ipython/profile_default/startup/00-imports.py
-
-# pgcli
-mkdir -pv ~/.config/pgcli
-[[ -e ~/.config/pgcli/config ]] && mv -v ~/.config/pgcli/config backup/pgcli_config
-ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
-
-# vim
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
-    [[ ! -e ~/.vim/colors/$file ]] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
+    [[ ! -e ~/.vim/colors/$file ]] && ln -sfv "$HOME/dotfiles/vim/colors/$file" "$HOME/.vim/colors/$file"
 done
 
 # Tmux Package Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-sudo ~/.tmux/plugins/tpm/bin/install_plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
+    && sudo ~/.tmux/plugins/tpm/bin/install_plugins

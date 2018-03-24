@@ -1,10 +1,3 @@
-# Path
-export PATH=$HOME/bin:$PATH
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/usr/local/opt/bin
-export PATH=/usr/local/opt/python/libexec/bin:$PATH  # Python
-export PATH=$PATH:$HOME/.local/bin                   # Haskell/Stack
-
 # Misc
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/repos/python
@@ -19,13 +12,21 @@ export HOMEBREW_NO_ANALYTICS=1
 export NOTESDIR=$HOME/notes
 export DATABASE_URL=postgres:///$(whoami)
 export GOPATH=$HOME/repos/go
-export PATH=$PATH:$GOPATH/bin
+
+# Path
+export PATH=$HOME/bin:$PATH
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/opt/bin
+export PATH=/usr/local/opt/python/libexec/bin:$PATH  # Python
+export PATH=$PATH:$HOME/.local/bin                   # Haskell/Stack
+export PATH=$HOME/.cargo/bin:$PATH                   # Rust
+export PATH=$PATH:$GOPATH/bin                        # Go
 
 # Initialize fasd.
 [[ -f ~/.fasd ]] && eval "$(fasd --init auto)"
 
 # Initalize rbenv.
-eval "$(rbenv init -)"
+command -v rbenv > /dev/null 2>&1 && eval "$(rbenv init -)"
 
 # OPAM configuration.
 command -v opam > /dev/null 2>&1 && eval `opam config env`
