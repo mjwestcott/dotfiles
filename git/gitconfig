@@ -1,67 +1,68 @@
 [core]
-    excludesfile = ~/.gitignore_global
+        excludesfile = ~/.gitignore_global
+        pager = diff-so-fancy | less --tabs=4 -RFX
 
 [user]
-    name = Matt Westcott
-    email = m.westcott@gmail.com
-    signingkey = A8FCAE14CFA47FDD
+        name = Matt Westcott
+        email = m.westcott@gmail.com
+        signingkey = A8FCAE14CFA47FDD
 
 [commit]
-    gpgsign = true
+        gpgsign = true
 
 [alias]
-    discard = checkout --
-    unstage = reset --
-    uncommit = reset --soft HEAD~
+        discard = checkout --
+        unstage = reset --
+        uncommit = reset --soft HEAD~
 
-    # Plurals...
-    branches = branch -a
-    stashes = stash list
-    remotes = remote -v
-    tags = tag
+        # Plurals...
+        branches = branch -a
+        stashes = stash list
+        remotes = remote -v
+        tags = tag
 
 [apply]
-    whitespace = warn
+        whitespace = warn
 
 [color]
-    ui = auto
+        ui = auto
 
 [diff]
-    tool = vimdiff
-    renames = copies  # Detect copies as well as renames.
-    compactionHeuristic = true
-    indentHeuristic = on
+        tool = vimdiff
+        renames = copies  # Detect copies as well as renames.
+        compactionHeuristic = true
+        indentHeuristic = on
 
 [difftool]
-    prompt = false
+        prompt = false
 
 [help]
-    # Automatically correct and execute mistyped commands.
-    autocorrect = 1
+        # Automatically correct and execute mistyped commands.
+        autocorrect = 1
 
 [merge]
-    # Include summaries of merged commits in newly created merge commit messages.
-    log = true
+        # Include summaries of merged commits in newly created merge commit messages.
+        log = true
 
 [push]
-    default = simple
+        default = simple
 
 [credential]
-    helper = cache --timeout=3600
+        helper = cache --timeout=3600
 
 [url "git@github.com:"]
-    insteadOf = "https://github.com/"
-    insteadOf = "git://github.com/"
-    insteadOf = "github:"
-    insteadOf = "gh:"
+        insteadOf = "https://github.com/"
+        insteadOf = "git://github.com/"
+        insteadOf = "github:"
+        insteadOf = "gh:"
 
 [url "git@gist.github.com:"]
-    insteadOf = "https://gist.github.com/"
-    insteadOf = "git://gist.github.com/"
-    insteadOf = "gist:"
+        insteadOf = "https://gist.github.com/"
+        insteadOf = "git://gist.github.com/"
+        insteadOf = "gist:"
 
 [filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true

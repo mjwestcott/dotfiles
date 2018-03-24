@@ -187,6 +187,7 @@ autocmd FileType taskpaper
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
+autocmd FileType gitconfig setlocal shiftwidth=8
 autocmd FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:}"
 
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
