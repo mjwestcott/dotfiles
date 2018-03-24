@@ -82,12 +82,12 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
-# Colors (Tomorrow Night Bright)
+# Colors (inspired by seoul256.vim)
 colors:
   # Default colors
   primary:
-    background: '0x000000'
-    foreground: '0xeaeaea'
+    background: '0x4e4e4e'
+    foreground: '0xd9d9d9'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
@@ -96,25 +96,25 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x000000'
-    red:     '0xd54e53'
-    green:   '0xb9ca4a'
-    yellow:  '0xe6c547'
-    blue:    '0x7aa6da'
-    magenta: '0xc397d8'
-    cyan:    '0x70c0ba'
-    white:   '0xffffff'
+    black:   '0x616161'
+    red:     '0xdf9b99'
+    green:   '0x98bb99'
+    yellow:  '0xe0bc72'
+    blue:    '0x96bcdc'
+    magenta: '0xe17899'
+    cyan:    '0x98bcbd'
+    white:   '0xd9d9d9'
 
   # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xe7c547'
-    blue:    '0x7aa6da'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
-    white:   '0xffffff'
+    black:   '0x757575'
+    red:     '0xffbfbd'
+    green:   '0xb8d6b8'
+    yellow:  '0xffde99'
+    blue:    '0xbaddfc'
+    magenta: '0xdfa0b4'
+    cyan:    '0x97dedf'
+    white:   '0xe9e9e9'
 
   # Dim colors (Optional)
   dim:
