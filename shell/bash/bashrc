@@ -1,3 +1,5 @@
+# shellcheck disable=SC2139
+
 [[ -e ~/dotfiles/shell/profile ]] && source ~/dotfiles/shell/profile
 
 #------------------------------------------------------------------------------
@@ -63,18 +65,18 @@ else
     colorflag="-G"
 fi
 
-alias ls='ls ${colorflag}'
-alias l='ls -1A ${colorflag}'         # Lists in one column, hidden files.
-alias ll='ls -lh ${colorflag}'        # Lists human readable sizes.
-alias lr='ll -R ${colorflag}'         # Lists human readable sizes, recursively.
-alias la='ll -A ${colorflag}'         # Lists human readable sizes, hidden files.
-alias lm='la ${colorflag} | "$PAGER"' # Lists human readable sizes, hidden files through pager.
-alias lx='ll -XB ${colorflag}'        # Lists sorted by extension (GNU only).
-alias lk='ll -Sr ${colorflag}'        # Lists sorted by size, largest last.
-alias lt='ll -tr ${colorflag}'        # Lists sorted by date, most recent last.
-alias lc='lt -c ${colorflag}'         # Lists sorted by date, most recent last, shows change time.
-alias lu='lt -u ${colorflag}'         # Lists sorted by date, most recent last, shows access time.
-alias sl='ls ${colorflag}'            # I often screw this up.
+alias ls="ls ${colorflag}"
+alias l="ls -1A ${colorflag}"         # Lists in one column, hidden files.
+alias ll="ls -lh ${colorflag}"        # Lists human readable sizes.
+alias lr="ll -R ${colorflag}"         # Lists human readable sizes, recursively.
+alias la="ll -A ${colorflag}"         # Lists human readable sizes, hidden files.
+alias lm="la ${colorflag} | $PAGER"   # Lists human readable sizes, hidden files through pager.
+alias lx="ll -XB ${colorflag}"        # Lists sorted by extension (GNU only).
+alias lk="ll -Sr ${colorflag}"        # Lists sorted by size, largest last.
+alias lt="ll -tr ${colorflag}"        # Lists sorted by date, most recent last.
+alias lc="lt -c ${colorflag}"         # Lists sorted by date, most recent last, shows change time.
+alias lu="lt -u ${colorflag}"         # Lists sorted by date, most recent last, shows access time.
+alias sl="ls ${colorflag}"            # I often screw this up.
 
 alias g="git"
 # Enable tab completion for `g` by marking it as an alias for `git`
