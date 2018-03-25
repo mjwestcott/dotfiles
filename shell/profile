@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Misc
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/repos/python
@@ -103,18 +105,21 @@ alias ,c='fzf_commit'
 alias ,b='fzf_branches'
 
 function fzf_jump {
-    local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
+    local file
+    file=$(ag -p "$AGIGNORE" -g "" | fzf -q "${*}")
     [[ -n "$file" ]] && cd "$(dirname "$file")"
 }
 
 function fzf_vim {
-    local file="$(ag -p $AGIGNORE -g "" | fzf -q "${*}")"
+    local file
+    file=$(ag -p "$AGIGNORE" -g "" | fzf -q "${*}")
     [[ -n "$file" ]] && vim "$file"
 }
 
 # Similar to fzf_vim, but show only hidden files (respecting agignore).
 function fzf_hidden {
-    local file="$(ag --hidden -f -p $AGIGNORE -g "/\..+" --ignore "/.git" | fzf -q "${*}")"
+    local file
+    file=$(ag --hidden -f -p "$AGIGNORE" -g "/\..+" --ignore "/.git" | fzf -q "${*}")
     [[ -n "$file" ]] && vim "$file"
 }
 
@@ -133,7 +138,8 @@ function fzf_regex {
 
 # Search the whole file system using locate.
 function fzf_locate {
-    local result="$(locate / | fzf -q "${*}")"
+    local result
+    result=$(locate / | fzf -q "${*}")
     if [[ -d "$result" ]]; then
         cd "$result"
     elif [[ -f "$result" ]]; then
@@ -143,9 +149,11 @@ function fzf_locate {
 
 # Search git log in fzf.
 function fzf_commit {
-    local sha="$(git log --pretty=format:"%h %an %ad %s" --date=short \
-                   | fzf -q "${*}" \
-                   | awk -F' ' '{ print $1 }')"
+    local sha
+    sha=$(
+        git log --pretty=format:"%h %an %ad %s" --date=short |
+        fzf -q "${*}" |
+        awk -F' ' '{ print $1 }')
     [[ -n "$sha" ]] && git show "$sha"
 }
 
@@ -164,14 +172,16 @@ function fzf_branches {
 }
 
 function fzf_tmux {
-  local session
-  session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0) && tmux switch-client -t "$session"
+    local session
+    session=$(
+        tmux list-sessions -F "#{session_name}" |
+        fzf --query="$1" --select-1 --exit-0) || return
+    tmux switch-client -t "$session"
 }
 
 # Create a new directory and enter it.
 function md {
-	mkdir -p "$@" && cd "$@"
+    mkdir -p "$@" && cd "$@"
 }
 
 # Create timestamped backup of a file.
@@ -182,17 +192,17 @@ function bk {
 function extract {
     if [[ -f $1 ]]; then
         case $1 in
-            *.tar.bz2) tar xjf $1;;
-            *.tar.gz)  tar xzf $1;;
-            *.bz2)     bunzip2 $1;;
-            *.rar)     unrar e $1;;
-            *.gz)      gunzip $1;;
-            *.tar)     tar xf $1;;
-            *.tbz2)    tar xjf $1;;
-            *.tgz)     tar xzf $1;;
-            *.zip)     unzip $1;;
-            *.Z)       uncompress $1;;
-            *.7z)      7z x $1;;
+            *.tar.bz2) tar xjf "$1";;
+            *.tar.gz)  tar xzf "$1";;
+            *.bz2)     bunzip2 "$1";;
+            *.rar)     unrar e "$1";;
+            *.gz)      gunzip "$1";;
+            *.tar)     tar xf "$1";;
+            *.tbz2)    tar xjf "$1";;
+            *.tgz)     tar xzf "$1";;
+            *.zip)     unzip "$1";;
+            *.Z)       uncompress "$1";;
+            *.7z)      7z x "$1";;
             *)         echo "'$1' cannot be extracted via extract()";;
         esac
     else
@@ -201,8 +211,8 @@ function extract {
 }
 
 function colours {
-    for code in `seq 255 0`; do
-        echo -e "\e[38;5;${code}m"'\\e[38;5;'"$code"m"\e[0m"
+    for code in $(seq 255 0); do
+        echo -e "\e[38;5;${code}m"'\\e[38;5;'"${code}m\e[0m"
     done
 }
 
