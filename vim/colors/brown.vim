@@ -188,11 +188,11 @@ hi link cStorageClass Statement
 "------------------------------------------------------------------------------
 " Python
 
-hi link pythonOperator   Statement
-hi link pythonDecorator  Statement
-hi link pythonDottedName Statement
+hi link pythonOperator   Operator
+hi link pythonDecorator  Operator
+hi link pythonDot        Operator
+hi link pythonDottedName Normal
 hi link pythonImport     Statement
-hi link pythonDot        Normal
 hi link pythonBuiltinObj Number
 hi link pythonBoolean    Boolean
 
