@@ -45,8 +45,6 @@ function session_info {
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export GIT_PS1_SHOWUPSTREAM=1
 export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_STATESEPARATOR=""
 export PS1='$(session_info)$(virtualenv_info)\[\e[34m\]\w\[\e[38;5;245m\]$(__git_ps1 " %s") \[\e[0m\]$ '
 
