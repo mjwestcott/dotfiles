@@ -360,3 +360,6 @@ key_bindings:
   - { key: F10,      mods: Command, chars: "\x1b[21;3~"                  }
   - { key: F11,      mods: Command, chars: "\x1b[23;3~"                  }
   - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
+
+  # To get # to work in vim.
+  - { key: Key3,     mods: Alt,     chars: "\x23"                        }
