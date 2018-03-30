@@ -92,7 +92,7 @@ hi! link Label            Statement
 hi! link Repeat           Statement
 hi! link Define           Statement
 
-call s:h("Keyword",       { "fg": s:Orange })
+call s:h("Keyword",       { "fg": s:Pale_Grey })
 
 call s:h("Identifier",    { "fg": s:Pale_Grey })
 
