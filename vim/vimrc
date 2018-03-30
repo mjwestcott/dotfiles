@@ -48,7 +48,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer'}
-Plug 'Valloric/vim-operator-highlight'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
 call plug#end()
@@ -347,26 +346,6 @@ let g:rooter_resolve_links = 1
 
 let g:indentLine_color_term = 102
 let g:indentLine_color_gui = "#767676"
-
-"------------------------------------------------------------------------------
-" vim-operator-highlight
-
-let g:ophigh_highlight_link_group = "Operator"
-let g:ophigh_filetypes_to_ignore = {
-\    "bash": 1,
-\    "clojure": 1,
-\    "dockerfile": 1,
-\    "ruby": 1,
-\    "erlang": 1,
-\    "gitcommit": 1,
-\    "haskell": 1,
-\    "lisp": 1,
-\    "ocaml": 1,
-\    "sh": 1,
-\    "taskpaper": 1,
-\    "text": 1,
-\    "zsh": 1
-\}
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
