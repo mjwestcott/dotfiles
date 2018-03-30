@@ -24,11 +24,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'junegunn/seoul256.vim'
-Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'Raimondi/delimitMate'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'sheerun/vim-polyglot'
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
@@ -355,16 +352,6 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72, '#F6F6F6']
 
 "------------------------------------------------------------------------------
-" NERDTree
-
-nnoremap <leader>N :NERDTreeToggle<CR>
-
-"------------------------------------------------------------------------------
-" TagBar
-
-nnoremap <leader>T :TagbarToggle<CR>
-
-"------------------------------------------------------------------------------
 " python-syntax
 
 let g:python_highlight_builtins = 0
@@ -429,14 +416,6 @@ nmap <leader>oe <Plug>(go-rename)
 nmap <leader>ds <Plug>(go-def-split)
 nmap <leader>dv <Plug>(go-def-vertical)
 nmap <leader>dt <Plug>(go-def-tab)
-
-"------------------------------------------------------------------------------
-" TagBar
-
-let g:tagbar_sort = 0
-let g:tagbar_singleclick = 1
-let g:tagbar_show_visibility = 1
-let g:tagbar_iconchars = ['▸', '▾']
 
 "------------------------------------------------------------------------------
 " delimitMate
