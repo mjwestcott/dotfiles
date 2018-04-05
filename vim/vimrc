@@ -192,6 +192,7 @@ let mapleader=" "
 
 " UK keyboards...
 inoremap § <ESC>
+vnoremap § <ESC>
 
 " Keep search matches in the middle of the window.
 nnoremap * *zzzv
