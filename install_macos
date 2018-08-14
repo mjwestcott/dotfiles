@@ -87,7 +87,7 @@ git clone https://github.com/jwilm/alacritty.git ~/alacritty \
 
 # OCaml config
 opam init
-opam switch 4.06.0
+opam switch 4.07.0
 eval "$(opam config env)"
 opam install merlin ocp-indent tuareg utop
 
@@ -97,7 +97,7 @@ sudo pip install virtualenvwrapper && mkdir -pv ~/repos/python
 sudo pip install 'ipython[all]'
 
 # Ruby config
-rbenv install 2.5.0 && rbenv global 2.5.0
+rbenv install 2.5.1 && rbenv global 2.5.1
 
 # Prezto
 if [[ ! -e ~/.zprezto ]]; then

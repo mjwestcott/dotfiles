@@ -18,26 +18,26 @@ sudo apt-get install -y \
     build-essential automake cmake pkg-config \
     python python-pip \
     ruby rbenv ruby-build \
-    ruby-dev python2.7-dev python3.4-dev ncurses-dev libevent-dev \
+    ruby-dev python2.7-dev python3.6-dev ncurses-dev libevent-dev \
     git httpie curl tree wget silversearcher-ag man-db manpages-dev bash-completion
 
 sudo pip install --upgrade pip
 sudo pip install virtualenvwrapper && mkdir -p ~/repos/python
 sudo pip install 'ipython[all]'
 
-# python 3.5.1
-cd ~ && wget https://www.python.org/ftp/python/3.5.1/Python-3.5.1.tar.xz
-tar -xf Python-3.5.1.tar.xz && cd Python-3.5.1
+# python 3.7.0
+cd ~ && wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tar.xz
+tar -xf Python-3.7.0.tar.xz && cd Python-3.7.0
 ./configure --prefix=/usr/local/opt/python3 && make && sudo make install
 
-# go1.4
-git clone https://go.googlesource.com/go ~/go1.4
-cd ~/go1.4 && git checkout go1.4 && cd ~/go1.4/src && sudo ./all.bash
+# go1.11
+git clone https://go.googlesource.com/go ~/go1.10
+cd ~/go1.10 && git checkout go1.10 && cd ~/go1.10/src && sudo ./all.bash
 mkdir -p ~/repos/go
 
-# ruby 2.3.1
-rbenv install 2.3.1
-rbenv global 2.3.1
+# ruby 2.5.1
+rbenv install 2.5.1
+rbenv global 2.5.1
 
 # vim
 git clone https://github.com/vim/vim.git ~/vim
@@ -69,9 +69,9 @@ fi
 # dotfiles
 cd ~/dotfiles && mkdir -pv backup
 for path in shell/bash/* readline/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
-    file=$(basename $path)
-    [[ -e ~/.$file ]] && mv -v ~/.$file backup/.$file
-    ln -sfv ~/dotfiles/$path ~/.$file
+    file=$(basename "$path")
+    [[ -e ~/.$file ]] && mv -v "$HOME/.$file" "backup/.$file"
+    ln -sfv "$HOME/dotfiles/$path" "$HOME/.$file"
 done
 
 # ipython
@@ -93,5 +93,5 @@ ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
 # vim
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
-    [[ ! -e ~/.vim/colors/$file ]] && ln -sfv ~/dotfiles/vim/colors/$file ~/.vim/colors/$file
+    [[ ! -e ~/.vim/colors/$file ]] && ln -sfv "$HOME/dotfiles/vim/colors/$file" "$HOME/.vim/colors/$file"
 done
