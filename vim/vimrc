@@ -4,6 +4,11 @@
 
 set nocompatible
 
+" XXX: Temp fix for python3.7 imp module deprecation warning
+if has('python3')
+  silent! python3 1
+endif
+
 "------------------------------------------------------------------------------
 " vim-plug
 
