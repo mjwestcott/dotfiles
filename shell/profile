@@ -45,12 +45,15 @@ alias tree='tree --dirsfirst'
 alias t='tree -L 1'
 alias t2='tree -L 2'
 alias t3='tree -L 3'
+alias t4='tree -L 4'
 alias vi='vim'
 alias ide='vim +NERDTreeToggle +TagbarToggle'
 alias json="python -m json.tool"
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 alias gh='hub browse'
 alias pr='hub pull-request'
+alias lg='lazygit'
+alias rcli='redis-cli'
 
 # Networking
 alias up='ping 8.8.8.8'
