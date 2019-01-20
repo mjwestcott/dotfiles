@@ -105,7 +105,7 @@ vi = True
 on_error = STOP
 
 # Set threshold for row limit prompt. Use 0 to disable prompt.
-row_limit = 1000
+row_limit = 5000
 
 # Skip intro on startup and goodbye on exit
 less_chatty = False
@@ -160,7 +160,7 @@ Token.Toolbar.Transaction.Failed = 'bg:#222222 #ff005f bold'
 
 # color of table
 # you can use token or custom colors
-Token.Output.Header = ""
+Token.Output.Header = "#ffffff bold"
 Token.Output.OddRow = ""
 Token.Output.EvenRow = ""
 
@@ -175,5 +175,5 @@ Token.Output.EvenRow = ""
 # for decimal "d" - 12345678, ",d" - 12,345,678
 # for float "g" - 123456.78, ",g" - 123,456.78
 [data_formats]
-decimal = ""
-float = ""
+decimal = "d"
+float = ".15f"
