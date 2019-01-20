@@ -30,7 +30,7 @@ endfunction
 let s:Black             = { "gui": "#333333", "cterm": "236" }
 let s:Black2            = { "gui": "#3a3a3a", "cterm": "237" }
 let s:Black3            = { "gui": "#444444", "cterm": "238" }
-let s:Dark_Grey         = { "gui": "#4e4e4e", "cterm": "239" }
+let s:Dark_Grey         = { "gui": "#3e3e3e", "cterm": "239" }
 let s:Grey              = { "gui": "#767676", "cterm": "102" }
 let s:Grey2             = { "gui": "#949494", "cterm": "246" }
 let s:Light_Grey        = { "gui": "#bdbdbd", "cterm": "145" }
