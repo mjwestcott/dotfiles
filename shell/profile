@@ -3,6 +3,7 @@
 # Misc
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/repos/python
+export VIRTUALENVWRAPPER_PYTHON=$(which python)
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3'
 export FZF_TMUX=0
