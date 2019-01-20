@@ -102,6 +102,9 @@ rbenv install 2.5.1 && rbenv global 2.5.1
 # Prezto
 if [[ ! -e ~/.zprezto ]]; then
     git clone --recursive git@github.com:mjwestcott/prezto.git ~/.zprezto
+    git clone https://github.com/belak/prezto-contrib ~/.zprezto/contrib \
+        && git submodule init \
+        && git submodule update
 fi
 
 # git-prompt
