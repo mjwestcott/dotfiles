@@ -77,6 +77,15 @@ alias pyc='find . -name "*.pyc" -delete'
 # https://github.com/junegunn/gv.vim
 alias gv='vim -c ":GV"'
 
+# AWS
+function agp {
+    echo "$AWS_PROFILE"
+}
+
+function asp {
+    export AWS_PROFILE=$1
+}
+
 # fasd
 alias j='fasd_jump'
 alias v='fasd_vim'
