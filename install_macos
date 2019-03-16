@@ -106,6 +106,10 @@ if [[ ! -e ~/.git-prompt.sh ]]; then
     curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 fi
 
+# Tmux Package Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
+    && sudo ~/.tmux/plugins/tpm/bin/install_plugins
+
 # Dotfiles
 cd ~/dotfiles && mkdir -pv backup
 for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
@@ -125,7 +129,3 @@ cd ~/dotfiles/bin && mkdir -pv ~/bin
 for file in *; do
     [[ ! -e ~/bin/$file ]] && ln -sfv "$HOME/dotfiles/bin/$file" "$HOME/bin/$file"
 done
-
-# Tmux Package Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
-    && sudo ~/.tmux/plugins/tpm/bin/install_plugins
