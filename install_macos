@@ -96,6 +96,15 @@ git clone https://github.com/jwilm/alacritty.git ~/alacritty \
 sudo pip3 install virtualenvwrapper && mkdir -pv ~/repos/python
 sudo pip3 install jupyterlab
 
+# Jupyter
+mkdir -pv ~/repos/python/notebooks \
+    && cp ~/dotfiles/ipython/Pipfile ~/repos/python/notebooks \
+    && cp ~/dotfiles/ipython/imports.ipynb ~/repos/python/notebooks \
+    && CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.2 \
+    && pushd ~/repos/python/notebooks \
+    && pipenv install --python ~/.pyenv/versions/3.7.2/bin/python \
+    && popd || exit 1
+
 # Ruby config
 rbenv install 2.6.1 && rbenv global 2.6.1
 

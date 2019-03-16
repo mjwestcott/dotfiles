@@ -1,0 +1,46 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+boto3 = "*"
+gensim = "*"
+graphviz = "*"
+lightfm = "*"
+lightgbm = "*"
+matplotlib = "*"
+numpy = "*"
+pandas = "*"
+psycopg2-binary = "*"
+requests = "*"
+scikit-learn = "*"
+scikit-optimize = "*"
+scipy = "*"
+seaborn = "*"
+torch = "*"
+xgboost = "*"
+Keras = "*"
+Lifetimes = "*"
+SQLAlchemy = "*"
+jupyterlab = "*"
+pyspark = "*"
+dask = {extras = ["complete"],version = "*"}
+findspark = "*"
+redis = "*"
+elasticsearch = "*"
+aws-requests-auth = "*"
+s3fs = "*"
+mlflow = "*"
+pystan = "*"
+fbprophet = "*"
+tsfresh = "*"
+scikit-plot = "*"
+statsmodels = "*"
+tqdm = "*"
+xlrd = "*"
+
+[requires]
+python_version = "3.7.2"
