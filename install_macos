@@ -104,8 +104,8 @@ sudo pip3 install jupyterlab
 
 # Jupyter
 mkdir -pv ~/repos/python/notebooks \
-    && cp ~/dotfiles/ipython/Pipfile ~/repos/python/notebooks \
-    && cp ~/dotfiles/ipython/imports.ipynb ~/repos/python/notebooks \
+    && cp ~/dotfiles/jupyter/Pipfile ~/repos/python/notebooks \
+    && cp ~/dotfiles/jupyter/imports.ipynb ~/repos/python/notebooks \
     && CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.2 \
     && pushd ~/repos/python/notebooks \
     && pipenv install --python ~/.pyenv/versions/3.7.2/bin/python \
