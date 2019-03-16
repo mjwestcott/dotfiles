@@ -32,6 +32,7 @@ brew install devd
 brew install diff-so-fancy
 brew install fasd
 brew install git
+brew install gnupg
 brew install gnuplot
 brew install go
 brew install graphviz
