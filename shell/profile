@@ -12,7 +12,6 @@ export PURE_CMD_MAX_EXEC_TIME=0
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
 export HOMEBREW_NO_ANALYTICS=1
-export NOTESDIR=$HOME/notes
 export DATABASE_URL=postgres:///$(whoami)
 export GOPATH=$HOME/repos/go
 
@@ -58,12 +57,6 @@ alias rcli='redis-cli'
 alias up='ping 8.8.8.8'
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
-
-# Notes (relies on fuzzynotes script in $HOME/bin)
-alias n='fuzzynotes run --loop'
-alias notes='fuzzynotes run'
-alias nsync='fuzzynotes rename && fuzzynotes sync'
-alias autosync='fuzzynotes autosync &'
 
 # Python
 alias py='python'
