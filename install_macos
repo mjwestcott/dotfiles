@@ -94,7 +94,7 @@ git clone https://github.com/jwilm/alacritty.git ~/alacritty \
 
 # Python config
 sudo pip3 install virtualenvwrapper && mkdir -pv ~/repos/python
-sudo pip3 install 'ipython[all]'
+sudo pip3 install jupyterlab
 
 # Ruby config
 rbenv install 2.6.1 && rbenv global 2.6.1
