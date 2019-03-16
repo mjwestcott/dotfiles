@@ -85,9 +85,8 @@ git clone https://github.com/jwilm/alacritty.git ~/alacritty \
     && popd || exit 1
 
 # Python config
-sudo pip install --upgrade pip
-sudo pip install virtualenvwrapper && mkdir -pv ~/repos/python
-sudo pip install 'ipython[all]'
+sudo pip3 install virtualenvwrapper && mkdir -pv ~/repos/python
+sudo pip3 install 'ipython[all]'
 
 # Ruby config
 rbenv install 2.5.1 && rbenv global 2.5.1
