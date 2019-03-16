@@ -11,6 +11,9 @@ elif [[ ! -e ~/dotfiles ]]; then
 elif [[ -s ~/dotfiles/backup ]]; then # Don't clobber an old backup
     echo "Error: ~/dotfiles/backup already exists"
     exit 1
+elif [[ $(xcode-select -p) != '/Applications/Xcode.app/Contents/Developer' ]]; then
+    echo "Error: Xcode must be installed first"
+    exit 1
 fi
 
 # Trackpad: enable tap to click for this user and for the login screen
@@ -41,7 +44,7 @@ brew install heroku/brew/heroku
 brew install httpie
 brew install hub
 brew install jq
-brew install macvim --HEAD --with-override-system-vim
+brew install macvim --HEAD
 brew install memcached
 brew install modd
 brew install mysql
