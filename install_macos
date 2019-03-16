@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 #
 # Install bash and zsh dotfiles environment on macOS.
+#
+# Manual steps:
+#     $ chsh -s $(which zsh)
+#     $ brew services start [...]
+#     install vim plugins (including fzf)
+#     set up GitHub SSH key
+#     set up git signing key
 
 if [[ $(uname -s) != 'Darwin' ]]; then
     echo "Error: not on macOS"
