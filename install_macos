@@ -17,7 +17,7 @@ elif [[ $(xcode-select -p) != '/Applications/Xcode.app/Contents/Developer' ]]; t
 fi
 
 # Homebrew
-[[ -z "$(which brew)" ]] && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+[[ -z "$(command -v brew)" ]] && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 brew upgrade
 brew tap caskroom/cask
