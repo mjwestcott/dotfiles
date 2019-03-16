@@ -70,6 +70,12 @@ brew install wget
 brew install youtube-dl
 brew install zsh
 
+# Java
+brew cask install homebrew/cask-versions/java8
+brew install apache-spark
+brew install kafka
+brew install scala
+
 # Docker
 brew cask install docker
 brew install docker-completion
