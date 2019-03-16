@@ -89,7 +89,7 @@ sudo pip3 install virtualenvwrapper && mkdir -pv ~/repos/python
 sudo pip3 install 'ipython[all]'
 
 # Ruby config
-rbenv install 2.5.1 && rbenv global 2.5.1
+rbenv install 2.6.1 && rbenv global 2.6.1
 
 # Prezto
 if [[ ! -e ~/.zprezto ]]; then
