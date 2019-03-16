@@ -83,12 +83,6 @@ git clone https://github.com/jwilm/alacritty.git ~/alacritty \
     && cp -rv target/release/osx/Alacritty.app /Applications/ \
     && popd || exit 1
 
-# OCaml config
-opam init
-opam switch 4.07.0
-eval "$(opam config env)"
-opam install merlin ocp-indent tuareg utop
-
 # Python config
 sudo pip install --upgrade pip
 sudo pip install virtualenvwrapper && mkdir -pv ~/repos/python

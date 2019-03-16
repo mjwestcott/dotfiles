@@ -31,9 +31,6 @@ export PATH=$PATH:$GOPATH/bin                        # Go
 # Initalize rbenv.
 command -v rbenv > /dev/null 2>&1 && eval "$(rbenv init -)"
 
-# OPAM configuration.
-command -v opam > /dev/null 2>&1 && eval "$(opam config env)"
-
 # Aliases
 alias ..='cd ..'
 alias ...='cd ../..'
