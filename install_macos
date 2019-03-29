@@ -52,8 +52,9 @@ brew install memcached
 brew install modd
 brew install mysql
 brew install opam
-brew install postgresql
+brew install pgcli
 brew install pipenv
+brew install postgresql
 brew install python
 brew install python@2
 brew install pyenv
@@ -99,7 +100,7 @@ git clone https://github.com/jwilm/alacritty.git ~/alacritty \
     && popd || exit 1
 
 # Python config
-sudo pip3 install virtualenvwrapper && mkdir -pv ~/repos/python
+sudo pip3 install virtualenvwrapper
 sudo pip3 install jupyterlab
 
 # Jupyter
