@@ -237,6 +237,17 @@ hi link rubyPredefinedConstant     rubySymbol
 hi link rubyPseudoVariable         rubySymbol
 
 "------------------------------------------------------------------------------
+" SQL
+
+call s:h("sqlKeyword",      { "fg": s:Orange })
+hi link sqlOperator  sqlKeyword
+hi link sqlStatement sqlKeyword
+hi link sqlType      sqlKeyword
+hi link sqlFunction  sqlKeyword
+hi link sqlSpecial   sqlKeyword
+hi link Quote        String
+
+"------------------------------------------------------------------------------
 " OCaml
 
 hi link ocamlConstructor Identifier
