@@ -72,6 +72,7 @@ set history=1000
 
 " Visual
 set ruler
+set number
 set showmode
 set lazyredraw
 set cursorline
