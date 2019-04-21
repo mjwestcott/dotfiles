@@ -65,9 +65,6 @@
 [push]
         default = simple
 
-[credential]
-        helper = cache --timeout=3600
-
 [url "git@github.com:"]
         insteadOf = "https://github.com/"
         insteadOf = "git://github.com/"
