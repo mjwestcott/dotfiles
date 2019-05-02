@@ -63,6 +63,7 @@ brew install ranger
 brew install rbenv
 brew install reattach-to-user-namespace
 brew install redis
+brew install rocksdb
 brew install shellcheck
 brew install sqlite
 brew install tmux
