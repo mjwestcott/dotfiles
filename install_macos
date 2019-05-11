@@ -143,12 +143,14 @@ for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/
     ln -sfv "$HOME/dotfiles/$path" "$HOME/.$file"
 done
 
+mkdir -pv ~/.config/pgcli && ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
+mkdir -pv ~/.config/ranger && ln -sfv ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
+mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.yml ~/.config/alacritty/alacritty.yml
+
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
     [[ ! -e ~/.vim/colors/$file ]] && ln -sfv "$HOME/dotfiles/vim/colors/$file" "$HOME/.vim/colors/$file"
 done
-
-mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.yml ~/.config/alacritty/alacritty.yml
 
 cd ~/dotfiles/bin && mkdir -pv ~/bin
 for file in *; do
