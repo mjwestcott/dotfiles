@@ -354,7 +354,13 @@ let g:indentLine_color_gui = "#767676"
 
 "------------------------------------------------------------------------------
 " vim-operator-highlight
+
 let g:ophigh_highlight_link_group = "Operator"
+
+"------------------------------------------------------------------------------
+" vim-highlightedyank
+
+let g:highlightedyank_highlight_duration = 100
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
