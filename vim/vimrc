@@ -250,6 +250,12 @@ noremap <silent> <leader>v :e $MYVIMRC<CR>
 noremap <silent> <leader>.v :so $MYVIMRC<CR>
 nnoremap <leader>U :PlugUpdate<CR>
 
+" Echo the number under the cursor as binary, useful for bitwise operations
+nnoremap <silent> gb :call EchoBinary()<CR>
+function! EchoBinary()
+    echo printf("%08b", expand('<cword>'))
+endfunction
+
 " Toggle functions.
 nnoremap <silent> <leader>Z :call ToggleNumber()<CR>
 function! ToggleNumber()
@@ -262,7 +268,7 @@ function! ToggleSyntax()
 endfunction
 
 nnoremap <silent> <leader>C :call ToggleColorColumn()<CR>
-function! g:ToggleColorColumn()
+function! ToggleColorColumn()
   if &colorcolumn != ''
     setlocal colorcolumn&
   else
