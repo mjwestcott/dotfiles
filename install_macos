@@ -74,6 +74,8 @@ brew install yarn
 brew install youtube-dl
 brew install zsh
 
+brew cask install ngrok
+
 # Java
 brew cask install homebrew/cask-versions/java8
 brew install apache-spark
