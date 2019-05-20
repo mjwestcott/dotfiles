@@ -45,7 +45,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer --ts-completer'}
 Plug 'Valloric/vim-operator-highlight'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
@@ -175,6 +175,11 @@ autocmd FileType ruby
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
 
+autocmd FileType javascript
+    \ setlocal textwidth=80 |
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab
+
 autocmd FileType sh
     \ setlocal textwidth=80
 
@@ -187,7 +192,6 @@ autocmd FileType taskpaper
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
 autocmd FileType gitconfig setlocal shiftwidth=8
-autocmd FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:}"
 
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead \*.{md,mdwn,mkd,mkdn,mark\*} setf markdown
@@ -331,6 +335,7 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 let g:ale_python_flake8_options = '--select=F,C9 --max-complexity=10'
+let g:ale_javascript_prettier_options = '--trailing-comma all --print-width 80'
 
 nnoremap <leader>al :ALELint<CR>
 nnoremap <leader>ai :ALEInfo<CR>
@@ -344,6 +349,8 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \    'python': ['isort', 'yapf'],
+\    'javascript': ['prettier'],
+\    'css': ['prettier'],
 \}
 
 "------------------------------------------------------------------------------
@@ -362,6 +369,23 @@ let g:indentLine_color_gui = "#767676"
 " vim-operator-highlight
 
 let g:ophigh_highlight_link_group = "Operator"
+let g:ophigh_filetypes_to_ignore = {
+\    "bash": 1,
+\    "clojure": 1,
+\    "dockerfile": 1,
+\    "ruby": 1,
+\    "erlang": 1,
+\    "gitcommit": 1,
+\    "haskell": 1,
+\    "lisp": 1,
+\    "ocaml": 1,
+\    "sh": 1,
+\    "taskpaper": 1,
+\    "text": 1,
+\    "zsh": 1,
+\    "javascript": 1,
+\    "javascript.jsx": 1
+\}
 
 "------------------------------------------------------------------------------
 " vim-highlightedyank
@@ -449,6 +473,7 @@ nmap <leader>dt <Plug>(go-def-tab)
 "------------------------------------------------------------------------------
 " delimitMate
 
+let delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_quotes = ""
 let delimitMate_expand_cr = 1
 
