@@ -500,7 +500,7 @@ nnoremap <leader>yc :YcmCompleter GoToDeclaration<CR>
 " UltiSnips
 
 let g:snips_author = 'Matt Westcott'
-let g:UltiSnipsExpandTrigger = "``"
+let g:UltiSnipsExpandTrigger = "<C-e>"
 let g:UltiSnipsEditSplit = "vertical"
 let g:UltiSnipsListSnippets = "<C-x>"
 let g:ultisnips_python_style = "google"
