@@ -179,7 +179,7 @@ autocmd FileType ruby
     \ setlocal expandtab
 
 autocmd FileType javascript
-    \ setlocal textwidth=80 |
+    \ setlocal textwidth=90 |
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
 
@@ -338,7 +338,7 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 let g:ale_python_flake8_options = '--select=F,C9 --max-complexity=10'
-let g:ale_javascript_prettier_options = '--trailing-comma all --print-width 80'
+let g:ale_javascript_prettier_options = '--trailing-comma all --print-width 90'
 
 nnoremap <leader>al :ALELint<CR>
 nnoremap <leader>ai :ALEInfo<CR>
