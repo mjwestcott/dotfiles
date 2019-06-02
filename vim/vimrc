@@ -1,13 +1,8 @@
 "------------------------------------------------------------------------------
-" vimrc intended for Python, Ruby, Go, Clojure, OCaml
+" vimrc intended for Python, Ruby, Go, Clojure, OCaml, Javascript
 " by Matt Westcott (mattwestcott.co.uk)
 
 set nocompatible
-
-" XXX: Temp fix for python3.7 imp module deprecation warning
-if has('python3')
-  silent! python3 1
-endif
 
 "------------------------------------------------------------------------------
 " vim-plug
@@ -54,15 +49,16 @@ call plug#end()
 "------------------------------------------------------------------------------
 " General Settings
 
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[0 q"
-
 set background=dark
 colorscheme brown
 
 filetype plugin indent on
 syntax on
+
+" Cursor styles
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[0 q"
 
 " Undo
 set undofile
@@ -136,8 +132,6 @@ if has("gui_running")
     set guioptions-=m
     set guioptions-=M
     set guioptions-=e
-    set guicursor=a:blinkon0
-    set guifont=Inconsolata:h16
 endif
 
 if has("nvim")
