@@ -84,9 +84,9 @@ hi! link Tag              Special
 
 call s:h("Delimiter",     { "fg": s:Orange })
 
-call s:h("Operator",      { "fg": s:Orange })
+call s:h("Operator",      { "fg": s:Pale_Grey })
 
-call s:h("Statement",     { "fg": s:Orange })
+call s:h("Statement",     { "fg": s:Pale_Grey })
 hi! link Conditional      Statement
 hi! link Exception        Statement
 hi! link Label            Statement
