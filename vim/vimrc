@@ -493,4 +493,4 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 "------------------------------------------------------------------------------
 " ocp-indent (assumes an installation via OPAM)
 
-set rtp^="/Users/mattwestcott/.opam/system/share/ocp-indent/vim"
+autocmd FileType ocaml execute "set rtp+=" . g:opamshare . "/ocp-indent/vim/indent/ocaml.vim"
