@@ -32,8 +32,6 @@ test -r /Users/mattwestcott/.opam/opam-init/init.zsh && . /Users/mattwestcott/.o
 SPACESHIP_PROMPT_ADD_NEWLINE="true"
 SPACESHIP_PROMPT_SEPARATE_LINE="true"
 
-
-# Spaceship prompt
 SPACESHIP_PROMPT_ORDER=(
     time          # Time stamps section
     user          # Username section
