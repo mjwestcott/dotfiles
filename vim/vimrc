@@ -134,9 +134,11 @@ if has("gui_running")
 endif
 
 if has("nvim")
-    let g:python_host_prog = $WORKON_HOME . "/neovim-py2/bin/python"
-    let g:python3_host_prog = $WORKON_HOME . "/neovim-py3/bin/python"
+    let g:python_host_prog = $WORKON_HOME . "/pynvim2/bin/python"
+    let g:python3_host_prog = $WORKON_HOME . "/pynvim3/bin/python"
+    tnoremap <Esc> <C-\><C-n>
 endif
+
 
 "------------------------------------------------------------------------------
 " FileType-Specific Settings
