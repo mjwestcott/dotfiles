@@ -25,6 +25,9 @@ source /usr/local/share/zsh/site-functions/_aws
 # Since it's provided by our prompt.
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+# Configure opam
+test -r /Users/mattwestcott/.opam/opam-init/init.zsh && . /Users/mattwestcott/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
 # Spaceship prompt
 SPACESHIP_PROMPT_ADD_NEWLINE="true"
 SPACESHIP_PROMPT_SEPARATE_LINE="true"
