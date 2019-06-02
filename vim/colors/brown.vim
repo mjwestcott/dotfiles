@@ -50,6 +50,7 @@ let s:Pastel_Red        = { "gui": "#e09b99", "cterm": "174" }
 let s:Red               = { "gui": "#cc2b12", "cterm": "160" }
 let s:Dark_Red          = { "gui": "#800c0c", "cterm": "88"  }
 let s:Pink              = { "gui": "#e09b99", "cterm": "174" }
+let s:Magenta           = { "gui": "#dfa0b4", "cterm": "181" }
 let s:Pale_Green        = { "gui": "#98bc99", "cterm": "108" }
 let s:Dark_Green        = { "gui": "#719872", "cterm": "65"  }
 let s:Flourescent_Green = { "gui": "#bdbb72", "cterm": "143" }
@@ -284,6 +285,16 @@ hi link cssValueLength         Constant
 hi link cssValueTime           Constant
 hi link cssValueUnitDecorators Constant
 hi link cssUnitDecorators      Constant
+
+"------------------------------------------------------------------------------
+" Javascript/JSX
+
+call s:h("xmlTag",          { "fg": s:Magenta })
+call s:h("xmlTagName",      { "fg": s:Magenta })
+call s:h("xmlAttrib",       { "fg": s:Magenta })
+call s:h("xmlAttribPunct",  { "fg": s:Magenta })
+call s:h("xmlEqual",        { "fg": s:Magenta })
+hi link JsThis Normal
 
 "------------------------------------------------------------------------------
 " Lisp
