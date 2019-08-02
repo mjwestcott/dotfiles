@@ -59,6 +59,7 @@ brew install postgresql
 brew install python
 brew install python@2
 brew install pyenv
+brew install r
 brew install rabbitmq
 brew install ranger
 brew install rbenv
