@@ -50,7 +50,7 @@ let s:Pastel_Red        = { "gui": "#e09b99", "cterm": "174" }
 let s:Red               = { "gui": "#cc2b12", "cterm": "160" }
 let s:Dark_Red          = { "gui": "#800c0c", "cterm": "88"  }
 let s:Pink              = { "gui": "#e09b99", "cterm": "174" }
-let s:Magenta           = { "gui": "#dfa0b4", "cterm": "181" }
+let s:Magenta           = { "gui": "#dfa0b4", "cterm": "13"  }
 let s:Pale_Green        = { "gui": "#98bc99", "cterm": "108" }
 let s:Dark_Green        = { "gui": "#719872", "cterm": "65"  }
 let s:Flourescent_Green = { "gui": "#bdbb72", "cterm": "143" }
@@ -289,12 +289,38 @@ hi link cssUnitDecorators      Constant
 "------------------------------------------------------------------------------
 " Javascript/JSX
 
+hi link JsThis Normal
+
 call s:h("xmlTag",          { "fg": s:Magenta })
 call s:h("xmlTagName",      { "fg": s:Magenta })
 call s:h("xmlAttrib",       { "fg": s:Magenta })
 call s:h("xmlAttribPunct",  { "fg": s:Magenta })
 call s:h("xmlEqual",        { "fg": s:Magenta })
-hi link JsThis Normal
+
+hi link htmlTag            xmlTag
+hi link htmlEndTag         xmlTag
+hi link htmlArg            xmlTag
+hi link htmlTagName        xmlTag
+hi link htmlSpecialTagName xmlTag
+hi link htmlStatement      xmlTag
+
+hi link jsxAttrib         xmlTag
+hi link jsxAttribKeyword  xmlTag
+hi link jsxTag            xmlTag
+hi link jsxTagName        xmlTag
+hi link jsxComponentName  xmlTag
+hi link jsxElement        xmlTag
+hi link jsxOpenPunct      xmlTag
+hi link jsxClosePunct     xmlTag
+hi link jsxEscapeJs       xmlTag
+hi link jsxSpreadOperator xmlTag
+hi link jsxComment        xmlTag
+hi link jsxCloseString    xmlTag
+hi link jsxOpenTag        xmlTag
+hi link jsxCloseTag       xmlTag
+hi link jsxDot            xmlTag
+hi link jsxNamespace      xmlTag
+hi link jsxEqual          xmlTag
 
 "------------------------------------------------------------------------------
 " Lisp
