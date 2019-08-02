@@ -84,6 +84,9 @@ brew install kafka
 brew install kafkacat
 brew install scala
 
+# Elasticsearch (needs Java)
+brew install elasticsearch
+
 # Docker
 brew cask install docker
 brew install docker-completion
