@@ -87,6 +87,11 @@ brew install scala
 # Elasticsearch (needs Java)
 brew install elasticsearch
 
+# k8s
+brew cask install virtualbox
+brew cask install minikube
+brew install kubectl
+
 # Docker
 brew cask install docker
 brew install docker-completion
