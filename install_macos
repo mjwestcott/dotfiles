@@ -84,8 +84,6 @@ brew install apache-spark
 brew install kafka
 brew install kafkacat
 brew install scala
-
-# Elasticsearch (needs Java)
 brew install elasticsearch
 
 # k8s
