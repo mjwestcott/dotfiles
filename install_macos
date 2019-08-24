@@ -44,6 +44,7 @@ brew install gnuplot
 brew install go
 brew install graphviz
 brew install heroku/brew/heroku
+brew install hexyl
 brew install httpie
 brew install hub
 brew install jq
