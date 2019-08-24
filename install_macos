@@ -92,6 +92,7 @@ brew install elasticsearch
 brew cask install virtualbox
 brew cask install minikube
 brew install kubectl
+brew install kubectx
 
 # Docker
 brew cask install docker
