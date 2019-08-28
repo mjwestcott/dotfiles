@@ -224,6 +224,7 @@ noremap <C-l> w
 noremap <C-j> 10gj
 noremap <C-k> 10gk
 noremap <C-n> <C-^>
+noremap <C-b> :bn<CR>
 
 " Window switching.
 noremap <leader>h <C-w>h
