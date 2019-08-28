@@ -64,7 +64,7 @@ alias ipy='ipython'
 alias lab='cd ~/repos/python/notebooks && pipenv run jupyter lab'
 alias de='deactivate'
 alias wk='workon'
-alias pyc='find . -name "*.pyc" -delete'
+alias pyc='find . -name '__pycache__' -delete && find . -name '*.py[co]' -delete'
 
 # https://github.com/junegunn/gv.vim
 alias gv='vim -c ":GV"'
