@@ -16,16 +16,13 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'davidoc/taskpaper.vim'
 Plug 'fatih/vim-go'
 Plug 'guns/vim-sexp'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'machakann/vim-highlightedyank'
-Plug 'michaeljsmith/vim-indent-object'
 Plug 'Raimondi/delimitMate'
 Plug 'sheerun/vim-polyglot'
 Plug 'SirVer/ultisnips'
