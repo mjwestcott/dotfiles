@@ -149,10 +149,12 @@ endif
 
 autocmd FileType c
     \ setlocal shiftwidth=4 |
+    \ setlocal tabstop=4 |
     \ setlocal expandtab
 
 autocmd FileType cpp
     \ setlocal shiftwidth=2 |
+    \ setlocal tabstop=4
 
 autocmd FileType go
     \ setlocal shiftwidth=8 |
@@ -164,7 +166,7 @@ autocmd FileType html
 autocmd FileType lisp,clojure,scheme
     \ setlocal shiftwidth=2
 
-autocmd FileType python
+autocmd FileType python,rst
     \ setlocal textwidth=88 |
     \ setlocal shiftwidth=4 |
     \ setlocal expandtab
@@ -183,13 +185,10 @@ autocmd FileType javascript
     \ setlocal expandtab
 
 autocmd FileType sh
-    \ setlocal textwidth=80
+    \ setlocal textwidth=88
 
 autocmd FileType markdown
     \ syntax match Comment /\%^---\_.\{-}\.\.\.$/ " YAML front-matter
-
-autocmd FileType taskpaper
-    \ setlocal shiftwidth=8
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
@@ -198,7 +197,6 @@ autocmd FileType gitconfig setlocal shiftwidth=8
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead \*.{md,mdwn,mkd,mkdn,mark\*} setf markdown
 autocmd BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
-autocmd BufNewFile,BufRead jbuild setf lisp
 
 "------------------------------------------------------------------------------
 " Mappings (see also Plugin section)
