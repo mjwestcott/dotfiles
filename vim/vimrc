@@ -241,8 +241,6 @@ nnoremap <silent> zk O<Esc>j
 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
-nnoremap <leader>Q :qa<CR>
-noremap <leader>cd :cd %:p:h<cr>
 
 " Replace what is under the cursor globally, prompted for each word.
 nnoremap <leader>r :%s/\<<C-r><C-w>\>//c<left><left>
