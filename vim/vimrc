@@ -91,7 +91,7 @@ set history=1000
 set ruler
 set showmode
 set lazyredraw
-set cursorline
+set nocursorline
 set scrolloff=3
 set laststatus=2
 set showtabline=0
