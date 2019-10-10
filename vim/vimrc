@@ -372,7 +372,7 @@ let g:indentLine_color_gui = "#767676"
 "------------------------------------------------------------------------------
 " vim-highlightedyank
 
-let g:highlightedyank_highlight_duration = 100
+let g:highlightedyank_highlight_duration = 50
 
 "------------------------------------------------------------------------------
 " rainbow-parentheses
