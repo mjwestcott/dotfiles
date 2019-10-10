@@ -375,23 +375,6 @@ let g:indentLine_color_gui = "#767676"
 let g:highlightedyank_highlight_duration = 50
 
 "------------------------------------------------------------------------------
-" rainbow-parentheses
-
-nnoremap <leader>P :RainbowParentheses!!<CR>
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#blacklist = [203, 253, 231, 224, 121, 159, 72, '#F6F6F6']
-
-"------------------------------------------------------------------------------
-" python-syntax
-
-let g:python_highlight_builtins = 0
-
-"------------------------------------------------------------------------------
-" vim-ruby
-
-let g:ruby_operators = 1
-
-"------------------------------------------------------------------------------
 " rust.vim
 
 let g:rustfmt_autosave = 1
