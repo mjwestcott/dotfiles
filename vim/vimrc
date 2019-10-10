@@ -302,6 +302,11 @@ endfunction
 
 let g:fzf_layout = {'down': '50%'}
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)(%an) %C(green)%cr"'
+let g:fzf_action = {
+\    'ctrl-t': 'tab split',
+\    'ctrl-v': 'vsplit',
+\    'alt-enter': 'split'
+\}
 
 nnoremap <leader><leader> :Ag<CR>
 nnoremap ,, :History<CR>
