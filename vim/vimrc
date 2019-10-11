@@ -52,10 +52,29 @@ if exists('+termguicolors')
 endif
 
 set background=dark
-colorscheme brown
+colorscheme yellow
 
 filetype plugin indent on
 syntax on
+
+let g:terminal_ansi_colors = [
+\ "#282828",
+\ "#fb5f4d",
+\ "#98971a",
+\ "#d79921",
+\ "#83a598",
+\ "#b16286",
+\ "#689d6a",
+\ "#d5c4a1",
+\ "#928374",
+\ "#fc7566",
+\ "#b8bd26",
+\ "#fabd2f",
+\ "#92b0a4",
+\ "#d3869b",
+\ "#8ec07c",
+\ "#ebdbb2",
+\]
 
 " Cursor styles
 let &t_SI = "\<Esc>[6 q"
@@ -366,8 +385,9 @@ let g:rooter_resolve_links = 1
 "------------------------------------------------------------------------------
 " indentLine
 
-let g:indentLine_color_term = 102
-let g:indentLine_color_gui = "#767676"
+let g:indentLine_color_term = 243
+let g:indentLine_color_gui = "#7c6f64"
+let g:indentLine_fileTypeExclude = ['markdown']
 
 "------------------------------------------------------------------------------
 " vim-highlightedyank
