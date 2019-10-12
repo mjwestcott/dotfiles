@@ -17,4 +17,7 @@ Thumbs.db
 .Trashes
 
 # Modd
-modd.conf
+modd.conf*
+
+# Python testing library
+.hypothesis
