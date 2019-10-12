@@ -51,7 +51,8 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 alias gh='hub browse'
 alias pr='hub pull-request'
 alias lg='lazygit'
-alias rcli='redis-cli'
+alias rd='redis-cli'
+
 
 # Networking
 alias up='ping 8.8.8.8'
@@ -65,6 +66,7 @@ alias lab='cd ~/repos/python/notebooks && pipenv run jupyter lab'
 alias de='deactivate'
 alias wk='workon'
 alias pyc='find . -name '__pycache__' -delete && find . -name '*.py[co]' -delete'
+alias venv='. "$(dirname $(poetry run which python))/activate"'
 
 # https://github.com/junegunn/gv.vim
 alias gv='vim -c ":GV"'
