@@ -12,7 +12,6 @@ export PURE_CMD_MAX_EXEC_TIME=0
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
 export HOMEBREW_NO_ANALYTICS=1
-export DATABASE_URL=postgres:///$(whoami)
 export GOPATH=$HOME/repos/go
 
 # Path
@@ -65,7 +64,7 @@ alias ipy='ipython'
 alias lab='cd ~/repos/python/notebooks && pipenv run jupyter lab'
 alias de='deactivate'
 alias wk='workon'
-alias pyc='find . -name '__pycache__' -delete && find . -name '*.py[co]' -delete'
+alias pyc='find . -name '*.py[co]' -delete && find . -name '__pycache__' -delete'
 alias venv='. "$(dirname $(poetry run which python))/activate"'
 
 # https://github.com/junegunn/gv.vim
