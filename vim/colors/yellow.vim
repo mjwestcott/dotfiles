@@ -115,17 +115,19 @@ call s:h("Search",       { "fg": s:Black,       "bg": s:Pale_Yellow })
 call s:h("NonText",      { "fg": s:Pale_Grey                        })
 call s:h("Title",        { "fg": s:Pale_Yellow                      })
 call s:h("ModeMsg",      { "fg": s:Dark_Yellow                      })
-call s:h("Error",        { "fg": s:Pale_Grey,   "bg": s:Red         })
+call s:h("Error",        { "fg": s:Black,       "bg": s:Red         })
 call s:h("ErrorMsg",     { "fg": s:Pale_Grey,   "bg": s:Red         })
 call s:h("ColorColumn",  { "fg": s:Red,         "bg": s:Dark_Grey   })
 call s:h("Pmenu",        { "fg": s:Light_Blue,  "bg": s:Dark_Grey   })
 call s:h("PmenuSel",     { "fg": s:Dark_Yellow, "bg": s:Black2      })
+call s:h("PmenuSbar",    { "fg": s:Dark_Yellow, "bg": s:Black       })
+call s:h("PmenuThumb",   { "fg": s:Dark_Yellow, "bg": s:Black       })
 call s:h("FoldColumn",   { "fg": s:Pink,        "bg": s:Black2      })
 call s:h("Folded",       { "fg": s:Pink,        "bg": s:Black2      })
 call s:h('TabLineFill',  {                      "bg": s:Dark_Grey   })
 call s:h('TabLineSel',   { "fg": s:Light_Blue,  "bg": s:Dark_Grey   })
 call s:h('TabLine',      { "fg": s:Grey,        "bg": s:Dark_Grey   })
-call s:h("SpellBad",     { "fg": s:Pale_Grey,   "bg": s:Red         })
+call s:h("SpellBad",     { "fg": s:Black,       "bg": s:Red         })
 call s:h("SpellCap",     { "fg": s:Black,       "bg": s:Pale_Yellow })
 call s:h("SpellRare",    { "fg": s:Black,       "bg": s:Light_Blue  })
 call s:h("SpellLocal",   { "fg": s:Black,       "bg": s:Pale_Yellow })
@@ -248,12 +250,13 @@ hi link cssUnitDecorators      Constant
 " Javascript/JSX
 
 hi link JsThis Normal
+hi link jsxBraces Normal
 
-call s:h("xmlTag",          { "fg": s:Magenta })
-call s:h("xmlTagName",      { "fg": s:Magenta })
-call s:h("xmlAttrib",       { "fg": s:Magenta })
-call s:h("xmlAttribPunct",  { "fg": s:Magenta })
-call s:h("xmlEqual",        { "fg": s:Magenta })
+call s:h("xmlTag",          { "fg": s:Pink })
+call s:h("xmlTagName",      { "fg": s:Pink })
+call s:h("xmlAttrib",       { "fg": s:Pink })
+call s:h("xmlAttribPunct",  { "fg": s:Pink })
+call s:h("xmlEqual",        { "fg": s:Pink })
 
 hi link htmlTag            xmlTag
 hi link htmlEndTag         xmlTag
@@ -264,13 +267,9 @@ hi link htmlStatement      xmlTag
 
 hi link jsxAttrib         xmlTag
 hi link jsxAttribKeyword  xmlTag
-hi link jsxTag            xmlTag
-hi link jsxTagName        xmlTag
 hi link jsxComponentName  xmlTag
-hi link jsxElement        xmlTag
 hi link jsxOpenPunct      xmlTag
 hi link jsxClosePunct     xmlTag
-hi link jsxEscapeJs       xmlTag
 hi link jsxSpreadOperator xmlTag
 hi link jsxComment        xmlTag
 hi link jsxCloseString    xmlTag
@@ -279,6 +278,10 @@ hi link jsxCloseTag       xmlTag
 hi link jsxDot            xmlTag
 hi link jsxNamespace      xmlTag
 hi link jsxEqual          xmlTag
+
+hi link jsonKeyword String
+hi link jsonString  String
+hi link jsonQuote   String
 
 "------------------------------------------------------------------------------
 " Lisp
