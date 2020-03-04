@@ -165,6 +165,7 @@ mkdir -pv /usr/local/share/highlight/themes/ && ln -s ~/dotfiles/highlight/mjw.t
 mkdir -pv ~/.config/ranger/colorschemes \
     && ln -sfv ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf \
     && ln -sfv ~/dotfiles/ranger/scope.sh ~/.config/ranger/scope.sh \
+    && ln -sfv ~/dotfiles/ranger/rifle.conf ~/.config/ranger/rifle.conf \
     && ln -sfv ~/dotfiles/ranger/mjw.py ~/.config/ranger/colorschemes/mjw.py
 
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
