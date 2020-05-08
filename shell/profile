@@ -11,8 +11,11 @@ export AGIGNORE="$HOME/dotfiles/ag/agignore"
 export PURE_CMD_MAX_EXEC_TIME=0
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
-export HOMEBREW_NO_ANALYTICS=1
 export GOPATH=$HOME/repos/go
+
+# Analytics
+export HOMEBREW_NO_ANALYTICS=1
+export NEXT_TELEMETRY_DISABLED=1
 
 # Path
 export PATH=$HOME/bin:$PATH
