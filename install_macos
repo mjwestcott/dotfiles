@@ -6,6 +6,7 @@
 #     $ chsh -s $(which zsh)
 #     $ brew services start [...]
 #     install vim plugins (including fzf)
+#     install tmux plugins (prefix + I)
 #     set up GitHub SSH key
 #     set up git signing key
 
@@ -18,20 +19,15 @@ elif [[ ! -e ~/dotfiles ]]; then
 elif [[ -s ~/dotfiles/backup ]]; then # Don't clobber an old backup
     echo "Error: ~/dotfiles/backup already exists"
     exit 1
-elif [[ $(xcode-select -p) != '/Applications/Xcode.app/Contents/Developer' ]]; then
-    echo "Error: Xcode must be installed first"
-    exit 1
 fi
 
 # Homebrew
-[[ -z "$(command -v brew)" ]] && ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+[[ -z "$(command -v brew)" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew update
 brew upgrade
-brew tap caskroom/cask
 brew install ag
 brew install awscli
 brew install bash
-brew install bash-completion@2
 brew install cloc
 brew install cmake
 brew install coreutils
@@ -41,10 +37,8 @@ brew install diff-so-fancy
 brew install fasd
 brew install git
 brew install gnupg
-brew install gnuplot
 brew install go
 brew install graphviz
-brew install heroku/brew/heroku
 brew install hexyl
 brew install highlight
 brew install httpie
@@ -55,12 +49,10 @@ brew install memcached
 brew install modd
 brew install mysql
 brew install node
-brew install opam
 brew install pgcli
 brew install pipenv
 brew install postgresql
 brew install python
-brew install python@2
 brew install pyenv
 brew install r
 brew install rabbitmq
@@ -79,6 +71,7 @@ brew install youtube-dl
 brew install zsh
 
 brew cask install ngrok
+brew cask install alacritty
 
 # Java
 brew cask install homebrew/cask-versions/java8
@@ -100,37 +93,23 @@ brew install docker-completion
 brew install docker-compose-completion
 brew install docker-machine-completion
 
-# SF Mono
-cp /Applications/Utilities/Terminal.app/Contents/Resources/Fonts/* ~/Library/Fonts
-
 # Rust config
 curl https://sh.rustup.rs -sSf | sh \
     && source "$HOME/.cargo/env" \
     && rustup override set stable \
     && rustup update stable
 
-# Alacritty
-git clone https://github.com/jwilm/alacritty.git ~/alacritty \
-    && pushd ~/alacritty \
-    && make app \
-    && cp -rv target/release/osx/Alacritty.app /Applications/ \
-    && popd || exit 1
-
-# Python config
-sudo pip3 install virtualenvwrapper
-sudo pip3 install jupyterlab
-
 # Jupyter
 mkdir -pv ~/repos/python/notebooks \
     && cp ~/dotfiles/jupyter/Pipfile ~/repos/python/notebooks \
     && cp ~/dotfiles/jupyter/imports.ipynb ~/repos/python/notebooks \
-    && CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.4 \
+    && CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.8.2 \
     && pushd ~/repos/python/notebooks \
-    && pipenv install --python ~/.pyenv/versions/3.7.4/bin/python \
+    && pipenv install --python ~/.pyenv/versions/3.8.2/bin/python \
     && popd || exit 1
 
 # Ruby config
-rbenv install 2.6.3 && rbenv global 2.6.3
+rbenv install 2.7.1 && rbenv global 2.7.1
 
 # Prezto
 if [[ ! -e ~/.zprezto ]]; then
@@ -142,14 +121,8 @@ if [[ ! -e ~/.zprezto ]]; then
 	&& popd || exit 1
 fi
 
-# git-prompt
-if [[ ! -e ~/.git-prompt.sh ]]; then
-    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
-fi
-
 # Tmux Package Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
-    && sudo ~/.tmux/plugins/tpm/bin/install_plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Dotfiles
 cd ~/dotfiles && mkdir -pv backup
