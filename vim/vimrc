@@ -206,8 +206,11 @@ autocmd FileType html,css,javascript,typescriptreact
 autocmd FileType sh
     \ setlocal textwidth=88
 
-autocmd FileType markdown
-    \ syntax match Comment /\%^---\_.\{-}\.\.\.$/ " YAML front-matter
+autocmd FileType markdown.mdx
+    \ setlocal textwidth=80 |
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab |
+    \ setlocal conceallevel=0
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
@@ -413,6 +416,12 @@ let g:markdown_fenced_languages = [
 \    'python', 'go', 'c', 'clojure', 'haskell',
 \    'bash=sh', 'zsh', 'html', 'css', 'javascript'
 \]
+
+" https://github.com/plasticboy/vim-markdown via polyglot
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_frontmatter = 1
+let g:vim_json_syntax_conceal = 0
 
 "------------------------------------------------------------------------------
 " ListToggle

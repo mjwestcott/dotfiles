@@ -218,6 +218,7 @@ hi link ocamlConstructor Identifier
 
 hi link markdownCode      Statement
 hi link markdownCodeBlock Statement
+hi link mkdDelimiter      Comment
 
 "------------------------------------------------------------------------------
 " HTML/CSS
@@ -267,6 +268,7 @@ hi link htmlStatement      xmlTag
 
 hi link jsxAttrib         xmlTag
 hi link jsxAttribKeyword  xmlTag
+hi link jsxTagName        xmlTag
 hi link jsxComponentName  xmlTag
 hi link jsxOpenPunct      xmlTag
 hi link jsxClosePunct     xmlTag
