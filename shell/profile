@@ -28,6 +28,9 @@ export PATH=$PATH:$HOME/.local/bin                   # Haskell/Stack
 export PATH=$HOME/.cargo/bin:$PATH                   # Rust
 export PATH=$PATH:$GOPATH/bin                        # Go
 
+# https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+
 # Initialize fasd.
 [[ -f ~/.fasd ]] && eval "$(fasd --init auto)"
 

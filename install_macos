@@ -49,6 +49,7 @@ brew install memcached
 brew install modd
 brew install mysql
 brew install node
+brew install openssl
 brew install pipenv
 brew install postgresql
 brew install python
