@@ -49,7 +49,6 @@ brew install memcached
 brew install modd
 brew install mysql
 brew install node
-brew install pgcli
 brew install pipenv
 brew install postgresql
 brew install python
@@ -72,6 +71,11 @@ brew install zsh
 
 brew cask install ngrok
 brew cask install alacritty
+
+# Custom taps
+brew tap dbcli/tap
+brew install litecli
+brew install pgcli
 
 # Java
 brew cask install homebrew/cask-versions/java8
@@ -133,6 +137,7 @@ for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/
 done
 
 mkdir -pv ~/.config/pgcli && ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
+mkdir -pv ~/.config/litecli && ln -sfv ~/dotfiles/litecli/config ~/.config/litecli/config
 mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.yml ~/.config/alacritty/alacritty.yml
 mkdir -pv /usr/local/share/highlight/themes/ && ln -s ~/dotfiles/highlight/mjw.theme /usr/local/share/highlight/themes/mjw.theme
 mkdir -pv ~/.config/ranger/colorschemes \
