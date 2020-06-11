@@ -206,6 +206,10 @@ autocmd FileType html,css,javascript,typescriptreact
 autocmd FileType sh
     \ setlocal textwidth=88
 
+autocmd FileType sql
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab
+
 autocmd FileType markdown.mdx
     \ setlocal textwidth=80 |
     \ setlocal shiftwidth=2 |
@@ -379,6 +383,12 @@ let g:ale_fixers = {
 \    'typescriptreact': ['prettier'],
 \    'css': ['prettier'],
 \}
+
+
+"------------------------------------------------------------------------------
+" Turn off SQL completion to avoid error connected to 'dbext' plugin
+
+let g:omni_sql_no_default_maps = 1
 
 "------------------------------------------------------------------------------
 " vim-rooter
