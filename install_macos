@@ -143,7 +143,7 @@ done
 mkdir -pv ~/.config/pgcli && ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
 mkdir -pv ~/.config/litecli && ln -sfv ~/dotfiles/litecli/config ~/.config/litecli/config
 mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.yml ~/.config/alacritty/alacritty.yml
-mkdir -pv /usr/local/share/highlight/themes/ && ln -s ~/dotfiles/highlight/mjw.theme /usr/local/share/highlight/themes/mjw.theme
+mkdir -pv /usr/local/share/highlight/themes/ && ln -sfv ~/dotfiles/highlight/mjw.theme /usr/local/share/highlight/themes/mjw.theme
 mkdir -pv ~/.config/ranger/colorschemes \
     && ln -sfv ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf \
     && ln -sfv ~/dotfiles/ranger/scope.sh ~/.config/ranger/scope.sh \
