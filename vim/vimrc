@@ -365,7 +365,6 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_fix_on_save = 1
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 let g:ale_python_flake8_options = '--select=F,C9 --max-complexity=10 --ignore=FI'
-let g:ale_javascript_prettier_options = '--trailing-comma all --print-width 90 --semi false'
 
 nnoremap <leader>al :ALELint<CR>
 nnoremap <leader>ai :ALEInfo<CR>
@@ -375,13 +374,16 @@ nnoremap <leader>ap :ALEPrevious<CR>
 
 let g:ale_linters = {
 \    'python': ['flake8'],
+\    'javascript': ['eslint'],
+\    'typescriptreact': ['eslint'],
+\    'css': ['eslint'],
 \}
 
 let g:ale_fixers = {
-\    'python': ['isort', 'black'],
-\    'javascript': ['prettier'],
-\    'typescriptreact': ['prettier'],
-\    'css': ['prettier'],
+\    'python': ['isort', 'yapf'],
+\    'javascript': ['eslint'],
+\    'typescriptreact': ['eslint'],
+\    'css': ['eslint'],
 \}
 
 
