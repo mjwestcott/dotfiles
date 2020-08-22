@@ -33,6 +33,8 @@ brew install cmake
 brew install coreutils
 brew install ctags
 brew install devd
+brew install dhall
+brew install dhall-json
 brew install diff-so-fancy
 brew install fasd
 brew install git
