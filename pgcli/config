@@ -1,6 +1,4 @@
-# vi: ft=dosini
 [main]
-
 # Enables context sensitive auto-completion. If this is disabled the all
 # possible completions will be listed.
 smart_completion = True
@@ -109,7 +107,7 @@ vi = True
 # Possible values "STOP" or "RESUME"
 on_error = STOP
 
-# Set threshold for row limit prompt. Use 0 to disable prompt.
+# Set threshold for row limit. Use 0 to disable limiting.
 row_limit = 5000
 
 # Skip intro on startup and goodbye on exit
@@ -126,16 +124,18 @@ less_chatty = False
 # \# - "@" sign if logged in as superuser, '>' in other case
 # \n - Newline
 # \dsn_alias - name of dsn alias if -D option is used (empty otherwise)
-prompt = '\u@\h:\d> '
+# \x1b[...m - insert ANSI escape sequence
+# eg: prompt = '\x1b[35m\u@\x1b[32m\h:\x1b[36m\d>'
+prompt = "\u@\h:\d> "
 
 # Number of lines to reserve for the suggestion menu
 min_num_menu_lines = 4
 
 # Character used to left pad multi-line queries to match the prompt size.
-multiline_continuation_char = ''
+multiline_continuation_char = ""
 
 # The string used in place of a null value.
-null_string = '<null>'
+null_string = <null>
 
 # manage pager on startup
 enable_pager = True
@@ -143,44 +143,37 @@ enable_pager = True
 # Use keyring to automatically save and load password in a secure manner
 keyring = True
 
-# Custom colors for the completion menu, toolbar, etc.
 [colors]
-completion-menu.completion.current = 'bg:#ffffff #000000'
-completion-menu.completion = 'bg:#008888 #ffffff'
-completion-menu.meta.completion.current = 'bg:#44aaaa #000000'
-completion-menu.meta.completion = 'bg:#448888 #ffffff'
-completion-menu.multi-column-meta = 'bg:#aaffff #000000'
-scrollbar.arrow = 'bg:#003333'
-scrollbar = 'bg:#00aaaa'
-selected = '#ffffff bg:#6666aa'
-search = '#ffffff bg:#4444aa'
-search.current = '#ffffff bg:#44aa44'
-bottom-toolbar = 'bg:#222222 #aaaaaa'
-bottom-toolbar.off = 'bg:#222222 #888888'
-bottom-toolbar.on = 'bg:#222222 #ffffff'
-search-toolbar = 'noinherit bold'
-search-toolbar.text = 'nobold'
-system-toolbar = 'noinherit bold'
-arg-toolbar = 'noinherit bold'
-arg-toolbar.text = 'nobold'
-bottom-toolbar.transaction.valid = 'bg:#222222 #00ff5f bold'
-bottom-toolbar.transaction.failed = 'bg:#222222 #ff005f bold'
+completion-menu.completion.current = "bg:#ffffff #000000"
+completion-menu.completion = "bg:#008888 #ffffff"
+completion-menu.meta.completion.current = "bg:#44aaaa #000000"
+completion-menu.meta.completion = "bg:#448888 #ffffff"
+completion-menu.multi-column-meta = "bg:#aaffff #000000"
+scrollbar.arrow = "bg:#003333"
+scrollbar = "bg:#00aaaa"
+selected = "#ffffff bg:#6666aa"
+search = "#ffffff bg:#4444aa"
+search.current = "#ffffff bg:#44aa44"
+bottom-toolbar = "bg:#222222 #aaaaaa"
+bottom-toolbar.off = "bg:#222222 #888888"
+bottom-toolbar.on = "bg:#222222 #ffffff"
+search-toolbar = noinherit bold
+search-toolbar.text = nobold
+system-toolbar = noinherit bold
+arg-toolbar = noinherit bold
+arg-toolbar.text = nobold
+bottom-toolbar.transaction.valid = "bg:#222222 #00ff5f bold"
+bottom-toolbar.transaction.failed = "bg:#222222 #ff005f bold"
 
 # style classes for colored table output
-output.header = "bold"
+output.header = bold
 output.odd-row = ""
 output.even-row = ""
 
-# Named queries are queries you can execute by name.
 [named queries]
 
-# DSN to call by -D option
 [alias_dsn]
-# example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
 
-# Format for number representation
-# for decimal "d" - 12345678, ",d" - 12,345,678
-# for float "g" - 123456.78, ",g" - 123,456.78
 [data_formats]
-decimal = "d"
-float = ".15f"
+decimal = d
+float = .15f
