@@ -88,16 +88,12 @@ brew install kafkacat
 brew install scala
 brew install elasticsearch
 
-# k8s
-brew cask install virtualbox
-brew cask install minikube
+# Kubernetes
+brew cask install docker
+brew install kind
+brew install k3d
 brew install kubectl
 brew install kubectx
-
-# Docker
-brew cask install docker
-brew install docker-completion
-brew install docker-compose-completion
 
 # Python Poetry
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
