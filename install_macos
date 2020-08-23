@@ -48,9 +48,7 @@ brew install httpie
 brew install hub
 brew install jq
 brew install macvim --HEAD
-brew install memcached
 brew install modd
-brew install mysql
 brew install node
 brew install openssl
 brew install pipenv
@@ -58,7 +56,6 @@ brew install postgresql
 brew install python
 brew install pyenv
 brew install r
-brew install rabbitmq
 brew install ranger
 brew install rbenv
 brew install reattach-to-user-namespace
