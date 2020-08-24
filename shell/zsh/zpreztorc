@@ -23,6 +23,8 @@ zstyle ':prezto:load' pmodule \
   'python' \
   'git' \
   'homebrew' \
+  'docker' \
+  'kubernetes' \
   'contrib-prompt' \
   'prompt' \
   'syntax-highlighting' \
