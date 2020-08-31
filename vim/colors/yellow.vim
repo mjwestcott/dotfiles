@@ -124,9 +124,9 @@ call s:h("PmenuSbar",    { "fg": s:Dark_Yellow, "bg": s:Black       })
 call s:h("PmenuThumb",   { "fg": s:Dark_Yellow, "bg": s:Black       })
 call s:h("FoldColumn",   { "fg": s:Pink,        "bg": s:Black2      })
 call s:h("Folded",       { "fg": s:Pink,        "bg": s:Black2      })
-call s:h('TabLineFill',  {                      "bg": s:Dark_Grey   })
-call s:h('TabLineSel',   { "fg": s:Light_Blue,  "bg": s:Dark_Grey   })
-call s:h('TabLine',      { "fg": s:Grey,        "bg": s:Dark_Grey   })
+call s:h("TabLineFill",  {                      "bg": s:Dark_Grey   })
+call s:h("TabLineSel",   { "fg": s:Light_Blue,  "bg": s:Dark_Grey   })
+call s:h("TabLine",      { "fg": s:Grey,        "bg": s:Dark_Grey   })
 call s:h("SpellBad",     { "fg": s:Black,       "bg": s:Red         })
 call s:h("SpellCap",     { "fg": s:Black,       "bg": s:Pale_Yellow })
 call s:h("SpellRare",    { "fg": s:Black,       "bg": s:Light_Blue  })
@@ -156,6 +156,14 @@ hi link pythonBuiltinObj Number
 hi link pythonNone       Number
 hi link pythonBoolean    Boolean
 hi link pythonImport     Statement
+
+"------------------------------------------------------------------------------
+" Rust
+
+call s:h("rustDerive",    { "fg": s:Dark_Yellow })
+call s:h("rustAttribute", { "fg": s:Dark_Yellow })
+hi link rustSelf        Normal
+hi link rustEnumVariant Normal
 
 "------------------------------------------------------------------------------
 " Go
