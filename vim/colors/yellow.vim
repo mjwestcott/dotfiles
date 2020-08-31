@@ -74,7 +74,7 @@ call s:h("Type",         { "fg": s:Pale_Grey })
 call s:h("PreProc",      { "fg": s:Pale_Grey })
 call s:h("MatchParen",   { "fg": s:Pale_Yellow, "bg": s:Grey })
 call s:h("CursorLineNr", { "fg": s:Pale_Grey })
-call s:h("Underlined",   { "fg": s:White, "gui": "underline", "cterm": "underline"})
+call s:h("Underlined",   { "fg": s:Pale_Grey, "gui": "underline", "cterm": "underline"})
 
 hi! link Boolean        Normal
 hi! link Number         Normal
@@ -164,6 +164,13 @@ call s:h("rustDerive",    { "fg": s:Dark_Yellow })
 call s:h("rustAttribute", { "fg": s:Dark_Yellow })
 hi link rustSelf        Normal
 hi link rustEnumVariant Normal
+
+"------------------------------------------------------------------------------
+" Dhall
+
+hi link dhallOperator     Special
+hi link dhallBrackets     Special
+hi link dhallSpecialLabel Special
 
 "------------------------------------------------------------------------------
 " Go

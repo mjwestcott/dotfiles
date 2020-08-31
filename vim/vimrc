@@ -394,6 +394,10 @@ let g:ale_fixers = {
 \    'css': ['eslint'],
 \}
 
+"------------------------------------------------------------------------------
+" dhall-vim (via polyglot)
+
+let g:dhall_format = 1
 
 "------------------------------------------------------------------------------
 " Turn off SQL completion to avoid error connected to 'dbext' plugin
@@ -500,6 +504,13 @@ let g:ycm_min_num_identifier_candidate_chars = 6
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_extra_conf_globlist = ['~/repos/*', '!~/*']
+let g:ycm_language_server = [
+\    {
+\        'name': 'dhall',
+\        'cmdline': ['dhall-lsp-server'],
+\        'filetypes': ['dhall'],
+\    },
+\]
 
 nnoremap <leader>g :YcmCompleter GoTo<CR>
 nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
