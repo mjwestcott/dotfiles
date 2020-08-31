@@ -1,5 +1,5 @@
 "------------------------------------------------------------------------------
-" vimrc intended for Python, Ruby, Go, Clojure, OCaml, Javascript
+" vimrc intended for Python, Rust, JS/TS, Go, Ruby, Clojure, OCaml
 " by Matt Westcott (mattwestcott.co.uk)
 
 set nocompatible
@@ -24,6 +24,7 @@ Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'Raimondi/delimitMate'
+Plug 'rust-lang/rust.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
@@ -37,7 +38,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --gocode-completer --clang-completer --ts-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --rust-completer --ts-completer --gocode-completer'}
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
 call plug#end()
@@ -187,6 +188,11 @@ autocmd FileType lisp,clojure,scheme
 
 autocmd FileType python,rst
     \ setlocal textwidth=88 |
+    \ setlocal shiftwidth=4 |
+    \ setlocal expandtab
+
+autocmd FileType rust
+    \ setlocal textwidth=99 |
     \ setlocal shiftwidth=4 |
     \ setlocal expandtab
 
@@ -374,6 +380,7 @@ nnoremap <leader>ap :ALEPrevious<CR>
 
 let g:ale_linters = {
 \    'python': ['flake8'],
+\    'rust': ['cargo', 'rls'],
 \    'javascript': ['eslint'],
 \    'typescriptreact': ['eslint'],
 \    'css': ['eslint'],
@@ -381,6 +388,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \    'python': ['isort', 'yapf'],
+\    'rust': ['rustfmt'],
 \    'javascript': ['eslint'],
 \    'typescriptreact': ['eslint'],
 \    'css': ['eslint'],
@@ -411,11 +419,6 @@ let g:indentLine_fileTypeExclude = ['markdown']
 let g:highlightedyank_highlight_duration = 50
 
 "------------------------------------------------------------------------------
-" rust.vim
-
-let g:rustfmt_autosave = 1
-
-"------------------------------------------------------------------------------
 " Clang-format
 
 noremap <leader>cf :pyf ~/dotfiles/vim/misc/clang-format.py<CR>
@@ -425,7 +428,7 @@ noremap <leader>cf :pyf ~/dotfiles/vim/misc/clang-format.py<CR>
 
 let g:markdown_syntax_conceal = 0
 let g:markdown_fenced_languages = [
-\    'python', 'go', 'c', 'clojure', 'haskell',
+\    'python', 'rust', 'go', 'c', 'clojure', 'haskell',
 \    'bash=sh', 'zsh', 'html', 'css', 'javascript'
 \]
 
