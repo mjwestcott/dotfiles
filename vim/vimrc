@@ -196,6 +196,10 @@ autocmd FileType rust
     \ setlocal shiftwidth=4 |
     \ setlocal expandtab
 
+autocmd FileType dhall
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab
+
 autocmd FileType ocaml
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
@@ -504,13 +508,6 @@ let g:ycm_min_num_identifier_candidate_chars = 6
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_extra_conf_globlist = ['~/repos/*', '!~/*']
-let g:ycm_language_server = [
-\    {
-\        'name': 'dhall',
-\        'cmdline': ['dhall-lsp-server'],
-\        'filetypes': ['dhall'],
-\    },
-\]
 
 nnoremap <leader>g :YcmCompleter GoTo<CR>
 nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
