@@ -176,28 +176,31 @@ autocmd FileType cpp
     \ setlocal shiftwidth=2 |
     \ setlocal tabstop=4
 
+autocmd FileType dhall
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab
+
 autocmd FileType go
     \ setlocal shiftwidth=8 |
     \ setlocal noexpandtab
 
-autocmd FileType html
-    \ setlocal shiftwidth=2
+autocmd FileType html,css,javascript,typescriptreact
+    \ setlocal textwidth=90 |
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab
 
 autocmd FileType lisp,clojure,scheme
     \ setlocal shiftwidth=2
 
+autocmd FileType markdown.mdx
+    \ setlocal textwidth=80 |
+    \ setlocal shiftwidth=2 |
+    \ setlocal expandtab |
+    \ setlocal conceallevel=0
+
 autocmd FileType python,rst
     \ setlocal textwidth=88 |
     \ setlocal shiftwidth=4 |
-    \ setlocal expandtab
-
-autocmd FileType rust
-    \ setlocal textwidth=99 |
-    \ setlocal shiftwidth=4 |
-    \ setlocal expandtab
-
-autocmd FileType dhall
-    \ setlocal shiftwidth=2 |
     \ setlocal expandtab
 
 autocmd FileType ocaml
@@ -208,9 +211,9 @@ autocmd FileType ruby
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
 
-autocmd FileType html,css,javascript,typescriptreact
-    \ setlocal textwidth=90 |
-    \ setlocal shiftwidth=2 |
+autocmd FileType rust
+    \ setlocal textwidth=99 |
+    \ setlocal shiftwidth=4 |
     \ setlocal expandtab
 
 autocmd FileType sh
@@ -219,12 +222,6 @@ autocmd FileType sh
 autocmd FileType sql
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
-
-autocmd FileType markdown.mdx
-    \ setlocal textwidth=80 |
-    \ setlocal shiftwidth=2 |
-    \ setlocal expandtab |
-    \ setlocal conceallevel=0
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
