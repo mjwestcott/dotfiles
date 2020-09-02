@@ -398,7 +398,7 @@ let g:ale_fixers = {
 "------------------------------------------------------------------------------
 " dhall-vim (via polyglot)
 
-let g:dhall_format = 1
+let g:dhall_format = 0
 
 "------------------------------------------------------------------------------
 " Turn off SQL completion to avoid error connected to 'dbext' plugin
