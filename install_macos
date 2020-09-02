@@ -126,6 +126,10 @@ if [[ ! -e ~/.zprezto ]]; then
 	&& popd || exit 1
 fi
 
+# Docker completion
+ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion ~/.zprezto/modules/completion/external/src/_docker
+ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion ~/.zprezto/modules/completion/external/src/_docker-compose
+
 # Tmux Package Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
