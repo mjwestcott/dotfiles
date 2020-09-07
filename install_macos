@@ -49,6 +49,8 @@ brew install httpie
 brew install hub
 brew install jq
 brew install macvim --HEAD
+brew install minio/stable/minio
+brew install minio/stable/mc
 brew install modd
 brew install node
 brew install openssl
