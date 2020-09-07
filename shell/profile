@@ -17,6 +17,7 @@ export GOPATH=$HOME/repos/go
 export HOMEBREW_NO_ANALYTICS=1
 export NEXT_TELEMETRY_DISABLED=1
 export SCARF_ANALYTICS=false
+export MEILI_NO_ANALYTICS=1
 
 # Path
 export PATH=$HOME/bin:$PATH
