@@ -13,12 +13,6 @@ export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
 export GOPATH=$HOME/repos/go
 
-# Analytics
-export HOMEBREW_NO_ANALYTICS=1
-export NEXT_TELEMETRY_DISABLED=1
-export SCARF_ANALYTICS=false
-export MEILI_NO_ANALYTICS=1
-
 # Path
 export PATH=$HOME/bin:$PATH
 export PATH=$PATH:/usr/local/bin
@@ -59,7 +53,6 @@ alias gh='hub browse'
 alias pr='hub pull-request'
 alias lg='lazygit'
 alias rd='redis-cli'
-
 
 # Networking
 alias up='ping 8.8.8.8'
@@ -251,3 +244,4 @@ function colours {
 
 # Source extra config
 [[ -f ~/dotfiles/private ]] && source ~/dotfiles/private
+[[ -f ~/dotfiles/shell/analytics ]] && source ~/dotfiles/shell/analytics
