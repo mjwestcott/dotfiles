@@ -130,6 +130,9 @@ fi
 ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion ~/.zprezto/modules/completion/external/src/_docker
 ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion ~/.zprezto/modules/completion/external/src/_docker-compose
 
+# Kind completion
+kind completion zsh > ~/.zprezto/modules/completion/external/src/_kind
+
 # Tmux Package Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
