@@ -43,6 +43,7 @@ brew install glances
 brew install gnupg
 brew install go
 brew install graphviz
+brew install helm
 brew install hexyl
 brew install highlight
 brew install httpie
