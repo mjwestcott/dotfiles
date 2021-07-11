@@ -80,8 +80,10 @@ brew install yq
 brew install youtube-dl
 brew install zsh
 
-brew cask install ngrok
-brew cask install alacritty
+brew install --cask anaconda
+brew install --cask ngrok
+brew install --cask alacritty
+brew install --cask gitify
 
 # Custom taps
 brew tap dbcli/tap
@@ -89,7 +91,7 @@ brew install litecli
 brew install pgcli
 
 # Java
-brew cask install homebrew/cask-versions/java8
+brew install --cask homebrew/cask-versions/java8
 brew install apache-spark
 brew install kafka
 brew install kafkacat
@@ -97,7 +99,7 @@ brew install scala
 brew install elasticsearch
 
 # Kubernetes
-brew cask install docker
+brew install --cask docker
 brew install kind
 brew install k3d
 brew install kubectl
@@ -144,7 +146,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Dotfiles
 cd ~/dotfiles && mkdir -pv backup
-for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/agignore; do
+for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/agignore conda/*; do
     file=$(basename "$path")
     [[ -e "$HOME/.$file" ]] && mv -v "$HOME/.$file" "backup/$file"
     ln -sfv "$HOME/dotfiles/$path" "$HOME/.$file"
