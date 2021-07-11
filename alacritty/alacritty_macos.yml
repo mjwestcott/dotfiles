@@ -127,7 +127,7 @@ font:
     style: Italic
 
   # Point size
-  size: 17.0
+  size: 16.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -533,7 +533,6 @@ key_bindings:
   # (macOS only)
   - { key: Key0,   mods: Command, action: ResetFontSize    }
   - { key: Equals, mods: Command, action: IncreaseFontSize }
-  - { key: Add,    mods: Command, action: IncreaseFontSize }
   - { key: Minus,  mods: Command, action: DecreaseFontSize }
   - { key: K,      mods: Command, action: ClearHistory     }
   - { key: K,      mods: Command, chars: "\x0c"            }
