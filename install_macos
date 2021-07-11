@@ -50,6 +50,7 @@ brew install httpie
 brew install hub
 brew install jq
 brew install jsonnet
+brew install lightgbm
 brew install macvim --HEAD
 brew install minio/stable/minio
 brew install minio/stable/mc
