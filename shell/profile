@@ -53,6 +53,7 @@ alias gh='hub browse'
 alias pr='hub pull-request'
 alias lg='lazygit'
 alias rd='redis-cli'
+alias cx='kubectx'
 
 # Networking
 alias up='ping 8.8.8.8'

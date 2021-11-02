@@ -44,6 +44,7 @@ SPACESHIP_PROMPT_ORDER=(
     git           # Git section (git_branch + git_status)
     venv          # virtualenv section
     conda         # Anaconda environment
+    kubecontext   # Kubectl context section
     line_sep      # Line break
     exit_code     # Exit code section
     jobs          # Background jobs indicator
@@ -98,6 +99,11 @@ SPACESHIP_AWS_PREFIX=""
 SPACESHIP_AWS_SUFFIX=" "
 SPACESHIP_AWS_SYMBOL=""
 SPACESHIP_AWS_COLOR="1"
+
+# KUBECTL
+SPACESHIP_KUBECONTEXT_PREFIX=""
+SPACESHIP_KUBECONTEXT_SUFFIX=""
+SPACESHIP_KUBECONTEXT_SYMBOL="☸️ "
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
