@@ -184,7 +184,7 @@ autocmd FileType go
     \ setlocal shiftwidth=8 |
     \ setlocal noexpandtab
 
-autocmd FileType html,css,javascript,typescriptreact
+autocmd FileType html,css,javascript,typescript,typescriptreact
     \ setlocal textwidth=90 |
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
@@ -222,6 +222,9 @@ autocmd FileType sh
 autocmd FileType sql
     \ setlocal shiftwidth=2 |
     \ setlocal expandtab
+
+autocmd FileType yaml
+    \ setlocal shiftwidth=2
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd FileType gitcommit setlocal spell! spelllang=en_gb
@@ -383,6 +386,7 @@ let g:ale_linters = {
 \    'python': ['flake8'],
 \    'rust': ['cargo', 'rls'],
 \    'javascript': ['eslint'],
+\    'typescript': ['eslint'],
 \    'typescriptreact': ['eslint'],
 \    'css': ['eslint'],
 \}
@@ -391,6 +395,7 @@ let g:ale_fixers = {
 \    'python': ['isort', 'black'],
 \    'rust': ['rustfmt'],
 \    'javascript': ['eslint'],
+\    'typescript': ['eslint'],
 \    'typescriptreact': ['eslint'],
 \    'css': ['eslint'],
 \}
