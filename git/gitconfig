@@ -2,6 +2,9 @@
         excludesfile = ~/.gitignore_global
         pager = diff-so-fancy | less --tabs=4 -RFX
 
+[init]
+        defaultBranch = main
+
 [user]
         name = Matt Westcott
         email = m.westcott@gmail.com
