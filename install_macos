@@ -69,6 +69,7 @@ brew install reattach-to-user-namespace
 brew install redis
 brew install rocksdb
 brew install shellcheck
+brew install sops
 brew install sqlite
 brew install terraform
 brew install tmux
@@ -89,6 +90,7 @@ brew install --cask gitify
 brew tap dbcli/tap
 brew install litecli
 brew install pgcli
+brew install cue-lang/tap/cue
 
 # Java
 brew install --cask homebrew/cask-versions/java8
@@ -102,6 +104,7 @@ brew install elasticsearch
 brew install --cask docker
 brew install kind
 brew install k3d
+brew install k9s
 brew install kubectl
 brew install kubectx
 
