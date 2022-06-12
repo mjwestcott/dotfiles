@@ -233,6 +233,7 @@ autocmd FileType gitconfig setlocal shiftwidth=8
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead \*.{md,mdwn,mkd,mkdn,mark\*} setf markdown
 autocmd BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
+autocmd BufNewFile,BufRead MLproject setf yaml
 
 "------------------------------------------------------------------------------
 " Mappings (see also Plugin section)
