@@ -85,6 +85,7 @@ brew install --cask anaconda
 brew install --cask ngrok
 brew install --cask alacritty
 brew install --cask gitify
+brew install --cask google-cloud-sdk
 
 # Custom taps
 brew tap dbcli/tap
