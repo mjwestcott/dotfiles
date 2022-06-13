@@ -22,7 +22,7 @@ elif [[ -s ~/dotfiles/backup ]]; then # Don't clobber an old backup
 fi
 
 # Homebrew
-[[ -z "$(command -v brew)" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+[[ -z "$(command -v brew)" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew update
 brew upgrade
 brew install ag
@@ -94,12 +94,10 @@ brew install pgcli
 brew install cue-lang/tap/cue
 
 # Java
-brew install --cask homebrew/cask-versions/java8
 brew install apache-spark
 brew install kafka
 brew install kafkacat
 brew install scala
-brew install elasticsearch
 
 # Kubernetes
 brew install --cask docker
@@ -110,23 +108,14 @@ brew install kubectl
 brew install kubectx
 
 # Python Poetry
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+curl -sSL https://install.python-poetry.org | python3 -
 
 # Rust config
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh \
     && source "$HOME/.cargo/env"
 
-# Jupyter
-mkdir -pv ~/repos/python/notebooks \
-    && cp ~/dotfiles/jupyter/Pipfile ~/repos/python/notebooks \
-    && cp ~/dotfiles/jupyter/imports.ipynb ~/repos/python/notebooks \
-    && CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.8.2 \
-    && pushd ~/repos/python/notebooks \
-    && pipenv install --python ~/.pyenv/versions/3.8.2/bin/python \
-    && popd || exit 1
-
 # Ruby config
-rbenv install 2.7.1 && rbenv global 2.7.1
+rbenv install 3.1.2 && rbenv global 3.1.2
 
 # Prezto
 if [[ ! -e ~/.zprezto ]]; then
