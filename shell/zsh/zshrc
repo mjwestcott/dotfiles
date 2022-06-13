@@ -16,11 +16,17 @@ export SAVEHIST=100000
 export HISTFILE=~/.zhistory
 [[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
+# Setup homebrew
+eval $(/opt/homebrew/bin/brew shellenv)
+
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
+# Initialize fasd.
+eval "$(fasd --init auto)"
+
 # AWS CLI completion (assumes awscli installed by Homebrew).
-source /usr/local/share/zsh/site-functions/_aws
+source /opt/homebrew/share/zsh/site-functions
 
 # GCP completion and path.
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
@@ -34,6 +40,9 @@ test -r /Users/mattwestcott/.opam/opam-init/init.zsh && . /Users/mattwestcott/.o
 
 # Init pyenv
 eval "$(pyenv init -)"
+
+# Initalize rbenv.
+command -v rbenv > /dev/null 2>&1 && eval "$(rbenv init -)"
 
 # Spaceship prompt
 SPACESHIP_PROMPT_ADD_NEWLINE="true"

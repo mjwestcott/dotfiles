@@ -27,12 +27,6 @@ export PATH=$PATH:$GOPATH/bin                        # Go
 # https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
-# Initialize fasd.
-[[ -f ~/.fasd ]] && eval "$(fasd --init auto)"
-
-# Initalize rbenv.
-command -v rbenv > /dev/null 2>&1 && eval "$(rbenv init -)"
-
 # Aliases
 alias ..='cd ..'
 alias ...='cd ../..'
