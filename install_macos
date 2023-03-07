@@ -55,6 +55,7 @@ brew install macvim --HEAD
 brew install minio/stable/minio
 brew install minio/stable/mc
 brew install modd
+brew install neovim
 brew install nginx
 brew install node
 brew install openssl
@@ -145,6 +146,7 @@ for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/
     ln -sfv "$HOME/dotfiles/$path" "$HOME/.$file"
 done
 
+mkdir -pv ~/.config/nvim && ln -sfv ~/dotfiles/vim/init.vim ~/.config/nvim/init.vim
 mkdir -pv ~/.config/pgcli && ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
 mkdir -pv ~/.config/litecli && ln -sfv ~/dotfiles/litecli/config ~/.config/litecli/config
 mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.yml ~/.config/alacritty/alacritty.yml
