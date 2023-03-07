@@ -159,7 +159,9 @@ mkdir -pv ~/.config/ranger/colorschemes \
 
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
-    [[ ! -e ~/.vim/colors/$file ]] && ln -sfv "$HOME/dotfiles/vim/colors/$file" "$HOME/.vim/colors/$file"
+    [[ ! -e ~/.vim/colors/$file ]] \
+        && ln -sfv "$HOME/dotfiles/vim/colors/$file" "$HOME/.vim/colors/$file" \
+        && ln -sfv "$HOME/dotfiles/vim/colors/$file" "$HOME/.config/nvim/colors/$file"
 done
 
 cd ~/dotfiles/bin && mkdir -pv ~/bin
