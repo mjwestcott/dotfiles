@@ -351,3 +351,6 @@ hi link HelpExample     Statement
 hi link vimCommand      Statement
 hi link vimOption       Function
 hi link vimCommentTitle Function
+
+
+call s:h("IndentBlanklineChar", { "fg": s:Grey2, "bg": s:Black2 })
