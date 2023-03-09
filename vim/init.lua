@@ -20,19 +20,23 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
-  'github/copilot.vim',
+  'lewis6991/gitsigns.nvim',
+  'phha/zenburn.nvim',
+  'junegunn/seoul256.vim',
   {
-    'ellisonleao/gruvbox.nvim',
+    'github/copilot.vim',
+    event = "VimEnter",
+  },
+  {
+    'nvim-lualine/lualine.nvim',
     opts = {
-      bold = false,
-      italic = false,
-      contrast = 'soft',
-      overrides = {
-        IndentBlanklineChar = {  link = "GruvboxGrey" },
-        IndentBlanklineSpaceCharBlankline = { link = "GruvboxGrey" },
-        IndentBlanklineSpaceChar = { link = "GruvboxGrey" },
+      options = {
+        icons_enabled = false,
+        theme = 'zenburn',
+        component_separators = '|',
+        section_separators = '',
       },
-    }
+    },
   },
   {
     'neovim/nvim-lspconfig',
@@ -52,19 +56,6 @@ require('lazy').setup({
     },
   },
   { 'folke/which-key.nvim', opts = {} },
-  {
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-        untracked = { text = '' },
-      },
-    },
-  },
   {
     'lukas-reineke/indent-blankline.nvim',
     opts = {
@@ -94,21 +85,22 @@ require('lazy').setup({
 
 -- Setting options
 vim.o.background = 'dark'
-vim.api.nvim_command [[colorscheme gruvbox]]
+vim.api.nvim_command [[colorscheme zenburn]]
 vim.o.hlsearch = false
-vim.wo.number = true
 vim.o.mouse = 'a'
 vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.wo.signcolumn = 'auto'
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
+vim.wo.number = true
+vim.wo.signcolumn = 'auto'
+vim.cmd "set noshowmode"
 
 -- Basic Keymaps
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -339,6 +331,58 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
+}
+
+-- gitsigns setup
+local gitsigns = require 'gitsigns'
+
+gitsigns.setup {
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked = { text = '' },
+  },
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+    map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+    map('n', '<leader>hS', gs.stage_buffer)
+    map('n', '<leader>hu', gs.undo_stage_hunk)
+    map('n', '<leader>hR', gs.reset_buffer)
+    map('n', '<leader>hp', gs.preview_hunk)
+    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+    map('n', '<leader>tb', gs.toggle_current_line_blame)
+    map('n', '<leader>hd', gs.diffthis)
+    map('n', '<leader>hD', function() gs.diffthis('~') end)
+    map('n', '<leader>td', gs.toggle_deleted)
+
+    -- Text object
+    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+  end
 }
 
 -- vim: ts=2 sts=2 sw=2 et
