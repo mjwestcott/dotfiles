@@ -400,6 +400,8 @@ gitsigns.setup {
     changedelete = { text = '~' },
     untracked = { text = '' },
   },
+  numhl = false,
+  linehl = false,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
