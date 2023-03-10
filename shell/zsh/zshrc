@@ -17,7 +17,7 @@ export HISTFILE=~/.zhistory
 [[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
 # Setup homebrew
-eval $(/usr/local/bin/brew shellenv)
+eval $(/opt/homebrew/bin/brew shellenv)
 
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
@@ -25,11 +25,10 @@ eval $(/usr/local/bin/brew shellenv)
 # Initialize fasd.
 eval "$(fasd --init auto)"
 
-# AWS CLI completion (assumes awscli installed by Homebrew).
+# AWS and GCP CLI completion (assumes awscli installed by Homebrew).
 source /usr/local/share/zsh/site-functions
 
-# GCP completion and path.
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+# GCP path.
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 # Since it's provided by our prompt.
