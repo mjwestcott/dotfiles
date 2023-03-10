@@ -28,17 +28,6 @@ require('lazy').setup({
     event = "VimEnter",
   },
   {
-    'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'zenburn',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
-  {
     'neovim/nvim-lspconfig',
     dependencies = {
       'williamboman/mason.nvim',
@@ -86,6 +75,9 @@ require('lazy').setup({
 -- Setting options
 vim.o.background = 'dark'
 vim.api.nvim_command [[colorscheme zenburn]]
+vim.api.nvim_set_hl(0, 'StatusLine', { fg = "#5f7f5f", bg = "#353535" })
+vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = "#5f7f5f", bg = "#353535" })
+
 vim.o.hlsearch = false
 vim.o.mouse = 'a'
 vim.o.clipboard = 'unnamedplus'
@@ -98,9 +90,8 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
-vim.wo.number = true
+vim.wo.number = false
 vim.wo.signcolumn = 'auto'
-vim.cmd "set noshowmode"
 
 -- Basic Keymaps
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
