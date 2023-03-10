@@ -26,7 +26,6 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'Raimondi/delimitMate'
 Plug 'rust-lang/rust.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
 Plug 'sjl/vitality.vim'
 Plug 'tpope/vim-commentary'
@@ -515,21 +514,6 @@ let g:ycm_extra_conf_globlist = ['~/repos/*', '!~/*']
 nnoremap <leader>g :YcmCompleter GoTo<CR>
 nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>yc :YcmCompleter GoToDeclaration<CR>
-
-"------------------------------------------------------------------------------
-" UltiSnips
-
-let g:snips_author = 'Matt Westcott'
-let g:UltiSnipsExpandTrigger = "<C-e>"
-let g:UltiSnipsEditSplit = "vertical"
-let g:UltiSnipsListSnippets = "<C-x>"
-let g:ultisnips_python_style = "google"
-let g:ultisnips_python_quoting_style = "single"
-let g:ultisnips_python_triple_quoting_style = "double"
-let g:UltiSnipsJumpBackwardTrigger = "<Left>"
-let g:UltiSnipsJumpForwardTrigger = "<Right>"
-let g:UltiSnipsSnippetsDir = "~/dotfiles/vim/ultisnips"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/vim/ultisnips']
 
 "------------------------------------------------------------------------------
 " merlin (assumes an installation via OPAM)
