@@ -163,6 +163,10 @@ vim.keymap.set('', '<C-k>', '10k', { noremap = true })
 vim.keymap.set('', '<C-l>', 'w', { noremap = true })
 vim.keymap.set('', '<C-n>', '<C-^>', { noremap = true })
 vim.keymap.set('', '<C-b>', ':bn<CR>', { noremap = true })
+vim.keymap.set('n', '*', '*zzzv', { noremap = true })
+vim.keymap.set('n', '#', '#zzzv', { noremap = true })
+vim.keymap.set('n', 'n', 'nzzzv', { noremap = true })
+vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true })
 
 -- Copilot
 vim.keymap.set('i', '<C-j>', '<Plug>(copilot-next)', { silent = true })
