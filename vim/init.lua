@@ -17,12 +17,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  'sheerun/vim-polyglot',
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-  'tpope/vim-sleuth',
   'lewis6991/gitsigns.nvim',
   'phha/zenburn.nvim',
-  'junegunn/seoul256.vim',
   {
     'github/copilot.vim',
     event = "VimEnter",
