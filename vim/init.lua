@@ -17,6 +17,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  "airblade/vim-rooter",
   "sheerun/vim-polyglot",
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
@@ -214,6 +215,18 @@ require("telescope").setup({
   },
 })
 
+local function get_project_root()
+  local util = require("lspconfig.util")
+  local lsp_root = util.root_pattern(".git")(vim.fn.expand("%:p"))
+
+  if lsp_root then
+    return lsp_root
+  else
+    local rooter_root = vim.g.rooter_silent_chdir == 0 and vim.fn.getcwd() or nil
+    return rooter_root or vim.fn.getcwd()
+  end
+end
+
 -- Enable telescope fzf native, if installed
 pcall(require("telescope").load_extension, "fzf")
 
@@ -225,10 +238,20 @@ vim.keymap.set("n", ",/", function()
     previewer = false,
   }))
 end, { desc = "Fuzzily search in current buffer" })
-vim.keymap.set("n", ",t", require("telescope.builtin").find_files, { desc = "Search [F]iles" })
+vim.keymap.set("n", ",t", function()
+  local project_root = get_project_root()
+  require("telescope.builtin").find_files({
+    search_dirs = { project_root },
+  })
+end, { desc = "Search [F]iles" })
 vim.keymap.set("n", ",h", require("telescope.builtin").help_tags, { desc = "Search [H]elp" })
 vim.keymap.set("n", ",w", require("telescope.builtin").grep_string, { desc = "Search current [W]ord" })
-vim.keymap.set("n", ",g", require("telescope.builtin").live_grep, { desc = "Search by [G]rep" })
+vim.keymap.set("n", ",g", function()
+  local project_root = get_project_root()
+  require("telescope.builtin").live_grep({
+    search_dirs = { project_root },
+  })
+end, { desc = "Search by [G]rep" })
 vim.keymap.set("n", ",d", require("telescope.builtin").diagnostics, { desc = "Search [D]iagnostics" })
 
 -- Configure Treesitter
