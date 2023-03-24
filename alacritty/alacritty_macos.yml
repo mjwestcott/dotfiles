@@ -186,3 +186,7 @@ key_bindings:
 
   # To get # to work in vim.
   - { key: Key3,     mods: Alt,     chars: "#"                               }
+
+# https://stackoverflow.com/a/42461580
+  - { key: Return,   mods: Shift,   chars: "\x1b[13;2u"                      }
+  - { key: Return,   mods: Control, chars: "\x1b[13;5u"                      }
