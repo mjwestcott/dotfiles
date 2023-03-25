@@ -46,10 +46,10 @@ require("lazy").setup({
           prompt = " ",
         },
         openai_params = {
-          model = "gpt-3.5-turbo",
+          model = "gpt-4",
           frequency_penalty = 0,
           presence_penalty = 0,
-          max_tokens = 300,
+          max_tokens = 800,
           temperature = 0,
           top_p = 1,
           n = 1,
@@ -62,7 +62,9 @@ require("lazy").setup({
         },
         keymaps = {
           close = { "<C-c>", "<Esc>" },
+          submit = "<C-Enter>",
           yank_last = "<C-y>",
+          yank_last_code = "<C-k>",
           scroll_up = "<C-u>",
           scroll_down = "<C-d>",
           toggle_settings = "<C-o>",
