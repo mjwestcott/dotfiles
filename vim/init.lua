@@ -23,6 +23,8 @@ require("lazy").setup({
   "tpope/vim-rhubarb",
   "lewis6991/gitsigns.nvim",
   "phha/zenburn.nvim",
+  "windwp/nvim-autopairs",
+  "nvim-lualine/lualine.nvim",
   {
     "github/copilot.vim",
     event = "VimEnter",
@@ -84,7 +86,6 @@ require("lazy").setup({
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      { "j-hui/fidget.nvim", opts = {} },
       "folke/neodev.nvim",
     },
   },
@@ -139,6 +140,76 @@ vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#284f28" })
 vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#000000", bg = "#4f2828" })
 vim.api.nvim_set_hl(0, "DiffChange", { bg = "#353535" })
 vim.api.nvim_set_hl(0, "DiffText", { bg = "#5d6262" })
+vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#7f9f7f" })
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#5d6262", bg = "#353535" })
+vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = "#7f9f7f", bg = "#284f28" })
+vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = "#e0cf9f", bg = "#4f4f28" })
+vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = "#e89393", bg = "#4f2828" })
+
+-- Lualine customisation
+local custom_zenburn = require("lualine.themes.zenburn")
+custom_zenburn.normal.b.bg = "#353535"
+custom_zenburn.insert.b.bg = "#353535"
+custom_zenburn.visual.b.bg = "#353535"
+custom_zenburn.replace.b.bg = "#353535"
+custom_zenburn.command.b.bg = "#353535"
+custom_zenburn.normal.c.bg = "#353535"
+custom_zenburn.insert.c.bg = "#353535"
+custom_zenburn.visual.c.bg = "#353535"
+custom_zenburn.replace.c.bg = "#353535"
+custom_zenburn.command.c.bg = "#353535"
+custom_zenburn.normal.z.bg = custom_zenburn.normal.b.bg
+custom_zenburn.insert.z.bg = custom_zenburn.insert.b.bg
+custom_zenburn.visual.z.bg = custom_zenburn.visual.b.bg
+custom_zenburn.replace.z.bg = custom_zenburn.replace.b.bg
+custom_zenburn.command.z.bg = custom_zenburn.command.b.bg
+custom_zenburn.normal.z.fg = custom_zenburn.normal.b.fg
+custom_zenburn.insert.z.fg = custom_zenburn.insert.b.fg
+custom_zenburn.visual.z.fg = custom_zenburn.visual.b.fg
+custom_zenburn.replace.z.fg = custom_zenburn.replace.b.fg
+custom_zenburn.command.z.fg = custom_zenburn.command.b.fg
+
+require("lualine").setup({
+  options = {
+    icons_enabled = false,
+    theme = custom_zenburn,
+    component_separators = "",
+    section_separators = "",
+  },
+  sections = {
+    lualine_a = { {
+      "mode",
+      fmt = function(str)
+        return str:sub(1, 1)
+      end,
+    } },
+    lualine_b = {
+      { "branch", padding = { left = 2, right = 1 }, color = { fg = "#7f9f7f" } },
+      { "filename", color = { fg = "#7f9f7f" } },
+      "diff",
+      "diagnostics",
+    },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {
+      { "location", color = { fg = "#7f9f7f" } },
+      { "progress", color = { fg = "#7f9f7f" }, padding = { left = 1, right = 0 } },
+    },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {},
+})
 
 vim.o.hlsearch = false
 vim.o.mouse = "a"
@@ -153,8 +224,9 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = "menuone,noselect"
 vim.o.termguicolors = true
 vim.o.expandtab = true
-vim.wo.number = false
-vim.wo.signcolumn = "auto"
+vim.o.showmode = false
+vim.wo.number = true
+vim.wo.signcolumn = "no"
 
 -- Basic Keymaps
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
@@ -365,6 +437,9 @@ local servers = {
 -- Setup neovim lua configuration
 require("neodev").setup()
 
+-- Setup autopairs
+require("nvim-autopairs").setup()
+
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -388,6 +463,7 @@ mason_lspconfig.setup_handlers({
     })
   end,
 })
+
 local null_ls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -470,7 +546,8 @@ gitsigns.setup({
     changedelete = { text = "~" },
     untracked = { text = "" },
   },
-  numhl = false,
+  signcolumn = false,
+  numhl = true,
   linehl = false,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
