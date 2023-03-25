@@ -1,4 +1,3 @@
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -57,6 +56,14 @@ require("lazy").setup({
     cond = function()
       return vim.fn.executable("make") == 1
     end,
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
