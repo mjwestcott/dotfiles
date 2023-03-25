@@ -39,13 +39,7 @@ require("lazy").setup({
   },
   { "jose-elias-alvarez/null-ls.nvim" },
   { "lewis6991/gitsigns.nvim" },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-      char = "┊",
-      show_trailing_blankline_indent = false,
-    },
-  },
+  { "lukas-reineke/indent-blankline.nvim" },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -124,4 +118,4 @@ require("custom.gitsigns")
 require("custom.lsp")
 require("custom.lint")
 require("custom.gpt")
-require("custom.colors")
+require("custom.ui")

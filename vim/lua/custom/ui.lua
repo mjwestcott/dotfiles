@@ -27,3 +27,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = highlight_group,
   pattern = "*",
 })
+
+-- Indent blankline
+require("indent_blankline").setup({
+  char = "┊",
+  show_trailing_blankline_indent = false,
+})
