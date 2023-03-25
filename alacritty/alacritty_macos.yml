@@ -12,7 +12,7 @@ window:
 font:
   normal:
     family: SF Mono
-    style: Light
+    style: Regular
 
   bold:
     family: SF Mono
