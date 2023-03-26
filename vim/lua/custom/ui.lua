@@ -16,9 +16,19 @@ vim.api.nvim_set_hl(0, "DiffChange", { bg = "#353535" })
 vim.api.nvim_set_hl(0, "DiffText", { bg = "#5d6262" })
 vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#7f9f7f" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "#5d6262", bg = "#353535" })
+vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#7f9f7f" })
 vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = "#7f9f7f", bg = "#284f28" })
+vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#e0cf9f" })
 vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = "#e0cf9f", bg = "#4f4f28" })
+vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#e89393" })
 vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = "#e89393", bg = "#4f2828" })
+vim.api.nvim_set_hl(0, "NeoTreeSymbolicLinkTarget", { link = "Operator" })
+vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { link = "Number" })
+vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { link = "Number" })
+vim.api.nvim_set_hl(0, "NeoTreeRootName", { link = "Macro" })
+vim.api.nvim_set_hl(0, "NeoTreeFilenameOpened", { bold = true })
+vim.api.nvim_set_hl(0, "NeoTreeDotfile", { link = "Comment" })
+vim.api.nvim_set_hl(0, "NeoTreeModified", { link = "String" })
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
@@ -46,7 +56,7 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSig
 require("neo-tree").setup({
   close_if_last_window = true,
   popup_border_style = "rounded",
-  enable_git_status = true,
+  enable_git_status = false,
   enable_diagnostics = true,
   open_files_do_not_replace_types = { "terminal", "trouble", "qf" },
   sort_case_insensitive = false,
@@ -71,7 +81,7 @@ require("neo-tree").setup({
       folder_closed = "",
       folder_open = "",
       folder_empty = "ﰊ",
-      default = "*",
+      default = " ",
       highlight = "NeoTreeFileIcon",
     },
     modified = {
@@ -118,17 +128,9 @@ require("neo-tree").setup({
       ["l"] = "focus_preview",
       ["S"] = "open_split",
       ["s"] = "open_vsplit",
-      -- ["S"] = "split_with_window_picker",
-      -- ["s"] = "vsplit_with_window_picker",
       ["t"] = "open_tabnew",
-      -- ["<cr>"] = "open_drop",
-      -- ["t"] = "open_tab_drop",
-      ["w"] = "open_with_window_picker",
-      --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
       ["C"] = "close_node",
-      -- ['C'] = 'close_all_subnodes',
       ["z"] = "close_all_nodes",
-      --["Z"] = "expand_all_nodes",
       ["a"] = {
         "add",
         config = {
@@ -154,9 +156,9 @@ require("neo-tree").setup({
   filesystem = {
     filtered_items = {
       visible = false,
-      hide_dotfiles = true,
+      hide_dotfiles = false,
       hide_gitignored = true,
-      hide_hidden = true,
+      hide_hidden = false,
       hide_by_name = {
         --"node_modules"
       },
