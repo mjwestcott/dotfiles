@@ -2,6 +2,7 @@
 vim.o.background = "dark"
 vim.api.nvim_command([[colorscheme zenburn]])
 
+vim.api.nvim_set_hl(0, "Boolean", { link = "Number" })
 vim.api.nvim_set_hl(0, "StatusLine", { fg = "#5f7f5f", bg = "#353535" })
 vim.api.nvim_set_hl(0, "StatusLineNC", { fg = "#5d6262", bg = "#353535" })
 vim.api.nvim_set_hl(0, "gitcommitSummary", { fg = "#dcdccc" })

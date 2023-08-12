@@ -6,6 +6,8 @@ require("telescope").setup({
         ["<C-u>"] = false,
         ["<C-d>"] = false,
         ["<esc>"] = require("telescope.actions").close,
+        ["<Tab>"] = require("telescope.actions").cycle_history_next,
+        ["<S-Tab>"] = require("telescope.actions").cycle_history_prev,
       },
     },
   },
@@ -48,7 +50,7 @@ vim.keymap.set("n", ",w", function()
     search_dirs = { project_root },
   })
 end, { desc = "Search current [W]ord" })
-vim.keymap.set("n", ",g", function()
+vim.keymap.set("n", "<leader><leader>", function()
   local project_root = get_project_root()
   require("telescope.builtin").live_grep({
     search_dirs = { project_root },

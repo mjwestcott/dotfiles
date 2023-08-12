@@ -8,9 +8,27 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
   end
 
+  -- Custom go to definition function
+  local function goto_definition_centered()
+    local params = vim.lsp.util.make_position_params()
+    local method = "textDocument/definition"
+
+    local function handle_result(_, result, ctx)
+      if not result then
+        print("No definition found")
+        return
+      end
+
+      vim.lsp.handlers[method](nil, result, ctx)
+      vim.cmd("normal! zz")
+    end
+
+    vim.lsp.buf_request(0, method, params, handle_result)
+  end
+
+  nmap("gd", goto_definition_centered, "[G]oto [D]efinition")
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
   nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-  nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
   nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
   nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")

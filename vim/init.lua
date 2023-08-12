@@ -19,7 +19,7 @@ require("lazy").setup({
   { "airblade/vim-rooter" },
   { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
   { "folke/which-key.nvim", opts = {} },
-  { "github/copilot.vim", event = "VimEnter" },
+  { "github/copilot.vim" },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -115,6 +115,15 @@ vim.keymap.set("n", "*", "*zzzv", { noremap = true })
 vim.keymap.set("n", "#", "#zzzv", { noremap = true })
 vim.keymap.set("n", "n", "nzzzv", { noremap = true })
 vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
+vim.keymap.set("", "Q", "gw", { noremap = true })
+vim.keymap.set("n", "Q", "gwap", { noremap = true })
+
+vim.cmd([[
+  augroup python
+    autocmd!
+    autocmd FileType python setlocal tw=88
+  augroup END
+]])
 
 -- Import customisations
 require("custom.statusline")
