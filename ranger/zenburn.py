@@ -42,7 +42,7 @@ class Zenburn(ColorScheme):
                 fg = 174
             if context.directory:
                 attr |= bold
-                fg = 223
+                fg = 4
             elif context.executable and not \
                     any((context.media, context.container,
                          context.fifo, context.socket)):
