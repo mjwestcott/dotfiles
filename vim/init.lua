@@ -38,7 +38,7 @@ require("lazy").setup({
   },
   { "jose-elias-alvarez/null-ls.nvim" },
   { "lewis6991/gitsigns.nvim" },
-  { "lukas-reineke/indent-blankline.nvim" },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
     "neovim/nvim-lspconfig",
     dependencies = {

@@ -42,9 +42,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Indent blankline
-require("indent_blankline").setup({
-  char = "┊",
-  show_trailing_blankline_indent = false,
+require("ibl").setup({
+  scope = { enabled = false },
+  indent = { char = "┊" },
+  whitespace = {
+    remove_blankline_trail = true,
+  },
 })
 
 -- Neo-tree
