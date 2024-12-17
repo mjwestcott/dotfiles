@@ -25,11 +25,9 @@ eval $(/opt/homebrew/bin/brew shellenv)
 # Initialize fasd.
 eval "$(fasd --init auto)"
 
-# AWS and GCP CLI completion (assumes awscli installed by Homebrew).
-source /usr/local/share/zsh/site-functions
-
 # GCP path.
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
 # Since it's provided by our prompt.
 export VIRTUAL_ENV_DISABLE_PROMPT=1
