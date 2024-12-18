@@ -82,6 +82,7 @@ brew install websocat
 brew install wget
 brew install yarn
 brew install yq
+brew install yqrashawn/goku/goku
 brew install youtube-dl
 brew install zsh
 
@@ -161,6 +162,7 @@ mkdir -pv ~/.config/ranger/colorschemes \
     && ln -sfv ~/dotfiles/ranger/scope.sh ~/.config/ranger/scope.sh \
     && ln -sfv ~/dotfiles/ranger/rifle.conf ~/.config/ranger/rifle.conf \
     && ln -sfv ~/dotfiles/ranger/zenburn.py ~/.config/ranger/colorschemes/zenburn.py
+ln -sfv ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
