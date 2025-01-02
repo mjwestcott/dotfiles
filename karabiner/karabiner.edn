@@ -1,19 +1,15 @@
 {
- :applications {
-  :alacritty ["io.alacritty"]
-  :slack ["com.tinyspeck.slackmacgap"]
-  :vscode ["com.microsoft.VSCode"]
-  :cursor ["com.todesktop.230313mzl4w4u92"]
-  :spotify ["com.spotify.client"]
-  :chrome ["com.google.Chrome"]
+ :devices {
+  :keychron-k3 [{:product_id 2609 :vendor_id 13364}]
+  :mx-mechanical [{:product_id 45933 :vendor_id 1133}]
  }
  :layers {
   :caps-mode {:key :caps_lock}
  }
  :main [
-  {:des "Caps Mode (Alacritty)"
+  {:des "Caps Mode"
    :rules [
-    [:condi :caps-mode :alacritty]
+    [:condi :caps-mode]
     ; Long
     [:##j :b]         ; Colemak N -> B
     [:##k :!Tj]       ; Colemak E -> Control-J
@@ -29,12 +25,21 @@
     ; Buffers
     [:##n :!Tn] ; Colemak K -> Control-N
    ]}
-  {:des "Colemak-DH"
+  {:des "Colemak-DH (default)"
    :rules [
+    [:condi :!keychron-k3]
     [:##non_us_backslash :grave_accent_and_tilde]
     [:##q :q][:##w :w][:##e :f][:##r :p][:##t :b][:##y :j][:##u :l][:##i :u][:##o :y][:##p :semicolon]
     [:##a :a][:##s :r][:##d :s][:##f :t][:##g :g][:##h :m][:##j :n][:##k :e][:##l :i][:##semicolon :o]
     [:##grave_accent_and_tilde :z][:##z :x][:##x :c][:##c :d][:##v :v][:##b :##non_us_backslash][:##n :k][:##m :h]
    ]}
-  ]
+  {:des "Colemak-DH (Keychron K3)"
+   :rules [
+    [:condi :keychron-k3]
+    [:##q :q][:##w :w][:##e :f][:##r :p][:##t :b][:##y :j][:##u :l][:##i :u][:##o :y][:##p :semicolon]
+    [:##a :a][:##s :r][:##d :s][:##f :t][:##g :g][:##h :m][:##j :n][:##k :e][:##l :i][:##semicolon :o]
+    [:##non_us_backslash :z][:##z :x][:##x :c][:##c :d][:##v :v][:##b :##non_us_backslash][:##n :k][:##m :h]
+   ]
+  }
+ ]
 }
