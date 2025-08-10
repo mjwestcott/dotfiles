@@ -1,22 +1,22 @@
 #!/bin/bash
 
-# Spaceship-style status line for Claude Code
-# Matches the user's zsh Spaceship prompt configuration
+# Starship-style status line for Claude Code
+# Matches the user's cross-shell Starship prompt configuration (migrated from Spaceship)
 
 input=$(cat)
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir')
 model_name=$(echo "$input" | jq -r '.model.display_name')
 
-# Colors (using ANSI codes to match Spaceship theme)
+# Colors (using ANSI codes to match Starship theme)
 RESET="\033[0m"
 BOLD="\033[1m"       # Bold text
-BLUE="\033[34m"      # Directory color (SPACESHIP_DIR_COLOR="4")
-GRAY="\033[37m"      # User/host and git branch color (SPACESHIP_*_COLOR="7")
-YELLOW="\033[33m"    # Git status color (SPACESHIP_GIT_STATUS_COLOR="3")
-GREEN="\033[32m"     # Virtual env color (SPACESHIP_VENV_COLOR="2")
-RED="\033[31m"       # AWS color (SPACESHIP_AWS_COLOR="1")
+BLUE="\033[34m"      # Directory color (blue bold in starship.toml)
+GRAY="\033[37m"      # User/host and git branch color (white bold in starship.toml)
+YELLOW="\033[33m"    # Git status color (yellow in starship.toml)
+GREEN="\033[32m"     # Virtual env color (green in starship.toml)
+RED="\033[31m"       # AWS color (red in starship.toml)
 
-# Get directory (full path like Spaceship with SPACESHIP_DIR_TRUNC="0")
+# Get directory (full path like Starship with truncation_length = 0)
 # Replace home directory with ~ for brevity
 dir="${current_dir/#$HOME/~}"
 

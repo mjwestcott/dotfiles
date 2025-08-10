@@ -1,6 +1,6 @@
 {
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline-spaceship.sh"
+    "command": "~/.claude/statusline.sh"
   }
 }
