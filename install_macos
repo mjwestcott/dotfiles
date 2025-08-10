@@ -37,7 +37,7 @@ brew install dhall
 brew install dhall-json
 brew install dhall-lsp-server
 brew install diff-so-fancy
-brew install fasd
+brew install starship
 brew install git
 brew install glances
 brew install gnupg
@@ -119,26 +119,13 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh \
 # Ruby config
 rbenv install 3.1.2 && rbenv global 3.1.2
 
-# Prezto
-if [[ ! -e ~/.zprezto ]]; then
-    git clone --recursive https://github.com/mjwestcott/prezto.git ~/.zprezto
-    git clone https://github.com/belak/prezto-contrib ~/.zprezto/contrib \
-	&& pushd ~/.zprezto/contrib \
-        && git submodule init \
-        && git submodule update \
-	&& popd || exit 1
+# Antidote (replaces Prezto)
+if [[ ! -e ~/.antidote ]]; then
+    git clone --depth=1 https://github.com/mattmc3/antidote.git ~/.antidote
 fi
 
 # Python Poetry
 pipx install poetry
-poetry completions zsh > ~/.zprezto/modules/completion/external/src/_poetry
-
-# Docker completion
-ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion ~/.zprezto/modules/completion/external/src/_docker
-ln -sfv /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion ~/.zprezto/modules/completion/external/src/_docker-compose
-
-# Kind completion
-kind completion zsh > ~/.zprezto/modules/completion/external/src/_kind
 
 # Tmux Package Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -151,12 +138,16 @@ for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/
     ln -sfv "$HOME/dotfiles/$path" "$HOME/.$file"
 done
 
+# Antidote plugins configuration
+ln -sfv ~/dotfiles/antidote/zsh_plugins.txt ~/.zsh_plugins.txt
+
 mkdir -pv ~/.config/nvim \
     && ln -sfv ~/dotfiles/vim/init.lua ~/.config/nvim/init.lua \
     && ln -sfv ~/dotfiles/vim/lua ~/.config/nvim/
 mkdir -pv ~/.config/pgcli && ln -sfv ~/dotfiles/pgcli/config ~/.config/pgcli/config
 mkdir -pv ~/.config/litecli && ln -sfv ~/dotfiles/litecli/config ~/.config/litecli/config
 mkdir -pv ~/.config/alacritty && ln -sfv ~/dotfiles/alacritty/alacritty_macos.toml ~/.config/alacritty/alacritty.toml
+mkdir -pv ~/.config && ln -sfv ~/dotfiles/starship/starship.toml ~/.config/starship.toml
 mkdir -pv ~/.config/ranger/colorschemes \
     && ln -sfv ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf \
     && ln -sfv ~/dotfiles/ranger/scope.sh ~/.config/ranger/scope.sh \
@@ -167,7 +158,7 @@ ln -sfv ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 # Claude config
 mkdir -pv ~/.claude
 ln -sfv ~/dotfiles/claude/settings.json ~/.claude/settings.json
-ln -sfv ~/dotfiles/claude/statusline-spaceship.sh ~/.claude/statusline-spaceship.sh
+ln -sfv ~/dotfiles/claude/statusline.sh ~/.claude/statusline.sh
 
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
