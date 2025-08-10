@@ -24,9 +24,6 @@ alias claude="~/.claude/local/claude"
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
-# Initialize fasd.
-eval "$(fasd --init auto)"
-
 # GCP path.
 source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"

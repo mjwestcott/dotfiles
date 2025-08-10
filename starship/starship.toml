@@ -72,12 +72,12 @@ style = "green"
 [aws]
 format = '[$profile]($style) '
 style = "red"
-symbol = ""
+symbol = "☁️ "
 
 [kubernetes]
 format = '[$symbol$context]($style)'
 style = "green"
-symbol = "☸️ "
+symbol = "⎈ "
 disabled = false
 
 [character]
