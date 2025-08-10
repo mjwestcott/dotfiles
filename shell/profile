@@ -49,6 +49,7 @@ alias lg='lazygit'
 alias rd='redis-cli'
 alias cx='kubectx'
 alias uuid='python -c "import uuid; print(uuid.uuid4().hex)"'
+alias cc='claude'
 
 # Networking
 alias up='ping 8.8.8.8'
