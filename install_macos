@@ -164,6 +164,11 @@ mkdir -pv ~/.config/ranger/colorschemes \
     && ln -sfv ~/dotfiles/ranger/zenburn.py ~/.config/ranger/colorschemes/zenburn.py
 ln -sfv ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 
+# Claude config
+mkdir -pv ~/.claude
+ln -sfv ~/dotfiles/claude/settings.json ~/.claude/settings.json
+ln -sfv ~/dotfiles/claude/statusline-spaceship.sh ~/.claude/statusline-spaceship.sh
+
 cd ~/dotfiles/vim/colors && mkdir -pv ~/.vim/colors
 for file in *; do
     [[ ! -e ~/.vim/colors/$file ]] \
