@@ -60,7 +60,7 @@ The shell profile includes a comprehensive git alias system with single-letter s
 Multiple fuzzy finder functions for enhanced workflow:
 - `,t` - Find and edit files
 - `,j` - Jump to directories  
-- `,a` - Search content with ag
+- `,a` - Search content with ripgrep
 - `,c` - Search git commits
 - `,b` - Checkout branches/tags
 

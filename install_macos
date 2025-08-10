@@ -25,7 +25,7 @@ fi
 [[ -z "$(command -v brew)" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew update
 brew upgrade
-brew install ag
+brew install ripgrep
 brew install awscli
 brew install bash
 brew install cloc
@@ -132,7 +132,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Dotfiles
 cd ~/dotfiles && mkdir -pv backup
-for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf ag/agignore conda/*; do
+for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf rg/rgignore conda/*; do
     file=$(basename "$path")
     [[ -e "$HOME/.$file" ]] && mv -v "$HOME/.$file" "backup/$file"
     ln -sfv "$HOME/dotfiles/$path" "$HOME/.$file"

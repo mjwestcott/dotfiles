@@ -4,10 +4,10 @@
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/repos/python
 export VIRTUALENVWRAPPER_PYTHON=$(which python)
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3,fg:7,fg+:7'
 export FZF_TMUX=0
-export AGIGNORE="$HOME/dotfiles/ag/agignore"
+# ripgrep uses .rgignore, .ignore, and .gitignore files automatically
 export PURE_CMD_MAX_EXEC_TIME=0
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
@@ -265,7 +265,7 @@ function fasd_vim {
 
 alias ,j='fzf_jump'
 alias ,t='fzf_vim'
-alias ,a='fzf_ag'
+alias ,a='fzf_rg'
 alias ,h='fzf_hidden'
 alias ,g='fzf_regex'
 alias ,l='fzf_locate'
@@ -275,33 +275,33 @@ alias ,m='fzf_chrome'
 
 function fzf_jump {
     local file
-    file=$(ag -p "$AGIGNORE" -g "" | fzf -q "${*}")
+    file=$(rg --files | fzf -q "${*}")
     [[ -n "$file" ]] && cd "$(dirname "$file")"
 }
 
 function fzf_vim {
     local file
-    file=$(ag -p "$AGIGNORE" -g "" | fzf -q "${*}")
+    file=$(rg --files | fzf -q "${*}")
     [[ -n "$file" ]] && vim "$file"
 }
 
-# Similar to fzf_vim, but show only hidden files (respecting agignore).
+# Similar to fzf_vim, but show only hidden files.
 function fzf_hidden {
     local file
-    file=$(ag --hidden -f -p "$AGIGNORE" -g "/\..+" --ignore "/.git" | fzf -q "${*}")
+    file=$(rg --hidden --files | fzf -q "${*}")
     [[ -n "$file" ]] && vim "$file"
 }
 
-function fzf_ag {
-    local tmp="$TMPDIR/fzf_ag"
-    ag "." | fzf -e -m -q "${*}" >| "$tmp"
+function fzf_rg {
+    local tmp="$TMPDIR/fzf_rg"
+    rg . | fzf -e -m -q "${*}" >| "$tmp"
     [[ -s "$tmp" ]] && vim -q "$tmp"
 }
 
-# Similar to fzf_ag, but pass the args through to ag as a regex and filter only the source text.
+# Similar to fzf_rg, but pass the args through to rg as a regex and filter only the source text.
 function fzf_regex {
-    local tmp="$TMPDIR/fzf_ag"
-    ag "${*}" --color | fzf -e -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. >| "$tmp"
+    local tmp="$TMPDIR/fzf_rg"
+    rg "${*}" --color=always | fzf -e -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. >| "$tmp"
     [[ -s "$tmp" ]] && vim -q "$tmp"
 }
 
