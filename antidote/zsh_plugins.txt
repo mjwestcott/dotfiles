@@ -1,0 +1,31 @@
+# .zsh_plugins.txt - antidote plugins configuration
+# Migrated from prezto - equivalent functionality
+
+# Completion system setup
+mattmc3/ez-compinit
+zsh-users/zsh-completions kind:fpath path:src
+
+# Core functionality (replaces prezto: environment, terminal, editor, history, directory, utility)
+belak/zsh-utils path:editor      # Key bindings and editor improvements (vi mode)
+belak/zsh-utils path:history     # History configuration
+belak/zsh-utils path:utility     # Cross-platform utilities
+belak/zsh-utils path:completion  # Completion system
+
+# Directory navigation (replaces prezto: directory, fasd)
+rupa/z                           # Smart directory jumping (fasd replacement)
+
+# Git functionality (replaces prezto: git)
+ohmyzsh/ohmyzsh path:plugins/git
+
+# Development tools (replaces prezto: python, homebrew, docker, kubernetes)
+ohmyzsh/ohmyzsh path:plugins/python
+ohmyzsh/ohmyzsh path:plugins/brew
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/kubectl
+
+# Fish-like enhancements (replaces prezto: syntax-highlighting, history-substring-search)
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+
+# Additional useful plugins
+zsh-users/zsh-autosuggestions     # Fish-like autosuggestions
