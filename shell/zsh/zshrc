@@ -3,12 +3,11 @@
 #
 
 # Source profile.
-[[ -e ~/dotfiles/shell/profile ]] && emulate sh -c 'source ~/dotfiles/shell/profile'
+[[ -e ~/dotfiles/shell/profile ]] && source ~/dotfiles/shell/profile
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# Source Antidote (replaces Prezto).
+source ~/.antidote/antidote.zsh
+antidote load ${ZDOTDIR:-~}/.zsh_plugins.txt
 
 setopt HIST_IGNORE_SPACE
 export HISTSIZE=100000
@@ -44,80 +43,8 @@ eval "$(pyenv init -)"
 # Initalize rbenv.
 command -v rbenv > /dev/null 2>&1 && eval "$(rbenv init -)"
 
-# Spaceship prompt
-SPACESHIP_PROMPT_ADD_NEWLINE="true"
-SPACESHIP_PROMPT_SEPARATE_LINE="true"
-
-SPACESHIP_PROMPT_ORDER=(
-    time          # Time stamps section
-    user          # Username section
-    host          # Hostname section
-    dir           # Current directory section
-    aws           # Amazon Web Services section
-    git           # Git section (git_branch + git_status)
-    venv          # virtualenv section
-    conda         # Anaconda environment
-    kubecontext   # Kubectl context section
-    line_sep      # Line break
-    exit_code     # Exit code section
-    jobs          # Background jobs indicator
-    char          # Prompt character
-)
-
-SPACESHIP_RPROMPT_ORDER=()
-
-# CHAR
-SPACESHIP_CHAR_SYMBOL="❯"
-SPACESHIP_CHAR_SUFFIX=" "
-SPACESHIP_CHAR_COLOR_SUCCESS="7"
-SPACESHIP_CHAR_COLOR_FAILURE="9"
-
-# TIME
-SPACESHIP_TIME_SHOW="false"
-SPACESHIP_TIME_PREFIX=""
-SPACESHIP_TIME_COLOR="7"
-
-# USER
-SPACESHIP_USER_PREFIX=""
-SPACESHIP_USER_SUFFIX=""
-
-# HOST
-SPACESHIP_HOST_PREFIX="@"
-SPACESHIP_HOST_SUFFIX=" "
-
-# DIR
-SPACESHIP_DIR_PREFIX=""
-SPACESHIP_DIR_TRUNC="0"
-SPACESHIP_DIR_TRUNC_REPO="false"
-SPACESHIP_DIR_COLOR="4"
-
-# GIT
-SPACESHIP_GIT_SYMBOL=""
-SPACESHIP_GIT_BRANCH_PREFIX=""
-SPACESHIP_GIT_BRANCH_COLOR="7"
-SPACESHIP_GIT_PREFIX=""
-SPACESHIP_GIT_SUFFIX=" "
-SPACESHIP_GIT_BRANCH_SUFFIX=""
-SPACESHIP_GIT_STATUS_PREFIX=""
-SPACESHIP_GIT_STATUS_SUFFIX=""
-SPACESHIP_GIT_STATUS_COLOR="3"
-
-# VENV
-SPACESHIP_VENV_PREFIX=""
-SPACESHIP_VENV_SUFFIX=" "
-SPACESHIP_VENV_COLOR="2"
-
-# AWS
-SPACESHIP_AWS_PREFIX=""
-SPACESHIP_AWS_SUFFIX=" "
-SPACESHIP_AWS_SYMBOL=""
-SPACESHIP_AWS_COLOR="1"
-
-# KUBECTL
-SPACESHIP_KUBECONTEXT_PREFIX=""
-SPACESHIP_KUBECONTEXT_SUFFIX=""
-SPACESHIP_KUBECONTEXT_SYMBOL="☸️ "
-SPACESHIP_KUBECONTEXT_COLOR="2"
+# Initialize Starship prompt (replaces Spaceship)
+eval "$(starship init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
