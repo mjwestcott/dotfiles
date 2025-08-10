@@ -1,5 +1,9 @@
 -- LSP settings.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+  -- Skip attaching keymaps for Copilot
+  if client.name == "GitHub Copilot" or client.name == "copilot" then
+    return
+  end
   local nmap = function(keys, func, desc)
     if desc then
       desc = "LSP: " .. desc
@@ -8,25 +12,14 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
   end
 
-  -- Custom go to definition function
-  local function goto_definition_centered()
-    local params = vim.lsp.util.make_position_params()
-    local method = "textDocument/definition"
-
-    local function handle_result(_, result, ctx)
-      if not result then
-        print("No definition found")
-        return
-      end
-
-      vim.lsp.handlers[method](nil, result, ctx)
+  -- Go to definition and center the screen
+  nmap("gd", function()
+    vim.lsp.buf.definition()
+    -- Center after a short delay to allow jump to complete
+    vim.defer_fn(function()
       vim.cmd("normal! zz")
-    end
-
-    vim.lsp.buf_request(0, method, params, handle_result)
-  end
-
-  nmap("gd", goto_definition_centered, "[G]oto [D]efinition")
+    end, 50)
+  end, "[G]oto [D]efinition")
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
   nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
   nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -72,14 +65,24 @@ local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
+  handlers = {
+    function(server_name)
+      require("lspconfig")[server_name].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = servers[server_name],
+      })
+    end,
+  },
 })
 
-mason_lspconfig.setup_handlers({
-  function(server_name)
-    require("lspconfig")[server_name].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    })
+-- Autocommand to attach keymaps when LSP attaches to a buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client then
+      on_attach(client, args.buf)
+    end
   end,
 })
