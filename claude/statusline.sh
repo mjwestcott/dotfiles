@@ -1,24 +1,32 @@
 #!/bin/bash
 
 # Starship-style status line for Claude Code
-# Matches the user's cross-shell Starship prompt configuration (migrated from Spaceship)
+# Matches the user's cross-shell Starship prompt configuration
 
 input=$(cat)
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir')
 model_name=$(echo "$input" | jq -r '.model.display_name')
 
-# Colors (using ANSI codes to match Starship theme)
+# Colors (using ANSI codes to match Starship theme - no bold)
 RESET="\033[0m"
-BOLD="\033[1m"       # Bold text
-BLUE="\033[34m"      # Directory color (blue bold in starship.toml)
-GRAY="\033[37m"      # User/host and git branch color (white bold in starship.toml)
+BLUE="\033[34m"      # Directory color (blue in starship.toml)
+WHITE="\033[37m"     # Git branch color (white in starship.toml)
 YELLOW="\033[33m"    # Git status color (yellow in starship.toml)
 GREEN="\033[32m"     # Virtual env color (green in starship.toml)
 RED="\033[31m"       # AWS color (red in starship.toml)
+GRAY="\033[90m"      # Model name color (bright-black/gray)
 
-# Get directory (full path like Starship with truncation_length = 0)
-# Replace home directory with ~ for brevity
-dir="${current_dir/#$HOME/~}"
+# Get directory (Starship style with truncation_length = 0)
+# Show ~ for home, relative path for subdirs, full path otherwise
+if [[ "$current_dir" == "$HOME" ]]; then
+    dir="~"
+elif [[ "$current_dir" == "$HOME"/* ]]; then
+    # Remove home prefix for subdirectories
+    dir="${current_dir#$HOME/}"
+else
+    # Full path for directories outside home
+    dir="$current_dir"
+fi
 
 # Get git info if in a git repository
 git_info=""
@@ -35,8 +43,8 @@ if command -v git >/dev/null 2>&1 && git -C "$current_dir" rev-parse --git-dir >
         git_status="${git_status}+"
     fi
     
-    # Format git info (no symbol prefix like SPACESHIP_GIT_SYMBOL="")
-    git_info=" ${BOLD}${GRAY}${branch}${RESET}${YELLOW}${git_status}${RESET}"
+    # Format git info
+    git_info=" ${WHITE}${branch}${RESET}${YELLOW}${git_status}${RESET}"
 fi
 
 # Get virtual environment info
@@ -58,11 +66,11 @@ if [[ -n "$AWS_PROFILE" ]]; then
     aws_info="${RED}${AWS_PROFILE}${RESET} "
 fi
 
-# Build the prompt line by line like Spaceship
+# Build the prompt line
 line1=""
 
-# Add directory (blue like SPACESHIP_DIR_COLOR="4")
-line1="${line1}${BOLD}${BLUE}${dir}${RESET}"
+# Add directory (blue to match starship)
+line1="${line1}${BLUE}${dir}${RESET}"
 
 # Add AWS info
 line1="${line1}${aws_info}"
