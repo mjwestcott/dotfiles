@@ -85,6 +85,7 @@ brew install yq
 brew install yqrashawn/goku/goku
 brew install youtube-dl
 brew install zsh
+brew install zoxide
 
 brew install --cask anaconda
 brew install --cask ngrok

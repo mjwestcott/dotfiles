@@ -102,5 +102,8 @@ fi
 # awscli completion (assumes awscli installed by homebrew)
 complete -C '/usr/local/bin/aws_completer' aws
 
+# Initialize zoxide (smarter cd)
+eval "$(zoxide init bash)"
+
 # Initialize Starship prompt
 eval "$(starship init bash)"

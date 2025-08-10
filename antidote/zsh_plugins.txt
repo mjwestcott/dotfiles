@@ -1,30 +1,29 @@
 # .zsh_plugins.txt - antidote plugins configuration
 # Migrated from prezto - equivalent functionality
 
-# Completion system setup
-mattmc3/ez-compinit
+# 1) Completions on fpath BEFORE compinit
 zsh-users/zsh-completions kind:fpath path:src
 
-# Core functionality (replaces prezto: environment, terminal, editor, history, directory, utility)
+# 2) Run compinit once
+mattmc3/ez-compinit
+
+# 3) Core functionality (replaces prezto: environment, terminal, editor, history, directory, utility)
 belak/zsh-utils path:editor      # Key bindings and editor improvements (vi mode)
 belak/zsh-utils path:history     # History configuration
 belak/zsh-utils path:utility     # Cross-platform utilities
-belak/zsh-utils path:completion  # Completion system
 
-# Directory navigation (replaces prezto: directory, fasd)
-rupa/z                           # Smart directory jumping (fasd replacement)
+# 4) Directory navigation (replaces prezto: directory, fasd)
+ajeetdsouza/zoxide               # Smarter cd with z compatibility (upgraded from rupa/z)
 
-# Git functionality (replaces prezto: git)
+# 5) Git functionality (replaces prezto: git)
 ohmyzsh/ohmyzsh path:plugins/git
 
-# Development tools (replaces prezto: python, homebrew, kubernetes)
+# 6) Development tools (replaces prezto: python, homebrew, kubernetes)
 ohmyzsh/ohmyzsh path:plugins/python
 ohmyzsh/ohmyzsh path:plugins/brew
 ohmyzsh/ohmyzsh path:plugins/kubectl
 
-# Fish-like enhancements (replaces prezto: syntax-highlighting, history-substring-search)
-zsh-users/zsh-syntax-highlighting
+# 7) Interactive goodies (order matters; syntax-highlighting LAST)
 zsh-users/zsh-history-substring-search
-
-# Additional useful plugins
-zsh-users/zsh-autosuggestions     # Fish-like autosuggestions
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting

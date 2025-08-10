@@ -9,6 +9,12 @@
 source ~/.antidote/antidote.zsh
 antidote load ${ZDOTDIR:-~}/.zsh_plugins.txt
 
+# Configure zsh-autosuggestions for better performance
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# Initialize zoxide (smarter cd)
+eval "$(zoxide init zsh)"
+
 setopt HIST_IGNORE_SPACE
 export HISTSIZE=100000
 export SAVEHIST=100000
