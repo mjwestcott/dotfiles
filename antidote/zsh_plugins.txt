@@ -17,10 +17,9 @@ rupa/z                           # Smart directory jumping (fasd replacement)
 # Git functionality (replaces prezto: git)
 ohmyzsh/ohmyzsh path:plugins/git
 
-# Development tools (replaces prezto: python, homebrew, docker, kubernetes)
+# Development tools (replaces prezto: python, homebrew, kubernetes)
 ohmyzsh/ohmyzsh path:plugins/python
 ohmyzsh/ohmyzsh path:plugins/brew
-ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/kubectl
 
 # Fish-like enhancements (replaces prezto: syntax-highlighting, history-substring-search)
