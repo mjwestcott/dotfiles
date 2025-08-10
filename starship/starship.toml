@@ -1,0 +1,121 @@
+add_newline = true
+
+format = """
+$time\
+$username\
+$hostname\
+$directory\
+$aws\
+$git_branch\
+$git_status\
+$python\
+$conda\
+$kubernetes\
+$line_break\
+$status\
+$jobs\
+$character"""
+
+right_format = ""
+
+[time]
+disabled = false
+format = '[$time]($style) '
+style = "bright-black"  # Gray color
+
+[username]
+format = '[$user]($style)'
+style_user = "white bold"
+style_root = "white bold"
+
+[hostname]
+format = '@[$hostname]($style) '
+style = "white bold"
+ssh_only = true
+
+[directory]
+format = '[$path]($style)'
+style = "blue"
+truncation_length = 0
+repo_root_style = "blue"
+
+[git_branch]
+format = '[$branch]($style)'
+style = "white"
+
+[git_status]
+format = '[$all_status]($style) '
+style = "yellow"
+conflicted = "="
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+up_to_date = ""
+untracked = "?"
+stashed = "$"
+modified = "*"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[python]
+format = '[$virtualenv]($style) '
+style = "green"
+detect_extensions = []
+detect_files = []
+detect_folders = []
+
+[conda]
+format = '[$environment]($style) '
+style = "green"
+
+[aws]
+format = '[$profile]($style) '
+style = "red"
+symbol = ""
+
+[kubernetes]
+format = '[$symbol$context]($style)'
+style = "green"
+symbol = "☸️ "
+disabled = false
+
+[character]
+success_symbol = '[❯](white)'
+error_symbol = '[❯](bright-red)'
+
+[status]
+format = '[$status]($style) '
+style = "red bold"
+disabled = false
+
+[jobs]
+format = '[$number]($style) '
+style = "blue"
+
+[cmd_duration]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[package]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[golang]
+disabled = true
+
+[java]
+disabled = true
+
+[docker_context]
+disabled = true
