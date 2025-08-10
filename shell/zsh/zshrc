@@ -19,6 +19,9 @@ export HISTFILE=~/.zhistory
 # Setup homebrew
 eval $(/opt/homebrew/bin/brew shellenv)
 
+# Setup Claude Code
+alias claude="~/.claude/local/claude"
+
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
