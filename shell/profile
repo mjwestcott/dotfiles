@@ -95,7 +95,7 @@ function fasd_vim {
     if [[ -n "${*}" ]]; then
         LANG=C fasd -f -t -e vim -b viminfo "${*}"
     else
-        vim -c ":Telescope oldfiles"
+        vim -c "autocmd VimEnter * ++once Telescope oldfiles"
     fi
 }
 
