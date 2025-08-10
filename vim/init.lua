@@ -36,7 +36,8 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
     },
   },
-  { "nvimtools/none-ls.nvim",
+  {
+    "nvimtools/none-ls.nvim",
     dependencies = {
       "nvimtools/none-ls-extras.nvim",
       "gbprod/none-ls-shellcheck.nvim",
