@@ -54,16 +54,16 @@ else
     source "$HOME/.cargo/env"
 fi
 
-# Python Poetry
-if command -v pipx &> /dev/null; then
-    if pipx list | grep -q poetry; then
+# Python package management (install Poetry for legacy projects)
+if command -v uv &> /dev/null; then
+    if command -v poetry &> /dev/null; then
         info "Poetry already installed"
     else
-        info "Installing Poetry..."
-        pipx install poetry
+        info "Installing Poetry via uv..."
+        uv tool install poetry
     fi
 else
-    warn "pipx not found, skipping Poetry installation"
+    warn "Neither uv nor pipx found, skipping Poetry installation"
 fi
 
 # ============================================================================
@@ -165,6 +165,10 @@ create_symlink ~/dotfiles/ranger/scope.sh ~/.config/ranger/scope.sh
 create_symlink ~/dotfiles/ranger/rifle.conf ~/.config/ranger/rifle.conf
 create_symlink ~/dotfiles/ranger/zenburn.py ~/.config/ranger/colorschemes/zenburn.py
 
+# Bat (better cat)
+mkdir -p ~/.config/bat
+create_symlink ~/dotfiles/bat/config ~/.config/bat/config
+
 # Karabiner
 create_symlink ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 
@@ -172,7 +176,6 @@ create_symlink ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 mkdir -p ~/.claude
 create_symlink ~/dotfiles/claude/settings.json ~/.claude/settings.json
 create_symlink ~/dotfiles/claude/statusline.sh ~/.claude/statusline.sh
-
 
 # User bin directory
 mkdir -p ~/bin
