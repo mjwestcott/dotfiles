@@ -145,8 +145,7 @@ create_symlink ~/dotfiles/litecli/config ~/.config/litecli/config
 
 # Terminal and prompt
 mkdir -p ~/.config/alacritty
-create_symlink ~/dotfiles/alacritty/alacritty_macos.toml ~/.config/alacritty/alacritty.toml
-
+create_symlink ~/dotfiles/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 create_symlink ~/dotfiles/starship/starship.toml ~/.config/starship.toml
 
 # Ranger file manager
@@ -189,4 +188,4 @@ echo "  5. Set up GitHub SSH keys"
 echo "  6. Configure Git signing keys"
 echo "  7. Start any required Homebrew services"
 echo
-echo "To update in the future, simply run this script again."
+echo "To update in the future, run this script again."
