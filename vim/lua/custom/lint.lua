@@ -12,36 +12,41 @@ vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = t
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 
-local null_ls = require("null-ls")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-null_ls.setup({
-  on_attach = function(client, bufnr)
-    if client:supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr })
-        end,
-      })
-    end
-  end,
-  sources = {
-    null_ls.builtins.diagnostics.trail_space,
-    null_ls.builtins.completion.spell,
-    -- Python
-    require('none-ls.diagnostics.flake8'),
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.isort,
-    -- Typescript
-    require('none-ls.diagnostics.eslint'),
-    null_ls.builtins.formatting.prettier,
-    -- Shell
-    require("none-ls-shellcheck.diagnostics"),
-    require("none-ls-shellcheck.code_actions"),
-    -- Lua
-    null_ls.builtins.formatting.stylua,
+-- Setup conform.nvim for formatting
+require("conform").setup({
+  formatters_by_ft = {
+    python = { "black", "isort" },
+    javascript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    css = { "prettier" },
+    html = { "prettier" },
+    json = { "prettier" },
+    yaml = { "prettier" },
+    markdown = { "prettier" },
+    lua = { "stylua" },
+    sh = { "shfmt" },
   },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})
+
+-- Setup nvim-lint for diagnostics
+require("lint").linters_by_ft = {
+  python = { "flake8" },
+  javascript = { "eslint" },
+  javascriptreact = { "eslint" },
+  typescript = { "eslint" },
+  typescriptreact = { "eslint" },
+  sh = { "shellcheck" },
+}
+
+-- Auto-trigger linting
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
 })

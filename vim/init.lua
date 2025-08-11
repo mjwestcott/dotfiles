@@ -36,13 +36,8 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
     },
   },
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = {
-      "nvimtools/none-ls-extras.nvim",
-      "gbprod/none-ls-shellcheck.nvim",
-    },
-  },
+  { "stevearc/conform.nvim" },
+  { "mfussenegger/nvim-lint" },
   { "lewis6991/gitsigns.nvim" },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
