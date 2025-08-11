@@ -78,6 +78,8 @@ require("lazy").setup({
   { "tpope/vim-fugitive" },
   { "tpope/vim-rhubarb" },
   { "windwp/nvim-autopairs" },
+  { "windwp/nvim-ts-autotag" },
+  { "nvim-pack/nvim-spectre" },
 }, {})
 
 -- Setting options
@@ -118,6 +120,13 @@ vim.keymap.set("n", "n", "nzzzv", { noremap = true })
 vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
 vim.keymap.set("", "Q", "gw", { noremap = true })
 vim.keymap.set("n", "Q", "gwap", { noremap = true })
+vim.keymap.set("n", "<leader>S", ":Spectre<CR>", { noremap = true, desc = "Search and Replace" })
+vim.keymap.set("n", "<leader>sw", function()
+  require("spectre").open_visual({ select_word = true })
+end, { desc = "Search current word" })
+vim.keymap.set("v", "<leader>sw", function()
+  require("spectre").open_visual()
+end, { desc = "Search visual selection" })
 
 vim.cmd([[
   augroup python

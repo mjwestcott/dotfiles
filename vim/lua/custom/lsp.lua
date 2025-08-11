@@ -53,6 +53,9 @@ require("neodev").setup()
 -- Setup autopairs
 require("nvim-autopairs").setup()
 
+-- Setup autotag
+require("nvim-ts-autotag").setup()
+
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
