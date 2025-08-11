@@ -1,6 +1,6 @@
 [core]
         excludesfile = ~/.gitignore_global
-        pager = diff-so-fancy | less --tabs=4 -RFX
+        pager = delta
 
 [init]
         defaultBranch = main
@@ -10,9 +10,10 @@
         email = m.westcott@gmail.com
         signingkey = A8FCAE14CFA47FDD
 
-# Conditional includes for work/personal repositories
+# Conditional includes for work repositories
 [includeIf "gitdir/i:~/work/"]
         path = ~/.gitconfig-work
+
 [includeIf "gitdir/i:~/repos/work/"]
         path = ~/.gitconfig-work
 
@@ -45,9 +46,45 @@
         new = green
         whitespace = red reverse
 
-[color "diff-highlight"]
-        oldHighlight = red 52
-        newNormal = green
+[delta]
+        # Core settings
+        navigate = true                          # use n and N to move between diff sections
+        light = false                            # dark terminal background
+        syntax-theme = zenburn
+
+        # Layout
+        side-by-side = false                     # set to true for side-by-side diffs
+        line-numbers = true
+        line-numbers-zero-style = "dim syntax"
+        line-numbers-minus-style = "red"
+        line-numbers-plus-style = "green"
+
+        # File headers
+        file-style = "yellow bold"
+        file-decoration-style = "yellow ul"
+
+        # Hunk headers
+        hunk-header-style = "file line-number syntax"
+        hunk-header-decoration-style = "cyan box dim"
+
+        # Diff colors - subtle highlighting
+        minus-style = "normal #503030"          # Subtle red background
+        minus-emph-style = "normal #804848"     # Word-level changes - brighter red
+        plus-style = "normal #2a462a"           # Subtle green background
+        plus-emph-style = "normal #486048"      # Word-level changes - brighter green
+
+        # Commit info
+        commit-decoration-style = "yellow box"
+        commit-style = "yellow bold"
+
+[interactive]
+        diffFilter = delta --color-only
+
+[merge]
+        conflictstyle = diff3
+
+[diff]
+        colorMoved = default
         newHighlight = green 22
         oldNormal = red
 
