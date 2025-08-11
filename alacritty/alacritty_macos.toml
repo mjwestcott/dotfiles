@@ -26,7 +26,7 @@ color = "0xc0c0c0"
 index = 21
 
 [colors.bright]
-black = "0x6f6f6f"
+black = "0x8f8f8f"
 blue = "0x7cb8bb"
 cyan = "0x93e0e3"
 green = "0x5f7f5f"
