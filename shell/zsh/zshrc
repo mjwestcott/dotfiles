@@ -18,7 +18,8 @@ eval "$(zoxide init zsh)"
 setopt HIST_IGNORE_SPACE
 export HISTSIZE=100000
 export SAVEHIST=100000
-export HISTFILE=~/.zhistory
+mkdir -p "$XDG_STATE_HOME/zsh"
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
 [[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
 # Setup homebrew

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# XDG directories
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
 # Misc
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/repos/python
