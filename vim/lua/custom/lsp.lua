@@ -36,6 +36,9 @@ end
 local servers = {
   pyright = {},
   ts_ls = {},
+  bashls = {},
+  yamlls = {},
+  jsonls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
