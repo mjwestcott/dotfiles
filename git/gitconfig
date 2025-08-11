@@ -10,8 +10,15 @@
         email = m.westcott@gmail.com
         signingkey = A8FCAE14CFA47FDD
 
+# Conditional includes for work/personal repositories
+[includeIf "gitdir/i:~/work/"]
+        path = ~/.gitconfig-work
+[includeIf "gitdir/i:~/repos/work/"]
+        path = ~/.gitconfig-work
+
 [commit]
         gpgsign = true
+        verbose = true
 
 [alias]
         discard = checkout --
@@ -70,6 +77,9 @@
 
 [pull]
 	rebase = true
+
+[rebase]
+        updateRefs = true
 
 [url "git@github.com:"]
         insteadOf = "https://github.com/"
