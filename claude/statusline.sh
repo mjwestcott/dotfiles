@@ -14,7 +14,7 @@ WHITE="\033[37m"     # Git branch color (white in starship.toml)
 YELLOW="\033[33m"    # Git status color (yellow in starship.toml)
 GREEN="\033[32m"     # Virtual env color (green in starship.toml)
 RED="\033[31m"       # AWS color (red in starship.toml)
-GRAY="\033[90m"      # Model name color (bright-black/gray)
+GRAY="\033[38;2;143;143;143m"  # Model name color (RGB gray #8f8f8f)
 
 # Get directory (Starship style with truncation_length = 0)
 # Show ~ for home, relative path for subdirs, full path otherwise
