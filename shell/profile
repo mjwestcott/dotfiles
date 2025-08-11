@@ -5,9 +5,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 # Misc
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/repos/python
-export VIRTUALENVWRAPPER_PYTHON=$(which python)
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3,fg:7,fg+:7'
 export FZF_TMUX=0
@@ -18,13 +15,13 @@ export GOPATH=$HOME/repos/go
 
 # Path
 export PATH=$HOME/bin:$PATH
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/usr/local/opt/bin
-export PATH=/usr/local/opt/python/libexec/bin:$PATH     # Python
-export PATH=$HOME/.local/share/pypoetry/venv/bin:$PATH  # Poetry (pipx managed)
-export PATH=$PATH:$HOME/.local/bin                      # Haskell/Stack
 export PATH=$HOME/.cargo/bin:$PATH                      # Rust
-export PATH=$PATH:$GOPATH/bin                           # Go
+export PATH=$HOME/.local/share/pypoetry/venv/bin:$PATH  # Poetry
+export PATH=$HOME/.local/bin:$PATH                      # User binaries
+export PATH=/usr/local/opt/python/libexec/bin:$PATH     # Python
+export PATH=/usr/local/opt/bin:$PATH                    # Homebrew
+export PATH=/usr/local/bin:$PATH                        # System
+export PATH=$PATH:$GOPATH/bin                           # Go (append to avoid conflicts)
 
 # https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/

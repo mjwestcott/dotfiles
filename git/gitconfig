@@ -88,10 +88,6 @@
         newHighlight = green 22
         oldNormal = red
 
-[diff-so-fancy]
-        markEmptyLines = true
-        stripLeadingSymbols = true
-
 [diff]
         tool = vimdiff
         renames = copies  # Detect copies as well as renames.
