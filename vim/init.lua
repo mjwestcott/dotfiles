@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { "airblade/vim-rooter" },
-  { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
+  { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, cmd = "TroubleToggle" },
   { "folke/which-key.nvim", opts = {} },
   { "github/copilot.vim" },
   {
@@ -38,7 +38,7 @@ require("lazy").setup({
   },
   { "stevearc/conform.nvim" },
   { "mfussenegger/nvim-lint" },
-  { "lewis6991/gitsigns.nvim" },
+  { "lewis6991/gitsigns.nvim", event = { "BufReadPre", "BufNewFile" } },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
     "neovim/nvim-lspconfig",
@@ -69,12 +69,12 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    event = "VeryLazy",
     config = function()
       pcall(require("nvim-treesitter.install").update({ with_sync = true }))
     end,
   },
   { "phha/zenburn.nvim" },
-  { "sheerun/vim-polyglot" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-rhubarb" },
   { "windwp/nvim-autopairs" },
