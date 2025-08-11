@@ -118,7 +118,7 @@ create_symlink() {
 
 # Shell configs and other dotfiles
 cd ~/dotfiles
-for path in shell/bash/* shell/zsh/* readline/* git/* vim/*rc tmux/tmux.conf rg/rgignore conda/*; do
+for path in shell/bash/* shell/zsh/* readline/* git/* tmux/tmux.conf rg/rgignore conda/*; do
     if [[ -e "$path" ]]; then
         file=$(basename "$path")
         create_symlink "$HOME/dotfiles/$path" "$HOME/.$file"
@@ -164,16 +164,6 @@ mkdir -p ~/.claude
 create_symlink ~/dotfiles/claude/settings.json ~/.claude/settings.json
 create_symlink ~/dotfiles/claude/statusline.sh ~/.claude/statusline.sh
 
-# Vim/Neovim colors
-mkdir -p ~/.vim/colors
-mkdir -p ~/.config/nvim/colors
-cd ~/dotfiles/vim/colors
-for file in *; do
-    if [[ -f "$file" ]]; then
-        create_symlink "$HOME/dotfiles/vim/colors/$file" "$HOME/.vim/colors/$file"
-        create_symlink "$HOME/dotfiles/vim/colors/$file" "$HOME/.config/nvim/colors/$file"
-    fi
-done
 
 # User bin directory
 mkdir -p ~/bin
