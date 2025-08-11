@@ -97,6 +97,8 @@ vim.o.completeopt = "menuone,noselect"
 vim.o.termguicolors = true
 vim.o.expandtab = true
 vim.o.showmode = false
+vim.o.cursorline = true
+vim.o.undodir = vim.fn.stdpath("data") .. "/undo"
 vim.wo.number = true
 vim.wo.signcolumn = "no"
 
