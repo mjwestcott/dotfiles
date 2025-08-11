@@ -11,7 +11,6 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python)
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3,fg:7,fg+:7'
 export FZF_TMUX=0
-# ripgrep uses .rgignore, .ignore, and .gitignore files automatically
 export PURE_CMD_MAX_EXEC_TIME=0
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
@@ -21,15 +20,36 @@ export GOPATH=$HOME/repos/go
 export PATH=$HOME/bin:$PATH
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/local/opt/bin
-export PATH=/usr/local/opt/python/libexec/bin:$PATH  # Python
-export PATH=$HOME/.poetry/bin:$PATH                  # Poetry
-export PATH=/usr/local/opt/sphinx-doc/bin:$PATH      # Sphinx
-export PATH=$PATH:$HOME/.local/bin                   # Haskell/Stack
-export PATH=$HOME/.cargo/bin:$PATH                   # Rust
-export PATH=$PATH:$GOPATH/bin                        # Go
+export PATH=/usr/local/opt/python/libexec/bin:$PATH     # Python
+export PATH=$HOME/.local/share/pypoetry/venv/bin:$PATH  # Poetry (pipx managed)
+export PATH=$PATH:$HOME/.local/bin                      # Haskell/Stack
+export PATH=$HOME/.cargo/bin:$PATH                      # Rust
+export PATH=$PATH:$GOPATH/bin                           # Go
 
 # https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+
+# Modern CLI replacements
+alias ls='eza'
+alias ll='eza -l'
+alias la='eza -la'
+alias lt='eza --tree'
+alias tree='eza --tree --git-ignore'
+alias t='eza --tree -L 1'
+alias t2='eza --tree -L 2'
+alias t3='eza --tree -L 3'
+alias t4='eza --tree -L 4'
+alias cat='bat --paging=never'
+alias less='bat --paging=always'
+alias bathelp='bat --list-themes'  # List available themes
+alias find='fd'
+alias ps='procs'
+alias du='dust'
+alias top='btm'
+alias htop='btm'
+alias man='tldr'
+alias cloc='tokei'
+alias youtube-dl='yt-dlp'
 
 # Aliases
 alias ..='cd ..'
@@ -38,18 +58,13 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias grep='grep --color=auto'
 alias r='ranger'
-alias tree='tree --dirsfirst'
-alias t='tree -L 1'
-alias t2='tree -L 2'
-alias t3='tree -L 3'
-alias t4='tree -L 4'
 alias vi='vim'
 alias json='python -m json.tool'
 alias dj='python manage.py'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
-alias gh='hub browse'
-alias pr='hub pull-request'
+alias pr='gh pr create'
 alias lg='lazygit'
+alias gds='git -c delta.side-by-side=true diff'  # Git diff side-by-side
 alias rd='redis-cli'
 alias cx='kubectx'
 alias uuid='python -c "import uuid; print(uuid.uuid4().hex)"'
@@ -70,6 +85,13 @@ alias de='deactivate'
 alias wk='workon'
 alias pyc='find . -name "*.py[co]" -delete && find . -name "__pycache__" -delete'
 alias venv='. "$(poetry env info --path)/bin/activate"'
+
+# Modern Python package management
+alias uvi='uv pip install'
+alias uvs='uv pip sync'
+alias uvl='uv pip list'
+alias uvr='uv run'
+alias uvx='uvx'  # uv's pipx replacement
 
 # https://github.com/junegunn/gv.vim
 alias gv='vim -c ":GV"'
@@ -108,7 +130,7 @@ alias gcP='git cherry-pick --no-commit'
 alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
 alias gcs='git show'
-alias gcl='git-commit-lost'
+alias gcl='git reflog'
 alias gcom='git checkout master'
 
 # Conflict (C)
@@ -178,8 +200,8 @@ alias gpf='git push --force'
 alias gpa='git push --all'
 alias gpA='git push --all && git push --tags'
 alias gpt='git push --tags'
-alias gpc='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
-alias gpp='git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"'
+alias gpc='git push --set-upstream origin "$(git branch --show-current 2> /dev/null)"'
+alias gpp='git pull origin "$(git branch --show-current 2> /dev/null)" && git push origin "$(git branch --show-current 2> /dev/null)"'
 
 # Rebase (r)
 alias gr='git rebase'
@@ -247,27 +269,12 @@ function asp {
     export AWS_PROFILE=$1
 }
 
-# fasd
+# Modern navigation
 alias vim='nvim'
-alias j='fasd_jump'
-alias v='fasd_vim'
+alias j='z'
+alias v='vim -c "autocmd VimEnter * ++once Telescope oldfiles"' 
 
-function fasd_jump {
-    if [[ -n "${*}" ]]; then
-        fasd_cd -d "${*}"
-    else
-        cd $OLDPWD
-    fi
-}
-
-function fasd_vim {
-    if [[ -n "${*}" ]]; then
-        LANG=C fasd -f -t -e vim -b viminfo "${*}"
-    else
-        vim -c "autocmd VimEnter * ++once Telescope oldfiles"
-    fi
-}
-
+# FZF aliases
 alias ,j='fzf_jump'
 alias ,t='fzf_vim'
 alias ,a='fzf_rg'
