@@ -13,7 +13,7 @@ Configuration for vim, tmux, zsh, bash, and more. This is a comprehensive dotfil
 ```bash
 git clone https://github.com/mjwestcott/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./install_macos
+./install
 ```
 
 This will:
