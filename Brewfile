@@ -18,7 +18,10 @@ brew "zsh"
 
 # Search and file tools
 brew "ripgrep"                    # Modern grep replacement
-brew "tree"
+brew "fd"                         # Modern find replacement
+brew "fzf"                        # Fuzzy finder
+brew "eza"                        # Modern ls replacement
+brew "bat"                        # Cat with syntax highlighting
 brew "ranger"                     # File browser
 brew "highlight"                  # Syntax highlighting
 brew "hexyl"                      # Hex viewer
@@ -27,16 +30,18 @@ brew "hexyl"                      # Hex viewer
 brew "cmake"
 brew "ctags"
 brew "shellcheck"
-brew "cloc"                       # Count lines of code
+brew "tokei"                      # Fast code statistics
 brew "jq"                         # JSON processor
 brew "yq"                         # YAML processor
+brew "just"                       # Modern task runner
+brew "hyperfine"                  # Benchmarking tool
+brew "tldr"                       # Simplified man pages
 
 # Editors
 brew "neovim"
 
 # Terminal and shell
 brew "tmux"
-brew "reattach-to-user-namespace" # For tmux clipboard
 brew "starship"                   # Cross-shell prompt
 brew "zoxide"                     # Smarter cd
 
@@ -44,6 +49,8 @@ brew "zoxide"                     # Smarter cd
 brew "awscli"
 brew "terraform"
 brew "sops"                       # Encrypted file editor
+brew "lazydocker"                 # Docker TUI
+brew "dive"                       # Docker image explorer
 
 # Kubernetes
 brew "docker", cask: true
@@ -62,7 +69,8 @@ brew "pnpm"
 brew "python"
 brew "pipx"
 brew "pyenv"
-brew "r"
+brew "uv"                         # Fast Python package installer and resolver
+brew "ruff"                       # Fast Python linter/formatter
 
 # Java/Scala ecosystem
 brew "scala"
@@ -93,14 +101,16 @@ brew "nginx"
 brew "websocat"                   # WebSocket client
 
 # Git tools
-brew "hub"                        # GitHub CLI
-brew "diff-so-fancy"              # Better git diffs
+brew "gh"                         # GitHub CLI (official)
+brew "delta"                      # Better git diffs with syntax highlighting
 
 # Monitoring
-brew "glances"                    # System monitoring
+brew "bottom"                     # Modern system monitor
+brew "procs"                      # Modern ps replacement
+brew "dust"                       # Modern du replacement
 
 # Media tools
-brew "youtube-dl"
+brew "yt-dlp"                     # youtube-dl fork (actively maintained)
 brew "exiftool"
 
 # Other tools
