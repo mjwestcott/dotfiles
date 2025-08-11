@@ -1,29 +1,15 @@
-[colors]
 draw_bold_text_with_bright_colors = true
 
-[[colors.indexed_colors]]
-color = "0xdfaf8f"
-index = 16
-
-[[colors.indexed_colors]]
-color = "0x000000"
-index = 17
-
-[[colors.indexed_colors]]
-color = "0x404040"
-index = 18
-
-[[colors.indexed_colors]]
-color = "0x606060"
-index = 19
-
-[[colors.indexed_colors]]
-color = "0x808080"
-index = 20
-
-[[colors.indexed_colors]]
-color = "0xc0c0c0"
-index = 21
+[colors]
+indexed_colors = [
+    { index = 16, color = "0xdfaf8f" },
+    { index = 17, color = "0x000000" },
+    { index = 18, color = "0x404040" },
+    { index = 19, color = "0x606060" },
+    { index = 20, color = "0x808080" },
+    { index = 21, color = "0xc0c0c0" },
+    { index = 90, color = "0x8f8f8f" }
+]
 
 [colors.bright]
 black = "0x8f8f8f"
