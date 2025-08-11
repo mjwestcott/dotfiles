@@ -68,17 +68,19 @@ detect_folders = []
 [conda]
 format = '[$environment]($style) '
 style = "green"
+disabled = true
 
 [aws]
 format = '[$profile]($style) '
 style = "red"
 symbol = "☁️ "
+disabled = true
 
 [kubernetes]
 format = '[$symbol$context]($style)'
 style = "green"
 symbol = "⎈ "
-disabled = false
+disabled = true
 
 [character]
 success_symbol = '[❯](white)'
