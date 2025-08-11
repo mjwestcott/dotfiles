@@ -1,0 +1,23 @@
+# Bat configuration file
+# https://github.com/sharkdp/bat
+
+# Set the theme to zenburn for consistency with ranger
+--theme="zenburn"
+
+# Show line numbers
+--style="numbers,changes,header"
+
+# Use italic text on the terminal (not supported on all terminals)
+--italic-text=always
+
+# Highlight the line(s) specified as a range with a different background color
+# --highlight-line 40:500
+
+# Enable automatic paging
+--paging=auto
+
+# Map file extensions to languages
+--map-syntax "*.conf:INI"
+--map-syntax ".zshrc:Bourne Again Shell (bash)"
+--map-syntax ".zshenv:Bourne Again Shell (bash)"
+--map-syntax ".zprofile:Bourne Again Shell (bash)"
