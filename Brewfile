@@ -42,7 +42,6 @@ brew "zoxide"                     # Smarter cd
 
 # Cloud and containers
 brew "awscli"
-brew "google-cloud-sdk"
 brew "terraform"
 brew "sops"                       # Encrypted file editor
 
@@ -63,14 +62,12 @@ brew "pnpm"
 brew "python"
 brew "pipx"
 brew "pyenv"
-brew "rbenv"
 brew "r"
 
 # Java/Scala ecosystem
 brew "scala"
 brew "apache-spark"
 brew "kafka"
-brew "kafkacat"
 
 # Databases
 brew "postgresql"
@@ -94,7 +91,6 @@ brew "dhall-lsp-server"
 brew "httpie"
 brew "nginx"
 brew "websocat"                   # WebSocket client
-brew "ngrok", cask: true
 
 # Git tools
 brew "hub"                        # GitHub CLI
@@ -108,8 +104,6 @@ brew "youtube-dl"
 brew "exiftool"
 
 # Other tools
-brew "devd"                       # Local web server
-brew "modd"                       # File watcher
 brew "stylua"                     # Lua formatter
 
 # Custom taps
@@ -120,5 +114,5 @@ brew "yqrashawn/goku/goku"        # Karabiner configurator
 
 # Casks (GUI applications)
 cask "alacritty"                  # GPU-accelerated terminal
-cask "anaconda"                   # Python data science platform
 cask "gitify"                     # GitHub notifications
+cask "google-cloud-sdk"           # Google Cloud CLI tools
