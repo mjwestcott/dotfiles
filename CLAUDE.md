@@ -30,7 +30,8 @@ This will:
 3. Install Tmux plugins: `prefix + I`
 4. Set up GitHub SSH keys
 5. Configure Git signing keys
-6. Start any required Homebrew services
+6. Create work git config: `~/.gitconfig-work` (see Git section below)
+7. Start any required Homebrew services
 
 ### Updating Existing Machine
 
@@ -81,7 +82,7 @@ brew bundle dump --describe --force
 
 ### Development Tools
 - `vim/` - Neovim configuration with Lua-based setup using lazy.nvim package manager
-- `git/gitconfig` - Git configuration with extensive alias system
+- `git/gitconfig` - Git configuration with extensive alias system and conditional includes
 - `tmux/tmux.conf` - Terminal multiplexer configuration
 
 ### Application Configs
@@ -125,6 +126,28 @@ Multiple fuzzy finder functions for enhanced workflow:
 - Zsh plugins managed via Antidote: `antidote/zsh_plugins.txt`
 - Vim plugins managed via lazy.nvim: `vim/init.lua`
 - Tmux plugins via TPM: install with `prefix + I`
+
+### Git Configuration
+
+The git config includes conditional includes for work repositories:
+- `~/work/` and `~/repos/work/` directories will use `~/.gitconfig-work`
+- Create `~/.gitconfig-work` manually with work-specific settings:
+
+```gitconfig
+[user]
+    name = Your Name
+    email = work@company.com
+    signingkey = WORK_KEY_ID
+[commit]
+    gpgsign = true
+```
+
+### Shell Performance Monitoring
+
+Use `bench` alias to measure shell startup time with zsh-bench:
+```bash
+bench        # Run shell startup benchmark
+```
 
 ## File Structure
 
