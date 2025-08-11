@@ -4,59 +4,102 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a comprehensive dotfiles repository that manages shell environments, development tools, and application configurations across macOS systems. All configurations are centrally managed here and symlinked to their expected locations.
+Configuration for vim, tmux, zsh, bash, and more. This is a comprehensive dotfiles repository that manages shell environments, development tools, and application configurations across macOS systems.
 
-## Installation and Setup
+## Installation
 
-**Primary Installation Command:**
+### Clean Install (New Machine)
+
 ```bash
+git clone https://github.com/mjwestcott/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ./install_macos
 ```
 
-This script handles the complete system setup including:
-- Homebrew installation and package management
-- Development environment setup (Python, Ruby, Rust, Go, Node.js)
-- Shell configuration (Zsh with Antidote plugin manager)
-- Application configurations (Git, Vim/Neovim, Tmux, etc.)
-- Symlink creation for all dotfiles
+This will:
+- Install Homebrew if not present
+- Install all packages from the Brewfile
+- Set up shell environments (Zsh with Antidote, Bash)
+- Create symlinks for all configuration files
+- Configure development tools (Neovim, Tmux, Git, etc.)
 
-**Manual Post-Installation Steps:**
-- Change default shell: `chsh -s $(which zsh)`
-- Install Vim plugins and fzf integration
-- Install Tmux plugins: `prefix + I`
-- Set up GitHub SSH keys and Git signing keys
-- Start required Homebrew services
+### Manual Post-Installation Steps
 
-## Architecture and Organization
+1. Change default shell: `chsh -s $(which zsh)`
+2. Install Vim plugins (:Lazy install, :Lazy update)
+3. Install Tmux plugins: `prefix + I`
+4. Set up GitHub SSH keys
+5. Configure Git signing keys
+6. Start any required Homebrew services
 
-### Core Components
+### Updating Existing Machine
 
-**Shell Environment:**
+```bash
+cd ~/dotfiles
+git pull
+brew bundle        # Install any new packages
+source ~/.zshrc    # Reload shell configuration
+```
+
+## Package Management with Brewfile
+
+Homebrew packages are managed declaratively via the `Brewfile`. This ensures reproducible installations across machines.
+
+### Common Commands
+
+```bash
+# Install all packages from Brewfile
+brew bundle
+
+# Check if all Brewfile dependencies are satisfied
+brew bundle check
+
+# List all packages in Brewfile
+brew bundle list
+
+# Remove packages not listed in Brewfile
+brew bundle cleanup
+
+# Regenerate Brewfile from currently installed packages
+brew bundle dump --describe --force
+```
+
+## Architecture
+
+- **Shell**: Zsh with Antidote plugin manager, Starship prompt
+- **Editor**: Neovim with lazy.nvim package manager
+- **Terminal**: Alacritty, Tmux
+- **Version Management**: pyenv (Python), rbenv (Ruby), rustup (Rust)
+- **Package Managers**: Homebrew, npm, yarn, pipx
+
+## Core Components
+
+### Shell Environment
 - `shell/profile` - Cross-shell configuration with extensive aliases, functions, and environment variables
 - `shell/zsh/zshrc` - Zsh-specific configuration with Antidote plugin management
 - `antidote/zsh_plugins.txt` - Plugin configuration (migrated from Prezto to Antidote)
 
-**Development Tools:**
+### Development Tools
 - `vim/` - Neovim configuration with Lua-based setup using lazy.nvim package manager
 - `git/gitconfig` - Git configuration with extensive alias system
 - `tmux/tmux.conf` - Terminal multiplexer configuration
 
-**Application Configs:**
+### Application Configs
 - `claude/` - Claude Code settings including custom statusline script
 - `starship/starship.toml` - Cross-shell prompt configuration
 - `alacritty/` - Terminal emulator configuration
 - Various tool configs: `pgcli/`, `litecli/`, `ranger/`, `karabiner/`
 
-### Key Features
+## Key Features
 
-**Extensive Git Alias System:**
+### Extensive Git Alias System
 The shell profile includes a comprehensive git alias system with single-letter shortcuts:
 - Branch operations: `gb`, `gbc`, `gbl`
 - Commit operations: `gc`, `gca`, `gcm`, `gco`
 - Log operations: `gl`, `gls`, `gld`, `glo`
 - And many more covering all git workflows
 
-**FZF Integration:**
+### FZF Integration
 Multiple fuzzy finder functions for enhanced workflow:
 - `,t` - Find and edit files
 - `,j` - Jump to directories  
@@ -64,7 +107,7 @@ Multiple fuzzy finder functions for enhanced workflow:
 - `,c` - Search git commits
 - `,b` - Checkout branches/tags
 
-**Development Environment Management:**
+### Development Environment Management
 - Python: Poetry, pyenv, conda integration
 - Ruby: rbenv support
 - Go: GOPATH configuration
@@ -73,21 +116,12 @@ Multiple fuzzy finder functions for enhanced workflow:
 
 ## Common Development Tasks
 
-**Environment Setup:**
-```bash
-# Install all dependencies and configure environment
-./install_macos
-
-# Reload shell configuration
-source ~/.zshrc
-```
-
-**Claude Code Configuration:**
+### Claude Code Configuration
 - Settings: `claude/settings.json` with custom statusline
 - Statusline script: `claude/statusline.sh` (Starship-style prompt)
 - Installation creates symlinks to `~/.claude/`
 
-**Plugin Management:**
+### Plugin Management
 - Zsh plugins managed via Antidote: `antidote/zsh_plugins.txt`
 - Vim plugins managed via lazy.nvim: `vim/init.lua`
 - Tmux plugins via TPM: install with `prefix + I`

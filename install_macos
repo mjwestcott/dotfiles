@@ -23,95 +23,10 @@ fi
 
 # Homebrew
 [[ -z "$(command -v brew)" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew update
-brew upgrade
-brew install ripgrep
-brew install awscli
-brew install bash
-brew install cloc
-brew install cmake
-brew install coreutils
-brew install ctags
-brew install devd
-brew install dhall
-brew install dhall-json
-brew install dhall-lsp-server
-brew install diff-so-fancy
-brew install starship
-brew install git
-brew install glances
-brew install gnupg
-brew install go
-brew install google-cloud-sdk
-brew install graphviz
-brew install helm
-brew install hexyl
-brew install highlight
-brew install httpie
-brew install hub
-brew install jq
-brew install jsonnet
-brew install lightgbm
-brew install macvim --HEAD
-brew install minio/stable/minio
-brew install minio/stable/mc
-brew install modd
-brew install neovim
-brew install nginx
-brew install node
-brew install openssl
-brew install pipx
-brew install postgresql
-brew install python
-brew install pyenv
-brew install r
-brew install ranger
-brew install rbenv
-brew install reattach-to-user-namespace
-brew install redis
-brew install ripgrep
-brew install rocksdb
-brew install shellcheck
-brew install sops
-brew install sqlite
-brew install stylua
-brew install terraform
-brew install tmux
-brew install tree
-brew install websocat
-brew install wget
-brew install yarn
-brew install yq
-brew install yqrashawn/goku/goku
-brew install youtube-dl
-brew install zsh
-brew install zoxide
 
-brew install --cask anaconda
-brew install --cask ngrok
-brew install --cask alacritty
-brew install --cask gitify
-brew install --cask google-cloud-sdk
-
-# Custom taps
-brew tap dbcli/tap
-brew install litecli
-brew install pgcli
-brew install cue-lang/tap/cue
-
-# Java
-brew install apache-spark
-brew install kafka
-brew install kafkacat
-brew install scala
-
-# Kubernetes
-brew install --cask docker
-brew install kind
-brew install k3d
-brew install k9s
-brew install kubectl
-brew install kubectx
+# Install all packages from Brewfile
+echo "Installing packages from Brewfile..."
+brew bundle --file=~/dotfiles/Brewfile
 
 # Rust config
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh \
