@@ -153,6 +153,6 @@ bench        # Run shell startup benchmark
 
 All configurations follow a modular structure:
 - Application-specific directories contain related configurations
-- The `install_macos` script creates appropriate symlinks
+- The `install` script creates appropriate symlinks
 - Backup system preserves existing configurations
 - Private configurations can be added via `~/dotfiles/private`
