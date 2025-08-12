@@ -1,14 +1,20 @@
-.PHONY: lint lint-python lint-js lint-shell lint-markdown help
+.PHONY: test lint lint-python lint-js lint-shell lint-markdown help
 
 # Default target
 help:
 	@echo "Available targets:"
+	@echo "  test         - Run shell configuration tests"
 	@echo "  lint         - Run all linters"
 	@echo "  lint-python  - Lint Python files with ruff"
 	@echo "  lint-js      - Lint JavaScript/TypeScript files with eslint"
 	@echo "  lint-shell   - Lint shell scripts with shellcheck"
 	@echo "  lint-markdown - Check markdown files with markdownlint (if available)"
 	@echo "  help         - Show this help message"
+
+# Run shell configuration tests
+test:
+	@echo "Running shell configuration tests..."
+	@./tests/shell.sh
 
 # Run all linters
 lint: lint-python lint-js lint-shell lint-markdown

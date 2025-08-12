@@ -153,7 +153,7 @@ bench        # Run shell startup benchmark
 
 Run the shell configuration test suite to validate setup:
 ```bash
-~/dotfiles/tests/shell.sh    # Verify configs source cleanly in zsh
+make test    # Verify configs source cleanly in zsh
 ```
 
 The minimal test suite validates that both `shell/profile` and `shell/zsh/zshrc` can be sourced without errors, ensuring your shell configuration is working properly.

@@ -32,8 +32,8 @@ This will:
 
 Test configuration and lint code:
 ```bash
-~/dotfiles/tests/shell.sh    # Verify configs source cleanly
-make lint                     # Run all linters
+make test    # Verify configs source cleanly
+make lint    # Run all linters
 ```
 
 ## Package Management with Brewfile
