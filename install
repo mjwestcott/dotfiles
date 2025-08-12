@@ -178,6 +178,7 @@ create_symlink ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 mkdir -p ~/.claude
 create_symlink ~/dotfiles/claude/settings.json ~/.claude/settings.json
 create_symlink ~/dotfiles/claude/statusline.sh ~/.claude/statusline.sh
+create_symlink ~/dotfiles/claude/hooks ~/.claude/hooks
 
 # User bin directory
 mkdir -p ~/bin

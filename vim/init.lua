@@ -135,6 +135,11 @@ vim.cmd([[
     autocmd!
     autocmd FileType python setlocal tw=88
   augroup END
+
+  augroup json
+    autocmd!
+    autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+  augroup END
 ]])
 
 -- Import customisations
