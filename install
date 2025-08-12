@@ -79,6 +79,7 @@ else
     git clone --depth=1 https://github.com/mattmc3/antidote.git ~/.antidote
 fi
 
+
 # Tmux Plugin Manager
 if [[ -e ~/.tmux/plugins/tpm ]]; then
     info "TPM already installed, updating..."
@@ -128,14 +129,14 @@ create_symlink() {
 
 # Shell configs and other dotfiles
 cd ~/dotfiles
-for path in shell/bash/* shell/zsh/* readline/* git/* tmux/tmux.conf rg/rgignore conda/*; do
+for path in shell/zsh/* readline/* git/* tmux/tmux.conf rg/rgignore conda/*; do
     if [[ -e "$path" ]]; then
         file=$(basename "$path")
         create_symlink "$HOME/dotfiles/$path" "$HOME/.$file"
     fi
 done
 
-# Antidote plugins configuration
+# Plugin manager configurations
 create_symlink ~/dotfiles/antidote/zsh_plugins.txt ~/.zsh_plugins.txt
 
 # .config directory symlinks

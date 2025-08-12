@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Configuration for vim, tmux, zsh, bash, and more. This is a comprehensive dotfiles repository that manages shell environments, development tools, and application configurations across macOS systems.
+Configuration for vim, tmux, zsh, and more. This is a comprehensive dotfiles repository that manages Zsh shell environment, development tools, and application configurations across macOS systems.
 
 ## Installation
 
@@ -19,7 +19,7 @@ cd ~/dotfiles
 This will:
 - Install Homebrew if not present
 - Install all packages from the Brewfile
-- Set up shell environments (Zsh with Antidote, Bash)
+- Set up Zsh shell environment with Antidote plugin manager
 - Create symlinks for all configuration files
 - Configure development tools (Neovim, Tmux, Git, etc.)
 
@@ -77,8 +77,8 @@ brew bundle dump --describe --force
 
 ### Shell Environment
 - `shell/profile` - Cross-shell configuration with extensive aliases, functions, and environment variables
-- `shell/zsh/zshrc` - Zsh-specific configuration with Antidote plugin management
-- `antidote/zsh_plugins.txt` - Plugin configuration (migrated from Prezto to Antidote)
+- `shell/zsh/zshrc` - Zsh configuration with Antidote plugin management
+- `antidote/zsh_plugins.txt` - Zsh plugin configuration (migrated from Prezto to Antidote)
 
 ### Development Tools
 - `vim/` - Neovim configuration with Lua-based setup using lazy.nvim package manager
@@ -123,9 +123,9 @@ Multiple fuzzy finder functions for enhanced workflow:
 - Installation creates symlinks to `~/.claude/`
 
 ### Plugin Management
-- Zsh plugins managed via Antidote: `antidote/zsh_plugins.txt`
-- Vim plugins managed via lazy.nvim: `vim/init.lua`
-- Tmux plugins via TPM: install with `prefix + I`
+- **Zsh**: Antidote plugin manager via `antidote/zsh_plugins.txt`
+- **Vim**: lazy.nvim package manager via `vim/init.lua`
+- **Tmux**: TPM plugin manager - install with `prefix + I`
 
 ### Git Configuration
 
@@ -148,6 +148,15 @@ Use `bench` alias to measure shell startup time with zsh-bench:
 ```bash
 bench        # Run shell startup benchmark
 ```
+
+### Testing Configuration
+
+Run the shell configuration test suite to validate setup:
+```bash
+~/dotfiles/tests/shell.sh    # Verify configs source cleanly in zsh
+```
+
+The minimal test suite validates that both `shell/profile` and `shell/zsh/zshrc` can be sourced without errors, ensuring your shell configuration is working properly.
 
 ## File Structure
 

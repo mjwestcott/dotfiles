@@ -1,6 +1,6 @@
 # dotfiles
 
-Configuration for vim, tmux, zsh, bash, and more.
+Configuration for vim, tmux, zsh, and more.
 
 ## Installation
 
@@ -15,7 +15,7 @@ cd ~/dotfiles
 This will:
 - Install Homebrew if not present
 - Install all packages from the Brewfile
-- Set up shell environments (Zsh with Antidote, Bash)
+- Set up Zsh shell environment with Antidote plugin manager
 - Create symlinks for all configuration files
 - Configure development tools (Neovim, Tmux, Git, etc.)
 
@@ -27,6 +27,13 @@ This will:
 4. Set up GitHub SSH keys
 5. Configure Git signing keys
 6. Start any required Homebrew services
+
+### Testing Configuration
+
+Validate your setup with the test suite:
+```bash
+~/dotfiles/tests/shell.sh    # Verify configs source cleanly
+```
 
 ## Package Management with Brewfile
 
