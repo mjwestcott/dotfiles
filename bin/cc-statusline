@@ -56,7 +56,7 @@ fi
 monthly_budget=$(echo "$burn_rate * 8 * 22" | bc)  # 22 work days per month
 
 # Build status line
-printf "model:%s | today:$%.2f | 30d:$%.2f | block:%s | burn:$%.0f/mo | cache:%d%%" \
+printf "%s | today:$%.2f | 30d:$%.2f | block:%s | burn:$%.0f/mo | cache:%d%%" \
     "$model" \
     "$today_total" \
     "$month_total" \
