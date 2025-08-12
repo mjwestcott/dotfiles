@@ -35,6 +35,11 @@ Validate your setup with the test suite:
 ~/dotfiles/tests/shell.sh    # Verify configs source cleanly
 ```
 
+Optionally install pre-commit hooks to run tests automatically:
+```bash
+pre-commit install            # Run tests before each commit
+```
+
 ## Package Management with Brewfile
 
 Homebrew packages are managed declaratively via the `Brewfile`. This ensures reproducible installations across machines.

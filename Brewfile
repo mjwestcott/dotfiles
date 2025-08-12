@@ -29,7 +29,7 @@ brew "hexyl"                      # Hex viewer
 # Development tools
 brew "cmake"
 brew "ctags"
-brew "shellcheck"
+brew "shellcheck"                 # Shell script linter
 brew "tokei"                      # Fast code statistics
 brew "jq"                         # JSON processor
 brew "yq"                         # YAML processor
@@ -114,6 +114,7 @@ brew "yt-dlp"                     # youtube-dl fork (actively maintained)
 brew "exiftool"
 
 # Other tools
+brew "pre-commit"                 # Git hooks framework
 brew "stylua"                     # Lua formatter
 
 # Custom taps

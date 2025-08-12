@@ -22,7 +22,7 @@ fi
 
 # Check dotfiles directory exists
 if [[ ! -e ~/dotfiles ]]; then
-    error "~/dotfiles does not exist. Clone the repository first: git clone https://github.com/mjwestcott/dotfiles.git ~/dotfiles"
+    error "$HOME/dotfiles does not exist. Clone the repository first: git clone https://github.com/mjwestcott/dotfiles.git $HOME/dotfiles"
 fi
 
 info "Starting dotfiles installation..."
@@ -109,20 +109,21 @@ info "Creating dotfiles symlinks..."
 create_symlink() {
     local source="$1"
     local target="$2"
-    
+
     # If target already points to the correct source, skip
     if [[ -L "$target" ]] && [[ "$(readlink "$target")" == "$source" ]]; then
         return 0
     fi
-    
+
     # If target exists and is not a symlink to our dotfiles, back it up
     if [[ -e "$target" ]] && [[ ! -L "$target" || "$(readlink "$target")" != "$source" ]]; then
-        local backup_dir=~/dotfiles/backup/$(date +%Y%m%d_%H%M%S)
+        local backup_dir
+        backup_dir=~/dotfiles/backup/$(date +%Y%m%d_%H%M%S)
         mkdir -p "$backup_dir"
         mv "$target" "$backup_dir/$(basename "$target")"
         warn "Backed up existing $(basename "$target") to $backup_dir"
     fi
-    
+
     # Create the symlink
     ln -sfn "$source" "$target"
 }
@@ -201,5 +202,6 @@ echo "  4. Install Tmux plugins: Start tmux and press prefix + I"
 echo "  5. Set up GitHub SSH keys"
 echo "  6. Configure Git signing keys"
 echo "  7. Start any required Homebrew services"
+echo "  8. Install pre-commit hooks: pre-commit install (optional)"
 echo
 echo "To update in the future, run this script again."
