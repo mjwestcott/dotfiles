@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+input=$(cat)
+model=$(echo "$input" | jq -r '.model.display_name // "Unknown"' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+
+# Get all ccusage data
+all_data=$(ccusage blocks --json)
+block_data=$(echo "$all_data" | jq '.blocks[] | select(.isActive == true)')
+
+if [ -z "$block_data" ]; then
+    printf "%s | No active session" "$model"
+    exit 0
+fi
+
+# Extract values for current block
+burn_rate=$(echo "$block_data" | jq -r '(.burnRate.costPerHour * 100 | round) / 100')
+remaining_mins=$(echo "$block_data" | jq -r '.projection.remainingMinutes')
+cache_read=$(echo "$block_data" | jq -r '.tokenCounts.cacheReadInputTokens // 0')
+cache_creation=$(echo "$block_data" | jq -r '.tokenCounts.cacheCreationInputTokens // 0')
+input_tokens=$(echo "$block_data" | jq -r '.tokenCounts.inputTokens // 0')
+
+# Calculate today's total (all blocks since midnight)
+today=$(date +%Y-%m-%d)
+today_total=$(echo "$all_data" | jq -r --arg today "$today" '
+    [.blocks[] | select(.startTime | startswith($today)) | .costUSD // 0] | add | . * 100 | round / 100
+')
+
+# Calculate last 30 days total
+thirty_days_ago=$(date -v-30d +%Y-%m-%dT%H:%M:%S 2>/dev/null || date -d '30 days ago' +%Y-%m-%dT%H:%M:%S)
+month_total=$(echo "$all_data" | jq -r --arg thirty_days_ago "$thirty_days_ago" '
+    [.blocks[] | select(.startTime >= $thirty_days_ago) | .costUSD // 0] | add | . * 100 | round / 100
+')
+
+# Calculate cache efficiency
+total_input=$((cache_read + cache_creation + input_tokens))
+if [ "$total_input" -gt 0 ]; then
+    cache_pct=$((cache_read * 100 / total_input))
+else
+    cache_pct=0
+fi
+
+# Format time remaining
+if [ "$remaining_mins" -lt 60 ]; then
+    time_left="${remaining_mins}m"
+elif [ "$remaining_mins" -lt 1440 ]; then
+    hours=$((remaining_mins / 60))
+    mins=$((remaining_mins % 60))
+    time_left="${hours}h${mins}m"
+else
+    days=$((remaining_mins / 1440))
+    hours=$(((remaining_mins % 1440) / 60))
+    time_left="${days}d${hours}h"
+fi
+
+# Calculate monthly budget
+monthly_budget=$(echo "$burn_rate * 8 * 22" | bc)  # 22 work days per month
+
+# Build status line
+printf "model:%s | today:$%.2f | 30d:$%.2f | block:%s | burn:$%.0f/mo | cache:%d%%" \
+    "$model" \
+    "$today_total" \
+    "$month_total" \
+    "$time_left" \
+    "$monthly_budget" \
+    "$cache_pct"
