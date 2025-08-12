@@ -103,7 +103,7 @@ The shell profile includes a comprehensive git alias system with single-letter s
 ### FZF Integration
 Multiple fuzzy finder functions for enhanced workflow:
 - `,t` - Find and edit files
-- `,j` - Jump to directories  
+- `,j` - Jump to directories
 - `,a` - Search content with ripgrep
 - `,c` - Search git commits
 - `,b` - Checkout branches/tags
@@ -157,6 +157,42 @@ Run the shell configuration test suite to validate setup:
 ```
 
 The minimal test suite validates that both `shell/profile` and `shell/zsh/zshrc` can be sourced without errors, ensuring your shell configuration is working properly.
+
+### Code Quality and Linting
+
+The repository includes automated formatting and linting capabilities:
+
+#### Formatting (Automatic)
+Claude Code is configured to automatically format files on save via the hook in `claude/hooks/format.sh`:
+- **Python**: Black formatting
+- **JavaScript/TypeScript/JSON**: Prettier formatting
+- **Shell scripts**: shfmt formatting
+- **Markdown**: Prettier formatting
+- **All text files**: Trailing whitespace removal
+
+#### Linting (Manual)
+Use the Makefile for comprehensive linting after making multiple changes:
+
+```bash
+# Lint all file types
+make lint
+
+# Lint specific file types
+make lint-python     # Ruff (Python)
+make lint-js         # ESLint (JavaScript/TypeScript)
+make lint-shell      # ShellCheck (shell scripts)
+make lint-markdown   # markdownlint (Markdown)
+```
+
+**Required tools** (install via Homebrew/npm):
+```bash
+# Core linters
+brew install ruff shellcheck
+npm install -g eslint markdownlint-cli
+
+# Formatters (also used by Claude hooks)
+brew install black prettier shfmt
+```
 
 ## File Structure
 

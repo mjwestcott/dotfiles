@@ -28,16 +28,12 @@ This will:
 5. Configure Git signing keys
 6. Start any required Homebrew services
 
-### Testing Configuration
+### Code Quality
 
-Validate your setup with the test suite:
+Test configuration and lint code:
 ```bash
 ~/dotfiles/tests/shell.sh    # Verify configs source cleanly
-```
-
-Optionally install pre-commit hooks to run tests automatically:
-```bash
-pre-commit install            # Run tests before each commit
+make lint                     # Run all linters
 ```
 
 ## Package Management with Brewfile

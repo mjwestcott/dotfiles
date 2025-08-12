@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Claude Code hooks script for auto-formatting and linting
+# Claude Code hooks script for auto-formatting
 # Supports Python, JavaScript/TypeScript, and shell scripts
 
 file_path="$1"
@@ -40,10 +40,6 @@ if [[ "$extension" == "py" ]]; then
         black --quiet "$file_path" 2>/dev/null
     fi
 
-    # Lint with Ruff if available
-    if command_exists ruff; then
-        ruff check --fix --quiet "$file_path" 2>/dev/null
-    fi
 
 # JavaScript/TypeScript files
 elif [[ "$extension" =~ ^(js|ts|jsx|tsx|json)$ ]]; then
@@ -54,23 +50,14 @@ elif [[ "$extension" =~ ^(js|ts|jsx|tsx|json)$ ]]; then
         prettier --write "$file_path" 2>/dev/null
     fi
 
-    # Lint with ESLint if available and fix auto-fixable issues
-    if command_exists eslint; then
-        eslint --fix --quiet "$file_path" 2>/dev/null
-    fi
 
 # Shell scripts
 elif [[ "$extension" =~ ^(sh|bash|zsh)$ ]] || [[ "$basename" =~ ^(zshrc|bashrc|profile)$ ]]; then
-    echo "Linting shell script: $basename"
+    echo "Formatting shell script: $basename"
 
     # Check if file has shell shebang
     first_line=$(head -n 1 "$file_path")
     if [[ "$first_line" =~ ^\#\!.*/(bash|zsh|sh) ]] || [[ "$extension" =~ ^(sh|bash|zsh)$ ]]; then
-        # Lint with ShellCheck if available
-        if command_exists shellcheck; then
-            # Run shellcheck but don't fail on warnings
-            shellcheck -x "$file_path" 2>/dev/null || true
-        fi
 
         # Format with shfmt if available
         if command_exists shfmt; then
