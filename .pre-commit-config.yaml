@@ -18,6 +18,12 @@ repos:
         files: \.(sh|bash|zsh)$|^(shell/profile|bin/|install)$
         args: [--severity=warning]
 
+      - id: stylua
+        name: StyLua formatter
+        entry: stylua
+        language: system
+        files: \.lua$
+
       - id: dotfiles-test
         name: Test dotfiles configuration
         entry: ./tests/shell.sh
