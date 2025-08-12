@@ -30,9 +30,9 @@ IFS=$'\n'
 ## Script arguments
 FILE_PATH="${1}"         # Full path of the highlighted file
 PV_WIDTH="${2}"          # Width of the preview pane (number of fitting characters)
-## shellcheck disable=SC2034 # PV_HEIGHT is provided for convenience and unused
-PV_HEIGHT="${3}"         # Height of the preview pane (number of fitting characters)
 IMAGE_CACHE_PATH="${4}"  # Full path that should be used to cache image preview
+# shellcheck disable=SC2034
+PV_HEIGHT="${3}"         # Height of the preview pane (number of fitting characters)
 PV_IMAGE_ENABLED="${5}"  # 'True' if image previews are enabled, 'False' otherwise.
 
 FILE_EXTENSION="${FILE_PATH##*.}"
@@ -94,6 +94,7 @@ handle_image() {
     ## rendered from vector graphics. If the conversion program allows
     ## specifying only one dimension while keeping the aspect ratio, the width
     ## will be used.
+    # shellcheck disable=SC2034
     local DEFAULT_SIZE="1920x1080"
 
     local mimetype="${1}"
@@ -270,4 +271,6 @@ handle_extension
 handle_mime "${MIMETYPE}"
 handle_fallback
 
+# Final fallback: no preview available
+# shellcheck disable=SC2317 # This exit is reachable when handlers don't exit
 exit 1

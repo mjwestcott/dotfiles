@@ -22,7 +22,7 @@ if [[ "$current_dir" == "$HOME" ]]; then
     dir="~"
 elif [[ "$current_dir" == "$HOME"/* ]]; then
     # Remove home prefix for subdirectories
-    dir="${current_dir#$HOME/}"
+    dir="${current_dir#"$HOME"/}"
 else
     # Full path for directories outside home
     dir="$current_dir"
@@ -33,7 +33,7 @@ git_info=""
 if command -v git >/dev/null 2>&1 && git -C "$current_dir" rev-parse --git-dir >/dev/null 2>&1; then
     # Get branch name
     branch=$(git -C "$current_dir" symbolic-ref --short HEAD 2>/dev/null || git -C "$current_dir" describe --tags --exact-match 2>/dev/null || git -C "$current_dir" rev-parse --short HEAD 2>/dev/null)
-    
+
     # Get git status
     git_status=""
     if ! git -C "$current_dir" diff --quiet 2>/dev/null; then
@@ -42,7 +42,7 @@ if command -v git >/dev/null 2>&1 && git -C "$current_dir" rev-parse --git-dir >
     if ! git -C "$current_dir" diff --cached --quiet 2>/dev/null; then
         git_status="${git_status}+"
     fi
-    
+
     # Format git info
     git_info=" ${WHITE}${branch}${RESET}${YELLOW}${git_status}${RESET}"
 fi
@@ -88,4 +88,4 @@ line1="${line1}${conda_info}"
 line1="${line1}${GRAY}${model_name}${RESET}"
 
 # Print the final prompt (single line only)
-printf "${line1}"
+printf '%s' "${line1}"

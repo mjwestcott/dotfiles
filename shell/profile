@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-
+# shellcheck shell=bash
+#
 # XDG directories
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -269,7 +269,7 @@ function asp {
 # Modern navigation
 alias vim='nvim'
 alias j='z'
-alias v='vim -c "autocmd VimEnter * ++once Telescope oldfiles"' 
+alias v='vim -c "autocmd VimEnter * ++once Telescope oldfiles"'
 
 # FZF aliases
 alias ,j='fzf_jump'
@@ -285,7 +285,7 @@ alias ,m='fzf_chrome'
 function fzf_jump {
     local file
     file=$(rg --files | fzf -q "${*}")
-    [[ -n "$file" ]] && cd "$(dirname "$file")"
+    [[ -n "$file" ]] && cd "$(dirname "$file")" || return
 }
 
 function fzf_vim {
@@ -319,7 +319,7 @@ function fzf_locate {
     local result
     result=$(locate / | fzf -q "${*}")
     if [[ -d "$result" ]]; then
-        cd "$result"
+        cd "$result" || return
     elif [[ -f "$result" ]]; then
         vim "$result"
     fi
@@ -346,7 +346,7 @@ function fzf_branches {
     target=$(
         (echo "$tags"; echo "$branches") |
         fzf-tmux -l40 -- --no-hscroll --ansi +m -d "\t" -n 2 -1 -q "$*") || return
-    git checkout $(echo "$target" | awk '{print $2}')
+    git checkout "$(echo "$target" | awk '{print $2}')"
 }
 
 function fzf_tmux {
@@ -379,7 +379,7 @@ function fzf_chrome {
 
 # Create a new directory and enter it.
 function md {
-    mkdir -p "$@" && cd "$@"
+    mkdir -p "$@" && cd "$@" || return
 }
 
 # Create timestamped backup of a file.

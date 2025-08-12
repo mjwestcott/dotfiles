@@ -186,13 +186,17 @@ make lint-markdown   # markdownlint (Markdown)
 
 **Required tools** (install via Homebrew/npm):
 ```bash
-# Core linters
+# Core linters (always installed)
 brew install ruff shellcheck
+
+# Optional linters (install as needed)
 npm install -g eslint markdownlint-cli
 
 # Formatters (also used by Claude hooks)
 brew install black prettier shfmt
 ```
+
+**Note**: The `make lint` command will work with whatever tools are available and skip missing ones gracefully.
 
 ## File Structure
 

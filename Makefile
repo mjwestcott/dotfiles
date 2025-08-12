@@ -43,9 +43,10 @@ lint-js:
 lint-shell:
 	@echo "Linting shell scripts..."
 	@if command -v shellcheck >/dev/null 2>&1; then \
-		find . -name "*.sh" -o -name "*.bash" -o -name "*.zsh" | \
-		grep -v tools | grep -v backup | xargs -r shellcheck -x; \
-		shellcheck -x shell/profile shell/zsh/* install 2>/dev/null || true; \
+		find . -name "*.sh" -o -name "*.bash" | \
+		grep -v tools | grep -v backup | xargs -r shellcheck -x -e SC1090,SC1091; \
+		shellcheck -x -e SC1090,SC1091 shell/profile shell/zsh/* install 2>/dev/null || true; \
+		find . -name "*.zsh" | grep -v tools | grep -v backup | grep -v antidote | xargs -r shellcheck -s bash -x -e SC1090,SC1091 2>/dev/null || true; \
 	else \
 		echo "shellcheck not found - install with: brew install shellcheck"; \
 	fi

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 #
 # Executes commands at the start of an interactive session.
 #
@@ -7,7 +8,7 @@
 
 # Source Antidote (replaces Prezto).
 source ~/.antidote/antidote.zsh
-antidote load ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load "${ZDOTDIR:-$HOME}"/.zsh_plugins.txt
 
 # Configure zsh-autosuggestions for better performance
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -23,7 +24,7 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 [[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
 # Setup homebrew
-eval $(/opt/homebrew/bin/brew shellenv)
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Setup Claude Code
 alias claude="~/.claude/local/claude"
@@ -52,8 +53,7 @@ eval "$(starship init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
+if __conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"; then
     eval "$__conda_setup"
 else
     if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then

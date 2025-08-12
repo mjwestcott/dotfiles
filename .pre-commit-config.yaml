@@ -16,7 +16,8 @@ repos:
         entry: shellcheck
         language: system
         files: \.(sh|bash|zsh)$|^(shell/profile|bin/|install)$
-        args: [--severity=warning]
+        exclude: antidote/.*\.zsh$
+        args: [-x, -e, "SC1090,SC1091", --severity=warning]
 
       - id: stylua
         name: StyLua formatter

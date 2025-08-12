@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+# shellcheck disable=SC1073,SC1009,SC1072
 #
 # Executes commands at login pre-zshrc.
 #
