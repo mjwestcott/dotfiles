@@ -36,6 +36,7 @@ brew "yq"                         # YAML processor
 brew "just"                       # Modern task runner
 brew "hyperfine"                  # Benchmarking tool
 brew "tldr"                       # Simplified man pages
+brew "ccusage"                    # Claude Code usage tracker
 
 # Editors
 brew "neovim"
