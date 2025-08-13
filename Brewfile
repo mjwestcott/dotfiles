@@ -127,4 +127,3 @@ brew "yqrashawn/goku/goku"        # Karabiner configurator
 # Casks (GUI applications)
 cask "alacritty"                  # GPU-accelerated terminal
 cask "gitify"                     # GitHub notifications
-cask "google-cloud-sdk"           # Google Cloud CLI tools

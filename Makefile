@@ -3,13 +3,13 @@
 # Default target
 help:
 	@echo "Available targets:"
-	@echo "  test         - Run shell configuration tests"
-	@echo "  lint         - Run all linters"
-	@echo "  lint-python  - Lint Python files with ruff"
-	@echo "  lint-js      - Lint JavaScript/TypeScript files with eslint"
-	@echo "  lint-shell   - Lint shell scripts with shellcheck"
+	@echo "  test          - Run shell configuration tests"
+	@echo "  lint          - Run all linters"
+	@echo "  lint-python   - Lint Python files with ruff"
+	@echo "  lint-js       - Lint JavaScript/TypeScript files with eslint"
+	@echo "  lint-shell    - Lint shell scripts with shellcheck"
 	@echo "  lint-markdown - Check markdown files with markdownlint (if available)"
-	@echo "  help         - Show this help message"
+	@echo "  help          - Show this help message"
 
 # Run shell configuration tests
 test:
