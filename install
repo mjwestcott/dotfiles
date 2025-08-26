@@ -66,6 +66,16 @@ else
     warn "Neither uv nor pipx found, skipping Poetry installation"
 fi
 
+# Global npm packages
+if command -v npm &> /dev/null; then
+    info "Installing/updating global npm packages..."
+    npm install -g @anthropic-ai/claude-code
+    npm install -g @openai/codex
+    npm install -g @google/gemini-cli
+else
+    warn "npm not found, skipping global npm package installation"
+fi
+
 # ============================================================================
 # Shell and Plugin Managers
 # ============================================================================
