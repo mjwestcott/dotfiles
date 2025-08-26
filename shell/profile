@@ -63,7 +63,6 @@ alias htop='btm'
 alias man='tldr'
 alias cloc='tokei'
 alias youtube-dl='yt-dlp'
-alias grep='rg'
 
 # Scripts/tools
 alias wifi='~/dotfiles/bin/wifi-password'

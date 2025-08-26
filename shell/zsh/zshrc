@@ -13,6 +13,12 @@ antidote load "${ZDOTDIR:-$HOME}"/.zsh_plugins.txt
 # Configure zsh-autosuggestions for better performance
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# Configure zsh-history-substring-search key bindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
+
 setopt HIST_IGNORE_SPACE
 export HISTSIZE=100000
 export SAVEHIST=100000
