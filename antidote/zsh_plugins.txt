@@ -21,6 +21,7 @@ ohmyzsh/ohmyzsh path:plugins/brew
 ohmyzsh/ohmyzsh path:plugins/kubectl
 
 # 6) Interactive goodies (order matters; syntax-highlighting LAST)
+Aloxaf/fzf-tab
 zsh-users/zsh-history-substring-search
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
