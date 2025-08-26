@@ -645,5 +645,8 @@ chars = "\u001B[13;5u"
 key = "Return"
 mods = "Control"
 
+[selection]
+save_to_clipboard = true
+
 [window]
 startup_mode = "Fullscreen"
