@@ -12,18 +12,15 @@ belak/zsh-utils path:editor      # Key bindings and editor improvements (vi mode
 belak/zsh-utils path:history     # History configuration
 belak/zsh-utils path:utility     # Cross-platform utilities
 
-# 4) Directory navigation (replaces prezto: directory, fasd)
-ajeetdsouza/zoxide               # Smarter cd with z compatibility (upgraded from rupa/z)
-
-# 5) Git functionality (replaces prezto: git)
+# 4) Git functionality (replaces prezto: git)
 ohmyzsh/ohmyzsh path:plugins/git
 
-# 6) Development tools (replaces prezto: python, homebrew, kubernetes)
+# 5) Development tools (replaces prezto: python, homebrew, kubernetes)
 ohmyzsh/ohmyzsh path:plugins/python
 ohmyzsh/ohmyzsh path:plugins/brew
 ohmyzsh/ohmyzsh path:plugins/kubectl
 
-# 7) Interactive goodies (order matters; syntax-highlighting LAST)
+# 6) Interactive goodies (order matters; syntax-highlighting LAST)
 zsh-users/zsh-history-substring-search
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
