@@ -64,3 +64,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+source ~/.config/broot/launcher/bash/br

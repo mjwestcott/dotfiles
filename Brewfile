@@ -22,6 +22,7 @@ brew "fd"                         # Modern find replacement
 brew "fzf"                        # Fuzzy finder
 brew "eza"                        # Modern ls replacement
 brew "bat"                        # Cat with syntax highlighting
+brew "broot"                      # Tree-based file browser
 brew "ranger"                     # File browser
 brew "highlight"                  # Syntax highlighting
 brew "hexyl"                      # Hex viewer

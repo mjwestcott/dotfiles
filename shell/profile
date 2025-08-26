@@ -32,6 +32,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias r='ranger'
+alias b='br'
 alias g="git"
 alias gv='nvim -c ":GV"'
 alias j='z'

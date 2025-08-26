@@ -171,6 +171,11 @@ create_symlink ~/dotfiles/ranger/zenburn.py ~/.config/ranger/colorschemes/zenbur
 mkdir -p ~/.config/bat
 create_symlink ~/dotfiles/bat/config ~/.config/bat/config
 
+# Broot (tree-based file browser)
+mkdir -p ~/.config/broot
+create_symlink ~/dotfiles/broot/conf.hjson ~/.config/broot/conf.hjson
+create_symlink ~/dotfiles/broot/verbs.hjson ~/.config/broot/verbs.hjson
+
 # Karabiner
 create_symlink ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 
