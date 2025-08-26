@@ -645,6 +645,11 @@ chars = "\u001B[13;5u"
 key = "Return"
 mods = "Control"
 
+[[keyboard.bindings]]
+chars = "\u001B\r"
+key = "Return"
+mods = "Alt"
+
 [selection]
 save_to_clipboard = true
 
