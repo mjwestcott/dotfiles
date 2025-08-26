@@ -175,6 +175,7 @@ create_symlink ~/dotfiles/bat/config ~/.config/bat/config
 mkdir -p ~/.config/broot
 create_symlink ~/dotfiles/broot/conf.hjson ~/.config/broot/conf.hjson
 create_symlink ~/dotfiles/broot/verbs.hjson ~/.config/broot/verbs.hjson
+create_symlink ~/dotfiles/broot/skins ~/.config/broot/skins
 
 # Karabiner
 create_symlink ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
