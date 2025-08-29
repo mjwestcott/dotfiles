@@ -42,9 +42,6 @@ alias vim='nvim'
 alias pr='gh pr create'
 alias rd='redis-cli'
 alias cx='kubectx'
-alias cc='claude'
-alias cr='claude --resume'
-alias ca='cursor-agent'
 alias ls='eza'
 alias ll='eza -l'
 alias la='eza -la'
@@ -63,6 +60,16 @@ alias htop='btm'
 alias man='tldr'
 alias cloc='tokei'
 alias youtube-dl='yt-dlp'
+
+# Claude Code
+alias c='claude'
+alias clc='claude --continue'
+alias clr='claude --resume'
+alias clp='claude --print'
+
+function todo() {
+    claude --print --permission-mode="acceptEdits" "/todo $*"
+}
 
 # Scripts/tools
 alias wifi='~/dotfiles/bin/wifi-password'
