@@ -43,6 +43,7 @@ brew "ccusage"                    # Claude Code usage tracker
 brew "neovim"
 
 # Terminal and shell
+cask "alacritty"                  # GPU-accelerated terminal
 brew "tmux"
 brew "starship"                   # Cross-shell prompt
 brew "zoxide"                     # Smarter cd
@@ -55,7 +56,7 @@ brew "lazydocker"                 # Docker TUI
 brew "dive"                       # Docker image explorer
 
 # Kubernetes
-brew "docker", cask: true
+cask "docker-desktop"
 brew "helm"
 brew "kind"
 brew "k3d"
@@ -104,6 +105,7 @@ brew "websocat"                   # WebSocket client
 
 # Git tools
 brew "gh"                         # GitHub CLI (official)
+cask "gitify"                     # GitHub notifications
 brew "delta"                      # Better git diffs with syntax highlighting
 
 # Monitoring
@@ -124,7 +126,3 @@ brew "cue-lang/tap/cue"           # CUE data language
 brew "minio/stable/minio"         # Object storage
 brew "minio/stable/mc"            # MinIO client
 brew "yqrashawn/goku/goku"        # Karabiner configurator
-
-# Casks (GUI applications)
-cask "alacritty"                  # GPU-accelerated terminal
-cask "gitify"                     # GitHub notifications
