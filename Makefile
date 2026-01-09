@@ -1,8 +1,10 @@
-.PHONY: test lint lint-python lint-js lint-shell lint-markdown help
+.PHONY: install update test lint lint-python lint-js lint-shell lint-markdown help
 
 # Default target
 help:
 	@echo "Available targets:"
+	@echo "  install       - Install/update dotfiles (idempotent)"
+	@echo "  update        - Alias for install"
 	@echo "  test          - Run shell configuration tests"
 	@echo "  lint          - Run all linters"
 	@echo "  lint-python   - Lint Python files with ruff"
@@ -10,6 +12,13 @@ help:
 	@echo "  lint-shell    - Lint shell scripts with shellcheck"
 	@echo "  lint-markdown - Check markdown files with markdownlint (if available)"
 	@echo "  help          - Show this help message"
+
+# Install/update dotfiles
+install:
+	@./install
+
+# Alias for install
+update: install
 
 # Run shell configuration tests
 test:

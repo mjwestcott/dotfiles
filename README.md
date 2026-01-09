@@ -4,12 +4,10 @@ Configuration for vim, tmux, zsh, and more.
 
 ## Installation
 
-### Clean Install (New Machine)
-
 ```bash
 git clone https://github.com/mjwestcott/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./install
+make install
 ```
 
 This will:
@@ -19,21 +17,23 @@ This will:
 - Create symlinks for all configuration files
 - Configure development tools (Neovim, Tmux, Git, etc.)
 
-### Manual Post-Installation Steps
+The install is idempotent, so run `make install` (or `make update`) anytime to pull in changes.
+
+### Post-Installation Steps
 
 1. Change default shell: `chsh -s $(which zsh)`
-2. Install Vim plugins (:Lazy install, :Lazy update)
+2. Install Vim plugins: `:Lazy install`
 3. Install Tmux plugins: `prefix + I`
 4. Set up GitHub SSH keys
 5. Configure Git signing keys
-6. Start any required Homebrew services
 
-### Code Quality
+### Make Targets
 
-Test configuration and lint code:
 ```bash
-make test    # Verify configs source cleanly
-make lint    # Run all linters
+make install  # Install/update dotfiles
+make test     # Verify configs source cleanly
+make lint     # Run all linters
+make help     # Show all available targets
 ```
 
 ## Package Management with Brewfile
