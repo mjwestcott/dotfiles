@@ -39,7 +39,7 @@ fi
 
 # Install packages from Brewfile
 info "Installing/updating packages from Brewfile..."
-brew bundle --file=~/dotfiles/Brewfile
+brew bundle --verbose --file=~/dotfiles/Brewfile
 
 # ============================================================================
 # Development Tools
