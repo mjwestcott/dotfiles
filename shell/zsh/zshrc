@@ -32,9 +32,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Initialize zoxide (smarter cd)
 eval "$(zoxide init zsh)"
 
-# Setup Claude Code
-alias claude="~/.claude/local/claude"
-
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 

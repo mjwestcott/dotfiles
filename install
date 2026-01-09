@@ -66,17 +66,17 @@ else
     warn "Neither uv nor pipx found, skipping Poetry installation"
 fi
 
+# Claude Code (native binary - recommended by Anthropic)
+if command -v claude &> /dev/null; then
+    info "Claude Code already installed"
+else
+    info "Installing Claude Code..."
+    curl -fsSL https://claude.ai/install.sh | bash
+fi
+
 # Global npm packages
 if command -v npm &> /dev/null; then
     info "Installing/updating global npm packages..."
-
-    # Claude Code - only install if command doesn't exist
-    if command -v claude &> /dev/null; then
-        info "Claude Code already installed"
-    else
-        npm install -g @anthropic-ai/claude-code
-    fi
-
     npm install -g @openai/codex
     npm install -g @google/gemini-cli
 else
