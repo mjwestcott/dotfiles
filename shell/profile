@@ -276,27 +276,39 @@ function fzf_jump {
 function fzf_vim {
     local file
     file=$(rg --files | fzf -q "${*}")
-    [[ -n "$file" ]] && vim "$file"
+    [[ -n "$file" ]] && nvim "$file"
 }
 
 # Similar to fzf_vim, but show only hidden files.
 function fzf_hidden {
     local file
     file=$(rg --hidden --files | fzf -q "${*}")
-    [[ -n "$file" ]] && vim "$file"
+    [[ -n "$file" ]] && nvim "$file"
 }
 
 function fzf_rg {
     local tmp="$TMPDIR/fzf_rg"
-    rg . | fzf -e -m -q "${*}" >| "$tmp"
-    [[ -s "$tmp" ]] && vim -q "$tmp"
+    rg --line-number --color=always . |
+        fzf -e -m --ansi --delimiter=':' --nth=3.. -q "${*}" |
+        sed 's/\x1b\[[0-9;]*m//g' >| "$tmp"
+    [[ -s "$tmp" ]] && nvim \
+        --cmd "set errorformat=%f:%l:%m" \
+        --cmd "set shortmess+=O" \
+        -c "silent cfile $tmp" \
+        -c "silent cc"
 }
 
 # Similar to fzf_rg, but pass the args through to rg as a regex and filter only the source text.
 function fzf_regex {
     local tmp="$TMPDIR/fzf_rg"
-    rg "${*}" --color=always | fzf -e -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. >| "$tmp"
-    [[ -s "$tmp" ]] && vim -q "$tmp"
+    rg --line-number --color=always "${*}" |
+        fzf -e -m --ansi --color=hl:4,hl+:4 --delimiter=':' --nth=3.. |
+        sed 's/\x1b\[[0-9;]*m//g' >| "$tmp"
+    [[ -s "$tmp" ]] && nvim \
+        --cmd "set errorformat=%f:%l:%m" \
+        --cmd "set shortmess+=O" \
+        -c "silent cfile $tmp" \
+        -c "silent cc"
 }
 
 # Search the whole file system using locate.
@@ -306,7 +318,7 @@ function fzf_locate {
     if [[ -d "$result" ]]; then
         cd "$result" || return
     elif [[ -f "$result" ]]; then
-        vim "$result"
+        nvim "$result"
     fi
 }
 
