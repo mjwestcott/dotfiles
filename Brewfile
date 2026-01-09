@@ -78,7 +78,6 @@ brew "ruff"                       # Fast Python linter/formatter
 # Java/Scala ecosystem
 brew "scala"
 brew "apache-spark"
-brew "kafka"
 
 # Databases
 brew "postgresql"

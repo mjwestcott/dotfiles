@@ -153,7 +153,7 @@ bench        # Run shell startup benchmark
 
 Run the shell configuration test suite to validate setup:
 ```bash
-make test    # Verify configs source cleanly in zsh
+just test    # Verify configs source cleanly in zsh
 ```
 
 The minimal test suite validates that both `shell/profile` and `shell/zsh/zshrc` can be sourced without errors, ensuring your shell configuration is working properly.
@@ -171,17 +171,17 @@ Claude Code is configured to automatically format files on save via the hook in 
 - **All text files**: Trailing whitespace removal
 
 #### Linting (Manual)
-Use the Makefile for comprehensive linting after making multiple changes:
+Use the justfile for comprehensive linting after making multiple changes:
 
 ```bash
 # Lint all file types
-make lint
+just lint
 
 # Lint specific file types
-make lint-python     # Ruff (Python)
-make lint-js         # ESLint (JavaScript/TypeScript)
-make lint-shell      # ShellCheck (shell scripts)
-make lint-markdown   # markdownlint (Markdown)
+just lint-python     # Ruff (Python)
+just lint-js         # ESLint (JavaScript/TypeScript)
+just lint-shell      # ShellCheck (shell scripts)
+just lint-markdown   # markdownlint (Markdown)
 ```
 
 **Required tools** (install via Homebrew/npm):
@@ -196,7 +196,7 @@ npm install -g eslint markdownlint-cli
 brew install black prettier shfmt
 ```
 
-**Note**: The `make lint` command will work with whatever tools are available and skip missing ones gracefully.
+**Note**: The `just lint` command will work with whatever tools are available and skip missing ones gracefully.
 
 ## File Structure
 

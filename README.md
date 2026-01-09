@@ -7,17 +7,17 @@ Configuration for vim, tmux, zsh, and more.
 ```bash
 git clone https://github.com/mjwestcott/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-make install
+./install
 ```
 
 This will:
 - Install Homebrew if not present
-- Install all packages from the Brewfile
+- Install all packages from the Brewfile (including `just`)
 - Set up Zsh shell environment with Antidote plugin manager
 - Create symlinks for all configuration files
 - Configure development tools (Neovim, Tmux, Git, etc.)
 
-The install is idempotent, so run `make install` (or `make update`) anytime to pull in changes.
+The install is idempotent, so run `just install` anytime to pull in changes.
 
 ### Post-Installation Steps
 
@@ -27,13 +27,13 @@ The install is idempotent, so run `make install` (or `make update`) anytime to p
 4. Set up GitHub SSH keys
 5. Configure Git signing keys
 
-### Make Targets
+### Commands
 
 ```bash
-make install  # Install/update dotfiles
-make test     # Verify configs source cleanly
-make lint     # Run all linters
-make help     # Show all available targets
+just           # Show all available recipes
+just install   # Install/update dotfiles
+just test      # Verify configs source cleanly
+just lint      # Run all linters
 ```
 
 ## Package Management with Brewfile
