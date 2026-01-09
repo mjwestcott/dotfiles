@@ -19,5 +19,7 @@
     "type": "command",
     "command": "~/dotfiles/bin/cc-statusline"
   },
-  "model": "opusplan"
+  "enabledPlugins": {
+    "code-simplifier@claude-plugins-official": true
+  }
 }
