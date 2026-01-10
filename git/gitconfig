@@ -80,30 +80,22 @@
 [interactive]
         diffFilter = delta --color-only
 
-[merge]
-        conflictstyle = diff3
-
-[diff]
-        colorMoved = default
-        newHighlight = green 22
-        oldNormal = red
-
 [diff]
         tool = vimdiff
+        colorMoved = default
         renames = copies  # Detect copies as well as renames.
         compactionHeuristic = true
         indentHeuristic = on
+
+[merge]
+        conflictstyle = diff3
+        log = true  # Include summaries of merged commits in newly created merge commit messages.
 
 [difftool]
         prompt = false
 
 [help]
-        # Automatically correct and execute mistyped commands.
         autocorrect = 1
-
-[merge]
-        # Include summaries of merged commits in newly created merge commit messages.
-        log = true
 
 [push]
         default = simple

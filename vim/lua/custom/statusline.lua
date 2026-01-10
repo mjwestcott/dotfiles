@@ -1,25 +1,14 @@
 -- Lualine customisation
 local custom_zenburn = require("lualine.themes.zenburn")
-custom_zenburn.normal.b.bg = "#353535"
-custom_zenburn.insert.b.bg = "#353535"
-custom_zenburn.visual.b.bg = "#353535"
-custom_zenburn.replace.b.bg = "#353535"
-custom_zenburn.command.b.bg = "#353535"
-custom_zenburn.normal.c.bg = "#353535"
-custom_zenburn.insert.c.bg = "#353535"
-custom_zenburn.visual.c.bg = "#353535"
-custom_zenburn.replace.c.bg = "#353535"
-custom_zenburn.command.c.bg = "#353535"
-custom_zenburn.normal.z.bg = custom_zenburn.normal.b.bg
-custom_zenburn.insert.z.bg = custom_zenburn.insert.b.bg
-custom_zenburn.visual.z.bg = custom_zenburn.visual.b.bg
-custom_zenburn.replace.z.bg = custom_zenburn.replace.b.bg
-custom_zenburn.command.z.bg = custom_zenburn.command.b.bg
-custom_zenburn.normal.z.fg = custom_zenburn.normal.b.fg
-custom_zenburn.insert.z.fg = custom_zenburn.insert.b.fg
-custom_zenburn.visual.z.fg = custom_zenburn.visual.b.fg
-custom_zenburn.replace.z.fg = custom_zenburn.replace.b.fg
-custom_zenburn.command.z.fg = custom_zenburn.command.b.fg
+local bg = "#353535"
+
+-- Apply consistent background to all mode sections
+for _, mode in ipairs({ "normal", "insert", "visual", "replace", "command" }) do
+  custom_zenburn[mode].b.bg = bg
+  custom_zenburn[mode].c.bg = bg
+  custom_zenburn[mode].z.bg = custom_zenburn[mode].b.bg
+  custom_zenburn[mode].z.fg = custom_zenburn[mode].b.fg
+end
 
 require("lualine").setup({
   options = {

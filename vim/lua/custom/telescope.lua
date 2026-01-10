@@ -15,14 +15,8 @@ require("telescope").setup({
 
 local function get_project_root()
   local util = require("lspconfig.util")
-  local lsp_root = util.root_pattern(".git")(vim.fn.expand("%:p"))
-
-  if lsp_root then
-    return lsp_root
-  else
-    local rooter_root = vim.g.rooter_silent_chdir == 0 and vim.fn.getcwd() or nil
-    return rooter_root or vim.fn.getcwd()
-  end
+  local git_root = util.root_pattern(".git")(vim.fn.expand("%:p"))
+  return git_root or vim.fn.getcwd()
 end
 
 -- Enable telescope fzf native, if installed
