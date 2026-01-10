@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Glass.aiff"
+            "command": "afplay -v 1.0 /System/Library/Sounds/Glass.aiff"
           }
         ]
       }
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Bottle.aiff"
+            "command": "afplay -v 2.0 /System/Library/Sounds/Bottle.aiff"
           }
         ]
       }
