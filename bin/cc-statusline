@@ -22,7 +22,7 @@ input_tokens=$(echo "$block_data" | jq -r '.tokenCounts.inputTokens // 0')
 # Calculate today's total (all blocks since midnight)
 today=$(date +%Y-%m-%d)
 today_total=$(echo "$all_data" | jq -r --arg today "$today" '
-    [.blocks[] | select(.startTime | startswith($today)) | .costUSD // 0] | add | . * 100 | round / 100
+    [.blocks[] | select(.startTime | startswith($today)) | .costUSD // 0] | add // 0 | . * 100 | round / 100
 ')
 
 # Calculate last 30 days total
