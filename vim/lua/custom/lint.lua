@@ -34,9 +34,21 @@ require("conform").setup({
   },
 })
 
+-- Helper to detect project-specific Python linter
+local function get_python_linters()
+  local root = vim.fn.getcwd()
+  local flake8_configs = { ".flake8", "setup.cfg", "tox.ini" }
+  for _, config in ipairs(flake8_configs) do
+    if vim.fn.filereadable(root .. "/" .. config) == 1 then
+      return { "flake8" }
+    end
+  end
+  return { "ruff" }
+end
+
 -- Setup nvim-lint for diagnostics
 require("lint").linters_by_ft = {
-  python = { "flake8" },
+  python = get_python_linters(),
   javascript = { "eslint" },
   javascriptreact = { "eslint" },
   typescript = { "eslint" },
