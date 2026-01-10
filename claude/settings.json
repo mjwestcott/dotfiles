@@ -2,6 +2,9 @@
   "env": {
     "MAX_THINKING_TOKENS": "8192"
   },
+  "trustedDirectories": [
+    "~/repos"
+  ],
   "hooks": {
     "PostToolUse": [
       {
