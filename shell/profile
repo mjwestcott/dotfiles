@@ -22,6 +22,7 @@ export PATH=/usr/local/opt/python/libexec/bin:$PATH     # Python
 export PATH=/usr/local/opt/bin:$PATH                    # Homebrew
 export PATH=/usr/local/bin:$PATH                        # System
 export PATH=$PATH:$GOPATH/bin                           # Go (append to avoid conflicts)
+export PATH=$HOME/.claude/local:$PATH                   # Claude Code
 
 # https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
