@@ -72,6 +72,61 @@ function todo() {
     claude --print --permission-mode="acceptEdits" "/todo $*"
 }
 
+# Git Worktree + Claude Code helpers
+# Usage:
+#   cw <branch>   - Create worktree and launch Claude
+#   cwl           - List worktrees
+#   cwm <branch>  - Merge branch into current, clean up worktree
+#   cwr <branch>  - Remove worktree without merging
+cw() {
+    local branch="${1:?Usage: cw <branch-name>}"
+    local worktree_path
+    worktree_path="../$(basename "$PWD")-$branch"
+
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+        git worktree add "$worktree_path" "$branch"
+    else
+        git worktree add "$worktree_path" -b "$branch"
+    fi
+
+    cd "$worktree_path" && claude
+}
+
+alias cwl='git worktree list'
+
+# Find worktree path for a branch (works from anywhere in the repo)
+_cwpath() {
+    git worktree list --porcelain | grep -B2 "branch refs/heads/$1" | grep "^worktree " | cut -d' ' -f2-
+}
+
+cwm() {
+    local branch="${1:?Usage: cwm <branch-name>}"
+    local wt_path
+    wt_path=$(_cwpath "$branch")
+
+    if [ -z "$wt_path" ]; then
+        echo "No worktree found for branch: $branch"
+        return 1
+    fi
+
+    git merge "$branch" && \
+    git branch -d "$branch" && \
+    git worktree remove "$wt_path"
+}
+
+cwr() {
+    local branch="${1:?Usage: cwr <branch-name>}"
+    local wt_path
+    wt_path=$(_cwpath "$branch")
+
+    if [ -z "$wt_path" ]; then
+        echo "No worktree found for branch: $branch"
+        return 1
+    fi
+
+    git worktree remove "$wt_path"
+}
+
 # Create a directory and cd into it
 take() { mkdir -p "$1" && cd "$1" || return; }
 
