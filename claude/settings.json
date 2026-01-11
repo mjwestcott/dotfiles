@@ -2,9 +2,6 @@
   "env": {
     "MAX_THINKING_TOKENS": "8192"
   },
-  "trustedDirectories": [
-    "~/repos"
-  ],
   "hooks": {
     "PostToolUse": [
       {
@@ -44,6 +41,10 @@
     "command": "~/dotfiles/bin/cc-statusline"
   },
   "enabledPlugins": {
-    "code-simplifier@claude-plugins-official": true
-  }
+    "code-simplifier@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true
+  },
+  "trustedDirectories": [
+    "~/repos"
+  ]
 }
