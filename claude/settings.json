@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path' | { read file_path; if [ -n \"$file_path\" ]; then ~/.claude/hooks/format.sh \"$file_path\"; fi; }"
+            "command": "jq -r '.tool_input.file_path' | { read file_path; if [ -n \"$file_path\" ] && [ -x ~/.claude/hooks/format.sh ]; then ~/.claude/hooks/format.sh \"$file_path\"; fi; }"
           }
         ]
       }
