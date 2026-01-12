@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay -v 1.0 /System/Library/Sounds/Glass.aiff"
+            "command": "[ \"$(uname)\" = Darwin ] && afplay -v 1.0 /System/Library/Sounds/Glass.aiff || printf '\\a'"
           }
         ]
       }
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay -v 2.0 /System/Library/Sounds/Bottle.aiff"
+            "command": "[ \"$(uname)\" = Darwin ] && afplay -v 2.0 /System/Library/Sounds/Bottle.aiff || printf '\\a'"
           }
         ]
       }
