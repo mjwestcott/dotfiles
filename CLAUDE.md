@@ -120,6 +120,8 @@ Multiple fuzzy finder functions for enhanced workflow:
 ### Claude Code Configuration
 - Settings: `claude/settings.json` with custom statusline
 - Statusline script: `claude/statusline.sh` (Starship-style prompt)
+- Custom agents: `claude/agents/` (Ousterhout code review agents)
+- Custom skills: `claude/skills/` (shared guidance referenced by agents)
 - Installation creates symlinks to `~/.claude/`
 
 ### Plugin Management
