@@ -1,7 +1,4 @@
 {
-  "env": {
-    "MAX_THINKING_TOKENS": "8192"
-  },
   "model": "opus",
   "hooks": {
     "PostToolUse": [
@@ -42,7 +39,6 @@
     "command": "~/dotfiles/bin/cc-statusline"
   },
   "enabledPlugins": {
-    "code-simplifier@claude-plugins-official": false,
     "commit-commands@claude-plugins-official": true
   }
 }
