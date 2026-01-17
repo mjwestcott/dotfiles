@@ -1,0 +1,136 @@
+# Justfile for project commands
+# Run `just` to see all available commands
+
+set dotenv-load
+
+default:
+    @just --list
+
+# =============================================================================
+# Development
+# =============================================================================
+
+# Start all services
+dev:
+    docker compose up -d
+
+# Stop all services
+down:
+    docker compose down
+
+# Restart all services
+restart:
+    docker compose restart
+
+# Tail logs (all services)
+logs:
+    docker compose logs -f
+
+# Tail backend logs only
+logs-backend:
+    docker compose logs -f backend
+
+# Tail frontend logs only
+logs-frontend:
+    docker compose logs -f frontend
+
+# =============================================================================
+# Backend
+# =============================================================================
+
+# Run backend tests
+test-backend:
+    docker compose exec backend pytest
+
+# Run backend linter
+lint-backend:
+    docker compose exec backend ruff check --fix src tests
+    docker compose exec backend ruff format src tests
+
+# Run backend type checker
+typecheck-backend:
+    docker compose exec backend mypy src
+
+# Open backend shell
+shell-backend:
+    docker compose exec backend bash
+
+# =============================================================================
+# Frontend
+# =============================================================================
+
+# Run frontend tests
+test-frontend:
+    docker compose exec frontend npm run test
+
+# Run frontend linter
+lint-frontend:
+    docker compose exec frontend npm run lint:fix
+
+# Run frontend type checker
+typecheck-frontend:
+    docker compose exec frontend npm run typecheck
+
+# Open frontend shell
+shell-frontend:
+    docker compose exec frontend sh
+
+# Generate API client from OpenAPI spec
+api-generate:
+    docker compose exec frontend npm run api:generate
+
+# =============================================================================
+# Database
+# =============================================================================
+
+# Create a new migration
+db-migrate message:
+    docker compose exec backend alembic revision --autogenerate -m "{{message}}"
+
+# Apply all migrations
+db-upgrade:
+    docker compose exec backend alembic upgrade head
+
+# Rollback one migration
+db-downgrade:
+    docker compose exec backend alembic downgrade -1
+
+# Open database shell
+db-shell:
+    docker compose exec postgres psql -U postgres -d app
+
+# =============================================================================
+# All
+# =============================================================================
+
+# Run all tests
+test: test-backend test-frontend
+
+# Run all linters
+lint: lint-backend lint-frontend
+
+# Run all type checkers
+typecheck: typecheck-backend typecheck-frontend
+
+# Run pre-commit checks
+pre-commit:
+    pre-commit run --all-files
+
+# Full check (lint, typecheck, test)
+check: lint typecheck test
+
+# =============================================================================
+# Setup
+# =============================================================================
+
+# Initial setup
+setup:
+    cp -n .env.example .env || true
+    docker compose build
+    docker compose up -d
+    just db-upgrade
+    @echo "Setup complete! Run 'just dev' to start."
+
+# Clean everything (containers, volumes)
+clean:
+    docker compose down -v --remove-orphans
