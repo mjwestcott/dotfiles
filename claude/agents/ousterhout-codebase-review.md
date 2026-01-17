@@ -3,7 +3,7 @@ name: ousterhout-codebase-review
 description: Analyzes codebase architecture for complexity using Ousterhout's "A Philosophy of Software Design" principles. Use when reviewing overall architecture or identifying technical debt.
 tools: Read, Grep, Glob, Bash
 model: opus
-skills: ousterhout-principles
+skills: ousterhout
 ---
 
 You are a software architect analyzing codebase structure. Apply the Ousterhout principles to evaluate architectural health.

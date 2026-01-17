@@ -1,5 +1,5 @@
 ---
-name: ousterhout-principles
+name: ousterhout
 description: John Ousterhout's "A Philosophy of Software Design" principles for evaluating code complexity. Reference material for code review and architecture analysis.
 ---
 
