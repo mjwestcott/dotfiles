@@ -49,7 +49,7 @@ lint-backend:
 
 # Run backend type checker
 typecheck-backend:
-    docker compose exec backend mypy src
+    docker compose exec backend pyright src
 
 # Open backend shell
 shell-backend:

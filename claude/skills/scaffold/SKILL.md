@@ -1,6 +1,6 @@
 ---
 name: scaffold
-description: Scaffold a new project from the python-react boilerplate. Use when starting a new full-stack codebase.
+description: Scaffold a new project from the fullstack boilerplate. Use when starting a new full-stack codebase.
 user_invocable: true
 ---
 
@@ -8,10 +8,10 @@ Scaffold a new project using my standard boilerplate.
 
 ## Boilerplate
 
-The full working boilerplate is at [assets/python-react-boilerplate/](assets/python-react-boilerplate/).
+The full working boilerplate is at [assets/fullstack-boilerplate/](assets/fullstack-boilerplate/).
 
 **Stack:**
-- Backend: Python 3.12+, FastAPI, SQLAlchemy (async), Alembic, uv, ruff, pytest
+- Backend: Python 3.12+, FastAPI, SQLAlchemy (async), Alembic, uv, ruff, pyright, pytest
 - Frontend: React, Vite, TypeScript, TanStack Query, shadcn/ui, Tailwind, vitest
 - Infrastructure: Docker Compose, PostgreSQL, Redis, GitHub Actions CI
 
@@ -22,7 +22,7 @@ The full working boilerplate is at [assets/python-react-boilerplate/](assets/pyt
    - Backend-only — use only `backend/` and root configs
    - Frontend-only — use only `frontend/` and adapt root configs
 
-2. **Copy the boilerplate**: Copy the appropriate files from `assets/python-react-boilerplate/` to the project root
+2. **Copy the boilerplate**: Copy the appropriate files from `assets/fullstack-boilerplate/` to the project root
 
 3. **Customize**:
    - Update project name in `package.json`, `pyproject.toml`, `README.md`

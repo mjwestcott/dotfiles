@@ -46,8 +46,8 @@ jobs:
           ruff check src tests
           ruff format --check src tests
 
-      - name: Type check with mypy
-        run: mypy src
+      - name: Type check with pyright
+        run: pyright src
 
       - name: Run tests
         env:

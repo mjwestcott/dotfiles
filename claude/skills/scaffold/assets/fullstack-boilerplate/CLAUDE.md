@@ -29,11 +29,11 @@ Located in `backend/`.
 
 ### Stack
 
-Python 3.12+, uv, ruff, mypy, FastAPI, Pydantic, SQLAlchemy 2.0+ (async), Alembic, PostgreSQL, Redis, structlog, pytest
+Python 3.12+, uv, ruff, pyright, FastAPI, Pydantic, SQLAlchemy 2.0+ (async), Alembic, PostgreSQL, Redis, structlog, pytest
 
 ### Standards
 
-- `ruff check`, `ruff format`, `mypy --strict` must pass
+- `ruff check`, `ruff format`, `pyright` must pass
 - Complete type hints on all functions
 - Pydantic models for all request/response data
 - All I/O is async; use `async with` for resource management
