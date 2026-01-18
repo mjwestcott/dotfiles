@@ -1,0 +1,56 @@
+# Justfile for mycli
+
+# Default recipe - show available commands
+default:
+    @just --list
+
+# Build the project
+build:
+    cargo build
+
+# Run the CLI with arguments
+run *ARGS:
+    cargo run -- {{ARGS}}
+
+# Run tests
+test:
+    cargo test
+
+# Run clippy linter
+lint:
+    cargo clippy --all-targets -- -D warnings
+
+# Format code
+fmt:
+    cargo fmt
+
+# Check formatting without modifying
+fmt-check:
+    cargo fmt --check
+
+# Run all checks (format, lint, test)
+check: fmt-check lint test
+
+# Generate and open documentation
+doc:
+    cargo doc --open
+
+# Build release binary
+release:
+    cargo build --release
+
+# Clean build artifacts
+clean:
+    cargo clean
+
+# Install the binary locally
+install:
+    cargo install --path .
+
+# Watch for changes and run tests
+watch:
+    cargo watch -x test
+
+# Run with verbose logging
+run-verbose *ARGS:
+    cargo run -- --verbose {{ARGS}}
