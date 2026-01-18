@@ -120,6 +120,7 @@ brew "exiftool"
 # Other tools
 brew "pre-commit"                 # Git hooks framework
 brew "stylua"                     # Lua formatter
+brew "biome"                      # JavaScript/TypeScript formatter
 
 # Custom taps
 brew "cue-lang/tap/cue"           # CUE data language
