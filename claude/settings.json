@@ -2,7 +2,7 @@
   "model": "opus",
   "permissions": {
     "deny": [
-      "Read(.env*)",
+      "Read(.env)",
       "Read(**/*secret*)",
       "Read(**/*credential*)",
       "Read(**/*.pem)",
@@ -11,10 +11,10 @@
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)",
       "Read(~/.gnupg/**)",
-      "Edit(.env*)",
+      "Edit(.env)",
       "Edit(**/*secret*)",
       "Edit(**/*credential*)",
-      "Write(.env*)",
+      "Write(.env)",
       "Write(**/*secret*)",
       "Write(**/*credential*)"
     ]
