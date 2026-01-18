@@ -22,7 +22,7 @@ if echo "$cmd" | grep -qE 'git\s+clean\s+-f'; then
     exit 2
 fi
 
-if echo "$cmd" | grep -qE 'git\s+push\s+.*(-f|--force)'; then
+if echo "$cmd" | grep -qE 'git\s+push\s+.*(-f\b|--force)'; then
     echo "Blocked: force push can destroy remote history. Run manually if needed." >&2
     exit 2
 fi
