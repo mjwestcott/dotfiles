@@ -39,6 +39,7 @@
     "command": "~/dotfiles/bin/cc-statusline"
   },
   "enabledPlugins": {
-    "commit-commands@claude-plugins-official": true
+    "commit-commands@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true
   }
 }
