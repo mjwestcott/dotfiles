@@ -10,7 +10,7 @@ Scaffold a new project using my standard boilerplates.
 
 ### 1. Full-Stack (Python + React)
 
-Located at [assets/fullstack-boilerplate/](assets/fullstack-boilerplate/).
+Located at [assets/fullstack/](assets/fullstack/).
 
 **Stack:**
 - Backend: Python 3.12+, FastAPI, SQLAlchemy (async), Alembic, uv, ruff, pyright, pytest
@@ -19,7 +19,7 @@ Located at [assets/fullstack-boilerplate/](assets/fullstack-boilerplate/).
 
 ### 2. Rust CLI
 
-Located at [assets/rust-cli-boilerplate/](assets/rust-cli-boilerplate/).
+Located at [assets/rust-cli/](assets/rust-cli/).
 
 **Stack:**
 - Rust 2024 edition, MSRV 1.85+
@@ -33,10 +33,10 @@ Located at [assets/rust-cli-boilerplate/](assets/rust-cli-boilerplate/).
 ## Steps
 
 1. **Ask what kind of project** (if not specified):
-   - Full-stack (Python + React) — use fullstack-boilerplate
-   - Backend-only — use only `backend/` from fullstack-boilerplate
-   - Frontend-only — use only `frontend/` from fullstack-boilerplate
-   - Rust CLI — use rust-cli-boilerplate
+   - Full-stack (Python + React) — use fullstack
+   - Backend-only — use only `backend/` from fullstack
+   - Frontend-only — use only `frontend/` from fullstack
+   - Rust CLI — use rust-cli
 
 2. **Copy the boilerplate**: Copy the appropriate files from `assets/` to the project root
 
