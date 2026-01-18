@@ -164,13 +164,17 @@ The minimal test suite validates that both `shell/profile` and `shell/zsh/zshrc`
 
 The repository includes automated formatting and linting capabilities:
 
-#### Formatting (Automatic)
-Claude Code is configured to automatically format files on save via the hook in `claude/hooks/format.sh`:
-- **Python**: Black formatting
-- **JavaScript/TypeScript/JSON**: Prettier formatting
-- **Shell scripts**: shfmt formatting
-- **Markdown**: Prettier formatting
+#### Formatting & Linting (Automatic)
+Claude Code is configured to automatically format and lint files on save via the hook in `claude/hooks/post-edit.sh`:
+- **Python**: ruff format + ruff check + pyright
+- **JavaScript/TypeScript**: biome format + biome lint + tsc
+- **JSON**: biome/prettier formatting
+- **Go**: goimports + golangci-lint
+- **Shell scripts**: shfmt + shellcheck
+- **Markdown/YAML**: prettier formatting
 - **All text files**: Trailing whitespace removal
+
+Lint errors are fed back to Claude as JSON feedback for automatic fixing.
 
 #### Linting (Manual)
 Use the justfile for comprehensive linting after making multiple changes:
