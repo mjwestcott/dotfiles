@@ -85,11 +85,30 @@ elif [[ "$extension" =~ ^(js|ts|jsx|tsx)$ ]]; then
         fi
     fi
 
-# JSON files
-elif [[ "$extension" == "json" ]]; then
+# JSON/JSONC files
+elif [[ "$extension" =~ ^(json|jsonc)$ ]]; then
     echo "Formatting JSON file: $filename"
     if command_exists biome; then
         biome format --write "$file_path" &>/dev/null
+        # Lint with biome for JSON
+        errors=$(biome lint "$file_path" 2>&1 | grep -E "^.*(error|warning)" | head -5)
+        if [[ -n "$errors" ]]; then
+            add_lint_error "Biome: $errors"
+        fi
+    elif command_exists prettier; then
+        prettier --write "$file_path" &>/dev/null
+    fi
+
+# CSS/SCSS files
+elif [[ "$extension" =~ ^(css|scss)$ ]]; then
+    echo "Formatting CSS file: $filename"
+    if command_exists biome; then
+        biome format --write "$file_path" &>/dev/null
+        # Lint with biome
+        errors=$(biome lint "$file_path" 2>&1 | grep -E "^.*(error|warning)" | head -5)
+        if [[ -n "$errors" ]]; then
+            add_lint_error "Biome: $errors"
+        fi
     elif command_exists prettier; then
         prettier --write "$file_path" &>/dev/null
     fi
