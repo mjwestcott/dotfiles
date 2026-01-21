@@ -9,10 +9,19 @@ install:
 # Alias for install
 update: install
 
+# Run all tests
+test: test-shell test-claude-hooks
+    @echo "All tests passed!"
+
 # Run shell configuration tests
-test:
+test-shell:
     @echo "Running shell configuration tests..."
     ./tests/shell.sh
+
+# Run Claude hooks tests
+test-claude-hooks:
+    @echo "Running Claude hooks tests..."
+    ./tests/claude-hooks.sh
 
 # Run all linters
 lint: lint-python lint-js lint-shell lint-markdown

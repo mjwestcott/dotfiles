@@ -148,6 +148,28 @@ elif [[ "$extension" =~ ^(sh|bash|zsh)$ ]] || [[ "$filename" =~ ^(zshrc|bashrc|p
         fi
     fi
 
+# Rust files
+elif [[ "$extension" == "rs" ]]; then
+    echo "Formatting Rust file: $filename"
+    if command_exists rustfmt; then
+        rustfmt --edition 2021 "$file_path" &>/dev/null
+    fi
+    # Lint with clippy if available (requires being in a cargo project)
+    if command_exists cargo; then
+        # Only run clippy if we're in a cargo project
+        cargo_root=$(dirname "$file_path")
+        while [[ "$cargo_root" != "/" ]]; do
+            if [[ -f "$cargo_root/Cargo.toml" ]]; then
+                errors=$(cargo clippy --manifest-path "$cargo_root/Cargo.toml" --message-format=short 2>&1 | grep -E "^error" | head -5)
+                if [[ -n "$errors" ]]; then
+                    add_lint_error "Clippy: $errors"
+                fi
+                break
+            fi
+            cargo_root=$(dirname "$cargo_root")
+        done
+    fi
+
 # Lua files
 elif [[ "$extension" == "lua" ]]; then
     echo "Formatting Lua file: $filename"
