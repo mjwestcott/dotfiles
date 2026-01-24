@@ -24,7 +24,7 @@ relative_time() {
 }
 
 # Box drawing
-WIDTH=50
+WIDTH=80
 TOP_LEFT="╭"
 TOP_RIGHT="╮"
 BOT_LEFT="╰"
@@ -159,14 +159,14 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     # GitHub PR and issues (if available)
     if command -v gh &>/dev/null && gh auth status &>/dev/null 2>&1; then
         # Check for active PR on current branch
-        pr_info=$(gh pr view --json number,state,title 2>/dev/null)
+        pr_info=$(gh pr view --json number,title 2>/dev/null)
         if [[ -n "$pr_info" ]]; then
             pr_num=$(echo "$pr_info" | grep -o '"number":[0-9]*' | cut -d: -f2)
-            pr_state=$(echo "$pr_info" | grep -o '"state":"[^"]*"' | cut -d'"' -f4)
             pr_title=$(echo "$pr_info" | grep -o '"title":"[^"]*"' | cut -d'"' -f4)
             if [[ -n "$pr_num" ]]; then
                 draw_empty
-                pr_text="PR #${pr_num} (${pr_state,,}) ${pr_title}"
+                draw_content "Open PRs:"
+                pr_text="#${pr_num} ${pr_title}"
                 draw_content "$pr_text"
             fi
         fi
@@ -175,7 +175,8 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
         issues=$(gh issue list --limit 3 --state open 2>/dev/null)
         if [[ -n "$issues" ]]; then
             draw_empty
-            while IFS=$'\t' read -r num title _; do
+            draw_content "Open Issues:"
+            while IFS=$'\t' read -r num _state title _; do
                 issue_text="#${num} ${title}"
                 draw_content "$issue_text"
             done < <(echo "$issues" | head -3)
