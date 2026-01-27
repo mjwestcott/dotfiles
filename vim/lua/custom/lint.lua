@@ -12,28 +12,6 @@ vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = t
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 
--- Setup conform.nvim for formatting
-require("conform").setup({
-  formatters_by_ft = {
-    python = { "black", "isort" },
-    javascript = { "prettier" },
-    javascriptreact = { "prettier" },
-    typescript = { "prettier" },
-    typescriptreact = { "prettier" },
-    css = { "prettier" },
-    html = { "prettier" },
-    json = { "prettier" },
-    yaml = { "prettier" },
-    markdown = { "prettier" },
-    lua = { "stylua" },
-    sh = { "shfmt" },
-  },
-  format_on_save = {
-    timeout_ms = 500,
-    lsp_fallback = true,
-  },
-})
-
 -- Helper to detect project-specific Python linter
 local function get_python_linters()
   local root = vim.fn.getcwd()
@@ -46,13 +24,58 @@ local function get_python_linters()
   return { "ruff" }
 end
 
+-- Helper to detect if project uses Biome
+local function has_biome()
+  local root = vim.fn.getcwd()
+  return vim.fn.filereadable(root .. "/biome.json") == 1 or vim.fn.filereadable(root .. "/biome.jsonc") == 1
+end
+
+-- Helper to get JS/TS formatter
+local function get_js_formatter()
+  if has_biome() then
+    return { "biome" }
+  end
+  return { "prettier" }
+end
+
+-- Helper to get JS/TS linters
+local function get_js_linters()
+  if has_biome() then
+    return { "biomejs" }
+  end
+  return { "eslint" }
+end
+
+-- Setup conform.nvim for formatting
+require("conform").setup({
+  formatters_by_ft = {
+    python = { "black", "isort" },
+    javascript = get_js_formatter,
+    javascriptreact = get_js_formatter,
+    typescript = get_js_formatter,
+    typescriptreact = get_js_formatter,
+    css = { "prettier" },
+    html = { "prettier" },
+    json = get_js_formatter,
+    jsonc = get_js_formatter,
+    yaml = { "prettier" },
+    markdown = { "prettier" },
+    lua = { "stylua" },
+    sh = { "shfmt" },
+  },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})
+
 -- Setup nvim-lint for diagnostics
 require("lint").linters_by_ft = {
   python = get_python_linters(),
-  javascript = { "eslint" },
-  javascriptreact = { "eslint" },
-  typescript = { "eslint" },
-  typescriptreact = { "eslint" },
+  javascript = get_js_linters(),
+  javascriptreact = get_js_linters(),
+  typescript = get_js_linters(),
+  typescriptreact = get_js_linters(),
   sh = { "shellcheck" },
 }
 
