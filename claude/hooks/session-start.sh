@@ -126,15 +126,15 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
                 fetch_ts=$(stat -c %Y "$fetch_head" 2>/dev/null)
             fi
             fetch_age=$(relative_time "$fetch_ts")
-            remote_status="↑${ahead} ↓${behind} (${fetch_age})  "
+            remote_status="+${ahead} -${behind} (${fetch_age})  "
         else
-            remote_status="↑${ahead} ↓${behind}  "
+            remote_status="+${ahead} -${behind}  "
         fi
     else
         remote_status=""
     fi
 
-    status_line="●${staged}  +${modified}  …${untracked}"
+    status_line="*${staged}  ~${modified}  ?${untracked}"
     [[ $stash_count -gt 0 ]] && status_line="$status_line  \$${stash_count}"
     [[ -n "$remote_status" ]] && status_line="${remote_status}${status_line}"
 
@@ -187,7 +187,7 @@ if git rev-parse --is-inside-work-tree &>/dev/null; then
     draw_line "$BOT_LEFT" "$BOT_RIGHT" "$HORIZ"
 
     # Legend for Claude to understand symbols
-    echo "Legend: ↑ahead ↓behind (last fetch) ●staged +modified …untracked \$stashed"
+    echo "Legend: +ahead -behind (last fetch) *staged ~modified ?untracked \$stashed"
 else
     # Not a git repo
     draw_line "$TOP_LEFT" "$TOP_RIGHT" "$HORIZ"
