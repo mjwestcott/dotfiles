@@ -204,6 +204,15 @@ create_symlink ~/dotfiles/claude/hooks ~/.claude/hooks
 create_symlink ~/dotfiles/claude/agents ~/.claude/agents
 create_symlink ~/dotfiles/claude/skills ~/.claude/skills
 
+# Codex config (copy, not symlink — Codex writes trusted projects into config.toml)
+mkdir -p ~/.codex
+if [[ ! -e ~/.codex/config.toml ]]; then
+    cp ~/dotfiles/codex/config.toml ~/.codex/config.toml
+    info "Seeded $HOME/.codex/config.toml from dotfiles"
+else
+    info "$HOME/.codex/config.toml already exists, skipping"
+fi
+
 # User bin directory
 mkdir -p ~/bin
 cd ~/dotfiles/bin
