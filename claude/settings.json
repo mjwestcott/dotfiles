@@ -6,8 +6,6 @@
   "permissions": {
     "deny": [
       "Read(.env)",
-      "Read(**/*secret*)",
-      "Read(**/*credential*)",
       "Read(**/*.pem)",
       "Read(**/*id_rsa*)",
       "Read(**/*id_ed25519*)",
@@ -15,11 +13,7 @@
       "Read(~/.aws/**)",
       "Read(~/.gnupg/**)",
       "Edit(.env)",
-      "Edit(**/*secret*)",
-      "Edit(**/*credential*)",
-      "Write(.env)",
-      "Write(**/*secret*)",
-      "Write(**/*credential*)"
+      "Write(.env)"
     ]
   },
   "hooks": {
