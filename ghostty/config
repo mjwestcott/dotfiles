@@ -1,0 +1,20 @@
+# Ghostty configuration
+# Run `ghostty +show-config --default --docs` for all options.
+# Docs: https://ghostty.org/docs/config
+
+font-family = Monaspace Argon Var
+font-size = 16
+font-variation = wdth=100
+
+theme = Zenburned
+palette = 8=#8f8f8f
+
+macos-titlebar-style = native
+macos-option-as-alt = false
+fullscreen = true
+copy-on-select = true
+confirm-close-surface = false
+
+keybind = alt+left=text:\x1b[1;3D
+keybind = alt+right=text:\x1b[1;3C
+keybind = shift+enter=text:\x1b\r

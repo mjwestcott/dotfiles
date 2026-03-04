@@ -177,6 +177,10 @@ mkdir -p ~/.config/alacritty
 create_symlink ~/dotfiles/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 create_symlink ~/dotfiles/starship/starship.toml ~/.config/starship.toml
 
+# Ghostty
+mkdir -p ~/.config/ghostty
+create_symlink ~/dotfiles/ghostty/config ~/.config/ghostty/config
+
 # Ranger file manager
 mkdir -p ~/.config/ranger/colorschemes
 create_symlink ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
