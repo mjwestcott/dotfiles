@@ -2,7 +2,6 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "model": "opus",
   "permissions": {
     "deny": [
       "Read(.env)",
@@ -16,6 +15,7 @@
       "Write(.env)"
     ]
   },
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -79,5 +79,6 @@
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true
-  }
+  },
+  "skipDangerousModePermissionPrompt": true
 }

@@ -63,7 +63,7 @@ alias cloc='tokei'
 alias youtube-dl='yt-dlp'
 
 # Claude Code
-alias c='claude'
+alias c='claude --dangerously-skip-permissions'
 alias clc='claude --continue'
 alias clr='claude --resume'
 alias clp='claude --print'
