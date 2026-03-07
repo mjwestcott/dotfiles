@@ -1,50 +1,40 @@
 ---
 name: review
-description: Reviews code changes for complexity and simplification opportunities. Use before creating PRs or when reviewing changesets.
+description: Reviews code changes for correctness, complexity, and simplification opportunities. Use before creating PRs or when reviewing changesets.
 user_invocable: true
 ---
 
-Comprehensive code review that spawns agents **in parallel** using a single message with multiple Task tool calls.
-
-**Note**: Using separate subagents helps maintain objectivity - they review the code fresh without the context of having written it.
+Spawn all review agents **in parallel** (single message, multiple Task/Bash tool calls). Subagents review the code fresh without the context of having written it, maintaining objectivity.
 
 ## Modes
 
-Check the user's arguments to determine the mode:
-
 ### Default mode (`/review`, `/review <scope>`)
 
-Report-only. Spawn the two review agents, then synthesize findings into the Output format below. Do not make any edits.
+Report-only. Run all review agents, then synthesize findings into the Output format below. Do not make any edits.
 
 ### Self mode (`/review self`, `/review self <scope>`)
 
-Act on the review. Same two review agents, but after they return:
+Same review agents, but after they return:
 
-1. **Think critically** about every recommendation. The subagents may be wrong, overzealous, or suggest changes that don't fit the context. For each finding, decide:
-   - Is this actually correct?
-   - Is this worth changing, or is it a nitpick?
-   - Will this change improve the code or just churn it?
-
-2. **Action the good ones.** Make the edits yourself for findings you judge to be correct and worthwhile. Skip the rest. Be opinionated - you're the senior engineer here, not the subagents.
-
+1. **Think critically** about every recommendation — subagents may be wrong or overzealous. For each finding, decide: is this actually correct, worth changing, or just churn?
+2. **Action the good ones.** Make the edits yourself. Skip the rest. Be opinionated — you're the senior engineer here.
 3. **Briefly summarize** what you changed and what you deliberately skipped (and why).
-
-### Manual test agent (both modes, optional)
-
-After reviewing the changes, assess whether the changeset is a **complex new feature** that warrants manual testing (e.g., new API endpoints, significant behavioral changes, complex integrations). If so, spawn a third agent:
-
-3. **Manual test agent** (`subagent_type: "general-purpose"`) - Instruct it to functionally test the feature by actually exercising it (e.g., calling API endpoints locally, running the CLI, triggering the new behavior). The agent should:
-   - Determine how to test the feature based on the code changes
-   - Actually run the tests (start servers, make HTTP requests, invoke commands, etc.)
-   - Report whether the feature works correctly, with specific pass/fail results
-
-Do NOT spawn this agent for minor refactors, config changes, documentation, or simple bug fixes. Use your judgement.
 
 ## Review Agents
 
-1. **Simplify agent** (`subagent_type: "simplify"`) - Tactical concerns: clarity, consistency, naming, readability. **READ-ONLY MODE**: Do not make any edits, only report findings.
+1. **Simplify agent** (`subagent_type: "simplify"`) - Clarity, consistency, naming, readability. **Read-only** — report findings only.
 
-2. **Ousterhout code review agent** (`subagent_type: "ousterhout-code-review"`) - Strategic concerns: module depth, information hiding, interface design, abstraction boundaries, layer quality.
+2. **Ousterhout agent** (`subagent_type: "ousterhout-code-review"`) - Module depth, information hiding, interface design, abstraction boundaries.
+
+3. **Codex correctness review** (via Bash) - Bugs, vulnerabilities, resource leaks, logic errors. Pipe the same diff used by the other agents into `codex review` via stdin:
+
+   ```
+   git diff <scope> | codex review -
+   ```
+
+   This keeps scope handling consistent — whatever diff the skill computes (branch, uncommitted, commit range) is what Codex reviews. Extract P0-P3 findings from stdout, ignoring metadata/deprecation lines.
+
+4. **Manual test agent** (optional, `subagent_type: "general-purpose"`) - Only for complex new features (new endpoints, significant behavioral changes). Instruct it to actually exercise the feature (start servers, make requests, invoke commands) and report pass/fail results. Skip for refactors, config changes, docs, or simple fixes.
 
 ## Input
 
@@ -57,12 +47,17 @@ If no scope is given, default to all changes on the current branch vs the main b
 
 ## Output
 
-After both review agents complete, synthesize their findings into a **PR review style** summary:
+After the review agents and `codex review` all complete, synthesize their findings into a **PR review style** summary:
 
 ### Summary
 Brief overall assessment of code quality.
 
 ### Findings
+
+**Correctness & Security** (from Codex)
+- List each P0-P3 finding with severity tag and file:line reference
+- P0/P1 findings are blocking; P2/P3 are advisory
+- If codex review found no issues, state that explicitly
 
 **Simplification Opportunities**
 - List each finding with file:line reference
@@ -73,8 +68,8 @@ Brief overall assessment of code quality.
 - Include the relevant red flag and specific code location
 
 ### Verdict
-- **Approve**: No blocking issues, minor suggestions only
-- **Request Changes**: Issues that should be addressed before merge
+- **Approve**: No blocking issues (no P0/P1), minor suggestions only
+- **Request Changes**: P0/P1 correctness issues or significant complexity/simplification concerns that should be addressed before merge
 - **Needs Discussion**: Architectural concerns requiring team input
 
 In **self mode**, append:
