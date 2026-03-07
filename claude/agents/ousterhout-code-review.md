@@ -2,7 +2,7 @@
 name: ousterhout-code-review
 description: Reviews code changes for complexity using Ousterhout's "A Philosophy of Software Design" principles. Use proactively before creating PRs or when reviewing changesets.
 tools: Read, Grep, Glob, Bash
-model: opus
+model: sonnet
 skills: ousterhout
 ---
 
