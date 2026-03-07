@@ -45,6 +45,15 @@ Pass along any context the user provides:
 
 If no scope is given, default to all changes on the current branch vs the main branch (committed, staged, and unstaged). Use context to infer the right scope - e.g., if you just finished working on something, review that.
 
+## Scope Detection
+
+Changes may be committed, staged, unstaged, or in untracked files. Ensure all agents cover the full picture:
+
+- **Tracked files**: `git diff main` covers committed + staged + unstaged changes in one command. Do not combine with `git diff` or you'll get duplicate hunks.
+- **Untracked files**: `git ls-files --others --exclude-standard` lists new files not yet tracked by git. Agents should read these too.
+
+Tell each agent the scope so it can determine the right commands itself.
+
 ## Output
 
 After the review agents and `codex review` all complete, synthesize their findings into a **PR review style** summary:
