@@ -34,7 +34,7 @@ Same review agents, but after they return:
 
    This keeps scope handling consistent — whatever diff the skill computes (branch, uncommitted, commit range) is what Codex reviews. Extract P0-P3 findings from stdout, ignoring metadata/deprecation lines.
 
-4. **Manual test agent** (optional, `subagent_type: "general-purpose"`) - Only for complex new features (new endpoints, significant behavioral changes). Instruct it to actually exercise the feature (start servers, make requests, invoke commands) and report pass/fail results. Skip for refactors, config changes, docs, or simple fixes.
+4. **Manual test agent** (optional, `subagent_type: "general-purpose"`, `model: "sonnet"`) - Only for complex new features (new endpoints, significant behavioral changes). Instruct it to actually exercise the feature (start servers, make requests, invoke commands) and report pass/fail results. Skip for refactors, config changes, docs, or simple fixes.
 
 ## Input
 
