@@ -76,9 +76,7 @@
     "type": "command",
     "command": "~/dotfiles/bin/cc-statusline"
   },
-  "enabledPlugins": {
-    "commit-commands@claude-plugins-official": true,
-    "ralph-loop@claude-plugins-official": true
-  },
+  "enabledPlugins": {},
+  "syntaxHighlightingDisabled": true,
   "skipDangerousModePermissionPrompt": true
 }
