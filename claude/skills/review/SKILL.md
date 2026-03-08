@@ -26,7 +26,7 @@ Same review agents, but after they return:
 
 2. **Ousterhout agent** (`subagent_type: "ousterhout-code-review"`) - Module depth, information hiding, interface design, abstraction boundaries.
 
-3. **Codex correctness review** (via Bash) - Bugs, vulnerabilities, resource leaks, logic errors. Pipe the same diff used by the other agents into `codex review` via stdin:
+3. **Codex correctness review** (via Bash, give it 5 mins) - Bugs, vulnerabilities, resource leaks, logic errors. Pipe the same diff used by the other agents into `codex review` via stdin:
 
    ```
    git diff <scope> | codex review -
