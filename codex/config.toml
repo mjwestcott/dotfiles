@@ -4,4 +4,4 @@ model_reasoning_effort = "medium"
 project_doc_fallback_filenames = ["CLAUDE.md"]
 
 [features]
-collab = true
+multi_agent = true
