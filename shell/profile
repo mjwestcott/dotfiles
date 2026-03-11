@@ -64,7 +64,7 @@ alias cloc='tokei'
 alias youtube-dl='yt-dlp'
 
 # Coding agents (sandboxed via safehouse)
-safe() { safehouse --env --add-dirs-ro=~/repos:~/dotfiles "$@"; }
+safe() { safehouse --env --enable=ssh --add-dirs-ro=~/repos:~/dotfiles "$@"; }
 claude() { safe claude --dangerously-skip-permissions "$@"; }
 codex() { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
 alias c='claude'
