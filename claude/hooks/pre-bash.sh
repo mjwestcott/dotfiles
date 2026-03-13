@@ -38,8 +38,8 @@ if echo "$cmd" | grep -qE 'git\s+branch\s+-D'; then
 fi
 
 # Dangerous filesystem operations
-if echo "$cmd" | grep -qE 'rm\s+(-[rf]+\s+)*(/|~|\$HOME)'; then
-    echo "Blocked: rm targeting root or home directory" >&2
+if echo "$cmd" | grep -qE 'rm\s+(-[rf]+\s+)*(/(\s|$)|/usr\b|/var\b|/etc\b|/System\b|/Applications\b|/Library\b|~/?\s|~$|\$HOME\b)'; then
+    echo "Blocked: rm targeting root, system, or home directory. Use cd and relative paths instead." >&2
     exit 2
 fi
 
