@@ -15,7 +15,6 @@
       "Write(.env)"
     ]
   },
-  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
