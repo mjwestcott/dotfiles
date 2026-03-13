@@ -43,7 +43,6 @@ brew "ccusage"                    # Claude Code usage tracker
 brew "neovim"
 
 # Terminal and shell
-cask "alacritty"                  # GPU-accelerated terminal
 cask "ghostty"                    # GPU-accelerated terminal
 brew "tmux"
 brew "starship"                   # Cross-shell prompt
