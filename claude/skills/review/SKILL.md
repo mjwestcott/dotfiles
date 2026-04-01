@@ -4,7 +4,7 @@ description: Reviews code changes for correctness, complexity, and simplificatio
 user_invocable: true
 ---
 
-Spawn all review agents **in parallel** (single message, multiple Task/Bash tool calls). Subagents review the code fresh without the context of having written it, maintaining objectivity.
+Spawn all review agents **in parallel** (single message, multiple tool calls). Subagents review the code fresh without the context of having written it, maintaining objectivity.
 
 ## Modes
 
@@ -26,13 +26,7 @@ Same review agents, but after they return:
 
 2. **Ousterhout agent** (`subagent_type: "ousterhout-code-review"`) - Module depth, information hiding, interface design, abstraction boundaries.
 
-3. **Codex correctness review** (via Bash, give it 5 mins) - Bugs, vulnerabilities, resource leaks, logic errors. Pipe the same diff used by the other agents into `codex review` via stdin:
-
-   ```
-   git diff <scope> | codex review -
-   ```
-
-   This keeps scope handling consistent — whatever diff the skill computes (branch, uncommitted, commit range) is what Codex reviews. Extract P0-P3 findings from stdout, ignoring metadata/deprecation lines.
+3. **Codex review** — Run `/codex:review` for correctness, bugs, vulnerabilities, resource leaks, logic errors. Use `--base main` for branch reviews, or no flags for uncommitted changes. Use `--wait` to block until complete.
 
 4. **Manual test agent** (optional, `subagent_type: "general-purpose"`, `model: "sonnet"`) - Only for complex new features (new endpoints, significant behavioral changes). Instruct it to actually exercise the feature (start servers, make requests, invoke commands) and report pass/fail results. Skip for refactors, config changes, docs, or simple fixes.
 
@@ -56,7 +50,7 @@ Tell each agent the scope so it can determine the right commands itself.
 
 ## Output
 
-After the review agents and `codex review` all complete, synthesize their findings into a **PR review style** summary:
+After all review agents complete, synthesize their findings into a **PR review style** summary:
 
 ### Summary
 Brief overall assessment of code quality.
@@ -64,9 +58,8 @@ Brief overall assessment of code quality.
 ### Findings
 
 **Correctness & Security** (from Codex)
-- List each P0-P3 finding with severity tag and file:line reference
-- P0/P1 findings are blocking; P2/P3 are advisory
-- If codex review found no issues, state that explicitly
+- List findings with severity and file:line reference
+- If Codex found no issues, state that explicitly
 
 **Simplification Opportunities**
 - List each finding with file:line reference
@@ -77,8 +70,8 @@ Brief overall assessment of code quality.
 - Include the relevant red flag and specific code location
 
 ### Verdict
-- **Approve**: No blocking issues (no P0/P1), minor suggestions only
-- **Request Changes**: P0/P1 correctness issues or significant complexity/simplification concerns that should be addressed before merge
+- **Approve**: No blocking issues, minor suggestions only
+- **Request Changes**: Correctness issues or significant complexity/simplification concerns that should be addressed before merge
 - **Needs Discussion**: Architectural concerns requiring team input
 
 In **self mode**, append:

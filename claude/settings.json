@@ -15,6 +15,7 @@
       "Write(.env)"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "SessionStart": [
       {
@@ -75,8 +76,18 @@
     "type": "command",
     "command": "~/dotfiles/bin/cc-statusline"
   },
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
   "syntaxHighlightingDisabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "model": "opus[1m]"
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true
 }
