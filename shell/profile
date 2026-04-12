@@ -65,7 +65,7 @@ alias youtube-dl='yt-dlp'
 
 # Coding agents (sandboxed via safehouse)
 safe() { safehouse --env --enable=ssh --add-dirs-ro=~/repos:~/dotfiles "$@"; }
-claude() { safe --add-dirs-ro=~/.codex:~/.gnupg --enable=docker,clipboard claude --dangerously-skip-permissions "$@"; }
+claude() { DO_NOT_TRACK=0 TELEMETRY_DISABLED=0 safe --add-dirs-ro=~/.codex:~/.gnupg --enable=docker,clipboard claude --permission-mode acceptEdits "$@"; }
 codex() { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
 alias c='claude'
 alias clc='claude --continue'
