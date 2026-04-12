@@ -1,38 +1,104 @@
 #!/usr/bin/env bash
 
 input=$(cat)
+
+# --- Parse stdin JSON (provided by Claude Code, no external calls) ---
 model=$(echo "$input" | jq -r '.model.display_name // "Unknown"' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+# Current context = input + cache_creation + cache_read from the most recent API call.
+# (total_input_tokens is cumulative across the session, not what we want here.)
+context_tokens=$(echo "$input" | jq -r '
+    (.context_window.current_usage // {}) as $u
+    | (($u.input_tokens // 0) + ($u.cache_creation_input_tokens // 0) + ($u.cache_read_input_tokens // 0))
+')
+context_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0 | round')
+rate_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty | round')
+session_id=$(echo "$input" | jq -r '.session_id // "unknown"')
+
+# Format context tokens as e.g. 44k, 1.2m
+if [ "$context_tokens" -ge 1000000 ] 2>/dev/null; then
+    ctx_display="$(echo "$context_tokens" | awk '{printf "%.1fm", $1/1000000}')"
+elif [ "$context_tokens" -ge 1000 ] 2>/dev/null; then
+    ctx_display="$(echo "$context_tokens" | awk '{printf "%.0fk", $1/1000}')"
+else
+    ctx_display="${context_tokens}"
+fi
+
 branch=$(git branch --show-current 2>/dev/null)
 
-# Get all ccusage data
-all_data=$(ccusage blocks --json)
-block_data=$(echo "$all_data" | jq '.blocks[] | select(.isActive == true)')
+# --- Cached ccusage data (expensive call, refresh every 30s) ---
+cache_file="/tmp/cc-statusline-${session_id}.json"
+cache_ttl=30
+now=$(date +%s)
+
+if [ -f "$cache_file" ]; then
+    cache_mtime=$(stat -f %m "$cache_file" 2>/dev/null || stat -c %Y "$cache_file" 2>/dev/null || echo 0)
+    cache_age=$((now - cache_mtime))
+else
+    cache_age=$((cache_ttl + 1))
+fi
+
+if [ "$cache_age" -gt "$cache_ttl" ]; then
+    all_data=$(ccusage blocks --json 2>/dev/null)
+    [ -n "$all_data" ] && echo "$all_data" > "$cache_file"
+else
+    all_data=$(cat "$cache_file")
+fi
+
+# --- Process ccusage block data ---
+block_data=$(echo "$all_data" | jq '.blocks[] | select(.isActive == true)' 2>/dev/null)
+
+# --- Colors (ANSI) ---
+# Claude Code applies ambient dim to the whole statusline, so values are
+# explicitly bright+bold to override it; labels/chrome stay at default and
+# appear dim through CC's rendering.
+B=$'\033[0;38;2;225;225;218m'  # subtly warm off-white, less cream than Zenburn fg
+Y=$'\033[0;38;2;230;200;110m'  # warm yellow (warning)
+R=$'\033[0;38;2;240;130;130m'  # soft red (critical)
+N=$'\033[0m'          # reset (back to CC's ambient dim)
+S=" | "               # separator (plain, gets dimmed by CC)
+
+# Threshold colour for a percentage: warn >=50, critical >=80, else plain bright
+pct_color() {
+    local p=${1:-0}
+    [[ "$p" =~ ^[0-9]+$ ]] || { printf '%s' "$B"; return; }
+    if [ "$p" -ge 80 ]; then printf '%s' "$R"
+    elif [ "$p" -ge 50 ]; then printf '%s' "$Y"
+    else printf '%s' "$B"
+    fi
+}
+ctx_c=$(pct_color "$context_pct")
+rate_c=$(pct_color "$rate_pct")
 
 if [ -z "$block_data" ]; then
-    printf "%s | %s | No active session" "$model" "$branch"
+    block_info="no active block"
+    [ -n "$rate_pct" ] && block_info="${block_info} (rate:${rate_c}${rate_pct}${N}%)"
+    printf "%s%s%s%s%s%s%s%sctx:%s%s%s%s\n" \
+        "$B" "$model" "$N" "$S" \
+        "$B" "$branch" "$N" "$S" \
+        "$ctx_c" "$ctx_display" "$N" \
+        "${S}${block_info}"
     exit 0
 fi
 
-# Extract values for current block
 burn_rate=$(echo "$block_data" | jq -r '(.burnRate.costPerHour * 100 | round) / 100')
-remaining_mins=$(echo "$block_data" | jq -r '.projection.remainingMinutes')
+remaining_mins=$(echo "$block_data" | jq -r '.projection.remainingMinutes // 0 | floor')
 cache_read=$(echo "$block_data" | jq -r '.tokenCounts.cacheReadInputTokens // 0')
 cache_creation=$(echo "$block_data" | jq -r '.tokenCounts.cacheCreationInputTokens // 0')
 input_tokens=$(echo "$block_data" | jq -r '.tokenCounts.inputTokens // 0')
 
-# Calculate today's total (all blocks since midnight)
+# Today's total (all blocks since midnight)
 today=$(date +%Y-%m-%d)
 today_total=$(echo "$all_data" | jq -r --arg today "$today" '
     [.blocks[] | select(.startTime | startswith($today)) | .costUSD // 0] | add // 0 | . * 100 | round / 100
 ')
 
-# Calculate last 30 days total
+# Last 30 days total
 thirty_days_ago=$(date -v-30d +%Y-%m-%dT%H:%M:%S 2>/dev/null || date -d '30 days ago' +%Y-%m-%dT%H:%M:%S)
 month_total=$(echo "$all_data" | jq -r --arg thirty_days_ago "$thirty_days_ago" '
     [.blocks[] | select(.startTime >= $thirty_days_ago) | .costUSD // 0] | add | . * 100 | round / 100
 ')
 
-# Calculate cache efficiency
+# Cache efficiency
 total_input=$((cache_read + cache_creation + input_tokens))
 if [ "$total_input" -gt 0 ]; then
     cache_pct=$((cache_read * 100 / total_input))
@@ -41,9 +107,9 @@ else
 fi
 
 # Format time remaining
-if [ "$remaining_mins" -lt 60 ]; then
+if [ "$remaining_mins" -lt 60 ] 2>/dev/null; then
     time_left="${remaining_mins}m"
-elif [ "$remaining_mins" -lt 1440 ]; then
+elif [ "$remaining_mins" -lt 1440 ] 2>/dev/null; then
     hours=$((remaining_mins / 60))
     mins=$((remaining_mins % 60))
     time_left="${hours}h${mins}m"
@@ -53,15 +119,23 @@ else
     time_left="${days}d${hours}h"
 fi
 
-# Calculate monthly budget
-monthly_budget=$(echo "$burn_rate * 8 * 22" | bc)  # 22 work days per month
+# Monthly burn projection (8h/day, 22 work days)
+monthly_budget=$(echo "$burn_rate * 8 * 22" | bc)
 
-# Build status line
-printf "%s | %s | today:$%.2f | 30d:$%.2f | block:%s | burn:$%.0f/mo | cache:%d%%" \
-    "$model" \
-    "$branch" \
-    "$today_total" \
-    "$month_total" \
-    "$time_left" \
-    "$monthly_budget" \
-    "$cache_pct"
+# --- Build output ---
+# Pattern: labels/punctuation plain (CC dims them), values wrapped in B/Y/R + N
+block_info="block:${B}${time_left}${N}"
+[ -n "$rate_pct" ] && block_info="${block_info} (rate:${rate_c}${rate_pct}${N}%)"
+
+today_fmt=$(printf '%.2f' "$today_total")
+month_fmt=$(printf '%.2f' "$month_total")
+burn_fmt=$(printf '%.0f' "$monthly_budget")
+
+line="${B}${model}${N}${S}${B}${branch}${N}${S}"
+line+="ctx:${ctx_c}${ctx_display}${N}${S}"
+line+="today:\$${B}${today_fmt}${N}${S}"
+line+="30d:\$${B}${month_fmt}${N}${S}"
+line+="${block_info}${S}"
+line+="burn:\$${B}${burn_fmt}${N}/mo${S}"
+line+="cache:${B}${cache_pct}${N}%"
+printf '%s\n' "$line"

@@ -75,7 +75,8 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "~/dotfiles/bin/cc-statusline"
+    "command": "~/dotfiles/bin/cc-statusline",
+    "refreshInterval": 10
   },
   "enabledPlugins": {
     "codex@openai-codex": true
