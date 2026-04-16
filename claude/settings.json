@@ -14,7 +14,8 @@
       "Read(~/.gnupg/**)",
       "Edit(.env)",
       "Write(.env)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "model": "opus[1m]",
   "hooks": {
@@ -90,6 +91,6 @@
     }
   },
   "syntaxHighlightingDisabled": true,
-  "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true
 }
