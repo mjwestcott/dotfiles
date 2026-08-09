@@ -137,7 +137,10 @@ elif [[ "$extension" == "go" ]]; then
 # Shell scripts
 elif [[ "$extension" =~ ^(sh|bash|zsh)$ ]] || [[ "$filename" =~ ^(zshrc|bashrc|profile)$ ]]; then
     echo "Formatting shell script: $filename"
-    if command_exists shfmt; then
+    # Only reformat scripts, not hand-aligned rc/profile config, whose
+    # column-aligned trailing comments shfmt would collapse. They still get
+    # linted by shellcheck below.
+    if command_exists shfmt && [[ "$extension" =~ ^(sh|bash|zsh)$ ]]; then
         shfmt -w -i 4 "$file_path" &>/dev/null
     fi
     # Lint with shellcheck
