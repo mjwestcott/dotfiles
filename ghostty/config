@@ -13,7 +13,6 @@ macos-titlebar-style = native
 macos-option-as-alt = false
 fullscreen = true
 copy-on-select = true
-confirm-close-surface = false
 
 keybind = alt+left=text:\x1b[1;3D
 keybind = alt+right=text:\x1b[1;3C
