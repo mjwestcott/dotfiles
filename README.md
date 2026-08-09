@@ -11,6 +11,7 @@ cd ~/dotfiles
 ```
 
 This will:
+
 - Install Homebrew if not present
 - Install all packages from the Brewfile (including `just`)
 - Set up Zsh shell environment with Antidote plugin manager
@@ -63,6 +64,6 @@ brew bundle dump --describe --force
 
 - **Shell**: Zsh with Antidote plugin manager, Starship prompt
 - **Editor**: Neovim with lazy.nvim package manager
-- **Terminal**: Alacritty, Tmux
+- **Terminal**: Ghostty, Tmux
 - **Version Management**: pyenv (Python), rbenv (Ruby), rustup (Rust)
 - **Package Managers**: Homebrew, npm, yarn, pipx

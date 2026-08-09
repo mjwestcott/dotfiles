@@ -17,6 +17,7 @@ cd ~/dotfiles
 ```
 
 This will:
+
 - Install Homebrew if not present
 - Install all packages from the Brewfile
 - Set up Zsh shell environment with Antidote plugin manager
@@ -69,39 +70,46 @@ brew bundle dump --describe --force
 
 - **Shell**: Zsh with Antidote plugin manager, Starship prompt
 - **Editor**: Neovim with lazy.nvim package manager
-- **Terminal**: Alacritty, Tmux
+- **Terminal**: Ghostty, Tmux
 - **Version Management**: pyenv (Python), rbenv (Ruby), rustup (Rust)
 - **Package Managers**: Homebrew, npm, yarn, pipx
 
 ## Core Components
 
 ### Shell Environment
+
 - `shell/profile` - Cross-shell configuration with extensive aliases, functions, and environment variables
 - `shell/zsh/zshrc` - Zsh configuration with Antidote plugin management
 - `antidote/zsh_plugins.txt` - Zsh plugin configuration (migrated from Prezto to Antidote)
 
 ### Development Tools
+
 - `vim/` - Neovim configuration with Lua-based setup using lazy.nvim package manager
 - `git/gitconfig` - Git configuration with extensive alias system and conditional includes
 - `tmux/tmux.conf` - Terminal multiplexer configuration
 
 ### Application Configs
+
 - `claude/` - Claude Code settings including custom statusline script
 - `starship/starship.toml` - Cross-shell prompt configuration
-- `alacritty/` - Terminal emulator configuration
+- `ghostty/` - Terminal emulator configuration
 - Various tool configs: `pgcli/`, `litecli/`, `ranger/`, `karabiner/`
 
 ## Key Features
 
 ### Extensive Git Alias System
+
 The shell profile includes a comprehensive git alias system with single-letter shortcuts:
+
 - Branch operations: `gb`, `gbc`, `gbl`
 - Commit operations: `gc`, `gca`, `gcm`, `gco`
 - Log operations: `gl`, `gls`, `gld`, `glo`
 - And many more covering all git workflows
 
 ### FZF Integration
+
 Multiple fuzzy finder functions for enhanced workflow:
+
 - `,t` - Find and edit files
 - `,j` - Jump to directories
 - `,a` - Search content with ripgrep
@@ -109,7 +117,8 @@ Multiple fuzzy finder functions for enhanced workflow:
 - `,b` - Checkout branches/tags
 
 ### Development Environment Management
-- Python: Poetry, pyenv, conda integration
+
+- Python: uv, pyenv, conda integration
 - Ruby: rbenv support
 - Go: GOPATH configuration
 - AWS: Profile switching functions (`asp`, `agp`)
@@ -118,6 +127,7 @@ Multiple fuzzy finder functions for enhanced workflow:
 ## Common Development Tasks
 
 ### Claude Code Configuration
+
 - Settings: `claude/settings.json` with custom statusline
 - Statusline script: `claude/statusline.sh` (Starship-style prompt)
 - Custom agents: `claude/agents/`
@@ -125,6 +135,7 @@ Multiple fuzzy finder functions for enhanced workflow:
 - Installation creates symlinks to `~/.claude/`
 
 ### Plugin Management
+
 - **Zsh**: Antidote plugin manager via `antidote/zsh_plugins.txt`
 - **Vim**: lazy.nvim package manager via `vim/init.lua`
 - **Tmux**: TPM plugin manager - install with `prefix + I`
@@ -132,6 +143,7 @@ Multiple fuzzy finder functions for enhanced workflow:
 ### Git Configuration
 
 The git config includes conditional includes for work repositories:
+
 - `~/work/` and `~/repos/work/` directories will use `~/.gitconfig-work`
 - Create `~/.gitconfig-work` manually with work-specific settings:
 
@@ -147,6 +159,7 @@ The git config includes conditional includes for work repositories:
 ### Shell Performance Monitoring
 
 Use `bench` alias to measure shell startup time with zsh-bench:
+
 ```bash
 bench        # Run shell startup benchmark
 ```
@@ -154,6 +167,7 @@ bench        # Run shell startup benchmark
 ### Testing Configuration
 
 Run the shell configuration test suite to validate setup:
+
 ```bash
 just test    # Verify configs source cleanly in zsh
 ```
@@ -165,7 +179,9 @@ The minimal test suite validates that both `shell/profile` and `shell/zsh/zshrc`
 The repository includes automated formatting and linting capabilities:
 
 #### Formatting & Linting (Automatic)
+
 Claude Code is configured to automatically format and lint files on save via the hook in `claude/hooks/post-edit.sh`:
+
 - **Python**: ruff format + ruff check + pyright
 - **JavaScript/TypeScript**: biome format + biome lint + tsc
 - **JSON**: biome/prettier formatting
@@ -177,6 +193,7 @@ Claude Code is configured to automatically format and lint files on save via the
 Lint errors are fed back to Claude as JSON feedback for automatic fixing.
 
 #### Linting (Manual)
+
 Use the justfile for comprehensive linting after making multiple changes:
 
 ```bash
@@ -191,6 +208,7 @@ just lint-markdown   # markdownlint (Markdown)
 ```
 
 **Required tools** (install via Homebrew/npm):
+
 ```bash
 # Core linters (always installed)
 brew install ruff shellcheck
@@ -207,6 +225,7 @@ brew install black prettier shfmt
 ## File Structure
 
 All configurations follow a modular structure:
+
 - Application-specific directories contain related configurations
 - The `install` script creates appropriate symlinks
 - Backup system preserves existing configurations
