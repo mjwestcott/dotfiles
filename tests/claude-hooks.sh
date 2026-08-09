@@ -134,6 +134,7 @@ test_pre_bash_allows_safe_commands() {
 }
 
 test_pre_bash_blocks_dangerous_commands() {
+    # shellcheck disable=SC2016 # Exercise a literal, unexpanded $HOME.
     local dangerous_commands=(
         "git reset --hard HEAD"
         "git clean -f"

@@ -231,25 +231,20 @@ just lint
 
 # Lint specific file types
 just lint-python     # Ruff (Python)
-just lint-js         # ESLint (JavaScript/TypeScript)
+just lint-js         # Biome (JavaScript/TypeScript/JSON/CSS)
 just lint-shell      # ShellCheck (shell scripts)
-just lint-markdown   # markdownlint (Markdown)
+just lint-markdown   # markdownlint, or Prettier as a fallback
 ```
 
-**Required tools** (install via Homebrew/npm):
+The required tools are declared in the Brewfile. Install or update them with:
 
 ```bash
-# Core linters (always installed)
-brew install ruff shellcheck
-
-# Optional linters (install as needed)
-npm install -g eslint markdownlint-cli
-
-# Formatters (also used by Claude hooks). Python formatting is ruff, above.
-brew install prettier shfmt stylua biome
+brew bundle
 ```
 
-**Note**: The `just lint` command will work with whatever tools are available and skip missing ones gracefully.
+`markdownlint` remains optional; when it is absent, `just lint-markdown` uses
+the Brewfile's Prettier installation. The other lint recipes also report and
+skip tools that are not installed.
 
 ## File Structure
 

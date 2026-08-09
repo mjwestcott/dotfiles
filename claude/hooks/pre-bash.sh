@@ -38,6 +38,7 @@ if echo "$cmd" | grep -qE 'git\s+branch\s+-D'; then
 fi
 
 # Dangerous filesystem operations
+# shellcheck disable=SC2016 # $HOME must remain literal in the command regex.
 if echo "$cmd" | grep -qE 'rm\s+(-[rf]+\s+)*(/(\s|$)|/usr\b|/var\b|/etc\b|/System\b|/Applications\b|/Library\b|~/?\s|~$|\$HOME\b)'; then
     echo "Blocked: rm targeting root, system, or home directory. Use cd and relative paths instead." >&2
     exit 2
