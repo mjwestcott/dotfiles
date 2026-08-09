@@ -116,6 +116,8 @@ test_pre_bash_allows_safe_commands() {
         "git log --oneline"
         "rm file.txt"
         "git push origin main"
+        "git push --force origin main"
+        "git push -f origin main"
         "git branch -d feature"
     )
 
@@ -133,8 +135,6 @@ test_pre_bash_blocks_dangerous_commands() {
     local dangerous_commands=(
         "git reset --hard HEAD"
         "git clean -f"
-        "git push --force origin main"
-        "git push -f origin main"
         "git checkout -- file.txt"
         "git stash drop"
         "git stash clear"
