@@ -26,8 +26,13 @@ mkdir -p "$XDG_STATE_HOME/zsh"
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 [[ -z "$TMPDIR" ]] && TMPDIR=/tmp
 
-# Setup homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Set up Homebrew on both Apple Silicon and Intel Macs. Homebrew is not on the
+# default PATH immediately after a clean install, so probe its standard paths.
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
 
 # Initialize zoxide (smarter cd)
 eval "$(zoxide init zsh)"
@@ -35,9 +40,13 @@ eval "$(zoxide init zsh)"
 # Source 'fzf'.
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
-# GCP path.
-source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+# GCP is installed separately from this repo, so only load it when present.
+if command -v brew > /dev/null 2>&1; then
+  gcloud_zsh_dir="$(brew --prefix)/share/google-cloud-sdk"
+  [[ -r "$gcloud_zsh_dir/path.zsh.inc" ]] && source "$gcloud_zsh_dir/path.zsh.inc"
+  [[ -r "$gcloud_zsh_dir/completion.zsh.inc" ]] && source "$gcloud_zsh_dir/completion.zsh.inc"
+  unset gcloud_zsh_dir
+fi
 
 # Since it's provided by our prompt.
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -48,4 +57,4 @@ command -v rbenv > /dev/null 2>&1 && eval "$(rbenv init -)"
 # Initialize Starship prompt (replaces Spaceship)
 eval "$(starship init zsh)"
 
-source ~/.config/broot/launcher/bash/br
+[[ -r ~/.config/broot/launcher/bash/br ]] && source ~/.config/broot/launcher/bash/br

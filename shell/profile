@@ -8,7 +8,6 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_DEFAULT_OPTS='--color prompt:4,pointer:1,marker:5,info:2,spinner:5,hl:3,hl+:3,fg:7,fg+:7'
 export FZF_TMUX=0
-export PURE_CMD_MAX_EXEC_TIME=0
 export GREP_COLOR='30;43'                             # BSD
 export GREP_COLORS='mt=30;43:ln=1;33:fn=1;32:se=37'   # GNU
 export GOPATH=$HOME/repos/go
