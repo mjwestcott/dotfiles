@@ -17,7 +17,6 @@ export GOPATH=$HOME/repos/go
 export PATH=$HOME/dotfiles/bin:$PATH                    # Dotfiles scripts
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH                      # Rust
-export PATH=$HOME/.local/share/pypoetry/venv/bin:$PATH  # Poetry
 export PATH=$HOME/.local/bin:$PATH                      # User binaries
 export PATH=/usr/local/opt/python/libexec/bin:$PATH     # Python
 export PATH=/usr/local/opt/bin:$PATH                    # Homebrew

@@ -54,18 +54,6 @@ else
     source "$HOME/.cargo/env"
 fi
 
-# Python package management (install Poetry for legacy projects)
-if command -v uv &> /dev/null; then
-    if command -v poetry &> /dev/null; then
-        info "Poetry already installed"
-    else
-        info "Installing Poetry via uv..."
-        uv tool install poetry
-    fi
-else
-    warn "Neither uv nor pipx found, skipping Poetry installation"
-fi
-
 # Claude Code (native binary - recommended by Anthropic)
 if command -v claude &> /dev/null; then
     info "Claude Code already installed"
