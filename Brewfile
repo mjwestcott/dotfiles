@@ -31,6 +31,7 @@ brew "hexyl"                      # Hex viewer
 brew "cmake"
 brew "ctags"
 brew "shellcheck"                 # Shell script linter
+brew "shfmt"                      # Shell script formatter
 brew "tokei"                      # Fast code statistics
 brew "jq"                         # JSON processor
 brew "yq"                         # YAML processor
@@ -121,6 +122,7 @@ brew "exiftool"
 brew "pre-commit"                 # Git hooks framework
 brew "stylua"                     # Lua formatter
 brew "biome"                      # JavaScript/TypeScript formatter
+brew "prettier"                   # Markdown/YAML formatter
 
 # Custom taps
 brew "cue-lang/tap/cue"           # CUE data language
