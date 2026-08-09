@@ -15,7 +15,6 @@
     "api:generate": "openapi-ts -i http://localhost:8000/openapi.json -o src/api/generated -c @hey-api/client-fetch"
   },
   "dependencies": {
-    "@hey-api/client-fetch": "^0.6.0",
     "@tanstack/react-query": "^5.62.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -27,7 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
-    "@hey-api/openapi-ts": "^0.61.0",
+    "@hey-api/openapi-ts": "^0.97.3",
     "@tailwindcss/forms": "^0.5.9",
     "@types/node": "^22.10.0",
     "@types/react": "^18.3.0",
@@ -45,6 +44,6 @@
     "typescript": "~5.7.0",
     "typescript-eslint": "^8.18.0",
     "vite": "^6.0.0",
-    "vitest": "^2.1.0"
+    "vitest": "^4.1.10"
   }
 }

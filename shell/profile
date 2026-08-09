@@ -138,7 +138,7 @@ alias up='ping 8.8.8.8'
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
 
-# Python. Homebrew ships python3 only, with no unversioned `python` symlink.
+# Python
 alias py='python3'
 alias ipy='ipython'
 alias pyc='find . -name "*.py[co]" -delete && find . -name "__pycache__" -delete'

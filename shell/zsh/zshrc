@@ -42,19 +42,10 @@ source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 # Since it's provided by our prompt.
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# No pyenv. It had zero versions installed and was pinned to `system`, so it
-# managed nothing while costing an eval on every shell. uv handles per-project
-# Python; Homebrew provides the interpreter.
-
 # Initalize rbenv.
 command -v rbenv > /dev/null 2>&1 && eval "$(rbenv init -)"
 
 # Initialize Starship prompt (replaces Spaceship)
 eval "$(starship init zsh)"
-
-# No conda init. The block that used to live here pointed at an Intel-Homebrew
-# /usr/local/anaconda3 that does not exist on this machine, so it only ever added
-# a bogus PATH entry. Conda is at /opt/homebrew/anaconda3 if it is ever wanted
-# back: run `conda init zsh` and move the block it writes into this file.
 
 source ~/.config/broot/launcher/bash/br
