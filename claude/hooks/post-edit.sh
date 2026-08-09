@@ -177,7 +177,10 @@ elif [[ "$extension" == "rs" ]]; then
 elif [[ "$extension" == "lua" ]]; then
     echo "Formatting Lua file: $filename" >&2
     if command_exists stylua; then
-        stylua "$file_path" &>/dev/null
+        # Without this stylua only looks in its own working directory, misses the
+        # project's .stylua.toml and silently falls back to tab indentation,
+        # fighting the pre-commit hook which does find the config.
+        stylua --search-parent-directories "$file_path" &>/dev/null
     fi
 
 # Markdown files

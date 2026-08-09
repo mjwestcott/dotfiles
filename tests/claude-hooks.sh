@@ -505,6 +505,34 @@ test_post_edit_silent_when_clean() {
     teardown
 }
 
+# stylua defaults to tabs. If the hook does not search upward for the project's
+# .stylua.toml it silently reformats against those defaults, undoing what the
+# pre-commit hook does and producing whole-file whitespace diffs.
+test_post_edit_lua_respects_project_config() {
+    if ! command -v stylua >/dev/null 2>&1; then
+        skip "post-edit stylua config discovery (no stylua)"
+        return
+    fi
+
+    setup
+    cat >.stylua.toml <<'EOF'
+indent_type = "Spaces"
+indent_width = 2
+EOF
+    printf 'local function f()\n\treturn 1\nend\n' >tabbed.lua
+
+    "$HOOKS_DIR/post-edit.sh" "$TEMP_DIR/tabbed.lua" >/dev/null 2>&1
+
+    if grep -qP '^\t' tabbed.lua 2>/dev/null || grep -q "$(printf '^\t')" tabbed.lua; then
+        fail "post-edit.sh ignored .stylua.toml and left tab indentation"
+    elif grep -q '^  return 1' tabbed.lua; then
+        pass "post-edit.sh honours the project .stylua.toml"
+    else
+        fail "post-edit.sh produced unexpected lua formatting: $(cat tabbed.lua)"
+    fi
+    teardown
+}
+
 # ============================================================================
 # Run tests
 # ============================================================================
@@ -539,6 +567,7 @@ test_post_edit_markdown
 test_post_edit_yaml
 test_post_edit_emits_valid_hook_json
 test_post_edit_silent_when_clean
+test_post_edit_lua_respects_project_config
 echo
 
 # Summary
