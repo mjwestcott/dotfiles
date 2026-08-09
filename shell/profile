@@ -66,7 +66,7 @@ alias youtube-dl='yt-dlp'
 safe() { safehouse --env --enable=ssh --add-dirs-ro=~/repos:~/dotfiles "$@"; }
 # shellcheck disable=SC2120
 claude() { DO_NOT_TRACK=0 TELEMETRY_DISABLED=0 safe --add-dirs-ro=~/.codex --add-dirs=~/.gnupg --enable=docker,clipboard claude --permission-mode auto "$@"; }
-codex() { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
+codex() { safe --add-dirs-ro=/Applications/ChatGPT.app codex -p dotfiles --dangerously-bypass-approvals-and-sandbox "$@"; }
 alias c='claude'
 alias clf='claude --model "fable[1m]"'  # quote: [1m] is a glob pattern
 alias clo='claude --model "opus[1m]"'

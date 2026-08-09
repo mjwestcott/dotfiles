@@ -199,14 +199,13 @@ for dir in hooks agents skills; do
     fi
 done
 
-# Codex config (copy, not symlink — Codex writes trusted projects into config.toml)
+# Codex config
+# The base ~/.codex/config.toml is left alone — Codex writes trusted projects,
+# plugin state and marketplaces into it. Preferences live in a profile file,
+# layered on top via `codex -p dotfiles` (see the codex() wrapper in
+# shell/profile), which Codex reads but never writes.
 mkdir -p ~/.codex
-if [[ ! -e ~/.codex/config.toml ]]; then
-    cp ~/dotfiles/codex/config.toml ~/.codex/config.toml
-    info "Seeded $HOME/.codex/config.toml from dotfiles"
-else
-    info "$HOME/.codex/config.toml already exists, skipping"
-fi
+create_symlink ~/dotfiles/codex/dotfiles.config.toml ~/.codex/dotfiles.config.toml
 
 # User bin directory
 mkdir -p ~/bin

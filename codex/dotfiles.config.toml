@@ -1,0 +1,14 @@
+# Codex preferences, layered over ~/.codex/config.toml via `codex -p dotfiles`.
+#
+# The base ~/.codex/config.toml is owned by Codex itself — it writes trusted
+# project paths, plugin toggles, marketplaces and desktop state into it, so it
+# stays untracked. Anything here wins over the base file, and Codex never
+# writes to a profile file, so this one is safe to symlink from the repo.
+
+personality = "pragmatic"
+model = "gpt-5.6-sol"
+model_reasoning_effort = "xhigh"
+project_doc_fallback_filenames = ["CLAUDE.md"]
+
+[features]
+multi_agent = true
