@@ -7,12 +7,6 @@
     "defaultMode": "auto"
   },
   "model": "opus[1m]",
-  "skillOverrides": {
-    "scaffold": "off",
-    "tests": "off",
-    "coverage": "off",
-    "start": "off"
-  },
   "hooks": {
     "SessionStart": [
       {
