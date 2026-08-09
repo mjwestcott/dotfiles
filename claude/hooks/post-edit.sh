@@ -45,7 +45,7 @@ trim_whitespace() {
 
 # Python files
 if [[ "$extension" == "py" ]]; then
-    echo "Formatting Python file: $filename"
+    echo "Formatting Python file: $filename" >&2
     if command_exists ruff; then
         ruff format --quiet "$file_path" &>/dev/null
         # Lint with ruff
@@ -66,7 +66,7 @@ if [[ "$extension" == "py" ]]; then
 
 # JavaScript/TypeScript files
 elif [[ "$extension" =~ ^(js|ts|jsx|tsx)$ ]]; then
-    echo "Formatting JS/TS file: $filename"
+    echo "Formatting JS/TS file: $filename" >&2
     if command_exists biome; then
         biome format --write "$file_path" &>/dev/null
         # Lint with biome
@@ -87,7 +87,7 @@ elif [[ "$extension" =~ ^(js|ts|jsx|tsx)$ ]]; then
 
 # JSON/JSONC files
 elif [[ "$extension" =~ ^(json|jsonc)$ ]]; then
-    echo "Formatting JSON file: $filename"
+    echo "Formatting JSON file: $filename" >&2
     if command_exists biome; then
         biome format --write "$file_path" &>/dev/null
         # Lint with biome for JSON
@@ -101,7 +101,7 @@ elif [[ "$extension" =~ ^(json|jsonc)$ ]]; then
 
 # CSS/SCSS files
 elif [[ "$extension" =~ ^(css|scss)$ ]]; then
-    echo "Formatting CSS file: $filename"
+    echo "Formatting CSS file: $filename" >&2
     if command_exists biome; then
         biome format --write "$file_path" &>/dev/null
         # Lint with biome
@@ -115,7 +115,7 @@ elif [[ "$extension" =~ ^(css|scss)$ ]]; then
 
 # Go files
 elif [[ "$extension" == "go" ]]; then
-    echo "Formatting Go file: $filename"
+    echo "Formatting Go file: $filename" >&2
     if command_exists goimports; then
         goimports -w "$file_path" &>/dev/null
     elif command_exists gofmt; then
@@ -136,7 +136,7 @@ elif [[ "$extension" == "go" ]]; then
 
 # Shell scripts
 elif [[ "$extension" =~ ^(sh|bash|zsh)$ ]] || [[ "$filename" =~ ^(zshrc|bashrc|profile)$ ]]; then
-    echo "Formatting shell script: $filename"
+    echo "Formatting shell script: $filename" >&2
     # Only reformat scripts, not hand-aligned rc/profile config, whose
     # column-aligned trailing comments shfmt would collapse. They still get
     # linted by shellcheck below.
@@ -153,7 +153,7 @@ elif [[ "$extension" =~ ^(sh|bash|zsh)$ ]] || [[ "$filename" =~ ^(zshrc|bashrc|p
 
 # Rust files
 elif [[ "$extension" == "rs" ]]; then
-    echo "Formatting Rust file: $filename"
+    echo "Formatting Rust file: $filename" >&2
     if command_exists rustfmt; then
         rustfmt --edition 2021 "$file_path" &>/dev/null
     fi
@@ -175,21 +175,21 @@ elif [[ "$extension" == "rs" ]]; then
 
 # Lua files
 elif [[ "$extension" == "lua" ]]; then
-    echo "Formatting Lua file: $filename"
+    echo "Formatting Lua file: $filename" >&2
     if command_exists stylua; then
         stylua "$file_path" &>/dev/null
     fi
 
 # Markdown files
 elif [[ "$extension" == "md" ]]; then
-    echo "Formatting Markdown file: $filename"
+    echo "Formatting Markdown file: $filename" >&2
     if command_exists prettier; then
         prettier --write "$file_path" &>/dev/null
     fi
 
 # YAML files
 elif [[ "$extension" =~ ^(yaml|yml)$ ]]; then
-    echo "Formatting YAML file: $filename"
+    echo "Formatting YAML file: $filename" >&2
     if command_exists prettier; then
         prettier --write "$file_path" &>/dev/null
     fi
@@ -200,11 +200,16 @@ if [[ "$extension" =~ ^(txt|toml|conf)$ ]]; then
     trim_whitespace "$file_path"
 fi
 
-# Output lint feedback to Claude if there were errors
+# Output lint feedback to Claude if there were errors. additionalContext is the
+# PostToolUse field that reaches the model; stdout must be nothing but this JSON,
+# which is why the progress lines above go to stderr.
 if [[ -n "$lint_errors" ]]; then
-    # Escape for JSON
-    escaped_errors=$(echo -e "$lint_errors" | jq -Rs '.')
-    echo "{\"feedback\": $escaped_errors}"
+    echo -e "$lint_errors" | jq -Rs '{
+        hookSpecificOutput: {
+            hookEventName: "PostToolUse",
+            additionalContext: .,
+        },
+    }'
 fi
 
 exit 0

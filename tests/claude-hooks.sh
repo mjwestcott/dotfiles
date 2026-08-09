@@ -444,6 +444,67 @@ EOF
     teardown
 }
 
+# Lint feedback only reaches Claude if stdout is exactly one JSON object shaped
+# the way PostToolUse expects. Anything else on stdout and the whole thing is
+# treated as plain text, which is how this hook silently did nothing for a while.
+test_post_edit_emits_valid_hook_json() {
+    if ! command -v ruff >/dev/null 2>&1; then
+        skip "post-edit lint feedback (no ruff)"
+        return
+    fi
+
+    setup
+    # F401: imported but unused, on by default in ruff.
+    printf 'import os\n' >lint_me.py
+
+    stdout=$("$HOOKS_DIR/post-edit.sh" "$TEMP_DIR/lint_me.py" 2>/dev/null)
+
+    if [[ -z "$stdout" ]]; then
+        fail "post-edit.sh emitted no lint feedback for a file with a ruff error"
+        teardown
+        return
+    fi
+
+    if ! echo "$stdout" | jq -e . >/dev/null 2>&1; then
+        fail "post-edit.sh stdout is not valid JSON: $stdout"
+        teardown
+        return
+    fi
+
+    event=$(echo "$stdout" | jq -r '.hookSpecificOutput.hookEventName // empty')
+    context=$(echo "$stdout" | jq -r '.hookSpecificOutput.additionalContext // empty')
+
+    if [[ "$event" != "PostToolUse" ]]; then
+        fail "post-edit.sh hookEventName should be PostToolUse, got '$event'"
+    elif [[ "$context" != *"F401"* ]]; then
+        fail "post-edit.sh additionalContext should carry the ruff error, got '$context'"
+    else
+        pass "post-edit.sh emits valid PostToolUse JSON with lint feedback"
+    fi
+    teardown
+}
+
+# A clean file must stay silent: an empty stdout is what tells Claude Code there
+# is nothing to report.
+test_post_edit_silent_when_clean() {
+    if ! command -v ruff >/dev/null 2>&1; then
+        skip "post-edit clean-file silence (no ruff)"
+        return
+    fi
+
+    setup
+    printf 'x = 1\n' >clean.py
+
+    stdout=$("$HOOKS_DIR/post-edit.sh" "$TEMP_DIR/clean.py" 2>/dev/null)
+
+    if [[ -z "$stdout" ]]; then
+        pass "post-edit.sh stays silent on a clean file"
+    else
+        fail "post-edit.sh should emit nothing for a clean file, got: $stdout"
+    fi
+    teardown
+}
+
 # ============================================================================
 # Run tests
 # ============================================================================
@@ -476,6 +537,8 @@ test_post_edit_rust
 test_post_edit_lua
 test_post_edit_markdown
 test_post_edit_yaml
+test_post_edit_emits_valid_hook_json
+test_post_edit_silent_when_clean
 echo
 
 # Summary
