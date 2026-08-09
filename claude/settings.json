@@ -7,6 +7,12 @@
     "defaultMode": "auto"
   },
   "model": "opus[1m]",
+  "skillOverrides": {
+    "scaffold": "off",
+    "tests": "off",
+    "coverage": "off",
+    "start": "off"
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -80,6 +86,7 @@
     }
   },
   "syntaxHighlightingDisabled": true,
+  "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "editorMode": "vim",
