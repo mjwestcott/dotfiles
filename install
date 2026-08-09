@@ -30,12 +30,33 @@ info "Starting dotfiles installation..."
 # ============================================================================
 # Homebrew
 # ============================================================================
-if [[ -z "$(command -v brew)" ]]; then
-    info "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew &> /dev/null; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    else
+        info "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        if [[ -x /opt/homebrew/bin/brew ]]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        elif [[ -x /usr/local/bin/brew ]]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+        else
+            error "Homebrew was installed but brew is not available"
+        fi
+    fi
 else
     info "Homebrew already installed"
 fi
+
+# Homebrew requires explicit trust for third-party taps. Both are intentional:
+# minio/stable provides the MinIO client/server, while yqrashawn/goku is the
+# Karabiner configurator (Homebrew core's `goku` is an unrelated load tester).
+for trusted_tap in minio/stable yqrashawn/goku; do
+    brew tap "$trusted_tap"
+    brew trust --tap "$trusted_tap"
+done
 
 # Install packages from Brewfile
 info "Installing/updating packages from Brewfile..."
@@ -185,6 +206,12 @@ mkdir -p ~/.config/broot
 create_symlink ~/dotfiles/broot/conf.hjson ~/.config/broot/conf.hjson
 create_symlink ~/dotfiles/broot/verbs.hjson ~/.config/broot/verbs.hjson
 create_symlink ~/dotfiles/broot/skins ~/.config/broot/skins
+
+# Generate broot's `br` shell launcher. The zsh config also guards this file so
+# a missing optional integration never prevents a shell from loading.
+if command -v broot &> /dev/null && [[ ! -r ~/.config/broot/launcher/bash/br ]]; then
+    broot --install || warn "Could not install the broot shell launcher"
+fi
 
 # Karabiner
 create_symlink ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn

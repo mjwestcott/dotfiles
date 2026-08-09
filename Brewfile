@@ -1,7 +1,8 @@
 # Homebrew Bundle file for dotfiles environment
 # Run with: brew bundle
 
-# Taps. litecli and pgcli come from homebrew/core, so dbcli/tap is not needed.
+# Taps. These are intentional third-party sources: core's `goku` is an
+# unrelated load tester, and its MinIO formula is deprecated.
 tap "minio/stable"
 tap "yqrashawn/goku"
 
@@ -107,7 +108,7 @@ brew "stylua"                     # Lua formatter
 brew "biome"                      # JavaScript/TypeScript formatter
 brew "prettier"                   # Markdown/YAML formatter
 
-# Custom taps
+# Custom taps (explicitly trusted by the install script before brew bundle).
 brew "minio/stable/minio"         # Object storage
 brew "minio/stable/mc"            # MinIO client
 brew "yqrashawn/goku/goku"        # Karabiner configurator
