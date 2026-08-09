@@ -287,7 +287,7 @@ echo "  2. Restart your terminal or run: source ~/.zshrc"
 echo "  3. Install Vim plugins: Open nvim and run :Lazy install"
 echo "  4. Install Tmux plugins: Start tmux and press prefix + I"
 echo "  5. Set up GitHub SSH keys"
-echo "  6. Configure Git signing keys"
+echo "  6. Create ~/.gitconfig-local with this machine's signingkey (see CLAUDE.md)"
 echo "  7. Start any required Homebrew services"
 echo
 echo "To update in the future, run this script again."

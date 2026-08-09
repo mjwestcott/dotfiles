@@ -33,7 +33,7 @@ This will:
 2. Install Vim plugins (:Lazy install, :Lazy update)
 3. Install Tmux plugins: `prefix + I`
 4. Set up GitHub SSH keys
-5. Configure Git signing keys
+5. Create per-machine git signing config: `~/.gitconfig-local` (see Git section below)
 6. Create work git config: `~/.gitconfig-work` (see Git section below)
 7. Start any required Homebrew services
 
@@ -167,7 +167,21 @@ a commit.
 
 ### Git Configuration
 
-The git config includes conditional includes for work repositories:
+Commit signing uses SSH, and the key differs per machine, so `user.signingkey`
+is not tracked here. Each machine needs `~/.gitconfig-local`:
+
+```gitconfig
+[user]
+    signingkey = ssh-ed25519 AAAA...this machine's public key
+```
+
+Without it, commits fail with `Couldn't find key in agent?`. Also add the
+matching public key to `git/allowed_signers` (so its commits verify on every
+machine) and register it on GitHub as a _signing_ key — GitHub tracks
+authentication and signing keys separately, and the same key must be added
+under both to both push and show commits as Verified.
+
+The git config also includes conditional includes for work repositories:
 
 - `~/work/` and `~/repos/work/` directories will use `~/.gitconfig-work`
 - Create `~/.gitconfig-work` manually with work-specific settings:

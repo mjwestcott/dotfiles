@@ -8,7 +8,22 @@
 [user]
         name = Matt Westcott
         email = m.westcott@gmail.com
-        signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOjL7JdsoYkRqtbXWQtMEIC4Jl84lgkNcKBUyw9iwG7s
+
+# The signing key is the one setting here that differs per machine: each box
+# holds a different private key, and git asks ssh-agent for the exact key named
+# below. Naming one in this shared file breaks signing on every other machine
+# ("Couldn't find key in agent?"), so it lives in an untracked local file
+# instead. Every machine needs ~/.gitconfig-local containing:
+#
+#     [user]
+#             signingkey = ssh-ed25519 AAAA...this machine's public key
+#
+# Add the matching public key to git/allowed_signers so its commits verify
+# everywhere, and register it on GitHub as a signing key. A missing include is
+# silently ignored by git, so a machine without this file fails at commit time,
+# not at shell startup.
+[include]
+        path = ~/.gitconfig-local
 
 # SSH rather than OpenPGP: gpg-agent's socket is unreachable from inside the
 # safehouse sandbox that wraps the coding agents, because macOS treats a unix
