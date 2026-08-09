@@ -20,18 +20,6 @@ vim.keymap.set("n", "<leader>xl", trouble("loclist"), { silent = true, noremap =
 vim.keymap.set("n", "<leader>xq", trouble("qflist"), { silent = true, noremap = true })
 vim.keymap.set("n", "gR", trouble("lsp_references"), { silent = true, noremap = true })
 
--- Helper to detect project-specific Python linter
-local function get_python_linters()
-  local root = vim.fn.getcwd()
-  local flake8_configs = { ".flake8", "setup.cfg", "tox.ini" }
-  for _, config in ipairs(flake8_configs) do
-    if vim.fn.filereadable(root .. "/" .. config) == 1 then
-      return { "flake8" }
-    end
-  end
-  return { "ruff" }
-end
-
 -- Helper to detect if project uses Biome
 local function has_biome()
   local root = vim.fn.getcwd()
@@ -80,7 +68,7 @@ require("conform").setup({
 
 -- Setup nvim-lint for diagnostics
 require("lint").linters_by_ft = {
-  python = get_python_linters(),
+  python = { "ruff" },
   javascript = get_js_linters(),
   javascriptreact = get_js_linters(),
   typescript = get_js_linters(),

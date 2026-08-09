@@ -1,9 +1,7 @@
 # Homebrew Bundle file for dotfiles environment
 # Run with: brew bundle
 
-# Taps
-tap "cue-lang/tap"
-tap "dbcli/tap"
+# Taps. litecli and pgcli come from homebrew/core, so dbcli/tap is not needed.
 tap "minio/stable"
 tap "yqrashawn/goku"
 
@@ -74,33 +72,19 @@ brew "python"
 brew "pipx"
 brew "uv"                         # Fast Python package installer and resolver
 brew "ruff"                       # Fast Python linter/formatter
-brew "flake8"                     # Python linter (for legacy projects)
-
-# Java/Scala ecosystem
-brew "scala"
-brew "apache-spark"
 
 # Databases
-brew "postgresql"
+brew "postgresql@18"              # Unversioned `postgresql` is deprecated
 brew "redis"
 brew "sqlite"
-brew "rocksdb"
 brew "litecli"                    # SQLite CLI with autocomplete
 brew "pgcli"                      # PostgreSQL CLI with autocomplete
 
 # Data tools
-brew "jsonnet"
-brew "lightgbm"
 brew "graphviz"
-
-# Dhall configuration language
-brew "dhall"
-brew "dhall-json"
-brew "dhall-lsp-server"
 
 # HTTP tools
 brew "httpie"
-brew "nginx"
 brew "websocat"                   # WebSocket client
 
 # Git tools
@@ -124,7 +108,6 @@ brew "biome"                      # JavaScript/TypeScript formatter
 brew "prettier"                   # Markdown/YAML formatter
 
 # Custom taps
-brew "cue-lang/tap/cue"           # CUE data language
 brew "minio/stable/minio"         # Object storage
 brew "minio/stable/mc"            # MinIO client
 brew "yqrashawn/goku/goku"        # Karabiner configurator

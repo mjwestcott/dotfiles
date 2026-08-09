@@ -245,8 +245,8 @@ brew install ruff shellcheck
 # Optional linters (install as needed)
 npm install -g eslint markdownlint-cli
 
-# Formatters (also used by Claude hooks)
-brew install black prettier shfmt
+# Formatters (also used by Claude hooks). Python formatting is ruff, above.
+brew install prettier shfmt stylua biome
 ```
 
 **Note**: The `just lint` command will work with whatever tools are available and skip missing ones gracefully.
