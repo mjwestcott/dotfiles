@@ -148,10 +148,12 @@ create_symlink ~/dotfiles/antidote/zsh_plugins.txt ~/.zsh_plugins.txt
 # .config directory symlinks
 mkdir -p ~/.config
 
-# Neovim
+# Neovim. lazy.nvim writes the lockfile next to init.lua, so symlinking it keeps
+# plugin versions in the repo and reproducible across machines.
 mkdir -p ~/.config/nvim
 create_symlink ~/dotfiles/vim/init.lua ~/.config/nvim/init.lua
 create_symlink ~/dotfiles/vim/lua ~/.config/nvim/lua
+create_symlink ~/dotfiles/vim/lazy-lock.json ~/.config/nvim/lazy-lock.json
 
 # Database CLIs
 mkdir -p ~/.config/pgcli

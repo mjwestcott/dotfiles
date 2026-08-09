@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 
 -- Install package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { "airblade/vim-rooter" },
-  { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, cmd = "TroubleToggle" },
+  { "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, cmd = "Trouble", opts = {} },
   { "folke/which-key.nvim", opts = {} },
   { "github/copilot.vim" },
   {
@@ -28,14 +28,6 @@ require("lazy").setup({
       "saadparwaiz1/cmp_luasnip",
     },
   },
-  {
-    "jackMort/ChatGPT.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
   { "stevearc/conform.nvim" },
   { "mfussenegger/nvim-lint" },
   { "lewis6991/gitsigns.nvim", event = { "BufReadPre", "BufNewFile" } },
@@ -43,11 +35,13 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "folke/neodev.nvim",
+      -- Both moved to the mason-org namespace with the 2.0 releases.
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
     },
   },
+  -- Replaces the archived neodev.nvim.
+  { "folke/lazydev.nvim", ft = "lua", opts = {} },
   { "numToStr/Comment.nvim", opts = {} },
   { "nvim-lualine/lualine.nvim" },
   { "nvim-telescope/telescope.nvim", version = "*", dependencies = { "nvim-lua/plenary.nvim" } },
@@ -67,8 +61,16 @@ require("lazy").setup({
     },
   },
   {
+    -- Pinned to master. nvim-treesitter's default branch is now the `main`
+    -- rewrite, which drops the nvim-treesitter.configs module that
+    -- custom/treesitter.lua is written against. Porting to main means
+    -- rewriting highlight, indent and all the textobject mappings, so that is
+    -- a deliberate job rather than something to inherit from a plugin update.
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    branch = "master",
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter-textobjects", branch = "master" },
+    },
     event = "VeryLazy",
     config = function()
       pcall(require("nvim-treesitter.install").update({ with_sync = true }))
@@ -150,5 +152,5 @@ require("custom.treesitter")
 require("custom.gitsigns")
 require("custom.lsp")
 require("custom.lint")
-require("custom.gpt")
+require("custom.ai")
 require("custom.ui")

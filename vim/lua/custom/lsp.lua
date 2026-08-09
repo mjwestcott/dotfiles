@@ -33,6 +33,7 @@ local on_attach = function(client, bufnr)
   end, { desc = "Format current buffer with LSP" })
 end
 
+-- Per-server settings. Anything not listed here takes nvim-lspconfig's defaults.
 local servers = {
   pyright = {},
   ts_ls = {},
@@ -40,18 +41,17 @@ local servers = {
   yamlls = {},
   jsonls = {},
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      diagnostics = {
-        globals = { "vim" },
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+        diagnostics = {
+          globals = { "vim" },
+        },
       },
     },
   },
 }
-
--- Setup neovim lua configuration
-require("neodev").setup()
 
 -- Setup autopairs
 require("nvim-autopairs").setup()
@@ -60,26 +60,25 @@ require("nvim-autopairs").setup()
 require("nvim-ts-autotag").setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Setup mason so it can manage external tooling
 require("mason").setup()
 
--- Ensure the servers above are installed
-local mason_lspconfig = require("mason-lspconfig")
+-- mason-lspconfig 2.0 removed setup_handlers and the handlers table. Servers are
+-- now configured through vim.lsp.config and turned on by automatic_enable, which
+-- is the default. Extending "*" applies the cmp capabilities to every server
+-- rather than repeating them per entry.
+vim.lsp.config("*", { capabilities = capabilities })
 
-mason_lspconfig.setup({
+for server, config in pairs(servers) do
+  if next(config) ~= nil then
+    vim.lsp.config(server, config)
+  end
+end
+
+require("mason-lspconfig").setup({
   ensure_installed = vim.tbl_keys(servers),
-  handlers = {
-    function(server_name)
-      require("lspconfig")[server_name].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = servers[server_name],
-      })
-    end,
-  },
 })
 
 -- Autocommand to attach keymaps when LSP attaches to a buffer

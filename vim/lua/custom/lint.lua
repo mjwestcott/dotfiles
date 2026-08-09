@@ -1,16 +1,24 @@
--- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+-- Diagnostic keymaps. goto_prev/goto_next were deprecated in 0.11 in favour of
+-- vim.diagnostic.jump.
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>u", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
--- Trouble.nvim
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+-- Trouble.nvim. v3 replaced the TroubleToggle command with `Trouble <mode>`.
+local trouble = function(mode)
+  return "<cmd>Trouble " .. mode .. " toggle<cr>"
+end
+vim.keymap.set("n", "<leader>xx", trouble("diagnostics"), { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xw", trouble("diagnostics"), { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xd", trouble("diagnostics filter.buf=0"), { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xl", trouble("loclist"), { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xq", trouble("qflist"), { silent = true, noremap = true })
+vim.keymap.set("n", "gR", trouble("lsp_references"), { silent = true, noremap = true })
 
 -- Helper to detect project-specific Python linter
 local function get_python_linters()
@@ -49,7 +57,8 @@ end
 -- Setup conform.nvim for formatting
 require("conform").setup({
   formatters_by_ft = {
-    python = { "black", "isort" },
+    -- ruff, to match the Claude post-edit hook, the justfile and the Brewfile.
+    python = { "ruff_organize_imports", "ruff_format" },
     javascript = get_js_formatter,
     javascriptreact = get_js_formatter,
     typescript = get_js_formatter,
