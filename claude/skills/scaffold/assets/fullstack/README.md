@@ -27,33 +27,37 @@ just logs
 Run `just` to see all available commands.
 
 **Development:**
+
 - `just dev` - Start all services
 - `just down` - Stop all services
 - `just logs` - Tail all logs
 
 **Testing:**
+
 - `just test` - Run all tests
 - `just test-backend` - Backend tests only
 - `just test-frontend` - Frontend tests only
 
 **Linting:**
+
 - `just lint` - Run all linters
 - `just typecheck` - Run all type checkers
 
 **Database:**
+
 - `just db-migrate "description"` - Create migration
 - `just db-upgrade` - Apply migrations
 - `just db-downgrade` - Rollback migration
 
 ### Services
 
-| Service  | URL                          |
-|----------|------------------------------|
-| Frontend | http://localhost:5173        |
-| Backend  | http://localhost:8000        |
-| API Docs | http://localhost:8000/docs   |
-| Postgres | localhost:5432               |
-| Redis    | localhost:6379               |
+| Service  | URL                        |
+| -------- | -------------------------- |
+| Frontend | http://localhost:5173      |
+| Backend  | http://localhost:8000      |
+| API Docs | http://localhost:8000/docs |
+| Postgres | localhost:5432             |
+| Redis    | localhost:6379             |
 
 ### Environment Variables
 

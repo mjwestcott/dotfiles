@@ -34,7 +34,7 @@ Run the following steps:
    - **Do NOT enable auto-merge before the reviews are in and handled.** These bot
      reviews are advisory (they post `COMMENTED`, not `CHANGES_REQUESTED`) and do
      **not** block the merge queue, which gates only on CI. So if you enable
-     auto-merge, the queue will merge on green CI *before* the slow PR Review
+     auto-merge, the queue will merge on green CI _before_ the slow PR Review
      workflow finishes, and you'll lose the chance to act on its feedback.
    - If CI runs fail, report the failures to the user and stop. Do not merge.
 7. Handle the automated review feedback. For each item, respond thoughtfully: take it
@@ -49,7 +49,7 @@ Run the following steps:
    - This repo uses a **merge queue**. `--delete-branch` is **rejected** with a merge
      queue enabled (the queue deletes the branch), and the merge method is set by the
      queue — so use `gh pr merge <pr-url> --squash` (add `--auto` to let the queue land
-     it when CI goes green). Only do this *after* step 7.
+     it when CI goes green). Only do this _after_ step 7.
    - Then poll PR state until merged: `gh pr view <pr-url> --json state --jq .state`
      (readable even with a restricted token). `MERGED` = done.
 9. Sync main. **In a git worktree, `git checkout main` fails if `main` is checked out in

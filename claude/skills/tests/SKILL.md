@@ -17,6 +17,7 @@ The agent should analyze recent code changes (staged, unstaged, or as specified)
 Pass along any specific files, commits, or scope the user mentions.
 
 Output should include:
+
 - Files changed that lack corresponding test coverage
 - Specific suggestions for tests that should be added
 - Any existing tests that may need updating due to the changes

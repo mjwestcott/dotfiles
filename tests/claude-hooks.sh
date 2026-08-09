@@ -52,7 +52,7 @@ test_session_start_in_git_repo() {
     git init -q
     git config user.email "test@test.com"
     git config user.name "Test"
-    echo "test" > file.txt
+    echo "test" >file.txt
     git add file.txt
     git commit -q -m "Initial commit"
 
@@ -88,7 +88,7 @@ test_session_start_detached_head() {
     git init -q
     git config user.email "test@test.com"
     git config user.name "Test"
-    echo "test" > file.txt
+    echo "test" >file.txt
     git add file.txt
     git commit -q -m "Initial commit"
     git checkout -q --detach HEAD
@@ -197,7 +197,7 @@ test_post_edit_python() {
     fi
 
     setup
-    cat > test.py << 'EOF'
+    cat >test.py <<'EOF'
 def foo():
     x=1
     return x
@@ -227,7 +227,7 @@ test_post_edit_javascript() {
     fi
 
     setup
-    cat > test.js << 'EOF'
+    cat >test.js <<'EOF'
 const foo = 1
 const bar = 2
 EOF
@@ -251,7 +251,7 @@ test_post_edit_typescript() {
     fi
 
     setup
-    cat > test.ts << 'EOF'
+    cat >test.ts <<'EOF'
 const foo: number = 1
 EOF
 
@@ -274,7 +274,7 @@ test_post_edit_json() {
     fi
 
     setup
-    echo '{"foo":1,"bar":2}' > test.json
+    echo '{"foo":1,"bar":2}' >test.json
 
     if output=$("$HOOKS_DIR/post-edit.sh" "$TEMP_DIR/test.json" 2>&1); then
         if [[ "$output" == *"Formatting JSON"* ]]; then
@@ -295,7 +295,7 @@ test_post_edit_go() {
     fi
 
     setup
-    cat > test.go << 'EOF'
+    cat >test.go <<'EOF'
 package main
 
 func main() {
@@ -323,7 +323,7 @@ test_post_edit_shell() {
     fi
 
     setup
-    cat > test.sh << 'EOF'
+    cat >test.sh <<'EOF'
 #!/bin/bash
 if [ -f foo ];then
 echo "bar"
@@ -349,7 +349,7 @@ test_post_edit_rust() {
     fi
 
     setup
-    cat > test.rs << 'EOF'
+    cat >test.rs <<'EOF'
 fn main(){let x=1;println!("{}",x);}
 EOF
 
@@ -377,7 +377,7 @@ test_post_edit_lua() {
     fi
 
     setup
-    cat > test.lua << 'EOF'
+    cat >test.lua <<'EOF'
 local x=1
 return x
 EOF
@@ -401,7 +401,7 @@ test_post_edit_markdown() {
     fi
 
     setup
-    cat > test.md << 'EOF'
+    cat >test.md <<'EOF'
 #Heading
 Some text
 EOF
@@ -425,7 +425,7 @@ test_post_edit_yaml() {
     fi
 
     setup
-    cat > test.yaml << 'EOF'
+    cat >test.yaml <<'EOF'
 foo: 1
 bar:  2
 EOF

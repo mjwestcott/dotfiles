@@ -43,7 +43,7 @@ if echo "$cmd" | grep -qE 'rm\s+(-[rf]+\s+)*(/(\s|$)|/usr\b|/var\b|/etc\b|/Syste
     exit 2
 fi
 
-if echo "$cmd" | grep -qE 'rm\s+-rf?\s+\.\.' ; then
+if echo "$cmd" | grep -qE 'rm\s+-rf?\s+\.\.'; then
     echo "Blocked: rm targeting parent directories" >&2
     exit 2
 fi
@@ -75,7 +75,7 @@ if echo "$cmd" | grep -qE 'wget.*\|\s*(bash|sh|zsh)'; then
 fi
 
 # Interpreter one-liners that might hide dangerous commands
-if echo "$cmd" | grep -qE "(python|python3|ruby|node|perl)\s+-[ec]\s+.*\b(rm|git reset|chmod|chown|curl.*\|)" ; then
+if echo "$cmd" | grep -qE "(python|python3|ruby|node|perl)\s+-[ec]\s+.*\b(rm|git reset|chmod|chown|curl.*\|)"; then
     echo "Blocked: interpreter one-liner containing potentially dangerous command" >&2
     exit 2
 fi

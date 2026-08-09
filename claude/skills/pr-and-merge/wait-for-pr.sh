@@ -29,44 +29,54 @@ BRANCH=$(gh pr view "$PR" --json headRefName --jq .headRefName)
 SHA=$(gh pr view "$PR" --json headRefOid --jq .headRefOid)
 echo "PR #$PR  repo=$REPO  branch=$BRANCH  sha=${SHA:0:10}  (require-run='$REQUIRE_RUN')"
 
-deadline=$(( $(date +%s) + MAX_MIN * 60 ))
+deadline=$(($(date +%s) + MAX_MIN * 60))
 echo "== Waiting for workflow runs on ${SHA:0:10} (timeout ${MAX_MIN}m) =="
 poll=0
 while :; do
-  # Bail out fast if the PR has gone unmergeable (main moved under it) or was
-  # closed/merged — waiting for runs on a conflicted head is wasted time, and
-  # a DIRTY PR never enters the merge queue. Check every ~2 min (mergeable is
-  # recomputed lazily by GitHub, so don't hammer it).
-  if [ $(( poll % 6 )) -eq 0 ]; then
-    pr_state=$(gh pr view "$PR" --json state,mergeable,mergeStateStatus \
-      --jq '"\(.state) \(.mergeable) \(.mergeStateStatus)"' 2>/dev/null || echo "")
-    case "$pr_state" in
-      MERGED*) echo "  PR already MERGED"; break ;;
-      CLOSED*) echo "  PR is CLOSED — stopping"; break ;;
-      *CONFLICTING*|*DIRTY*)
-        echo "  PR is CONFLICTING with the base branch (main moved under it)."
-        echo "  ACTION NEEDED: rebase onto main, resolve, push — then re-run this script."
-        exit 2 ;;
-    esac
-  fi
-  poll=$(( poll + 1 ))
-  runs=$(gh run list --branch "$BRANCH" --limit 30 \
-    --json name,status,conclusion,headSha \
-    --jq "[.[] | select(.headSha==\"$SHA\")]" 2>/dev/null)
-  total=$(jq 'length' <<<"$runs" 2>/dev/null || echo 0)
-  pending=$(jq '[.[] | select(.status != "completed")] | length' <<<"$runs" 2>/dev/null || echo 1)
-  # Guard: if a required run hasn't even been created yet, keep waiting.
-  have_required=1
-  if [ -n "$REQUIRE_RUN" ]; then
-    have_required=$(jq --arg n "$REQUIRE_RUN" \
-      '[.[] | select(.name|test($n;"i")) | select(.status=="completed")] | length' <<<"$runs" 2>/dev/null || echo 0)
-  fi
-  now=$(date +%s)
-  if [ "$total" -gt 0 ] && [ "$pending" -eq 0 ] && [ "${have_required:-0}" -ge 1 ]; then
-    break
-  fi
-  if [ "$now" -ge "$deadline" ]; then echo "  TIMEOUT after ${MAX_MIN}m (pending=$pending)"; break; fi
-  sleep 20
+    # Bail out fast if the PR has gone unmergeable (main moved under it) or was
+    # closed/merged — waiting for runs on a conflicted head is wasted time, and
+    # a DIRTY PR never enters the merge queue. Check every ~2 min (mergeable is
+    # recomputed lazily by GitHub, so don't hammer it).
+    if [ $((poll % 6)) -eq 0 ]; then
+        pr_state=$(gh pr view "$PR" --json state,mergeable,mergeStateStatus \
+            --jq '"\(.state) \(.mergeable) \(.mergeStateStatus)"' 2>/dev/null || echo "")
+        case "$pr_state" in
+        MERGED*)
+            echo "  PR already MERGED"
+            break
+            ;;
+        CLOSED*)
+            echo "  PR is CLOSED — stopping"
+            break
+            ;;
+        *CONFLICTING* | *DIRTY*)
+            echo "  PR is CONFLICTING with the base branch (main moved under it)."
+            echo "  ACTION NEEDED: rebase onto main, resolve, push — then re-run this script."
+            exit 2
+            ;;
+        esac
+    fi
+    poll=$((poll + 1))
+    runs=$(gh run list --branch "$BRANCH" --limit 30 \
+        --json name,status,conclusion,headSha \
+        --jq "[.[] | select(.headSha==\"$SHA\")]" 2>/dev/null)
+    total=$(jq 'length' <<<"$runs" 2>/dev/null || echo 0)
+    pending=$(jq '[.[] | select(.status != "completed")] | length' <<<"$runs" 2>/dev/null || echo 1)
+    # Guard: if a required run hasn't even been created yet, keep waiting.
+    have_required=1
+    if [ -n "$REQUIRE_RUN" ]; then
+        have_required=$(jq --arg n "$REQUIRE_RUN" \
+            '[.[] | select(.name|test($n;"i")) | select(.status=="completed")] | length' <<<"$runs" 2>/dev/null || echo 0)
+    fi
+    now=$(date +%s)
+    if [ "$total" -gt 0 ] && [ "$pending" -eq 0 ] && [ "${have_required:-0}" -ge 1 ]; then
+        break
+    fi
+    if [ "$now" -ge "$deadline" ]; then
+        echo "  TIMEOUT after ${MAX_MIN}m (pending=$pending)"
+        break
+    fi
+    sleep 20
 done
 
 echo "== Run conclusions =="
@@ -74,12 +84,12 @@ jq -r '.[] | "  \(.name): \(.status) \(.conclusion // "")"' <<<"$runs" 2>/dev/nu
 
 echo "== Automated reviews =="
 gh api "repos/$REPO/pulls/$PR/reviews" \
-  --jq '.[] | "--- \(.user.login) [\(.state)] \(.submitted_at) ---\n\(.body // "(no body)")\n"' 2>/dev/null || echo "  (none)"
+    --jq '.[] | "--- \(.user.login) [\(.state)] \(.submitted_at) ---\n\(.body // "(no body)")\n"' 2>/dev/null || echo "  (none)"
 
 echo "== Inline review comments =="
 gh api "repos/$REPO/pulls/$PR/comments" \
-  --jq '.[] | "\(.path):\(.line // .original_line) [\(.user.login)]\n\(.body)\n"' 2>/dev/null || echo "  (none)"
+    --jq '.[] | "\(.path):\(.line // .original_line) [\(.user.login)]\n\(.body)\n"' 2>/dev/null || echo "  (none)"
 
 echo "== PR state =="
 gh pr view "$PR" --json state,mergeStateStatus,reviewDecision \
-  --jq '"  state=\(.state)  mergeState=\(.mergeStateStatus)  reviewDecision=\(.reviewDecision)"' 2>/dev/null
+    --jq '"  state=\(.state)  mergeState=\(.mergeStateStatus)  reviewDecision=\(.reviewDecision)"' 2>/dev/null

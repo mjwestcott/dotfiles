@@ -62,6 +62,7 @@ src/
 ## Configuration
 
 Config is loaded via Figment in order of precedence:
+
 1. Default values (in `Config::default()`)
 2. Config file (`~/.config/mycli/config.toml`)
 3. Environment variables (`MYCLI_*`)
@@ -76,14 +77,14 @@ Config is loaded via Figment in order of precedence:
 
 ## Dependencies
 
-| Crate | Purpose |
-|-------|---------|
-| clap | CLI argument parsing with derive macros |
-| anyhow | Application-level error handling |
-| thiserror | Custom error types for library code |
-| figment | Layered configuration (file, env, defaults) |
-| indicatif | Progress bars and spinners |
-| colored | Terminal colors |
-| tracing | Structured logging |
-| directories | Platform-specific config paths |
-| serde | Serialization for config |
+| Crate       | Purpose                                     |
+| ----------- | ------------------------------------------- |
+| clap        | CLI argument parsing with derive macros     |
+| anyhow      | Application-level error handling            |
+| thiserror   | Custom error types for library code         |
+| figment     | Layered configuration (file, env, defaults) |
+| indicatif   | Progress bars and spinners                  |
+| colored     | Terminal colors                             |
+| tracing     | Structured logging                          |
+| directories | Platform-specific config paths              |
+| serde       | Serialization for config                    |

@@ -13,6 +13,7 @@ Scaffold a new project using my standard boilerplates.
 Located at [assets/fullstack/](assets/fullstack/).
 
 **Stack:**
+
 - Backend: Python 3.12+, FastAPI, SQLAlchemy (async), Alembic, uv, ruff, pyright, pytest
 - Frontend: React, Vite, TypeScript, TanStack Query, shadcn/ui, Tailwind, vitest
 - Infrastructure: Docker Compose, PostgreSQL, Redis, GitHub Actions CI
@@ -22,6 +23,7 @@ Located at [assets/fullstack/](assets/fullstack/).
 Located at [assets/rust-cli/](assets/rust-cli/).
 
 **Stack:**
+
 - Rust 2024 edition, MSRV 1.85+
 - clap (derive) — argument parsing with subcommands
 - anyhow + thiserror — error handling (app + lib pattern)

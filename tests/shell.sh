@@ -34,7 +34,6 @@ test_zsh_config() {
     fi
 }
 
-
 echo "Testing dotfiles configuration..."
 
 test_config "Profile" ~/dotfiles/shell/profile
