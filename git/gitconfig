@@ -123,7 +123,6 @@
 
 [fetch]
         prune = true      # Drop local refs for branches deleted on the remote.
-        pruneTags = true
 
 # Record how each conflict was resolved and replay it if the same conflict shows
 # up again. Worth having with rebase.updateRefs, where a stack gets replayed.
