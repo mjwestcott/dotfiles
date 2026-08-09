@@ -68,7 +68,9 @@ safe() { safehouse --env --enable=ssh --add-dirs-ro=~/repos:~/dotfiles "$@"; }
 # shellcheck disable=SC2120
 claude() { DO_NOT_TRACK=0 TELEMETRY_DISABLED=0 safe --add-dirs-ro=~/.codex --add-dirs=~/.gnupg --enable=docker,clipboard claude --permission-mode auto "$@"; }
 codex() { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
-alias c='claude'
+alias c='claude'                     # default model (settings.json: fable[1m])
+alias clf='claude --model fable[1m]'
+alias clo='claude --model opus[1m]'
 alias clc='claude --continue'
 alias clr='claude --resume'
 alias clp='claude --print'
