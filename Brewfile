@@ -72,7 +72,6 @@ brew "yarn"
 brew "pnpm"
 brew "python"
 brew "pipx"
-brew "pyenv"
 brew "uv"                         # Fast Python package installer and resolver
 brew "ruff"                       # Fast Python linter/formatter
 brew "flake8"                     # Python linter (for legacy projects)

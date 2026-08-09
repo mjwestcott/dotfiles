@@ -18,14 +18,8 @@ export PATH=$HOME/dotfiles/bin:$PATH                    # Dotfiles scripts
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH                      # Rust
 export PATH=$HOME/.local/bin:$PATH                      # User binaries
-export PATH=/usr/local/opt/python/libexec/bin:$PATH     # Python
-export PATH=/usr/local/opt/bin:$PATH                    # Homebrew
-export PATH=/usr/local/bin:$PATH                        # System
+export PATH=/usr/local/bin:$PATH                        # docker, kubectl, mullvad
 export PATH=$PATH:$GOPATH/bin                           # Go (append to avoid conflicts)
-export PATH=$HOME/.claude/local:$PATH                   # Claude Code
-
-# https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
 # Aliases
 alias ..='cd ..'
@@ -135,8 +129,8 @@ take() { mkdir -p "$1" && cd "$1" || return; }
 # Scripts/tools
 alias wifi='~/dotfiles/bin/wifi-password'
 alias bench='~/dotfiles/tools/zsh-bench/zsh-bench'
-alias json='python -m json.tool'
-alias uuid='python -c "import uuid; print(uuid.uuid4().hex)"'
+alias json='python3 -m json.tool'
+alias uuid='python3 -c "import uuid; print(uuid.uuid4().hex)"'
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 # Networking
@@ -144,8 +138,8 @@ alias up='ping 8.8.8.8'
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
 
-# Python
-alias py='python'
+# Python. Homebrew ships python3 only, with no unversioned `python` symlink.
+alias py='python3'
 alias ipy='ipython'
 alias pyc='find . -name "*.py[co]" -delete && find . -name "__pycache__" -delete'
 alias uvi='uv pip install'

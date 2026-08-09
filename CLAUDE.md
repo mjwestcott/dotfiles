@@ -179,6 +179,10 @@ The git config includes conditional includes for work repositories:
     signingkey = WORK_KEY_ID
 [commit]
     gpgsign = true
+# Required: the global config sets format = ssh, which this inherits. Without
+# this line git would read the OpenPGP signingkey above as an SSH key.
+[gpg]
+    format = openpgp
 ```
 
 ### Shell Performance Monitoring

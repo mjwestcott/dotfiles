@@ -52,6 +52,7 @@ test_session_start_in_git_repo() {
     git init -q
     git config user.email "test@test.com"
     git config user.name "Test"
+    git config commit.gpgsign false
     echo "test" >file.txt
     git add file.txt
     git commit -q -m "Initial commit"
@@ -88,6 +89,7 @@ test_session_start_detached_head() {
     git init -q
     git config user.email "test@test.com"
     git config user.name "Test"
+    git config commit.gpgsign false
     echo "test" >file.txt
     git add file.txt
     git commit -q -m "Initial commit"
