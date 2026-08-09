@@ -202,9 +202,14 @@ create_symlink ~/dotfiles/karabiner/karabiner.edn ~/.config/karabiner.edn
 # Claude config
 mkdir -p ~/.claude
 create_symlink ~/dotfiles/claude/settings.json ~/.claude/settings.json
-create_symlink ~/dotfiles/claude/hooks ~/.claude/hooks
-create_symlink ~/dotfiles/claude/agents ~/.claude/agents
-create_symlink ~/dotfiles/claude/skills ~/.claude/skills
+for dir in hooks agents skills; do
+    if [[ -d ~/dotfiles/claude/$dir ]]; then
+        create_symlink "$HOME/dotfiles/claude/$dir" "$HOME/.claude/$dir"
+    elif [[ -L ~/.claude/$dir ]] && [[ ! -e ~/.claude/$dir ]]; then
+        rm ~/.claude/$dir
+        warn "Removed dangling symlink ~/.claude/$dir (no longer in dotfiles)"
+    fi
+done
 
 # Codex config (copy, not symlink — Codex writes trusted projects into config.toml)
 mkdir -p ~/.codex
