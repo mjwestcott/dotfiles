@@ -232,6 +232,20 @@ for file in *; do
     fi
 done
 
+# Git hooks
+# pre-commit carries the no-machine-state guard that keeps app-written state out
+# of this public repo. A guard nobody remembers to enable is not a guard, so
+# install it here rather than leaving it as a manual step.
+if command -v pre-commit >/dev/null 2>&1; then
+    if (cd ~/dotfiles && pre-commit install >/dev/null 2>&1); then
+        info "Installed pre-commit hooks"
+    else
+        warn "Could not install pre-commit hooks; run 'pre-commit install' in ~/dotfiles"
+    fi
+else
+    warn "pre-commit not found; run 'brew bundle', then 'pre-commit install' in ~/dotfiles"
+fi
+
 # ============================================================================
 # Final Steps
 # ============================================================================
@@ -246,6 +260,5 @@ echo "  4. Install Tmux plugins: Start tmux and press prefix + I"
 echo "  5. Set up GitHub SSH keys"
 echo "  6. Configure Git signing keys"
 echo "  7. Start any required Homebrew services"
-echo "  8. Install pre-commit hooks: pre-commit install (optional)"
 echo
 echo "To update in the future, run this script again."

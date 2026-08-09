@@ -23,6 +23,9 @@ This will:
 - Set up Zsh shell environment with Antidote plugin manager
 - Create symlinks for all configuration files
 - Configure development tools (Neovim, Tmux, Git, etc.)
+- Install the pre-commit hooks, including the machine-state guard
+- Install Claude Code managed settings to `/Library/Application Support/ClaudeCode/`
+  (prompts for `sudo`; skipped when already current)
 
 ### Manual Post-Installation Steps
 
