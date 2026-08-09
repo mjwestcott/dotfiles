@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(**/*.pem)",
+      "Read(**/*id_rsa*)",
+      "Read(**/*id_ed25519*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Edit(.env)",
+      "Edit(**/*.pem)",
+      "Edit(**/*id_rsa*)",
+      "Edit(**/*id_ed25519*)",
+      "Edit(~/.ssh/**)"
+    ]
+  }
+}

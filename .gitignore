@@ -2,3 +2,4 @@ private
 backup/
 .claude
 tools/
+nvim.log

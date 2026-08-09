@@ -4,16 +4,6 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
-    "deny": [
-      "Read(.env)",
-      "Read(**/*.pem)",
-      "Read(**/*id_rsa*)",
-      "Read(**/*id_ed25519*)",
-      "Read(~/.ssh/**)",
-      "Read(~/.aws/**)",
-      "Read(~/.gnupg/**)",
-      "Edit(.env)"
-    ],
     "defaultMode": "auto"
   },
   "model": "opus[1m]",

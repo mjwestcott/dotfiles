@@ -129,10 +129,32 @@ Multiple fuzzy finder functions for enhanced workflow:
 ### Claude Code Configuration
 
 - Settings: `claude/settings.json` with custom statusline
-- Statusline script: `claude/statusline.sh` (Starship-style prompt)
+- Statusline script: `bin/cc-statusline` (Starship-style prompt)
+- Permission deny rules: `claude/managed-settings.json`
 - Custom agents: `claude/agents/`
 - Custom skills: `claude/skills/`
 - Installation creates symlinks to `~/.claude/`
+
+Deny rules live in managed settings rather than `settings.json` because Claude
+Code writes to user settings (`/model`, `/effort`, `/fast` all persist there)
+but only ever reads managed settings, and project settings cannot override them.
+`install` copies that file to `/Library/Application Support/ClaudeCode/` as root
+— a policy file the invoking user can rewrite is not a policy file.
+
+### Agent Config and Machine State
+
+Codex and Claude Code both write their own state back into config files they
+read. Because this repo is public, tracked agent config must hold preferences
+only; anything the app writes stays in the untracked file the app owns:
+
+| Tool   | Repo owns (tracked)                                     | App owns (untracked)   |
+| ------ | ------------------------------------------------------- | ---------------------- |
+| Codex  | `codex/dotfiles.config.toml`, layered via `-p dotfiles` | `~/.codex/config.toml` |
+| Claude | `claude/managed-settings.json`                          | `~/.claude.json`       |
+
+The `no-machine-state` pre-commit hook (`tests/no-machine-state.sh`) blocks
+trusted project paths, marketplace tables and absolute repo paths from reaching
+a commit.
 
 ### Plugin Management
 

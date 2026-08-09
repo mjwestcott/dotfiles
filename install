@@ -199,6 +199,22 @@ for dir in hooks agents skills; do
     fi
 done
 
+# Claude Code managed settings (permission deny rules)
+# Copied, not symlinked, and left owned by root: a policy file that the invoking
+# user can rewrite is not a policy file. Claude Code reads managed settings but
+# never writes them, and project settings cannot override them, so the deny
+# rules survive both an app write and a per-project relaxation.
+managed_dir="/Library/Application Support/ClaudeCode"
+if cmp -s ~/dotfiles/claude/managed-settings.json "$managed_dir/managed-settings.json"; then
+    info "Claude Code managed settings already current"
+else
+    info "Installing Claude Code managed settings (requires sudo)"
+    sudo mkdir -p "$managed_dir"
+    sudo cp ~/dotfiles/claude/managed-settings.json "$managed_dir/managed-settings.json"
+    sudo chown root:wheel "$managed_dir/managed-settings.json"
+    sudo chmod 644 "$managed_dir/managed-settings.json"
+fi
+
 # Codex config
 # The base ~/.codex/config.toml is left alone — Codex writes trusted projects,
 # plugin state and marketplaces into it. Preferences live in a profile file,

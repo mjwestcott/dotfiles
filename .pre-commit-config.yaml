@@ -12,6 +12,7 @@ repos:
       - id: check-merge-conflict
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
+      - id: detect-private-key
 
   - repo: local
     hooks:
@@ -28,6 +29,13 @@ repos:
         entry: stylua
         language: system
         files: \.lua$
+
+      - id: no-machine-state
+        name: Block machine state in agent config
+        entry: ./tests/no-machine-state.sh
+        language: script
+        files: ^(codex/|claude/).*\.(toml|json)$
+        description: Keep app-written state out of this public repo
 
       - id: dotfiles-test
         name: Test dotfiles configuration
