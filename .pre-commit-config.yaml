@@ -2,8 +2,12 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
+      # bin/safehouse is a generated upstream dist file; keep it byte-identical
+      # so `safehouse update` diffs stay clean.
       - id: trailing-whitespace
+        exclude: ^bin/safehouse$
       - id: end-of-file-fixer
+        exclude: ^bin/safehouse$
       - id: check-yaml
       - id: check-merge-conflict
       - id: check-executables-have-shebangs
