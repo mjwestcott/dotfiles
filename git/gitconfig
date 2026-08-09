@@ -92,14 +92,16 @@
         diffFilter = delta --color-only
 
 [diff]
-        tool = vimdiff
+        tool = nvimdiff
         colorMoved = default
         renames = copies  # Detect copies as well as renames.
-        compactionHeuristic = true
         indentHeuristic = on
+        algorithm = histogram  # Better hunk boundaries than the default myers.
 
 [merge]
-        conflictstyle = diff3
+        # zdiff3 keeps the common lines that diff3 duplicates into both sides out
+        # of the conflict region, which makes conflicts much smaller to read.
+        conflictstyle = zdiff3
         log = true  # Include summaries of merged commits in newly created merge commit messages.
 
 [difftool]
@@ -109,13 +111,31 @@
         autocorrect = 1
 
 [push]
-        default = simple
+        # Create the upstream branch on first push instead of erroring with the
+        # set-upstream hint. This is what the gpc alias existed to work around.
+        autoSetupRemote = true
 
 [pull]
-	rebase = true
+        rebase = true
 
 [rebase]
         updateRefs = true
+
+[fetch]
+        prune = true      # Drop local refs for branches deleted on the remote.
+        pruneTags = true
+
+# Record how each conflict was resolved and replay it if the same conflict shows
+# up again. Worth having with rebase.updateRefs, where a stack gets replayed.
+[rerere]
+        enabled = true
+        autoUpdate = true
+
+[branch]
+        sort = -committerdate  # Most recently worked on first.
+
+[column]
+        ui = auto
 
 [url "git@github.com:"]
         insteadOf = "https://github.com/"
