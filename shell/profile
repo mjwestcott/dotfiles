@@ -185,7 +185,7 @@ alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
 alias gcs='git show'
 alias gcl='git reflog'
-gcom() { git switch "$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo master)"; }
+gcom() { git switch "$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo main)"; }
 
 # Conflict (C)
 alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
